@@ -1,0 +1,18 @@
+= To co jest do opisu i czego nie rozumiem :-(
+Mikołaj Dalecki
+:stem: 
+
+* Prawdopodobieństwo:
+** Co znaczy słowo wariancja? 
+
+    To można by ująć w taki sposób, że z angielskiego `variance` oznacza niezgodność, rozbieżność, sprzeczność.  W sensie matematycznym jest to definiowane jako miara zmienności. Jak to przedstawić graficznie? Jak to rozumieć na prawdę?   
+
+** "Rozkład prawdopodobieństwa pierwszego stopnia"
+*** Czym jest rozkład prawdopodobieństwa?
+*** Czym jest prawdopodobieństwo pierwszego stopnia?
+
+* Stochatystyka – całość :D.
+
+stem:[sqrt(4) = 2]  
+
+Water (stem:[H_2O]) is a critical component.

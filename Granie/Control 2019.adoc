@@ -1,0 +1,58 @@
+= Wrażenia z gry Control z 2019 roku studia Remedy Entertainment
+Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
+:toc:
+
+[.lead]
+Dziś piszę o wrażeniach z gry _Control_ z 2019 roku autorstwa Remedy Entertainment i wydawnictwa 505 Games. 
+Gra ta opowiada o Jesse Faden, jej bracie i Federalnym Biurze Kontroli (FBK), gdzie prowdzi się badania nad zjawiskami paranormalnymi. 
+
+WARNING: Jedyne miejsce wolne od spojlerów to część „Krótka recenzja”, dalsza treść jest napisana w celu zachęcenia do dyskusji po ukończeniu gry.
+
+== Krótka recenzja
+
+Grę uruchomiłem w styczniu 2021 roku na Xbox One X – tak więc wszystkie poniższe stwierdzenia dotyczą tej platformy i są czysto subiektywne. 
+Warstwa wizualna jest dobra – jak dla mnie nie odstaje w żaden sposób – czy to negatywny czy pozytywny – oczywiście widać czasem jak elementy muszą się doładowywać, lecz korytarzowy charakter gry skutecznie minimalizuje ten efekt. 
+W grze znajduje się kilka zagadek logicznych jednak nie są one jakimś szczególnym wyzwaniem – raczej miłym przerywnikiem.
+Poziom trudności walki jest na stałym poziomie, który dynamicznie dostowuje się do postępów gracza i jest sam w sobie satysfakcjonujący – w przypadku problemów można ustawić kilka ułatwiaczy.
+
+Fabuła kręci się wokół zjawisk nadprzyrodzonych i poszukiwaniu rodziny. 
+Niestety raczej próżno szukać tutaj wyszukanych schematów jednak gdy odpowiednio postaramy się odsłuchując wszystkie ścieżki dialogowe i zbierając dokumenty można doświadczyć szeregu pomniejszych i większych historii o niszczeniu ludzkiego życia w imię zachowania tajeminicy – w grze będziemy świadkiem właśnie jednej z takich historii, którą ktoś probował wymazać siłą. 
+
+== Ogólnie o grze
+Zacznę od tych zalet, które urzekły mnie najbardziej: niezwykle dynamiczna rozgrywka. 
+Ciężko mi nawet to ując dokładnie. 
+Walki prowadzone wewnątrz Federalnego Biura Kontroli są niezwykle płynne – nie ma tam czasu na przerwę w działaniu – gdy nie możemy użyc broni musimy sięgnąć po zdolności paranormalne co powoduje, że walka jest nieustająca i wymagająca – żaden pojedynek mi się nie znudził. 
+Jedyne czego mi tutaj brakowało, to samoregeneracji paska zdrowia Jesse po za walką – twórcy mogli dorzucić choćby takie ulepszenie, acz z perspektywy czasu mogłoby to ubić tę dynamiczną rozgrywkę.
+
+Drugą sprawą dla mnie jest niezwykle ciekawy temat przewodni – zawsze interesowały mnie zjawisk paranormalnych – choć nieżadko wywołują one u mnie różne obawy – tak było i tym razem, jednak mimo tego nie przeszkadzało mi to w rozgrywce.
+Twórcy skutecznie maskowali wszystkie niedoskonałości teorii użytych w rozgrywce poprzez zamazywanie fragmentów dokumentów lub urywaniem wypowiedzi stwierdzeniem "to ściśle tajne". 
+Choć czasem mogło to irytować to dzięki tym zabiegom nie odczułem nigdzie _dysonansów poznawczych_, gdzie w dokumentach piszą jedno w przerywnikach filmowych dzieje się drugie, a jeszcze co innego w grze – strasznie tego nie lubię.  
+
+Dodatkowo muzyka – wciąż mam problem skupić się na niej w trakcie seansu (czy to growego czy filmowego), kiedy nie jest ona jego głowną treścią, ale wiem jedno – jeśli się na niej nie skupiłem to była ona wystarczająco dobra i działała nastrojowo.
+Niestety nie aż tak dobrze jak w innych produkcjach (dla przykładu pamiętam dreszczyk na rękach w trakcie gry w Shadow of the Tomb Raider), ale raczej nie powinna ona nikogo zawieść. 
+W całej grze jest jedno odstępstwo od tego, że muzyka towarzyszy nam gdzieś w tle (dobra, dwa, ale to drugie jest całkowicie pomijalne – chodzi o dodatkowy pokój w dziale badań) – gdy przebijamy się przez Labirynt Popielniczki przy dźwiekach Old Gods of Asgard – _Take Control_ – to doświadczenie jest fenomenalne – gdy go kończyłem żałowałem, że trwał tak krótko. 
+Jak wiem zespół odpowiedzialny za ten utwór często współpracował z studiem Remedy ale nie o tym w tej recenzji. 
+
+Na koniec chciałem jeszcze dodać, że według mnie bardzo udany jest system prowadzenia gracza – w większości miejsc jednoznacznie jest powiedziane, że tutaj teraz pójść nie możesz, choć i tutaj znajdą się niedopraocowania:
+
+* Biuro nostalgii, gdzie schowany jest głowny obiekt mocy – projektor slajdów – jest na wyciągnięcie ręki praktycznie od początku gry ale nie możemy tam wejść.
+Jedyne co usłyszymy od Jesse to, że Polaris nie chce aby ona tam wchodziła, ale dlaczego? 
+Bo nie jest gotowa? Bo ma za mało umiejętności? Można wziąć to w obronę patrząc na to, że Polaris może wiedzieć dość dużo o biurze, ale ma problem w komunikacji z Jesse. 
+* Walka z kotwicą w zadaniu „Wróg w środku”: aby dostać się na arenę walki z tym bossem musimy posiadać umiejętność lewitacji – jedyne co usłyszymy gdy jej nie posiadamy to: "Jak się tam dostać?". 
+Próbowałem 10 razy się tam przemieścić aż w końcu zajrzałem do Internetu, że jednak muszę pierwej pójśc dalej w wątku głownym – to jest według mnie na minus – Jesse mogłaby powiedzieć, przed wejściem do schronu, że teraz ważniejszy jest jej brat.
+* Dodatkowo dość nie fajnie potraktowała mnie szafa grająca – gdy wszedłem tam pierwszy raz napotkałem na przeciwnikó poziomu 8, kiedy w głownych lokachacj w grze walczyłem z poziomem 4 i 5. 
+To czyniło wszystkie starcia niezwykle trudnymi. 
+Co ciekawe, kiedy wszedłem tam po zakończeniu wątku fabularnego przeciwnicy byli na poziomie 6, czyli takim samym jak Ci w innych lokacjach – bardzo nie fajnie.
+
+Na plus zaliczam jeszcze dokumenty – są one treściwe i skutecznie rozwijają fabułę gry, pogłębiają wątki poboczne i główny dzięki czemu ani razu nie poczułem, że zbieranie ich jest męczące (jak to miało miejsce w Shadow of the Tomb Raider, gdzie nie chciało mi się już znajdować kolejnych artefaktów ani dokumentów bo w większości były w nich informacje luźno nawiązujące do wydarzeń w grze).
+Kilka razy zdarzyło się, że znalezienie i przeczytanie dokumentu pozwoliło mi się lepiej przygotować na to, co mnie czeka – choć w tych przypadkach chodziło głóqniw o doznania wizualne jak zakrzywianie czasoprzestrzeni czy szybkie przemieszczanie się.
+
+Czy gra ma jakieś konkretne minusy, które uznałbym za warte wymienienia? 
+Myślę, że jeden – jest krótka – moment w którym jakoś konkretnie zacząłem się zblizac emocjonalnie do bohaterki okazał się zakończeniem. 
+Z tego też mógłby wyniknąć wniosek, że gra jest nierówna faublarnie, jednak mi ten efekt zniwelowała masa łatwodostępnych dokumentów z których, między wierszami, można było wyczytać emocje, które może odczuwać bohaterka w czasie bieżących wydarzeń. 
+
+== Podsumowanie
+
+Jak dla mnie świetna gra naprawdę warta polecenia.
+W dodatku coś świeżego – brak ganiania za patykami w celu wytworzenia czegoś, dynamiczna rozrywka i ciekawe rozwiązania dotyczące przestrzeni a do tego całkiem wciągający świat gry. 
+Moja ocena 8/10 i etykieta "Trzeba zagrać!". 

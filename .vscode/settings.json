@@ -1,0 +1,6 @@
+{
+    "asciidoc.asciidoctor_command": "asciidoctor -r asciidoctor-diagram -D \"obj\"",
+    "asciidoc.asciidoctorpdf_command": "asciidoctor-pdf -r asciidoctor-diagram ",
+    "asciidoc.use_asciidoctorpdf": true,
+    "languageTool.language": "pl"
+}

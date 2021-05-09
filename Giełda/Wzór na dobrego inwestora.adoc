@@ -1,0 +1,32 @@
+= O pochodnych
+Mikołaj Dalecki
+:stem: 
+
+#TODO: Zrobić artykuł o granicach#
+
+W niniejszym artykule zmaierzam zawrzeć moją wiedze na temat pochodnych footnote:[Dużo wiedzy do tego artykułu zostało zaczerpnięte z https://www.matemaks.pl/pochodne.html]. 
+
+Możemy się spotkać z dwoma wzorami na definicję granicy. 
+#TODO: Skąd się one wzięły?# #TODO: Kiedy dokładnie lepiej korzystać z którego?# 
+Zazwyczaj, na podstawie doświadczenia, można wywnioskować, którego z nich lepiej użyć przy rozwiązywaniu danego problemu.
+
+
+[asciimath]
+++++
+f'(x_0) = lim_{x->x_o} {f(x) - f(x_0)}/{x-x_0}
+++++
+
+[asciimath]
+++++
+f'(x_0) = lim_{x->x_o} {f(x_0 + h) - f(x_0)}/{h}
+++++
+
+Jak czytać te wzory? 
+Jak już zapewne wiesz, granica odpowiada nam na pytanie „_dokąd dąży (zmierza) dana funkcja?_”. #TODO: Czy na pewno odpowiada na to pytanie?# 
+W pierwszym przypadku mamy do wyliczenia różnice wartości funkcji w punkcie stem:[x] oraz w punkcji stem:[x_0], co zwraca nam zmianę w osi OY (czyli o ile przyrosła wartość funkcji pomiędzy stem:[x] a stem:[x_0]). 
+Natomiast mianownik natomiast wyraża zmianę na osi poziomej.
+SKoro w liczniku mamy różnicę wynikowej wartości funkcji a w mianowniku mamy różnicę w dziedzinie (argumencie) funkcji, to cały ułamek mówi nam o tym „_jak szybko zmienia się wartość funkcji?_”.
+
+Gdy połączymy zdanie "_jak szybko zmienia się wartość funkcji?_" z zdaniem reprezentującym granicę „_dokąd dąży (zmierza) dana funkcja?_” to uzyskamy zdanie „_Dokąd dąży zmienność funkcji?_”. Czyli możemy sobie odpowiedzieć na pytanie czy zmiennośc funkcji rośnie (zmierza do nieskończoności, lub minus nieskończoności)? Maleje dąząc do zera (czyli że w pewnym momencie funkcja przestaje się zmieniać), czy może jej zmienność jest stała? 
+Z racji, że pochodne zawsze liczy się dla jakiegoś punktu w przestzeni to wynik pochodnej mówi nam o tym jak szybko funkcja będzie się zmieniać w danym miejscu.
+Taki czynnik jak zmienność już poznaliśmy (tylko w formie stałej) i w funkcjach liniowych nazywał się "współczynnikiem kierunkowym". 

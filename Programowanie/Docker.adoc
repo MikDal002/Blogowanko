@@ -1,0 +1,16 @@
+= ((Docker)) w codzinnej pracy niekontenerowców
+Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
+:toc:
+
+.lead
+W tym miejscu chciałbym zaprezentować moje sposoby pracy z Docker'em, którego wykorzystuję w celu łatwej i przenośnej pracy bez potrzeby zaśmiecania komputera. 
+
+== Docker i ((Visual Studio Code))
+
+Konfiguracja wymaga rozszerzenia "Remote - Containers". 
+Więcej na temat konfiguracji Visual Studio Code pod kontenery znajdziesz https://code.visualstudio.com/docs/remote/containers-tutorial[tutaj].
+
+NOTE: Jeszcze więcej informacji na https://code.visualstudio.com/docs/remote/containers[oficjalnej stronie Microsoft].
+
+Visual Studio Code może działać w środowisko skonteneryzowanym (uruchamiać projekt w Dokerze) poprzez dodanie katalogu `.devcontainer` a w nim pliku `devcontainer.json` służącego do konfiguracji samego środowiska VSC oraz `Dockerfile`, który przechowuje informacje na temat naszego obrazu w którym będziemy pracować.
+VSC może uzupełnić strukturę plików za ciebie poprzez polecenie `((Remote-Containers)): Add Development Container Configuration Files`.

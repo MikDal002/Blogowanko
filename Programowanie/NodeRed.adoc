@@ -1,0 +1,28 @@
+= Początek z ((NodeRed))'em
+Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
+:toc:
+
+[.lead]
+W tym artykule zamierzam przedstawić moje początki z NodeRedem, które również powinny wystarczyć innym do tego, aby łatwo wystartować.
+
+== Instalacja i konfiguracja
+#TODO: Dorobić#
+
+== Podstawowe elementy
+
+=== Pozycja ((GPS))
+
+.Klocek GPS
+image::img/NodeRed-GPSD.png[Klocek GPS]
+
+Pozycję GPS można uzyskać za pomocą klocka `GPSD` (którego, trzeba wcześniej zainstalować).
+
+=== Konwersje
+
+Dokonać konwersji z string'a ((JSON))/((XML)) na obiekt bądź w drugą stronę z obiektu na JSON/XML można dokonać za pomocą klocków o tej samej nazwie:
+
+.Klocek JSON
+image::img/NodeRed-JSON.png[Klocek JSON]
+
+.Klocek XML
+image::img/NodeRed-XML.png[Klocek XML]

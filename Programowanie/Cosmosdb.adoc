@@ -1,0 +1,29 @@
+= CosmosDB i praca z nim
+Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
+:toc:
+:source-highlighter: pygments
+
+[.lead]
+W niniejszym artykule chciałbym przedstawić kilka trików i skrótów, które skutecznie ułatwiają pracę z CosmosDB.
+
+== ((Request Unit))s (RU) dla ostatniego zapytania
+Często w trakcie pracy przy optymalizacji zapytań do bazy danych nie wystarczy kierować się tylko czasem wykonywania polecenia oraz rozmiarem transferowanych danych do i z bazy. 
+Dla tych, co nie wiedzą: w przypadku CosmosDB rozliczenie następuje za pomocą jednostek żądań (z ang. _request units_, RU), dlatego zależy nam też, aby liczba tych jednostek przypadająca na jedno żądanie była możliwie najmniejsza. 
+
+Przy wykorzystaniu ((mongo)) shell można sprawdzić ilość użytego RU za pomocą komendy:
+
+[source,javascript]
+.Komenda pobierająca statystyki dotyczące ostatniego wykonania
+----
+> db.nazwa_kolekcji.((runCommand))({ getLastRequestStatistics: 1 });
+----
+Ilość wykorzystanych RU będzie znajdowała się przy pozycji `RequestCharge`.
+Więcej sposobów na znajdowanie wartości zużytych jednostek żądań znajdziesz pod adresem: https://docs.microsoft.com/en-us/azure/cosmos-db/find-request-unit-charge-mongodb[find request unit charge mongodb].
+
+=== Więcej na temat RU
+Jeśli zainteresował Cię temat RU, to więcej informacji znajdziesz na stronie Microsoftu: https://docs.microsoft.com/en-us/azure/cosmos-db/request-units[Request Units]. 
+Pokrótce mogę powiedzieć, że ilość użytych jednostek na żądanie zależy od tego, ile użyjesz pamięci, procesora i operacji wejścia/wyjścia na sekundę (z ang. IOPS – _input/output operations per second_). 
+
+Żądania używane często i gęsto (częściej niż raz na minutę) powinny ograniczać się gdzieś do 10 RU na raz. 
+Zapytania rzadsze (częściej niż raz na godzinę) powinny mieścić się w przedziale 10-50 RU, maksymalnie do 100 RU.
+Tylko niektóre polecenia administracyjne, wykonywane od święta, mogą przekraczać barierę 100 RU i tutaj nie widzę górnego limitu, aczkolwiek pamiętajmy, że mogło zostać założone ograniczenie kosztów na bazie danych, przez co nie będziemy w stanie wykonać niektórych obliczeniożernych poleceń. 
