@@ -70,7 +70,7 @@ ____
 [source,C#]
 .Opis kodu źródłowego
 ----
-class PrzykładCSharp
+class PrzykładCSharp <1>
 {
 
 }
@@ -119,6 +119,19 @@ class PlantUmlBlock
 BlockProcessor <|-- DiagramBlock
 DiagramBlock <|-- DitaaBlock
 DiagramBlock <|-- PlantUmlBlock
+....
+
+[plantuml, bezpieczne-warstwy-iot, png]
+....
+agent Urządzenie
+agent Komunikacja
+agent Chmura
+agent "Cykl życia" as Cykl_Życia
+
+Urządzenie -> Komunikacja
+Komunikacja -> Chmura
+Chmura -> Cykl_Życia
+Cykl_Życia -> Urządzenie
 ....
 
 [glossary]
