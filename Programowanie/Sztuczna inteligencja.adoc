@@ -1,0 +1,26 @@
+= O sztucznej inteligencji
+Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
+:toc:
+:source-highlighter: pygments
+
+[.lead]
+Niniejszy artykuł jest krótkim wstępem do sztucznej inteligencji. 
+
+== Algorytm Genetyczne
+
+=== Krzyżowanie uporządkowane `((Davis' Ordered Crossover))` (((OX1))) footnote:[https://www.tutorialspoint.com/genetic_algorithms/genetic_algorithms_crossover.htm]
+
+Krzyżowanie uporządkowane jest w szczególności przydatne gdy mamy do czynienia z chromosomami (#TODO: Wyjaśnić czym jest chromosom#), któych geny mogą składać się tylko z ściśle określonej puli. 
+
+.Przykład krzyżowania uporządkowanego
+==============================
+| BY | GDA | WWA | KRK | SZCZ
+==============================
+
+
+
+
+
+
+
+

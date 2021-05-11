@@ -57,8 +57,6 @@ node.warn("Warning")
 node.error("Error")
 ----
 
-
-
 === Konwersje
 
 Dokonać konwersji z string'a ((JSON))/((XML)) na obiekt bądź w drugą stronę z obiektu na JSON/XML można dokonać za pomocą klocków o tej samej nazwie:
