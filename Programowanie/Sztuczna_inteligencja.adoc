@@ -1,0 +1,218 @@
+= Algorytmy Genetyczne
+Mikołaj Dalecki <mikdal002@utp.edu.pl>; Mateusz Lewandowski <matlew13@utp.edu.pl>; Karol Appel <karapp002@utp.edu.pl>; Przemysław Nadobny <prznad005@utp.edu.pl>; Jacek Suty <jacsut000@utp.edu.pl>
+:toc:
+:imagesdir: ./img
+:sectnums:
+:iconsdir: ./icons
+:sectanchors:
+:source-highlighter: pygments
+:keywords: asciidoc, wstęp
+:doctype: book
+
+[.lead]
+Niniejsza praca jest rezultatem prac nad algorytmami genetycznymi i ich wykorzystaniem w znajdowaniu rozwiązania problemu komiwojażera/plecakowego i optymalizacji funkcji w porównaniu z algorytmem optymalizacji rojem cząstek (PSO). 
+
+= Wstęp
+((Algorytm genetyczny)) (dalej w pracy w skrócie AG) znajduje się w grupie algorytmów ewolucyjnych i jest powszechnie używany do problemów optymalizacyjnych, takich jak znajdowanie najkrótszej drogi, bądź modelowania systemów, gdzie zmienność odgrywa znaczącą rolę (np. giełda).
+Jest on wyszukiwaniem heurystycznym zainspirowany zmianami genetycznymi w populacji i został przedstawiony przez ((Johna Holland))a na początku lat 70 XX wieku. 
+Algorytm ten oparty jest o takie zagadnienia, jak: dziedziczenie, mutacje, selekcje i krzyżowania, które będą opisane w dalszej części pracy <<Kumar2010>>.
+
+Uproszczony schemat działania algorytmu genetycznego przedstawiono na diagramie poniżej.
+Pokrótce mówi on nam, aby <<Kumar2010>>:
+
+. Zdefiniować nową populację poprzez wylosowanie całkowicie nowych osobników (przy rozpoczęciu algorytmu) bądź poprzez dokonanie wyboru rodziców, krzyżowania i mutacji.
+. Następnie obliczyć dopasowanie każdego chromosomu.
+. Na końcu sprawdzić, czy warunek zakończenia działania programu jest spełniony, jeśli nie, to powtórzyć. 
+
+Wszystkie wymienione elementy zostaną szerzej opisane w następnych rozdziałach i sekcjach.
+
+[plantuml, zasada-dzialania-ag, png]
+.Sposób działania Algorytmu Genetycznego
+....
+start
+repeat
+    if (Czy to pierwsza generacja?) then (tak)
+        :Wygeneruj zestaw losowych chromosomów;
+    else (nie)
+        :Wybierz rodziców;
+        :Dokonaj krzyżowania;
+        :Dokonaj ewentualnej mutacji;
+    endif
+    :Oblicz dopasowanie każdego chromosomu;
+    
+repeat while (Czy należy zakończyć algorytm?)
+end
+....
+
+
+== Chromosomy
+Każdy z chromosomów reprezentuje jedno możliwe rozwiązanie, a każdy z chromosomów składa się z ((allel))i (czasem zwanymi genami), które stanowią drobną część (na przykład bit, znak lub liczbę) będącą częścią tegoż rozwiązania  <<Kumar2010>>.
+
+#TODO: TBD#
+
+=== `GeneableChromosome` – implementacja
+W naszym rozwiązaniu chromosom może implementować interfejs `IChromosome`, który przechowuje jedynie wartość dopasowania (`Fitness`). 
+Jednak w celu uproszczenia implementacji, postępując zgodnie z zasadą DRY (z ang. _don't repeat yourself_ – nie powtarzaj siebie) wprowadzono interfejs `IGeneableChromosome`, który pozwala na dekompozycję każdego rozwiązania na drobne kawałki. 
+Definicja tychże interfejsów prezentuje się następująco: 
+
+#TODO: Dodać ilustrację chromosomu z różnymi genami#
+
+[source,csharp]
+.Interfejsy dla ((chromosom))ów
+----
+public interface IChromosome : IComparable
+{
+    double? Fitness { get; set; }
+}
+public interface IGenableChromosome<T> : IChromosome
+{
+    public IReadOnlyList<T> Genes { get; }
+}
+----
+#TODO: TBD#
+
+=== Funkcja dopasowania
+Funkcja dopasowania jest inna dla każdego problemu i służy do oceny danego rozwiązania (chromosomu) footnote:[https://en.wikipedia.org/wiki/Fitness_function].
+Najczęściej spotykanym traktowania dopasowania jest „im większe, tym lepsze”, aczkolwiek w naszym rozwiązaniu możliwe jest odwrócenie tej zasady, co pozwala na naturalne pisanie funkcji optymalizacyjnych.
+Z takiej możliwości korzysta rozwiązanie problemu ((komiwojażer))a, gdzie wartość dopasowania jest równa długości ścieżki, jaką musi przebyć, a ta jest tym lepsza, im jest krótsza. 
+
+Przykłady implementacji funkcji dopasowania zostaną przedstawione w następnych rozdziałach przy okazji omówienia poszczególnych problemów.
+
+== Selekcja rodziców i populacja
+W każdej następnej generacji dochodzi do selekcji rodziców w celu zrobienia potomków, którzy będą stanowili nową generację.
+Rozmiar generacji zależy od natury problemu i zazwyczaj mieści się w zakresie od kilkuset do kilku tysięcy osobników.
+
+Wybór rodziców zazwyczaj opiera się o poziom dopasowania do problemu: im lepszy, tym większe prawdopodobieństwo zostania dawcą genów  <<Kumar2010>>. 
+#TODO: TBD#
+
+=== Selekcja ruletkowa
+Selekcja ruletkowa (oraz ((selekcja turniejowa)) – nieporuszana w niniejszej pracy) jest jedną z popularniejszych metod selekcji  <<Kumar2010>>. 
+#TODO: TBD#
+
+[source,csharp]
+.Implementacja selekcji ruletkowej indexterm:[Selekcja ruletkowa]
+----
+public class RouletteSelection
+{
+    private readonly Random _random = new();
+    public bool? IsReversed { get; set; } = null;
+
+    public IEnumerable<T> SelectChromosomes<T>(Generation<T> previousGeneration, int requiredNumberOfParents)
+        where T : IChromosome
+    {
+        if (IsReversed == null) <1>
+        {
+            var min = previousGeneration.Min();
+            var max = previousGeneration.Max();
+            IsReversed = max.Fitness < min.Fitness;
+        }
+
+        var sumOfFitnesse = 0.0;
+
+        foreach (var chrom in previousGeneration)
+        {
+            if (!chrom.Fitness.HasValue)
+                throw new ArgumentException("Chromosome doesn't have fitness calculated!");
+
+            sumOfFitnesse += chrom.Fitness.Value;
+        }
+
+        if (IsReversed == true) sumOfFitnesse = 1.0 / sumOfFitnesse;
+
+        var parentThresholds = new List<double>(requiredNumberOfParents);
+
+        for (int i = 0; i < requiredNumberOfParents; ++i)
+            parentThresholds.Add(_random.NextDouble() * sumOfFitnesse);
+
+        parentThresholds = parentThresholds.OrderBy(d => d).ToList(); <2>
+
+        var minimumParentThreshold = parentThresholds[0];
+
+        var selectionProgress = 0.0;
+        foreach (var chrom in previousGeneration)
+        {
+            selectionProgress += IsReversed == true ? 1.0 / chrom.Fitness!.Value : chrom.Fitness!.Value; <3>
+            if (minimumParentThreshold > selectionProgress) continue;
+
+            parentThresholds.RemoveAt(0); <4>
+            yield return chrom;
+
+            if (parentThresholds.Count == 0) yield break;
+            minimumParentThreshold = parentThresholds[0];
+        }
+    }
+}
+----
+
+<1> Na początku należy sprawdzić, czy czasem chromosom nie ma odwróconego wartościowania (to znaczy, że lepsza odpowiedź to ta o mniejszej wartości).
+<2> Następnie losujemy tyle progów ile rodziców potrzeba (domyślnie 2) wyrażonych w procentach.
+<3> Na końcu w bierzemy kolejne chromosomy i dodajemy ich wartości do siebie. W momencie, w którym suma przekroczy procentową wartość progu, aktywny chromosom zostaje wybrany na rodzica.
+<4> Algorytm jest powtarzany aż wszystkie progi zostaną przekroczone.
+
+== Krzyżowanie
+Krzyżowanie, czasem zwane również ((rekomobinowanie))m, to proces łączenia genów rodziców w taki sposób, aby uzyskać nowego potomka, reprezentujące nowe rozwiązanie <<Kumar2010>>. 
+#TODO: TBD#
+
+=== Krzyżowanie uporządkowane – ((Davis' Ordered Crossover)) (((OX1))) 
+
+Krzyżowanie uporządkowane jest w szczególności przydatne, gdy mamy do czynienia z chromosomami, których geny mogą pochodzić tylko ze ściśle określonej puli footnote:[https://www.tutorialspoint.com/genetic_algorithms/genetic_algorithms_crossover.htm]. 
+
+.Przykład krzyżowania uporządkowanego
+==============================
+| BY | GDA | WWA | KRK | SZCZ
+==============================
+#TODO Dodać przykład powyżej!#
+
+=== Cyclic Ordered Chrossover
+#TODO: TBD#
+
+=== Single-, Multi- point crossover
+#TODO: TBD#
+
+=== Uniform Crossover
+#TODO: TBD#
+
+== Mutacje
+#TODO: TBD#
+
+=== Random Resseting Mutation
+#TODO: TBD#
+
+=== Swap Mutation
+#TODO: TBD#
+
+== Zakończenie działania Algorytmu Genetycznego
+#TODO: TBD#
+
+=== `GenerationNumberTermination`
+#TODO: TBD#
+
+=== `TheSameNeuronWinner`
+#TODO: TBD#
+
+== Algorytm optymalizacji rojem cząstek (PSO)
+#TODO: TBD#
+
+= Problemy dla algorytmów genetycznych
+#TODO: TBD#
+
+== Problem plecakowy
+#TODO: TBD#
+
+== Problem komiwojażera
+#TODO: TBD#
+
+== Optymalizacja funkcji
+#TODO: TBD#
+
+== Wnioski
+#TODO: TBD#
+
+[bibliography]
+= Bibliografia
+
+
+* [[[Kumar2010]]] Kumar, Manoj, Mohamed Husain, Naveen Upreti, i Deepti Gupta. 2010. „Genetic Algorithm: Review and Application”. SSRN Electronic Journal. https://doi.org/10.2139/ssrn.3529843.
+
+[index]
+= Index
