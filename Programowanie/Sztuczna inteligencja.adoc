@@ -1,26 +1,95 @@
-= O sztucznej inteligencji
+= Algorytmy Genetyczne
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:
 :source-highlighter: pygments
 
 [.lead]
-Niniejszy artykuł jest krótkim wstępem do sztucznej inteligencji. 
+Niniejsza praca jest rezultatem prac nad algorytmami genetycznymi i ich wykorzystanie w znajdowaniu rozwiązania problemu komiwojażera/plecakowego i optymalizacji funkcji w porównaniu z algorytmem optymalizacji rojem cząstek (PSO). 
 
-== Algorytm Genetyczne
+= Wstęp
+Algorytm genetyczny (dalej w pracy w skrócie AG) znajduje się w grupie algorytmów ewolucyjnych i jest powszechnie używany do problemów optymalizacyjnych, takich jak znajdowanie najkrótszej drogi, bądź modelowania systemów, gdzie zmienność odgrywa bardzo dużą rolę (np. giełda).
+Jest on wyszukiwaniem heurystycznym zainspirowany zmianami genetycznymi w populacji i został przedstawiony przez Johna Hollanda na początku lat 70 XX wieku. 
+Algorytm ten oparty jest o takie zagadnienia, jak: dziedziczenie, mutacje, selekcje i krzyżowania, które będą opisane w dalszej części pracy. 
 
-=== Krzyżowanie uporządkowane `((Davis' Ordered Crossover))` (((OX1))) footnote:[https://www.tutorialspoint.com/genetic_algorithms/genetic_algorithms_crossover.htm]
 
-Krzyżowanie uporządkowane jest w szczególności przydatne gdy mamy do czynienia z chromosomami (#TODO: Wyjaśnić czym jest chromosom#), któych geny mogą składać się tylko z ściśle określonej puli. 
+<<Kumar2010>>
+
+
+== Chromosomy
+#TODO: TBD#
+
+=== `GeneableChromosome`
+#TODO: TBD#
+
+== Funkcja dopasowania
+#TODO: TBD#
+
+== Krzyżowania
+#TODO: TBD#
+
+=== Krzyżowanie uporządkowane – ((Davis' Ordered Crossover)) (((OX1))) 
+
+Krzyżowanie uporządkowane jest w szczególności przydatne gdy mamy do czynienia z chromosomami (#TODO: Wyjaśnić czym jest chromosom#), któych geny mogą składać się tylko z ściśle określonej puli footnote:[https://www.tutorialspoint.com/genetic_algorithms/genetic_algorithms_crossover.htm]. 
 
 .Przykład krzyżowania uporządkowanego
 ==============================
 | BY | GDA | WWA | KRK | SZCZ
 ==============================
+#TODO Dodać przykład powyżej!#
+
+=== Cyclic Ordered Chrossover
+#TODO: TBD#
+
+=== Single-, Multi- point crossover
+#TODO: TBD#
+
+=== Uniform Crossover
+#TODO: TBD#
+
+== Mutacje
+#TODO: TBD#
+
+=== Random Resseting Mutation
+#TODO: TBD#
+
+=== Swap Mutation
+#TODO: TBD#
+
+== Selekcja rodziców
+#TODO: TBD#
+
+=== Selekcja ruletkowa
+#TODO: TBD#
+
+== Zakończenie działa AG
+#TODO: TBD#
+
+=== `GenerationNumberTermination`
+#TODO: TBD#
+
+=== `TheSameNeuronWinner`
+#TODO: TBD#
+
+== Algorytm cząsteczkowy (PSO)
+#TODO: TBD#
+
+= Problemy dla algorytmów genetycznych
+#TODO: TBD#
+
+== Problem plecakowy
+#TODO: TBD#
+
+== Problem komiwojażera
+#TODO: TBD#
+
+== Optymalizacja funkcji
+#TODO: TBD#
+
+== Wnioski
+#TODO: TBD#
+
+[bibliography]
+= Bibliografia
 
 
-
-
-
-
-
-
+* [[[Kumar2010]]] Kumar, Manoj, Mohamed Husain, Naveen Upreti, i Deepti Gupta. 2010. „Genetic Algorithm: Review and Application”. SSRN Electronic Journal. https://doi.org/10.2139/ssrn.3529843.
