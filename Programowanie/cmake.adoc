@@ -8,7 +8,7 @@ W tym artykule chciałbym przedstawić moje doświadczenia z CMake'm, które uwa
 
 == Zanim zaczniesz
 Zanim zaczniesz czytać niniejszy artykuł szukając odpowiedzi na pytania, które w twojej opinii powinny być proste zapoznaj się proszę z dedykowanym https://cmake.org/cmake/help/latest/guide/tutorial/index.html[tutorialem].
-Sam przez wiele dni mojej walki z CMake nie miałem o nim pojęcia, a jego odnalezienie (i zapoznanie się!) wprowadziło dużo ładu do mojej pracy – aż wstyd się przyznawac, że nie znalazłem tego na samym początku.
+Sam przez wiele dni mojej walki z CMake nie miałem o nim pojęcia, a jego odnalezienie (i zapoznanie się!) wprowadziło dużo ładu do mojej pracy – aż wstyd się przyznawać, że nie znalazłem tego na samym początku.
 
 == Chwyty i sztuczki
 === Budowanie równoległe
