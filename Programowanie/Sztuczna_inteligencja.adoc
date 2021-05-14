@@ -8,13 +8,25 @@ Mikołaj Dalecki <mikdal002@utp.edu.pl>; Mateusz Lewandowski <matlew13@utp.edu.p
 :source-highlighter: pygments
 :keywords: asciidoc, wstęp
 :doctype: book
+:toc-title: Spis treści
+:caution-caption: Ostrożnie
+:important-caption: Ważne
+:note-caption: Uwaga
+:tip-caption: Podpowiedź
+:warning-caption: Ostrzeżenie
+:appendix-caption: Załącznik
+:example-caption: Przykład
+:figure-caption: Ilustracja
+:table-caption: Tabela
+:chapter-label: Rozdział
 
 [.lead]
 Niniejsze sprawozdanie jest rezultatem prac nad algorytmami genetycznymi i ich wykorzystaniem w znajdowaniu rozwiązania problemu komiwojażera/plecakowego i optymalizacji funkcji w porównaniu z algorytmem optymalizacji rojem cząstek (PSO). 
 
 = Wstęp
+indexterm:[John Holland]
 ((Algorytm genetyczny)) (dalej w pracy w skrócie AG) znajduje się w grupie algorytmów ewolucyjnych i jest powszechnie używany do problemów optymalizacyjnych, takich jak znajdowanie najkrótszej drogi, bądź modelowania systemów, gdzie zmienność odgrywa znaczącą rolę (np. giełda).
-Jest on wyszukiwaniem heurystycznym zainspirowany zmianami genetycznymi w populacji i został przedstawiony przez ((Johna Holland))a na początku lat 70 XX wieku. 
+Jest on wyszukiwaniem heurystycznym zainspirowany zmianami genetycznymi w populacji i został przedstawiony przez Johna Hollanda na początku lat 70 XX wieku. 
 Algorytm ten oparty jest o takie zagadnienia, jak: dziedziczenie, mutacje, selekcje i krzyżowania, które będą opisane w dalszej części pracy <<Kumar2010>>.
 
 Uproszczony schemat działania algorytmu genetycznego przedstawiono na diagramie poniżej.
@@ -395,22 +407,143 @@ public class UniformCrossover<T, E> : ICrossover<T> where T : IGenableChromosome
 <1> W tym miejscu dokonujemy decyzji, za pomocą losowania, czy dany gen ma pochodzić od rodzica pierwszego, czy od rodzica drugiego.
 
 == Mutacje
-#TODO: TBD#
+Mutacja to jeden z głownych elementów ewolucji - pozwala na wprowadzenie kompletnie nowych elementów do już istniejącej populacji.
+W przypadków algorytmów genetycznych ważnym jest, aby prawdopobieństwo wystąpienia mutacji było niskie <<FalcoCioppa2002>>.
 
-=== Random Resseting Mutation
-#TODO: TBD#
+=== Mutacja losowego resetu
+indexterm:[Mutacja, Random Resseting]
+Mutacja ta najlepiej działa w przypadku, kiedy poszczególne geny składają się z liczb. 
+Jej działanie polega na losowym wybraniu genu, który zostanie wylosowany ponownie.
 
-=== Swap Mutation
-#TODO: TBD#
+#TODO: Dodać ilustrację przykłądu#
+
+[source,csharp]
+.Implementacja RandomRessetingMutation
+----
+public class RandomResettingMutation<T, E> : BaseMutation<T> where T : IGenableChromosome<E>
+{
+    private readonly IGenableChromosomeFactory<T, E> _factory;
+    public double MutationThreshold { get; set; } = 0.1;
+
+    public T? Mutate(T offspring) <1>
+    {
+        Random rnd = new();
+        var shouldMutate = rnd.NextDouble() < MutationThreshold;
+        if (shouldMutate) return MutateImplementation(offspring);
+        return default(T?);
+    }
+
+    protected override T MutateImplementation(T offspring) <2>
+    {
+        Random rnd = new();
+        var genes = offspring.Genes.ToList();
+        var geneToMutate = rnd.Next(genes.Count);
+        genes[geneToMutate] = _factory.GetGene(geneToMutate);
+        return _factory.FromGenes(genes);
+    }
+}
+----
+
+<1> Najpierw należy zdecydować, czy mutacja powinna wogóle wystąpić: losowana jest wartość od 0 do 1.0 a następnie sprawdzana, czy jest mniejsza od wartości progowej.
+<2> Jeśli mutacja występuje to wylosuj miejsce mutacji a następnie zastąp to nowym genem.
+
+=== Mutacja przestawna
+indexterm:[Mutacja, Swap] indexterm:[Mutacja, Translocation]
+Mutacja ta polega na zamianie miejscami losowo wybranych neuronów.
+Najlepiej sprawdza się w przypadku problemów o skończonym i jasno określonym zestawie genów, jak na przykład przy problemie plecakowym <<FalcoCioppa2002>>. 
+
+#TODO: Dodać ilustrację przykładu#
+
+[source,csharp]
+----
+public class SwapMutation<T, E> : BaseMutation<T> where T : IGenableChromosome<E>
+{
+    private readonly IGenableChromosomeFactory<T, E> _factory;
+    public int AmountOfSwaps { get; set; } = 1;
+    public double MutationThreshold { get; set; } = 0.1;
+
+    public T? Mutate(T offspring) <1>
+    {
+        Random rnd = new();
+        var shouldMutate = rnd.NextDouble() < MutationThreshold;
+        if (shouldMutate) return MutateImplementation(offspring);
+        return default(T?);
+    }
+
+    protected override T MutateImplementation(T offspring) <2>
+    {
+        var genes = offspring.Genes.ToList();
+        var random = new Random();
+
+        for (int i = 0; i < AmountOfSwaps; ++i)
+        {
+            var one = random.Next(genes.Count);
+            var two = random.Next(genes.Count);
+            var tmp = genes[one];
+            genes[one] = genes[two];
+            genes[two] = tmp;
+        }
+
+        return _factory.FromGenes(genes);
+    }
+}
+----
+
+<1> Najpierw należy zdecydować, czy mutacja powinna wogóle wystąpić: losowana jest wartość od 0 do 1.0 a następnie sprawdzana, czy jest mniejsza od wartości progowej.
+<2> Jeśli mutacja występuje to wylosuj dwa miejsca mutacji i następnie zamień wybrane geny.
 
 == Zakończenie działania Algorytmu Genetycznego
-#TODO: TBD#
+Każdy algorytm kiedyś musi się skończyć. 
+W przypadku AG nie jest to takie oczywiste, ponieważ zazwyczaj rozwiązujemy problemy, które nie mają znanego nam, obiektywnego, miejsca zakończenia.
+W związku z tym używa się kilku warunków zakończenia. 
 
-=== `GenerationNumberTermination`
-#TODO: TBD#
+#TODO: Znaleźć bibliografię#
 
-=== `TheSameNeuronWinner`
-#TODO: TBD#
+=== Limit wszystkich generacji
+Zakończenie to musi mieć jasno określoną ilość generacji, które wystąpią w trakcie działania całego algorytmu.
+Niewątpliwą zaletą takiej zasady jest względnie łatwy do przewidzenia czas oczekiwania na rezultat.
+
+#TODO: Znaleźć bibliografię#
+
+[source,csharp]
+.Implementacja MaxGenerationCountImplementation
+----
+public class GenerationNumberTermination : ITermination
+{
+    public int MaxGenerationsCount { get; }
+
+    public bool HasReached(IGeneticAlgorithm geneticAlgorithm)
+    {
+        return geneticAlgorithm.GenerationsNumber > MaxGenerationsCount;
+    }
+}
+----
+
+=== Limit zwycięstw pojedynczego neuronu
+Zasada ta polega na tym, że działanie algorytmu zostaje zakończone po przekroczeniu ściśle określonej liczby zwycięstw jednego neuronu. 
+W tym przypadku niemożliwe może być określenie z góry ile czasu zajmie wyliczenie, w zamian daje pewne zabezpieczenie przed niekorzystnym wylosowaniem populacji początkowej.
+
+#TODO: Znaleźć bibliografię#
+
+[source,csharp]
+----
+public class TheSameNeuronWinner : ITermination
+{
+    [JsonIgnore] public long AmountLastNeruonWins { get; private set; } = 0;
+    private IChromosome _lastKnwonWinner = null;
+    public long MaxGenerationsCount { get; }
+
+    public bool HasReached(IGeneticAlgorithm geneticAlgorithm)
+    {
+        if (_lastKnwonWinner != geneticAlgorithm.BestChromosome)
+        {
+            AmountLastNeruonWins = 0;
+            _lastKnwonWinner = geneticAlgorithm.BestChromosome;
+        }
+
+        return MaxGenerationsCount < ++AmountLastNeruonWins;
+    }
+----
 
 == Algorytm optymalizacji rojem cząstek (PSO)
 #TODO: TBD#
@@ -433,8 +566,8 @@ public class UniformCrossover<T, E> : ICrossover<T> where T : IGenableChromosome
 [bibliography]
 = Bibliografia
 
-
 * [[[Kumar2010]]] Kumar, Manoj, Mohamed Husain, Naveen Upreti, i Deepti Gupta. 2010. „Genetic Algorithm: Review and Application”. SSRN Electronic Journal. https://doi.org/10.2139/ssrn.3529843.
+* [[FalcoCioppa2002]] De Falco, I, A Della Cioppa, i E Tarantino. 2002. „Mutation-Based Genetic Algorithm: Performance Evaluation”. Applied Soft Computing 1 (4): 285–99. https://doi.org/10.1016/S1568-4946(02)00021-2.
 
 [index]
-= Index
+= Indeks

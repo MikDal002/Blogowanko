@@ -1,0 +1,4 @@
+= O powstawianiu bloga
+
+== Inspiracje
+W moim odczuciu blog mógłby w dużej mierze wyglądać (w kwestii treścii) podobnie do strony https://refactoring.guru/pl[Refactoring Guru].
