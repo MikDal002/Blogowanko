@@ -1,0 +1,86 @@
+== Mutacje
+Mutacja to jeden z głownych elementów ewolucji - pozwala na wprowadzenie kompletnie nowych elementów do już istniejącej populacji.
+W przypadków algorytmów genetycznych ważnym jest, aby prawdopobieństwo wystąpienia mutacji było niskie <<FalcoCioppa2002>>.
+
+=== Mutacja losowego resetu
+indexterm:[Mutacja, Random Resseting]
+Mutacja ta najlepiej działa w przypadku, kiedy poszczególne geny składają się z liczb. 
+Jej działanie polega na losowym wybraniu genu, który zostanie wylosowany ponownie.
+
+#TODO: Dodać ilustrację przykłądu#
+
+[source,csharp]
+.Implementacja RandomRessetingMutation
+----
+public class RandomResettingMutation<T, E> : BaseMutation<T> where T : IGenableChromosome<E>
+{
+    private readonly IGenableChromosomeFactory<T, E> _factory;
+    public double MutationThreshold { get; set; } = 0.1;
+
+    public T? Mutate(T offspring) <1>
+    {
+        Random rnd = new();
+        var shouldMutate = rnd.NextDouble() < MutationThreshold;
+        if (shouldMutate) return MutateImplementation(offspring);
+        return default(T?);
+    }
+
+    protected override T MutateImplementation(T offspring) <2>
+    {
+        Random rnd = new();
+        var genes = offspring.Genes.ToList();
+        var geneToMutate = rnd.Next(genes.Count);
+        genes[geneToMutate] = _factory.GetGene(geneToMutate);
+        return _factory.FromGenes(genes);
+    }
+}
+----
+
+<1> Najpierw należy zdecydować, czy mutacja powinna wogóle wystąpić: losowana jest wartość od 0 do 1.0 a następnie sprawdzana, czy jest mniejsza od wartości progowej.
+<2> Jeśli mutacja występuje to wylosuj miejsce mutacji a następnie zastąp to nowym genem.
+
+=== Mutacja przestawna
+
+indexterm:[Mutacja, Swap] indexterm:[Mutacja, Translocation]
+Mutacja ta polega na zamianie miejscami losowo wybranych neuronów.
+Najlepiej sprawdza się w przypadku problemów o skończonym i jasno określonym zestawie genów, jak na przykład przy problemie plecakowym <<FalcoCioppa2002>>. 
+
+#TODO: Dodać ilustrację przykładu#
+
+[source,csharp]
+----
+public class SwapMutation<T, E> : BaseMutation<T> where T : IGenableChromosome<E>
+{
+    private readonly IGenableChromosomeFactory<T, E> _factory;
+    public int AmountOfSwaps { get; set; } = 1;
+    public double MutationThreshold { get; set; } = 0.1;
+
+    public T? Mutate(T offspring) <1>
+    {
+        Random rnd = new();
+        var shouldMutate = rnd.NextDouble() < MutationThreshold;
+        if (shouldMutate) return MutateImplementation(offspring);
+        return default(T?);
+    }
+
+    protected override T MutateImplementation(T offspring) <2>
+    {
+        var genes = offspring.Genes.ToList();
+        var random = new Random();
+
+        for (int i = 0; i < AmountOfSwaps; ++i)
+        {
+            var one = random.Next(genes.Count);
+            var two = random.Next(genes.Count);
+            var tmp = genes[one];
+            genes[one] = genes[two];
+            genes[two] = tmp;
+        }
+
+        return _factory.FromGenes(genes);
+    }
+}
+----
+
+<1> Najpierw należy zdecydować, czy mutacja powinna wogóle wystąpić: losowana jest wartość od 0 do 1.0 a następnie sprawdzana, czy jest mniejsza od wartości progowej.
+<2> Jeśli mutacja występuje to wylosuj dwa miejsca mutacji i następnie zamień wybrane geny.
