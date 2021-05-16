@@ -1,2 +1,157 @@
 == Problem komiwojażera
+Drugim problemem optymalizacyjnym, nad którym pochyliliśmy się w trakcie prac, jest problem komiwojażera. 
+
+Problem ten polega na znalezieniu najlepszej możliwej drogi pomiędzy kolejnymi punktami. 
+Połączenie pomiędzy miastami może być określone jako odległość lub koszt przejazdu. 
+W naszym przypadku problem komiwojażera jest symetryczny, to znaczy, że podróż z miasta A do miasta B zajmuje tyle samo ile podróż powrotna, czyli z B do A. 
+footnote:[https://pl.wikipedia.org/wiki/Problem_komiwoja%C5%BCera]
+
+Przedstawione poniżej wyniki pochodzą z pracy nad zestawem 48 miast pochodzących ze strony https://people.sc.fsu.edu/~jburkardt/datasets/tsp/att48_xy.txt. 
+W zestawie tym najkrótsza możliwa droga wynosi 33523.
+
+Problem komiwojażera jest problemem o ściśle określonej puli genów.
+Z tego powodu nie wszystkie mutacje i krzyżowania nadają się do zastosowania: pozostają nam krzyżowania uporządkowane (ordered) i mutacje typu swap.
+
+=== Implementacja
+
+Funkcja dopasowania oblicza odległość pomiędzy kolejnymi miastami w chromosomie, sumuje tę odległość i na końcu wartość ta jest zwracana jako wynik.
+Warto zwrócić uwagę, w przypadku komiwojażera dokonujemy odwrócenia wartościowania dopasowania.
+To znaczy, że lepsza jest wartość mniejsza, a nie większa. 
+Implementację tego można zobaczyć w klasie chromosomu.
+
+[source,csharp]
+.Implementacja funkcji dopasowania dla problemu komiwojażera
+----
+public class TravelsManFitness : IFitness<TravelerProblemChromosome>
+{
+    public double Evaluate(TravelerProblemChromosome chromosome)
+    {
+        var cities = chromosome.Genes;
+        var sum = 0.0;
+        for (int i = 0; i < cities.Count - 1; i++) <1>
+        {
+            var first = cities[i].Location;
+            var second = cities[i + 1].Location;
+            sum += Math.Sqrt(Math.Pow(first.X - second.X, 2) + Math.Pow(first.Y - second.Y, 2));
+        }
+
+        chromosome.TotalPath = sum; <2>
+        return sum;
+    }
+}
+----
+
+<1> W pętli obliczamy odległość między miastami, sumujemy ją...
+<2> i zapisujemy do poszczególnych chromosomów i zwracamy jako poziom dopasowania.
+
+Fabryka chromosomów dla problemu komiwojażera jest bardzo podobna do tej dla problemu plecakowego. 
+Mamy tutaj również odczyt z pliku, który w każdej linii zawiera parę liczb reprezentujących pozycje X,Y. 
+
+[source,csharp]
+.Implementacja fabryki chromosomów
+----
+public class TravelerProblemFactory : IGenableChromosomeFactory<TravelerProblemChromosome, City>
+{
+    public IReadOnlyList<City> AllCities => CitiesFromFile;
+
+    private string FilePath { get; } = "SalesManData/ATT48.txt"; // Shortest path is 33523
+    private List<City> CitiesFromFile { get; } = new List<City>();
+
+    TravelerProblemChromosome IChromosomeFactory<TravelerProblemChromosome>.CreateNew() <1>
+    {
+        if (CitiesFromFile.Count == 0) LoadCitiesFromFile();
+        return new TravelerProblemChromosome(CitiesFromFile.Shuffle());
+    }
+    
+    private void LoadCitiesFromFile() <2>
+    {
+        var lines = File.ReadAllLines(FilePath);
+        int i = 0;
+        foreach (var cityRaw in lines.Where(d => !string.IsNullOrWhiteSpace(d)))
+        {
+            if (cityRaw.StartsWith("#")) continue;
+            var split = cityRaw.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            if (split.Length != 2) throw new ArgumentException("There is abnormal amount of points for the city");
+            var city = new City
+            {
+                Location = new PointF(float.Parse(split[0]), float.Parse(split[1])),
+                Name = $"City {++i}"
+            };
+            CitiesFromFile.Add(city);
+        }
+    }
+
+    public TravelerProblemChromosome FromGenes(IList<City> genes) <3>
+    {
+        return new TravelerProblemChromosome(genes);
+    }
+
+    public City GetGene(int geneNumber) <4>
+    {
+        throw new NotImplementedException();
+    }
+}
+----
+
+<1> Na początku, gdy trzeba określić pierwszą generację, odczytujemy wszystkie dane z pliku (jeśli tego wcześniej nie zrobiono) i zwracamy nowy obiekt, którego geny są wymieszanym zestawem danych z pliku.
+<2> Plik z danymi to nic innego jak para liczb zmiennoprzecinkowych rozdzielonych spacją reprezentujących pozycję X,Y.
+Każdy plik może posiadać komentarze, z tym że linie je zawierające muszą zaczynać się od znaku `#`.
+<3> W tym miejscu znajduje się funkcja wywoływana przez operator krzyżowania, która tworzy nowy chromosom z puli genów.
+<4> Funkcja pobierania pojedynczych genów jest wyłączona, gdyż problem komiwojażera wymaga, aby genom był ściśle kontrolowany.
+
+Przykład, jak wygląda pliku pokazano poniżej. 
+Na początku znajdują się komentarze poprzedzone znakiem `#`, co pozwala na zawarcie w nich podstawowych informacji na temat pochodzenia.
+
+[listing]
+.Kilka początkowych rekordów dla problemu komiwojażera
+----
+# najkrótsza droga: 33523
+6734 1453
+2233   10
+5530 1424
+ 401  841
+3082 1644
+7608 4458
+7573 3716
+7265 1268
+6898 1885
+1112 2049
+----
+
+Klasa chromosomu w przypadku problemu komiwojażera jest bardzo podobna do tej wykorzystanej w problemie komiwojażera.
+Jej głównym zadaniem jest przechowywanie danych na temat dopasowania i robienie tego w minimalistycznej formie w celu oszczędności pamięci RAM.
+
+[source,csharp]
+.Implementacja chromosomu dla problemu komiwojażera
+----
+public class TravelerProblemChromosome : FitnessComparableChromosome, IGenableChromosome<City>
+{
+    public double TotalPath { get; set; }
+    private readonly List<City> _genes;
+    public IReadOnlyList<City> Genes => _genes;
+
+    public TravelerProblemChromosome(IEnumerable<City> cities) <1>
+    {
+        _genes = cities.ToList();
+    }
+
+    public override int GetHashCode()
+    {
+        int hash = 1;
+        foreach (var gen in _genes) hash = HashCode.Combine(hash, gen.GetHashCode());
+
+        return hash;
+    }
+
+    public int CompareTo(object? obj) <2> 
+    {
+        return -base.CompareTo(obj);
+    }
+}
+----
+
+<1> Każdy z chromosomów może być utworzony za pomocą zestawu genów.
+<2> W tym miejscu następuje odwrócenie wartościowania dopasowania: im mniejsza wartość, tym lepiej!
+
+=== Wyniki badań
 #TODO: TBD#

@@ -8,9 +8,15 @@ Różnica między tą popularną otwartoźródłową biblioteką a naszą implem
 Takie podejście pozwala na większą świadomość programisty na temat typów, z którymi pracuje i zwalnia z potrzeby ciągłego rzutowania obiektów (zmiany typu z jednego na drugi).
 Dodatkowo została wydzielona odpowiedzialność fabryki – w źródłowej bibliotece za produkcje kolejnych chromosomów odpowiadała sama klasa chromosomu, co wydaje nam się naruszeniem zasady pojedynczej odpowiedzialności (z ang. _single responsibility principle_).
 
+W trakcie realizacji programu udało się uzyskać bardzo ciekawe efekty jak to, że:
+
+* program potrafi wykorzystywać efektywnie od 80 do 100 procent procesora poprzez wielowątkowość, 
+* zużycie pamięci RAM nie przekracza 100 MB nawet w trakcie działania na tysiącach chromosomów i setkach generacji. 
+
+Udało się to osiągnąć dzięki przemyślanej architekturze (wzorowanej na GeneticSharp) oraz doświadczeń autorów niniejszej pracy poprzez odpowiednie rozdysponowanie odpowiedzialności każdej z klas. 
+
 include::problem_plecakowy.adoc[]
 
 include::problem_komiwojazera.adoc[]
 
 include::optymalizacja_funkcji.adoc[]
-

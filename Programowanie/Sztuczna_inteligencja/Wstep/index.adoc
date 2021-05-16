@@ -3,7 +3,8 @@
 indexterm:[John Holland]
 ((Algorytm genetyczny)) (dalej w pracy w skrócie AG) znajduje się w grupie algorytmów ewolucyjnych i jest powszechnie używany do problemów optymalizacyjnych, takich jak znajdowanie najkrótszej drogi, bądź modelowania systemów, gdzie zmienność odgrywa znaczącą rolę (np. giełda).
 Jest on wyszukiwaniem heurystycznym zainspirowany zmianami genetycznymi w populacji i został przedstawiony przez Johna Hollanda na początku lat 70 XX wieku. 
-Algorytm ten oparty jest o takie zagadnienia, jak: dziedziczenie, mutacje, selekcje i krzyżowania, które będą opisane w dalszej części pracy <<Kumar2010>>.
+Algorytm ten oparty jest o takie zagadnienia, jak: dziedziczenie, mutacje, selekcje i krzyżowania zwane operatorami, które będą opisane w dalszej części pracy. 
+W większości przypadków implementacja poszczególnych operatorów zainspirowana została procesami zachodzącymi w przyrodzie <<Kumar2010>>.
 
 Uproszczony schemat działania algorytmu genetycznego przedstawiono na diagramie poniżej.
 Pokrótce mówi on nam, aby <<Kumar2010>>:
@@ -41,3 +42,5 @@ include::Krzyzowanie.adoc[]
 include::mutacje.adoc[]
 
 include::konczecznie-algorytmu.adoc[]
+
+include::pso.adoc[]
