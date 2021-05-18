@@ -3,11 +3,11 @@ Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 v0.1, 2021-05-08: Work in progress
 :toc:
 :imagesdir: ./img
+:sectnums:
 :iconsdir: ./icons
 :sectanchors:
 :source-highlighter: pygments
 :keywords: asciidoc, wstęp
-:sectnums:
 
 [.lead]
 Przedstawiam podstawowe komendy i użycia AsciiDoc'a, które są mi niezbędne w trakcie pracy nad blogiem.
@@ -67,10 +67,10 @@ ____
 Blok typu verse.
 ____
 
-[source,C#]
+[source,csharp]
 .Opis kodu źródłowego
 ----
-class PrzykładCSharp
+class PrzykładCSharp <1>
 {
 
 }
@@ -109,7 +109,7 @@ Pasek boczny, który, co ciekawe, bierze cały rozmiar dla siebie :D.
 ....
 
 [plantuml, przykład-plantuml, png]
-.DIagram PlantUML
+.Diagram PlantUML
 ....
 class BlockProcessor
 class DiagramBlock
@@ -119,6 +119,19 @@ class PlantUmlBlock
 BlockProcessor <|-- DiagramBlock
 DiagramBlock <|-- DitaaBlock
 DiagramBlock <|-- PlantUmlBlock
+....
+
+[plantuml, bezpieczne-warstwy-iot, png]
+....
+agent Urządzenie
+agent Komunikacja
+agent Chmura
+agent "Cykl życia" as Cykl_Życia
+
+Urządzenie -> Komunikacja
+Komunikacja -> Chmura
+Chmura -> Cykl_Życia
+Cykl_Życia -> Urządzenie
 ....
 
 [glossary]

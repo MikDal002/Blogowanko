@@ -1,0 +1,52 @@
+== Zakończenie działania Algorytmu Genetycznego
+Każdy algorytm kiedyś musi się skończyć. 
+W przypadku AG nie jest to takie oczywiste, ponieważ zazwyczaj rozwiązujemy problemy, które nie mają znanego nam, obiektywnego, miejsca zakończenia.
+W związku z tym używa się kilku warunków zakończenia. 
+
+#TODO: Znaleźć bibliografię#
+
+=== Limit wszystkich generacji
+Zakończenie to musi mieć jasno określoną ilość generacji, które wystąpią w trakcie działania całego algorytmu.
+Niewątpliwą zaletą takiej zasady jest względnie łatwy do przewidzenia czas oczekiwania na rezultat.
+
+#TODO: Znaleźć bibliografię#
+
+[source,csharp]
+.Implementacja MaxGenerationCountImplementation
+----
+public class GenerationNumberTermination : ITermination
+{
+    public int MaxGenerationsCount { get; }
+
+    public bool HasReached(IGeneticAlgorithm geneticAlgorithm)
+    {
+        return geneticAlgorithm.GenerationsNumber > MaxGenerationsCount;
+    }
+}
+----
+
+=== Limit zwycięstw pojedynczego neuronu
+Zasada ta polega na tym, że działanie algorytmu zostaje zakończone po przekroczeniu ściśle określonej liczby zwycięstw jednego neuronu. 
+W tym przypadku niemożliwe może być określenie z góry ile czasu zajmie wyliczenie, w zamian daje pewne zabezpieczenie przed niekorzystnym wylosowaniem populacji początkowej.
+
+#TODO: Znaleźć bibliografię#
+
+[source,csharp]
+----
+public class TheSameNeuronWinner : ITermination
+{
+    [JsonIgnore] public long AmountLastNeruonWins { get; private set; } = 0;
+    private IChromosome _lastKnwonWinner = null;
+    public long MaxGenerationsCount { get; }
+
+    public bool HasReached(IGeneticAlgorithm geneticAlgorithm)
+    {
+        if (_lastKnwonWinner != geneticAlgorithm.BestChromosome)
+        {
+            AmountLastNeruonWins = 0;
+            _lastKnwonWinner = geneticAlgorithm.BestChromosome;
+        }
+
+        return MaxGenerationsCount < ++AmountLastNeruonWins;
+    }
+----

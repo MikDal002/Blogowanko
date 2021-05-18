@@ -1,0 +1,46 @@
+
+= Wstęp
+indexterm:[John Holland]
+((Algorytm genetyczny)) (dalej w pracy w skrócie AG) znajduje się w grupie algorytmów ewolucyjnych i jest powszechnie używany do problemów optymalizacyjnych, takich jak znajdowanie najkrótszej drogi, bądź modelowania systemów, gdzie zmienność odgrywa znaczącą rolę (np. giełda).
+Jest on wyszukiwaniem heurystycznym zainspirowany zmianami genetycznymi w populacji i został przedstawiony przez Johna Hollanda na początku lat 70 XX wieku. 
+Algorytm ten oparty jest o takie zagadnienia, jak: dziedziczenie, mutacje, selekcje i krzyżowania zwane operatorami, które będą opisane w dalszej części pracy. 
+W większości przypadków implementacja poszczególnych operatorów zainspirowana została procesami zachodzącymi w przyrodzie <<Kumar2010>>.
+
+Uproszczony schemat działania algorytmu genetycznego przedstawiono na diagramie poniżej.
+Pokrótce mówi on nam, aby <<Kumar2010>>:
+
+. Zdefiniować nową populację poprzez wylosowanie całkowicie nowych osobników (przy rozpoczęciu algorytmu) bądź poprzez dokonanie wyboru rodziców, krzyżowania i mutacji.
+. Następnie obliczyć dopasowanie każdego chromosomu.
+. Na końcu sprawdzić, czy warunek zakończenia działania programu jest spełniony, jeśli nie, to powtórzyć. 
+
+Wszystkie wymienione elementy zostaną szerzej opisane w następnych rozdziałach i sekcjach.
+
+[plantuml, zasada-dzialania-ag, png]
+.Sposób działania Algorytmu Genetycznego
+....
+start
+repeat
+    if (Czy to pierwsza generacja?) then (tak)
+        :Wygeneruj zestaw losowych chromosomów;
+    else (nie)
+        :Wybierz rodziców;
+        :Dokonaj krzyżowania;
+        :Dokonaj ewentualnej mutacji;
+    endif
+    :Oblicz dopasowanie każdego chromosomu;
+    
+repeat while (Czy należy zakończyć algorytm?)
+end
+....
+
+include::chromosomy.adoc[]
+
+include::Selekcja_rodzicow_i_populacja.adoc[]
+
+include::Krzyzowanie.adoc[]
+
+include::mutacje.adoc[]
+
+include::konczecznie-algorytmu.adoc[]
+
+include::pso.adoc[]

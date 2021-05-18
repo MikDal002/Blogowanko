@@ -1,0 +1,164 @@
+== Problem plecakowy
+W trakcie realizacji pracy spróbowaliśmy znaleźć najlepsze rozwiązanie dla problemu plecakowego z użyciem algorytmu genetycznego naszej implementacji.
+
+Problem plecakowy dyskretny, znany czasem jako problem złodzieja rabującego sklep, polega na tym, aby do plecaka o ograniczonej pojemności zapakować tylko taki zestaw przedmiotów, który pozwoli zabrać jak najwięcej pod względem wartości. 
+Przy tym wszystkim nie można zabrać ze sobą połowy przedmiotu footnote:[https://pl.wikipedia.org/wiki/Problem_plecakowy].
+
+Wszystkie przedstawione poniżej wyniki zostały oparte na zestawie danych dostępnym pod adresem http://artemisa.unicauca.edu.co/~johnyortega/instances_01_KP. 
+Wybrany do badań zestaw posiada 200 elementów o różnej wadze i wartości, a maksymalna pojemność plecaka to 1008.
+Najlepsza możliwa wartość to 1634. 
+
+Problem ten w kwestii funkcji dopasowania jest dość podobny do problemu komiwojażera.
+W obu przypadkach mamy do czynienia ze skończonym i jasno określonym zestawem genów (przedmiotów do zabrania). 
+Różnica polega na tym, że w przypadku komiwojażera do wyliczenia funkcjo dopasowania bierze się wszystkie elementy, tak przy problemie plecakowym liczy się tylko tyle elementów, ile zmieści się do plecaka.
+
+=== Implementacja
+
+Funkcja dopasowania została zaimplementowana zgodnie z tym, co zaprezentowano we wstępie do rozdziału.
+
+[source,csharp]
+.Funkcja obliczająca dopasowanie, czyli wartość wkładu plecaka
+----
+public class KnapsackFitness : IFitness<KnapsackProblemChromosome>
+{
+    public double Evaluate(KnapsackProblemChromosome chromosome)
+    {
+        var weight = 0.0;
+        var profit = 0.0;
+
+        foreach (var insert in chromosome.Genes) <1>
+        {
+            if (weight + insert.Weight < chromosome.MaxWeight) <2>
+            {
+                weight += insert.Weight;
+                profit += insert.Profit;
+            }
+            else { break; }
+        }
+
+        chromosome.TotalWeight = weight;
+        chromosome.TotalProfit = profit;
+
+        return profit;
+    }
+}
+----
+
+<1> Dobieramy geny od początku,
+<2> aż do momentu, kiedy ich łączna waga przekroczy pojemność plecaka.
+
+Fabryka chromosomów została napisana w dość prosty sposób:
+
+[source,csharp]
+.Implementacja fabryki chromosomów dla problemu plecakowego
+----
+public class KnapsackProblemFactory : IGenableChromosomeFactory<KnapsackProblemChromosome, Insert>
+{
+    public double MaxWeight { get; set; } = 1008f;
+    private string FilePath { get; } = "KnapsackData/knapPI_2_200_1000_1.txt";
+
+    private List<Insert> InsertsFromFile { get; } = new List<Insert>();
+    public IReadOnlyList<Insert> AllInserts => InsertsFromFile;
+
+    KnapsackProblemChromosome IChromosomeFactory<KnapsackProblemChromosome>.CreateNew() <1>
+    {
+        if (InsertsFromFile.Count == 0) LoadCitiesFromFile();
+        return new KnapsackProblemChromosome(MaxWeight, InsertsFromFile.Shuffle());
+    }
+
+    private void LoadCitiesFromFile() <2>
+    {
+        var lines = File.ReadAllLines(FilePath);
+        int i = 0;
+        foreach (var cityRaw in lines.Where(d => !string.IsNullOrWhiteSpace(d)))
+        {
+            if (cityRaw.StartsWith("#")) continue;
+            var split = cityRaw.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            if (split.Length != 2) throw new ArgumentException("There is abnormal amount of points for the city");
+            var city = new Insert
+            {
+                Profit = double.Parse(split[0]),
+                Weight = double.Parse(split[1]),
+                Name = $"Insert {++i}"
+            };
+            InsertsFromFile.Add(city);
+        }
+    }
+
+    public KnapsackProblemChromosome FromGenes(IList<Insert> genes) <3>
+    {
+        return new KnapsackProblemChromosome(MaxWeight, genes);
+    }
+
+    public Insert GetGene(int geneNumber) <4>
+    {
+        throw new NotImplementedException();
+    }
+}
+----
+
+<1> Na początku, gdy trzeba określić pierwszą generację, odczytujemy wszystkie dane z pliku (jeśli tego wcześniej nie zrobiono) i zwracamy nowy obiekt, którego geny są wymieszanym zestawem danych z pliku.
+<2> Plik z danymi to nic innego jak para liczb zmiennoprzecinkowych rozdzielonych spacją, gdzie pierwsza wartość to wartość przedmiotu a druga liczba to jego waga.
+Każdy plik może posiadać komentarze, z tym że linie je zawierające muszą zaczynać się od znaku `#`.
+<3> W tym miejscu znajduje się funkcja wywoływana przez operator krzyżowania, która tworzy nowy chromosom z puli genów.
+<4> Funkcja pobierania pojedynczych genów jest wyłączona, gdyż problem plecakowy wymaga, aby genom był ściśle kontrolowany.
+
+[listing]
+.Kilka pierwszych rekordów pliku z danymi testowymi
+----
+# 200 1008 – pierwsza liczba to ilość rekordów w pliku (poza liniami komentarza), druga to maksymalna pojemność plecaka w zadaniu.
+# 1634 - najlepszy możliwy wynik w tym zestawie danych.
+# 
+482 485
+257 326
+286 248
+517 421
+404 322
+713 795
+45 43
+924 845
+873 955
+160 252
+1 9
+838 901
+40 122
+58 94
+676 738
+----
+
+Na koniec została implementacja chromosomu. 
+W rzeczywistości jest to prosta klasa, którą można by określić jako _obiekt transferu danych_ (z ang. DTO – _data transfer object_). 
+Został on specjalnie zaprezentowany w taki sposób, aby możliwe było przechowywanie dużej ilości obiektów w pamięci celem optymalizacji.
+
+[source,csharp]
+.Implementacja chromosomu dla problemu plecakowego
+----
+public class KnapsackProblemChromosome : FitnessComparableChromosome, IGenableChromosome<Insert>
+{
+    public double MaxWeight { get; }
+    private readonly List<Insert> _genes;
+
+    public double TotalProfit { get; set; }
+    public double TotalWeight { get; set; }
+
+    public IReadOnlyList<Insert> Genes => _genes;
+
+    public KnapsackProblemChromosome(double maxWeight, IEnumerable<Insert> cities)
+    {
+        MaxWeight = maxWeight;
+        _genes = cities.ToList();
+    }
+
+    public override int GetHashCode()
+    {
+        int hash = 1;
+        foreach (var gen in _genes) hash = HashCode.Combine(hash, gen.GetHashCode());
+
+        return hash;
+    }
+}
+----
+
+=== Wyniki badań
+
+#TODO: Dodać wyniki pomiarów#

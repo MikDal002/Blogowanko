@@ -1,6 +1,7 @@
 {
-    "asciidoc.asciidoctor_command": "asciidoctor -r asciidoctor-diagram -D \"obj\"",
-    "asciidoc.asciidoctorpdf_command": "asciidoctor-pdf -r asciidoctor-diagram ",
+    "asciidoc.asciidoctor_command": "asciidoctor -r asciidoctor-diagram",
+    "asciidoc.asciidoctorpdf_command": "asciidoctor-pdf -r asciidoctor-diagram",
+    "languageTool.language": "pl",
+    "asciidoc.use_asciidoctor_js": false,
     "asciidoc.use_asciidoctorpdf": true,
-    "languageTool.language": "pl"
 }

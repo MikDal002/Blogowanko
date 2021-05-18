@@ -1,0 +1,31 @@
+= Wstęp do JavaScriptu
+Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
+:toc:
+:source-highlighter: pygments
+
+== Operacje na znakach i ciągach znaków
+
+Łączenie stringów w JavaScript wykonuje się za pomocą operatora `+` (dodawania). 
+Dodawanie cudzysłowów wewnątrz stringów robi się za pomocą znaku ucieczki, którym jest `\`.
+I tak, aby dodać cudzysłów w środku należy wpisać `\"`.
+
+[source, JavaScript]
+.Przykład łączenia stringów z zmiennymi oraz zagnieżdżania cudzysłowów.
+----
+var key = "klucz"
+var val = "wartość"
+var st = "<tt:SimpleItem Name=\""+key+"\" Value=\""+val+"\" />\n" 
+----
+
+== Pobieranie pól obiektu
+
+Ogólnie rzecz biorąc iterując po wszystkich polach obiektu może spotkać Cię kilka niemiłbych niespodzianek [Szczegóły znajdziesz w https://stackoverflow.com/a/16643074[tej odpowiedzi na SO]).
+Niżej jednak przedstawiam tylko najnowsze rozwiązanie, które powinno działać w szanujących się przeglądarkach (ECMAScript 2017+)
+
+[source, JavaScript]
+----
+// obj jest twoim obiektem, który chcesz sprawdzić
+for (const [key, val] of Object.entries(obj)) {
+    // tutaj mozesz użyć nazwy (key) oraz wartości (val) właściwości.
+}
+----
