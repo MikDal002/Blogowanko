@@ -200,7 +200,7 @@ public class MultiPointCrossover<T, E> : ICrossover<T> where T : IGenableChromos
 }
 ----
 
-=== Uniform Crossover
+=== Krzyżowanie jednorodne
 #TODO: Znaleźć bibliografię#
 indexterm:[Krzyżowanie, Uniform]
 Krzyżowanie jednorodne polega na równomiernym pobraniu materiału genetycznego od każdego z rodziców i jego równomierne rozłożenie.

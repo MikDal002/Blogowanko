@@ -1,6 +1,6 @@
 = Algorytmy Genetyczne
 Mikołaj Dalecki <mikdal002@utp.edu.pl>; Mateusz Lewandowski <matlew13@utp.edu.pl>; Karol Appel <karapp002@utp.edu.pl>; Przemysław Nadobny <prznad005@utp.edu.pl>; Jacek Suty <jacsut000@utp.edu.pl>
-:toc:
+:toc2:
 :imagesdir: ./img
 :sectnums:
 :iconsdir: ./icons
@@ -19,16 +19,20 @@ Mikołaj Dalecki <mikdal002@utp.edu.pl>; Mateusz Lewandowski <matlew13@utp.edu.p
 :figure-caption: Ilustracja
 :table-caption: Tabela
 :chapter-label: Rozdział
+:lang: PL
+:hyphens:
 
-[.normal] 
+[.normal]
 Niniejsze sprawozdanie jest rezultatem prac nad algorytmami genetycznymi i ich wykorzystaniem w znajdowaniu rozwiązania problemu komiwojażera/plecakowego i optymalizacji funkcji w porównaniu z algorytmem optymalizacji rojem cząstek (PSO). 
 Całość została wykonana przez dwa zespoły:
 
-* Mikołaj Dalecki i Mateusz Lewandowski,
 * Jacek Suty, Przemysław Nadobny i Karol Appel.
+* Mikołaj Dalecki i Mateusz Lewandowski,
 
-Zespół pierwszy wykonał i przeanalizował problem komiwojażera oraz znalezienia minimum funkcji #TODO: Wybrać#.
-Zespół drugi wykonał i przeanalizował problem plecakowy oraz znalezienia minimum funkcji #TODO: Wpisać#.
+Zespół pierwszy wykonał i przeanalizował problem plecakowy oraz znalezienia minimum funkcji McCormick'a. 
+Do tego odpowiadał za implementację selekcji ruletkowej, krzyżowanie jednorodne (z ang. _uniform selection_), mutację przestawną, mutację losowego resetu i zakończenie pracy algorytmu na podstawie globalnego limitu generacji.
+Zespół drugi wykonał i przeanalizował problem komiwojażera, znalezienia minimum funkcji Schwefela i odpowiadał za implementacje pozostałych elementów. 
+Fakt odpowiadania za implementację pewnego elementu nie zmienia faktu, że nad całością czuwały oba zespoły i z racji potrzeb oba zespoły nanosiły poprawki i ulepszenia.
 
 include::Wstep/index.adoc[]
 
