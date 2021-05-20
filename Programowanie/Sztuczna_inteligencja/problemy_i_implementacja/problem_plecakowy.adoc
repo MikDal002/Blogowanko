@@ -161,4 +161,7 @@ public class KnapsackProblemChromosome : FitnessComparableChromosome, IGenableCh
 
 === Wyniki badań
 
+.Wykres najlepszych 25 wyników w szukaniu najlepszej wartości plecaka.
+image::knapsack_results.png[]
+
 #TODO: Dodać wyniki pomiarów#

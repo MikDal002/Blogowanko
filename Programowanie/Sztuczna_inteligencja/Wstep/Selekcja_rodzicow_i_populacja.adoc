@@ -1,5 +1,5 @@
 == Selekcja rodziców i populacja
-W każdej następnej generacji dochodzi do selekcji rodziców w celu zrobienia potomków, którzy będą stanowili nową generację.
+W każdej następnej generacji dochodzi do selekcji rodziców w celu wyznaczenia potomków, którzy będą stanowili nową generację.
 Rozmiar generacji zależy od natury problemu i zazwyczaj mieści się w zakresie od kilkuset do kilku tysięcy osobników.
 
 Wybór rodziców zazwyczaj opiera się o poziom dopasowania do problemu: im lepszy, tym większe prawdopodobieństwo zostania dawcą genów  <<Kumar2010>>. 

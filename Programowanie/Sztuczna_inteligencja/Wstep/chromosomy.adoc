@@ -26,7 +26,7 @@ public interface IGenableChromosome<T> : IChromosome
 
 === Funkcja dopasowania
 Funkcja dopasowania jest inna dla każdego problemu i służy do oceny danego rozwiązania (chromosomu) footnote:[https://en.wikipedia.org/wiki/Fitness_function].
-Najczęściej spotykanym traktowania dopasowania jest „im większe, tym lepsze”, aczkolwiek w naszym rozwiązaniu możliwe jest odwrócenie tej zasady, co pozwala na naturalne pisanie funkcji optymalizacyjnych.
+Najczęściej spotykanym podejściem do dopasowania jest „im większe, tym lepsze”, aczkolwiek w naszym rozwiązaniu możliwe jest odwrócenie tej zasady, co pozwala na naturalne podejście do implementacji funkcji optymalizacyjnych, gdzie szukamy rozwiązań o wartościach możliwie najmniejszych.
 Z takiej możliwości korzysta rozwiązanie problemu ((komiwojażer))a, gdzie wartość dopasowania jest równa długości ścieżki, jaką musi przebyć, a ta jest tym lepsza, im jest krótsza. 
 
 Przykłady implementacji funkcji dopasowania zostaną przedstawione w następnych rozdziałach przy okazji omówienia poszczególnych problemów.

@@ -1,12 +1,19 @@
-== Optymalizacja funkcji
-#TODO: TBD#
+== Znajdowanie miniumum funkcji testowych
+Testy optymalizacji poszczególnych funkcji przeprowadzono za pomocą funkcji testowych zwanych również sztucznymi przestrzeniami footnote:[https://en.wikipedia.org/wiki/Test_functions_for_optimization].
+Funkcje te zostały zaprojektowanie przez badaczy w celu testowania takich cech algorytmów jak:
 
-.Ogólna implementacja
+* precyzja,
+* pewność,
+* ogólna wydajność.
 
-Całość optymalizacji funkcji jest oparta o zestaw klas bazowych, który pozwala na ułatwienie badań wybranych funkcji i innych.
+
+=== Ogólna implementacja
+
+Mechanizm optymalizacji funkcji jest oparty o trzy klasy podstawowe, które pozwalają na proste dodawanie kolejnych funkcji do badań.
+Na początek leci klasa bazowa dla fabryki: `BitChromosomeFactory`, która odpowiada za produkcje chromosomów pozwalających na pracę na pojedynczych bitach.
 
 [source,csharp]
-.Implementacja frabryki bitowych chromosomów
+.Implementacja fabryki operującej na pojedynczych bitach
 ----
 public class BitChromosomeFactory : IGenableChromosomeFactory<SimpleChromosome, bool>
 {
@@ -36,6 +43,9 @@ public class BitChromosomeFactory : IGenableChromosomeFactory<SimpleChromosome, 
     }
 }
 ----
+
+Z fabryki `BitChromosomeFactory` dziedziczona jest klasa `FloatChromosomeFactory`, która opakowuje pojedyncze bity w zmienne zmiennoprzecinkowe pojedynczej precyzji. 
+Jest to pewnego rodzaju fasada, która ukrywa przed programistą pojedyncze bity i dba o to, aby ich ilość zawsze była odpowiednia – czyli podzielna przez 32 footnote:[Dla niezaznajomionych, 32 bity są niezbędne aby reprezentować liczbę zmiennoprzecinkową pojedynczej precyzji]. 
 
 [source,csharp]
 .Implementacja fabryki do produkcji chromosomów dla problemów ciągłych.
@@ -92,6 +102,8 @@ public class FloatChromosomeFactory : BitChromosomeFactory
 }
 ----
 
+Poniżej pokazany jest chromosom, który przechowuje informacje na temat rozwiązania w postaci ciągu bitów. 
+
 [source,csharp]
 .Chromosom przechowujący informacje o bitach
 ----
@@ -120,7 +132,9 @@ public class SimpleChromosome : FitnessComparableChromosome, IGenableChromosome<
 ----
 
 === Funkcja McCormick'a
-#TODO: TBD#
+
+.Wykres funkcji McCormick'a w zakresie od -2 do 4.
+image::mccorm.png[]
 
 [source,csharp]
 .Implementacja funkcji McCormick'a
@@ -148,8 +162,20 @@ public class MCCORMICKChromosomeFitness : IFitness<SimpleChromosome>
 }
 ----
 
-=== Funkcja Schwefela
-#TODO: TBD#
+=== Funkcja Schwefela 
+
+Funkcję Schwefela zaobserwowano w dwóch wariantach. 
+
+. latexmath:[$418,9829n - \sum_{i=1}^{n} x_i \sin{\sqrt{|x_i|}}$]
+. latexmath:[$\sum_{i=1}^{n} x_i \sin{\sqrt{|x_i|}}$],
++
+gdzie `n` – liczba wymiarów.
+
+Wartość na początku pierwszego równiania jest w rzeczywistości podniesieniem wartości funkcji o minimum globalne w celu uniknięcia ujemnych wartości. 
+W przypadku niniejszej pracy wykorzystano drugi wariant funkcji Schwefela.
+
+.Wykres funkcji Schefela w zakresie od -500 do 500. Na ilustracji wszystkie wartości sa podeniesione o wartość minimum. 
+image::schwef.png[footnote:[https://www.sfu.ca/~ssurjano/schwef.html]]
 
 [source,csharp]
 .Implementacja funkcji Schwefela
@@ -182,3 +208,11 @@ public class SchwefelChromosomeFitness : IFitness<SimpleChromosome>
     }
 }
 ----
+
+=== Wynik działania algorytmu genetycznego
+
+.Wyniki pracy algorytmu genetycznego dla funkcji Schwefela.
+image::szchwefel_results.jpg[]
+
+=== Wynik działania PSO
+#TODO: TBA#

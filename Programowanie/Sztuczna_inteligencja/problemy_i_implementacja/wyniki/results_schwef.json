@@ -1,0 +1,5007 @@
+[
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a5095"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.2,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 3,
+        "MutationThreshold": 0.2
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 100
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745446291
+      },
+      "AmountOfGenerations": 606,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745446291,
+      "TotalTimeMs": 473,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -695.3331852679302
+        },
+        {
+          "generation": 2,
+          "Elapse": 1,
+          "fitness": -735.8646756121403
+        },
+        {
+          "generation": 3,
+          "Elapse": 2,
+          "fitness": -753.7955631539689
+        },
+        {
+          "generation": 8,
+          "Elapse": 6,
+          "fitness": -754.5299931746853
+        },
+        {
+          "generation": 9,
+          "Elapse": 7,
+          "fitness": -757.5431721986627
+        },
+        {
+          "generation": 12,
+          "Elapse": 9,
+          "fitness": -809.6031802607838
+        },
+        {
+          "generation": 17,
+          "Elapse": 13,
+          "fitness": -809.6691435183117
+        },
+        {
+          "generation": 18,
+          "Elapse": 13,
+          "fitness": -812.2809207937305
+        },
+        {
+          "generation": 19,
+          "Elapse": 14,
+          "fitness": -813.9840729264363
+        },
+        {
+          "generation": 22,
+          "Elapse": 16,
+          "fitness": -817.3640321346388
+        },
+        {
+          "generation": 25,
+          "Elapse": 18,
+          "fitness": -822.5096147856175
+        },
+        {
+          "generation": 26,
+          "Elapse": 19,
+          "fitness": -822.5162430471366
+        },
+        {
+          "generation": 28,
+          "Elapse": 21,
+          "fitness": -824.2970174468956
+        },
+        {
+          "generation": 30,
+          "Elapse": 22,
+          "fitness": -829.5979091957602
+        },
+        {
+          "generation": 32,
+          "Elapse": 24,
+          "fitness": -830.1969085602066
+        },
+        {
+          "generation": 33,
+          "Elapse": 24,
+          "fitness": -830.1969521660985
+        },
+        {
+          "generation": 35,
+          "Elapse": 27,
+          "fitness": -830.2857719339502
+        },
+        {
+          "generation": 36,
+          "Elapse": 27,
+          "fitness": -832.2056345138452
+        },
+        {
+          "generation": 40,
+          "Elapse": 30,
+          "fitness": -832.3236092779487
+        },
+        {
+          "generation": 45,
+          "Elapse": 34,
+          "fitness": -833.5938171357323
+        },
+        {
+          "generation": 49,
+          "Elapse": 36,
+          "fitness": -834.3472594813696
+        },
+        {
+          "generation": 51,
+          "Elapse": 39,
+          "fitness": -834.3671812587406
+        },
+        {
+          "generation": 54,
+          "Elapse": 41,
+          "fitness": -834.3734778916098
+        },
+        {
+          "generation": 56,
+          "Elapse": 42,
+          "fitness": -836.1567299568712
+        },
+        {
+          "generation": 60,
+          "Elapse": 45,
+          "fitness": -836.197003585193
+        },
+        {
+          "generation": 63,
+          "Elapse": 47,
+          "fitness": -836.4653589997871
+        },
+        {
+          "generation": 64,
+          "Elapse": 48,
+          "fitness": -836.5053516977086
+        },
+        {
+          "generation": 66,
+          "Elapse": 49,
+          "fitness": -836.5056326281087
+        },
+        {
+          "generation": 86,
+          "Elapse": 63,
+          "fitness": -836.5405650124751
+        },
+        {
+          "generation": 91,
+          "Elapse": 67,
+          "fitness": -836.5406038627316
+        },
+        {
+          "generation": 92,
+          "Elapse": 67,
+          "fitness": -836.5477843277982
+        },
+        {
+          "generation": 93,
+          "Elapse": 68,
+          "fitness": -836.9542561653992
+        },
+        {
+          "generation": 97,
+          "Elapse": 71,
+          "fitness": -837.2420263358897
+        },
+        {
+          "generation": 101,
+          "Elapse": 75,
+          "fitness": -837.6407624042158
+        },
+        {
+          "generation": 104,
+          "Elapse": 78,
+          "fitness": -837.6573306074306
+        },
+        {
+          "generation": 111,
+          "Elapse": 85,
+          "fitness": -837.6613198862669
+        },
+        {
+          "generation": 112,
+          "Elapse": 86,
+          "fitness": -837.7582099367315
+        },
+        {
+          "generation": 113,
+          "Elapse": 87,
+          "fitness": -837.7586975935585
+        },
+        {
+          "generation": 114,
+          "Elapse": 88,
+          "fitness": -837.83024707203
+        },
+        {
+          "generation": 117,
+          "Elapse": 91,
+          "fitness": -837.8302549217824
+        },
+        {
+          "generation": 119,
+          "Elapse": 93,
+          "fitness": -837.8304218289343
+        },
+        {
+          "generation": 121,
+          "Elapse": 94,
+          "fitness": -837.8304296937063
+        },
+        {
+          "generation": 130,
+          "Elapse": 103,
+          "fitness": -837.8309822095642
+        },
+        {
+          "generation": 136,
+          "Elapse": 110,
+          "fitness": -837.9409803536855
+        },
+        {
+          "generation": 137,
+          "Elapse": 111,
+          "fitness": -837.942654893687
+        },
+        {
+          "generation": 142,
+          "Elapse": 115,
+          "fitness": -837.9434779200851
+        },
+        {
+          "generation": 152,
+          "Elapse": 125,
+          "fitness": -837.9614320320268
+        },
+        {
+          "generation": 156,
+          "Elapse": 127,
+          "fitness": -837.9630658929907
+        },
+        {
+          "generation": 159,
+          "Elapse": 131,
+          "fitness": -837.9630736390163
+        },
+        {
+          "generation": 166,
+          "Elapse": 136,
+          "fitness": -837.9635683994097
+        },
+        {
+          "generation": 186,
+          "Elapse": 154,
+          "fitness": -837.9636330893157
+        },
+        {
+          "generation": 195,
+          "Elapse": 162,
+          "fitness": -837.9646592344889
+        },
+        {
+          "generation": 218,
+          "Elapse": 183,
+          "fitness": -837.9657630956631
+        },
+        {
+          "generation": 268,
+          "Elapse": 220,
+          "fitness": -837.9657635032406
+        },
+        {
+          "generation": 276,
+          "Elapse": 225,
+          "fitness": -837.9657638559631
+        },
+        {
+          "generation": 285,
+          "Elapse": 232,
+          "fitness": -837.965764247062
+        },
+        {
+          "generation": 291,
+          "Elapse": 237,
+          "fitness": -837.9657646708968
+        },
+        {
+          "generation": 299,
+          "Elapse": 242,
+          "fitness": -837.9657673826525
+        },
+        {
+          "generation": 306,
+          "Elapse": 248,
+          "fitness": -837.9657682668369
+        },
+        {
+          "generation": 325,
+          "Elapse": 262,
+          "fitness": -837.9657727713837
+        },
+        {
+          "generation": 334,
+          "Elapse": 269,
+          "fitness": -837.9657731742132
+        },
+        {
+          "generation": 365,
+          "Elapse": 291,
+          "fitness": -837.9657732400232
+        },
+        {
+          "generation": 382,
+          "Elapse": 302,
+          "fitness": -837.9657733093693
+        },
+        {
+          "generation": 440,
+          "Elapse": 344,
+          "fitness": -837.9657744158728
+        },
+        {
+          "generation": 473,
+          "Elapse": 368,
+          "fitness": -837.9657745350033
+        },
+        {
+          "generation": 506,
+          "Elapse": 391,
+          "fitness": -837.9657745446291
+        }
+      ],
+      "quality": 1.000000000006167
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a5056"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.2,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.7
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 100
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745448642
+      },
+      "AmountOfGenerations": 602,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745448642,
+      "TotalTimeMs": 481,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -639.4090208180069
+        },
+        {
+          "generation": 2,
+          "Elapse": 2,
+          "fitness": -680.7925348580332
+        },
+        {
+          "generation": 3,
+          "Elapse": 2,
+          "fitness": -830.5704047105498
+        },
+        {
+          "generation": 10,
+          "Elapse": 7,
+          "fitness": -836.6411588716003
+        },
+        {
+          "generation": 15,
+          "Elapse": 12,
+          "fitness": -837.3761552521327
+        },
+        {
+          "generation": 16,
+          "Elapse": 12,
+          "fitness": -837.7496522857724
+        },
+        {
+          "generation": 35,
+          "Elapse": 27,
+          "fitness": -837.9151099786768
+        },
+        {
+          "generation": 36,
+          "Elapse": 28,
+          "fitness": -837.9608142382488
+        },
+        {
+          "generation": 52,
+          "Elapse": 40,
+          "fitness": -837.9611856423617
+        },
+        {
+          "generation": 54,
+          "Elapse": 42,
+          "fitness": -837.961212370446
+        },
+        {
+          "generation": 56,
+          "Elapse": 44,
+          "fitness": -837.9612326750467
+        },
+        {
+          "generation": 76,
+          "Elapse": 59,
+          "fitness": -837.9612494100387
+        },
+        {
+          "generation": 78,
+          "Elapse": 61,
+          "fitness": -837.9633097257977
+        },
+        {
+          "generation": 95,
+          "Elapse": 75,
+          "fitness": -837.9655138139302
+        },
+        {
+          "generation": 96,
+          "Elapse": 76,
+          "fitness": -837.9656510344148
+        },
+        {
+          "generation": 101,
+          "Elapse": 82,
+          "fitness": -837.9656772583212
+        },
+        {
+          "generation": 102,
+          "Elapse": 82,
+          "fitness": -837.9656776493902
+        },
+        {
+          "generation": 104,
+          "Elapse": 84,
+          "fitness": -837.965712012744
+        },
+        {
+          "generation": 105,
+          "Elapse": 85,
+          "fitness": -837.9657147103444
+        },
+        {
+          "generation": 122,
+          "Elapse": 99,
+          "fitness": -837.9657688271473
+        },
+        {
+          "generation": 131,
+          "Elapse": 107,
+          "fitness": -837.9657695993085
+        },
+        {
+          "generation": 150,
+          "Elapse": 123,
+          "fitness": -837.9657696282973
+        },
+        {
+          "generation": 185,
+          "Elapse": 149,
+          "fitness": -837.9657698183184
+        },
+        {
+          "generation": 197,
+          "Elapse": 159,
+          "fitness": -837.9657698212844
+        },
+        {
+          "generation": 211,
+          "Elapse": 170,
+          "fitness": -837.965770180442
+        },
+        {
+          "generation": 216,
+          "Elapse": 173,
+          "fitness": -837.9657736652548
+        },
+        {
+          "generation": 220,
+          "Elapse": 177,
+          "fitness": -837.9657736748018
+        },
+        {
+          "generation": 232,
+          "Elapse": 186,
+          "fitness": -837.9657741574999
+        },
+        {
+          "generation": 293,
+          "Elapse": 234,
+          "fitness": -837.9657741670135
+        },
+        {
+          "generation": 315,
+          "Elapse": 251,
+          "fitness": -837.9657742440716
+        },
+        {
+          "generation": 321,
+          "Elapse": 257,
+          "fitness": -837.9657742554989
+        },
+        {
+          "generation": 334,
+          "Elapse": 266,
+          "fitness": -837.9657743354895
+        },
+        {
+          "generation": 383,
+          "Elapse": 307,
+          "fitness": -837.9657744354475
+        },
+        {
+          "generation": 384,
+          "Elapse": 308,
+          "fitness": -837.9657745168938
+        },
+        {
+          "generation": 396,
+          "Elapse": 317,
+          "fitness": -837.9657745350928
+        },
+        {
+          "generation": 443,
+          "Elapse": 357,
+          "fitness": -837.9657745369732
+        },
+        {
+          "generation": 445,
+          "Elapse": 358,
+          "fitness": -837.9657745371187
+        },
+        {
+          "generation": 502,
+          "Elapse": 403,
+          "fitness": -837.9657745448642
+        }
+      ],
+      "quality": 1.0000000000064475
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a5017"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.2,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.2
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 100
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745446851
+      },
+      "AmountOfGenerations": 685,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745446851,
+      "TotalTimeMs": 518,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -710.5426926168706
+        },
+        {
+          "generation": 5,
+          "Elapse": 3,
+          "fitness": -835.59422037823
+        },
+        {
+          "generation": 16,
+          "Elapse": 11,
+          "fitness": -835.8783757820632
+        },
+        {
+          "generation": 20,
+          "Elapse": 14,
+          "fitness": -836.1126720366733
+        },
+        {
+          "generation": 22,
+          "Elapse": 15,
+          "fitness": -836.3329047082432
+        },
+        {
+          "generation": 27,
+          "Elapse": 18,
+          "fitness": -836.3948858032104
+        },
+        {
+          "generation": 28,
+          "Elapse": 19,
+          "fitness": -836.641395780335
+        },
+        {
+          "generation": 30,
+          "Elapse": 21,
+          "fitness": -837.0453504053692
+        },
+        {
+          "generation": 44,
+          "Elapse": 34,
+          "fitness": -837.1208985257238
+        },
+        {
+          "generation": 57,
+          "Elapse": 46,
+          "fitness": -837.1304899475138
+        },
+        {
+          "generation": 59,
+          "Elapse": 48,
+          "fitness": -837.4067945307982
+        },
+        {
+          "generation": 62,
+          "Elapse": 50,
+          "fitness": -837.4147161920077
+        },
+        {
+          "generation": 76,
+          "Elapse": 64,
+          "fitness": -837.4417478317396
+        },
+        {
+          "generation": 78,
+          "Elapse": 66,
+          "fitness": -837.4469044863749
+        },
+        {
+          "generation": 88,
+          "Elapse": 75,
+          "fitness": -837.4509659552456
+        },
+        {
+          "generation": 89,
+          "Elapse": 76,
+          "fitness": -837.6659450073903
+        },
+        {
+          "generation": 90,
+          "Elapse": 77,
+          "fitness": -837.6716324152748
+        },
+        {
+          "generation": 93,
+          "Elapse": 80,
+          "fitness": -837.7583449670972
+        },
+        {
+          "generation": 95,
+          "Elapse": 81,
+          "fitness": -837.75852874693
+        },
+        {
+          "generation": 97,
+          "Elapse": 83,
+          "fitness": -837.9355574153335
+        },
+        {
+          "generation": 98,
+          "Elapse": 84,
+          "fitness": -837.9655468485896
+        },
+        {
+          "generation": 99,
+          "Elapse": 85,
+          "fitness": -837.9656502940529
+        },
+        {
+          "generation": 105,
+          "Elapse": 91,
+          "fitness": -837.9656507463244
+        },
+        {
+          "generation": 114,
+          "Elapse": 99,
+          "fitness": -837.9657352596132
+        },
+        {
+          "generation": 118,
+          "Elapse": 103,
+          "fitness": -837.9657415340713
+        },
+        {
+          "generation": 130,
+          "Elapse": 114,
+          "fitness": -837.9657715532182
+        },
+        {
+          "generation": 135,
+          "Elapse": 118,
+          "fitness": -837.9657720826832
+        },
+        {
+          "generation": 148,
+          "Elapse": 130,
+          "fitness": -837.9657720942894
+        },
+        {
+          "generation": 160,
+          "Elapse": 139,
+          "fitness": -837.9657729804348
+        },
+        {
+          "generation": 163,
+          "Elapse": 141,
+          "fitness": -837.9657742451752
+        },
+        {
+          "generation": 165,
+          "Elapse": 142,
+          "fitness": -837.9657742567813
+        },
+        {
+          "generation": 188,
+          "Elapse": 158,
+          "fitness": -837.9657744999961
+        },
+        {
+          "generation": 191,
+          "Elapse": 161,
+          "fitness": -837.9657745040811
+        },
+        {
+          "generation": 277,
+          "Elapse": 224,
+          "fitness": -837.9657745283006
+        },
+        {
+          "generation": 344,
+          "Elapse": 272,
+          "fitness": -837.9657745347695
+        },
+        {
+          "generation": 353,
+          "Elapse": 279,
+          "fitness": -837.9657745374777
+        },
+        {
+          "generation": 395,
+          "Elapse": 309,
+          "fitness": -837.9657745402982
+        },
+        {
+          "generation": 411,
+          "Elapse": 320,
+          "fitness": -837.9657745426819
+        },
+        {
+          "generation": 412,
+          "Elapse": 321,
+          "fitness": -837.9657745430064
+        },
+        {
+          "generation": 501,
+          "Elapse": 386,
+          "fitness": -837.965774543801
+        },
+        {
+          "generation": 530,
+          "Elapse": 407,
+          "fitness": -837.9657745443606
+        },
+        {
+          "generation": 585,
+          "Elapse": 448,
+          "fitness": -837.9657745446851
+        }
+      ],
+      "quality": 1.000000000006234
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a4ca6"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.5,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 8,
+        "MutationThreshold": 0.2
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 300
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745443606
+      },
+      "AmountOfGenerations": 678,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745443606,
+      "TotalTimeMs": 518,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -749.712738551122
+        },
+        {
+          "generation": 2,
+          "Elapse": 1,
+          "fitness": -837.8103845953411
+        },
+        {
+          "generation": 16,
+          "Elapse": 12,
+          "fitness": -837.8273961396185
+        },
+        {
+          "generation": 28,
+          "Elapse": 21,
+          "fitness": -837.8332609841466
+        },
+        {
+          "generation": 36,
+          "Elapse": 27,
+          "fitness": -837.9450854489362
+        },
+        {
+          "generation": 61,
+          "Elapse": 45,
+          "fitness": -837.9450978794571
+        },
+        {
+          "generation": 74,
+          "Elapse": 55,
+          "fitness": -837.957779102228
+        },
+        {
+          "generation": 116,
+          "Elapse": 86,
+          "fitness": -837.9577817712482
+        },
+        {
+          "generation": 118,
+          "Elapse": 87,
+          "fitness": -837.9577837042093
+        },
+        {
+          "generation": 121,
+          "Elapse": 89,
+          "fitness": -837.9657326906921
+        },
+        {
+          "generation": 126,
+          "Elapse": 93,
+          "fitness": -837.9657502569494
+        },
+        {
+          "generation": 140,
+          "Elapse": 103,
+          "fitness": -837.9657514886178
+        },
+        {
+          "generation": 141,
+          "Elapse": 104,
+          "fitness": -837.9657517006988
+        },
+        {
+          "generation": 145,
+          "Elapse": 107,
+          "fitness": -837.9657735216182
+        },
+        {
+          "generation": 158,
+          "Elapse": 116,
+          "fitness": -837.9657735605779
+        },
+        {
+          "generation": 195,
+          "Elapse": 144,
+          "fitness": -837.9657735797052
+        },
+        {
+          "generation": 202,
+          "Elapse": 149,
+          "fitness": -837.9657736299241
+        },
+        {
+          "generation": 266,
+          "Elapse": 197,
+          "fitness": -837.9657739077568
+        },
+        {
+          "generation": 342,
+          "Elapse": 263,
+          "fitness": -837.9657743802416
+        },
+        {
+          "generation": 362,
+          "Elapse": 279,
+          "fitness": -837.9657745021113
+        },
+        {
+          "generation": 364,
+          "Elapse": 282,
+          "fitness": -837.9657745072035
+        },
+        {
+          "generation": 378,
+          "Elapse": 294,
+          "fitness": -837.9657745443606
+        }
+      ],
+      "quality": 1.0000000000058467
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a4eb2"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.3,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.4
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 100
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745447746
+      },
+      "AmountOfGenerations": 618,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745447746,
+      "TotalTimeMs": 533,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -587.4407004559512
+        },
+        {
+          "generation": 2,
+          "Elapse": 1,
+          "fitness": -697.786800316348
+        },
+        {
+          "generation": 3,
+          "Elapse": 1,
+          "fitness": -704.9496912292498
+        },
+        {
+          "generation": 5,
+          "Elapse": 3,
+          "fitness": -706.1604697703286
+        },
+        {
+          "generation": 8,
+          "Elapse": 6,
+          "fitness": -710.7684202242201
+        },
+        {
+          "generation": 11,
+          "Elapse": 8,
+          "fitness": -731.3308958595645
+        },
+        {
+          "generation": 12,
+          "Elapse": 9,
+          "fitness": -836.0335173735887
+        },
+        {
+          "generation": 15,
+          "Elapse": 11,
+          "fitness": -836.5626621048161
+        },
+        {
+          "generation": 19,
+          "Elapse": 14,
+          "fitness": -837.3204750437251
+        },
+        {
+          "generation": 21,
+          "Elapse": 16,
+          "fitness": -837.3858038675528
+        },
+        {
+          "generation": 25,
+          "Elapse": 18,
+          "fitness": -837.5008780635941
+        },
+        {
+          "generation": 28,
+          "Elapse": 20,
+          "fitness": -837.5010322494275
+        },
+        {
+          "generation": 31,
+          "Elapse": 23,
+          "fitness": -837.7616071455654
+        },
+        {
+          "generation": 33,
+          "Elapse": 25,
+          "fitness": -837.7663020356914
+        },
+        {
+          "generation": 38,
+          "Elapse": 28,
+          "fitness": -837.7676525364525
+        },
+        {
+          "generation": 40,
+          "Elapse": 30,
+          "fitness": -837.7676974343847
+        },
+        {
+          "generation": 54,
+          "Elapse": 43,
+          "fitness": -837.7677416031503
+        },
+        {
+          "generation": 57,
+          "Elapse": 45,
+          "fitness": -837.7683268255054
+        },
+        {
+          "generation": 59,
+          "Elapse": 47,
+          "fitness": -837.8388191312791
+        },
+        {
+          "generation": 62,
+          "Elapse": 50,
+          "fitness": -837.8813242964846
+        },
+        {
+          "generation": 63,
+          "Elapse": 51,
+          "fitness": -837.8927046031888
+        },
+        {
+          "generation": 65,
+          "Elapse": 54,
+          "fitness": -837.9553072310699
+        },
+        {
+          "generation": 86,
+          "Elapse": 72,
+          "fitness": -837.9565764403726
+        },
+        {
+          "generation": 93,
+          "Elapse": 79,
+          "fitness": -837.9590555926995
+        },
+        {
+          "generation": 117,
+          "Elapse": 103,
+          "fitness": -837.9590556807339
+        },
+        {
+          "generation": 118,
+          "Elapse": 104,
+          "fitness": -837.9590832340983
+        },
+        {
+          "generation": 129,
+          "Elapse": 115,
+          "fitness": -837.9590834341997
+        },
+        {
+          "generation": 131,
+          "Elapse": 117,
+          "fitness": -837.9590955667694
+        },
+        {
+          "generation": 132,
+          "Elapse": 119,
+          "fitness": -837.9656326425215
+        },
+        {
+          "generation": 142,
+          "Elapse": 127,
+          "fitness": -837.96570434881
+        },
+        {
+          "generation": 143,
+          "Elapse": 129,
+          "fitness": -837.9657462804521
+        },
+        {
+          "generation": 147,
+          "Elapse": 132,
+          "fitness": -837.9657528122493
+        },
+        {
+          "generation": 158,
+          "Elapse": 143,
+          "fitness": -837.9657565851539
+        },
+        {
+          "generation": 159,
+          "Elapse": 144,
+          "fitness": -837.96575918655
+        },
+        {
+          "generation": 171,
+          "Elapse": 155,
+          "fitness": -837.9657617874707
+        },
+        {
+          "generation": 183,
+          "Elapse": 167,
+          "fitness": -837.9657724690089
+        },
+        {
+          "generation": 213,
+          "Elapse": 190,
+          "fitness": -837.9657738715217
+        },
+        {
+          "generation": 215,
+          "Elapse": 191,
+          "fitness": -837.9657741413849
+        },
+        {
+          "generation": 223,
+          "Elapse": 197,
+          "fitness": -837.9657741502601
+        },
+        {
+          "generation": 244,
+          "Elapse": 213,
+          "fitness": -837.9657741630976
+        },
+        {
+          "generation": 251,
+          "Elapse": 221,
+          "fitness": -837.9657744872794
+        },
+        {
+          "generation": 297,
+          "Elapse": 267,
+          "fitness": -837.9657745061943
+        },
+        {
+          "generation": 304,
+          "Elapse": 274,
+          "fitness": -837.9657745100109
+        },
+        {
+          "generation": 306,
+          "Elapse": 276,
+          "fitness": -837.9657745103355
+        },
+        {
+          "generation": 323,
+          "Elapse": 294,
+          "fitness": -837.9657745142415
+        },
+        {
+          "generation": 415,
+          "Elapse": 376,
+          "fitness": -837.9657745350033
+        },
+        {
+          "generation": 454,
+          "Elapse": 406,
+          "fitness": -837.9657745446291
+        },
+        {
+          "generation": 518,
+          "Elapse": 457,
+          "fitness": -837.9657745447746
+        }
+      ],
+      "quality": 1.0000000000063407
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a4e9e"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.3,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.2
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 300
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745447746
+      },
+      "AmountOfGenerations": 704,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745447746,
+      "TotalTimeMs": 535,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -654.3017842132156
+        },
+        {
+          "generation": 2,
+          "Elapse": 1,
+          "fitness": -831.2864256864498
+        },
+        {
+          "generation": 4,
+          "Elapse": 3,
+          "fitness": -836.3642981895391
+        },
+        {
+          "generation": 11,
+          "Elapse": 7,
+          "fitness": -836.3647052271223
+        },
+        {
+          "generation": 14,
+          "Elapse": 9,
+          "fitness": -836.4315395228994
+        },
+        {
+          "generation": 15,
+          "Elapse": 10,
+          "fitness": -836.5981490011172
+        },
+        {
+          "generation": 30,
+          "Elapse": 21,
+          "fitness": -836.6280457735642
+        },
+        {
+          "generation": 31,
+          "Elapse": 22,
+          "fitness": -836.99778275823
+        },
+        {
+          "generation": 33,
+          "Elapse": 23,
+          "fitness": -837.4997146796477
+        },
+        {
+          "generation": 39,
+          "Elapse": 27,
+          "fitness": -837.6973705801834
+        },
+        {
+          "generation": 42,
+          "Elapse": 30,
+          "fitness": -837.731263212425
+        },
+        {
+          "generation": 47,
+          "Elapse": 33,
+          "fitness": -837.7458406549633
+        },
+        {
+          "generation": 50,
+          "Elapse": 35,
+          "fitness": -837.7520115989432
+        },
+        {
+          "generation": 52,
+          "Elapse": 36,
+          "fitness": -837.7988377157917
+        },
+        {
+          "generation": 59,
+          "Elapse": 41,
+          "fitness": -837.963689922795
+        },
+        {
+          "generation": 62,
+          "Elapse": 43,
+          "fitness": -837.9644513188516
+        },
+        {
+          "generation": 84,
+          "Elapse": 59,
+          "fitness": -837.9648350576474
+        },
+        {
+          "generation": 91,
+          "Elapse": 66,
+          "fitness": -837.9649143155759
+        },
+        {
+          "generation": 101,
+          "Elapse": 72,
+          "fitness": -837.9654051767038
+        },
+        {
+          "generation": 107,
+          "Elapse": 77,
+          "fitness": -837.9656689939986
+        },
+        {
+          "generation": 108,
+          "Elapse": 78,
+          "fitness": -837.9657156636843
+        },
+        {
+          "generation": 150,
+          "Elapse": 109,
+          "fitness": -837.9657474474615
+        },
+        {
+          "generation": 172,
+          "Elapse": 125,
+          "fitness": -837.9657541882366
+        },
+        {
+          "generation": 192,
+          "Elapse": 139,
+          "fitness": -837.9657715241779
+        },
+        {
+          "generation": 198,
+          "Elapse": 143,
+          "fitness": -837.965774417678
+        },
+        {
+          "generation": 243,
+          "Elapse": 174,
+          "fitness": -837.9657745152281
+        },
+        {
+          "generation": 255,
+          "Elapse": 183,
+          "fitness": -837.9657745176227
+        },
+        {
+          "generation": 259,
+          "Elapse": 186,
+          "fitness": -837.9657745188432
+        },
+        {
+          "generation": 265,
+          "Elapse": 191,
+          "fitness": -837.9657745309529
+        },
+        {
+          "generation": 357,
+          "Elapse": 255,
+          "fitness": -837.9657745438906
+        },
+        {
+          "generation": 404,
+          "Elapse": 290,
+          "fitness": -837.9657745447746
+        }
+      ],
+      "quality": 1.0000000000063407
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a4d63"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.4,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.7
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 300
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745420664
+      },
+      "AmountOfGenerations": 710,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745420664,
+      "TotalTimeMs": 600,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -516.2732119856656
+        },
+        {
+          "generation": 2,
+          "Elapse": 1,
+          "fitness": -699.2250363775433
+        },
+        {
+          "generation": 7,
+          "Elapse": 6,
+          "fitness": -714.2113776444279
+        },
+        {
+          "generation": 16,
+          "Elapse": 14,
+          "fitness": -818.7985393569883
+        },
+        {
+          "generation": 33,
+          "Elapse": 27,
+          "fitness": -819.3778156701148
+        },
+        {
+          "generation": 34,
+          "Elapse": 28,
+          "fitness": -822.4786432063306
+        },
+        {
+          "generation": 37,
+          "Elapse": 30,
+          "fitness": -822.5217441106676
+        },
+        {
+          "generation": 38,
+          "Elapse": 31,
+          "fitness": -833.13259395452
+        },
+        {
+          "generation": 40,
+          "Elapse": 33,
+          "fitness": -837.8415426706113
+        },
+        {
+          "generation": 48,
+          "Elapse": 38,
+          "fitness": -837.8538956050168
+        },
+        {
+          "generation": 52,
+          "Elapse": 42,
+          "fitness": -837.9415622673696
+        },
+        {
+          "generation": 66,
+          "Elapse": 53,
+          "fitness": -837.9416940488936
+        },
+        {
+          "generation": 70,
+          "Elapse": 56,
+          "fitness": -837.9462629954952
+        },
+        {
+          "generation": 76,
+          "Elapse": 60,
+          "fitness": -837.9463336056936
+        },
+        {
+          "generation": 77,
+          "Elapse": 61,
+          "fitness": -837.9499558952643
+        },
+        {
+          "generation": 78,
+          "Elapse": 62,
+          "fitness": -837.9503797321543
+        },
+        {
+          "generation": 84,
+          "Elapse": 66,
+          "fitness": -837.9564823502134
+        },
+        {
+          "generation": 92,
+          "Elapse": 72,
+          "fitness": -837.9620336188739
+        },
+        {
+          "generation": 104,
+          "Elapse": 82,
+          "fitness": -837.9623583611146
+        },
+        {
+          "generation": 117,
+          "Elapse": 92,
+          "fitness": -837.9653747261467
+        },
+        {
+          "generation": 118,
+          "Elapse": 93,
+          "fitness": -837.9654525271123
+        },
+        {
+          "generation": 123,
+          "Elapse": 96,
+          "fitness": -837.9655659087231
+        },
+        {
+          "generation": 125,
+          "Elapse": 98,
+          "fitness": -837.9657271684293
+        },
+        {
+          "generation": 136,
+          "Elapse": 106,
+          "fitness": -837.9657273107136
+        },
+        {
+          "generation": 139,
+          "Elapse": 109,
+          "fitness": -837.9657278775002
+        },
+        {
+          "generation": 142,
+          "Elapse": 111,
+          "fitness": -837.965728999792
+        },
+        {
+          "generation": 149,
+          "Elapse": 117,
+          "fitness": -837.9657488688766
+        },
+        {
+          "generation": 162,
+          "Elapse": 126,
+          "fitness": -837.9657661930923
+        },
+        {
+          "generation": 166,
+          "Elapse": 129,
+          "fitness": -837.9657700737164
+        },
+        {
+          "generation": 211,
+          "Elapse": 164,
+          "fitness": -837.9657707426458
+        },
+        {
+          "generation": 215,
+          "Elapse": 167,
+          "fitness": -837.9657709348833
+        },
+        {
+          "generation": 226,
+          "Elapse": 194,
+          "fitness": -837.9657711067618
+        },
+        {
+          "generation": 246,
+          "Elapse": 236,
+          "fitness": -837.9657740228643
+        },
+        {
+          "generation": 283,
+          "Elapse": 267,
+          "fitness": -837.9657742217254
+        },
+        {
+          "generation": 286,
+          "Elapse": 270,
+          "fitness": -837.9657742695723
+        },
+        {
+          "generation": 296,
+          "Elapse": 278,
+          "fitness": -837.9657744836427
+        },
+        {
+          "generation": 330,
+          "Elapse": 303,
+          "fitness": -837.9657745102686
+        },
+        {
+          "generation": 353,
+          "Elapse": 320,
+          "fitness": -837.9657745115333
+        },
+        {
+          "generation": 410,
+          "Elapse": 364,
+          "fitness": -837.9657745420664
+        }
+      ],
+      "quality": 1.0000000000031088
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a4edd"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.3,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.7
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 300
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745446851
+      },
+      "AmountOfGenerations": 819,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745446851,
+      "TotalTimeMs": 680,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -530.0764058715731
+        },
+        {
+          "generation": 2,
+          "Elapse": 1,
+          "fitness": -587.4334450083655
+        },
+        {
+          "generation": 3,
+          "Elapse": 2,
+          "fitness": -704.9871534494429
+        },
+        {
+          "generation": 5,
+          "Elapse": 4,
+          "fitness": -774.0398236984686
+        },
+        {
+          "generation": 9,
+          "Elapse": 6,
+          "fitness": -810.2001708179093
+        },
+        {
+          "generation": 18,
+          "Elapse": 13,
+          "fitness": -810.2747968548408
+        },
+        {
+          "generation": 19,
+          "Elapse": 13,
+          "fitness": -814.1297034945451
+        },
+        {
+          "generation": 21,
+          "Elapse": 15,
+          "fitness": -833.4234272668364
+        },
+        {
+          "generation": 22,
+          "Elapse": 16,
+          "fitness": -836.5643467793737
+        },
+        {
+          "generation": 23,
+          "Elapse": 17,
+          "fitness": -836.7007536633938
+        },
+        {
+          "generation": 24,
+          "Elapse": 18,
+          "fitness": -836.7025471461693
+        },
+        {
+          "generation": 25,
+          "Elapse": 19,
+          "fitness": -837.0879272704195
+        },
+        {
+          "generation": 33,
+          "Elapse": 25,
+          "fitness": -837.230336374495
+        },
+        {
+          "generation": 37,
+          "Elapse": 28,
+          "fitness": -837.4122509399931
+        },
+        {
+          "generation": 38,
+          "Elapse": 28,
+          "fitness": -837.4122994334815
+        },
+        {
+          "generation": 39,
+          "Elapse": 29,
+          "fitness": -837.4136121878083
+        },
+        {
+          "generation": 51,
+          "Elapse": 38,
+          "fitness": -837.7220957954755
+        },
+        {
+          "generation": 67,
+          "Elapse": 51,
+          "fitness": -837.7222682182894
+        },
+        {
+          "generation": 73,
+          "Elapse": 56,
+          "fitness": -837.7223107224291
+        },
+        {
+          "generation": 75,
+          "Elapse": 58,
+          "fitness": -837.7351437609037
+        },
+        {
+          "generation": 76,
+          "Elapse": 58,
+          "fitness": -837.743523942454
+        },
+        {
+          "generation": 78,
+          "Elapse": 60,
+          "fitness": -837.7435664465938
+        },
+        {
+          "generation": 81,
+          "Elapse": 62,
+          "fitness": -837.8915471021814
+        },
+        {
+          "generation": 83,
+          "Elapse": 64,
+          "fitness": -837.9065015194208
+        },
+        {
+          "generation": 92,
+          "Elapse": 71,
+          "fitness": -837.9496494792868
+        },
+        {
+          "generation": 102,
+          "Elapse": 79,
+          "fitness": -837.9587480777658
+        },
+        {
+          "generation": 112,
+          "Elapse": 87,
+          "fitness": -837.961007145174
+        },
+        {
+          "generation": 117,
+          "Elapse": 90,
+          "fitness": -837.961712902722
+        },
+        {
+          "generation": 120,
+          "Elapse": 93,
+          "fitness": -837.9620961336441
+        },
+        {
+          "generation": 121,
+          "Elapse": 94,
+          "fitness": -837.964425022577
+        },
+        {
+          "generation": 127,
+          "Elapse": 98,
+          "fitness": -837.9647838690446
+        },
+        {
+          "generation": 131,
+          "Elapse": 102,
+          "fitness": -837.9656184445148
+        },
+        {
+          "generation": 132,
+          "Elapse": 102,
+          "fitness": -837.965708842564
+        },
+        {
+          "generation": 134,
+          "Elapse": 104,
+          "fitness": -837.9657132702155
+        },
+        {
+          "generation": 139,
+          "Elapse": 107,
+          "fitness": -837.9657152816487
+        },
+        {
+          "generation": 148,
+          "Elapse": 114,
+          "fitness": -837.9657198538398
+        },
+        {
+          "generation": 151,
+          "Elapse": 117,
+          "fitness": -837.965721865273
+        },
+        {
+          "generation": 155,
+          "Elapse": 120,
+          "fitness": -837.9657269698216
+        },
+        {
+          "generation": 162,
+          "Elapse": 126,
+          "fitness": -837.9657288092009
+        },
+        {
+          "generation": 186,
+          "Elapse": 144,
+          "fitness": -837.9657291806711
+        },
+        {
+          "generation": 196,
+          "Elapse": 152,
+          "fitness": -837.9657322548007
+        },
+        {
+          "generation": 199,
+          "Elapse": 154,
+          "fitness": -837.9657449351139
+        },
+        {
+          "generation": 228,
+          "Elapse": 178,
+          "fitness": -837.9657462751618
+        },
+        {
+          "generation": 241,
+          "Elapse": 191,
+          "fitness": -837.9657661928088
+        },
+        {
+          "generation": 255,
+          "Elapse": 202,
+          "fitness": -837.9657662545337
+        },
+        {
+          "generation": 273,
+          "Elapse": 217,
+          "fitness": -837.9657664990835
+        },
+        {
+          "generation": 282,
+          "Elapse": 224,
+          "fitness": -837.9657666199483
+        },
+        {
+          "generation": 288,
+          "Elapse": 228,
+          "fitness": -837.9657666396351
+        },
+        {
+          "generation": 330,
+          "Elapse": 261,
+          "fitness": -837.9657668411658
+        },
+        {
+          "generation": 337,
+          "Elapse": 267,
+          "fitness": -837.9657670798483
+        },
+        {
+          "generation": 352,
+          "Elapse": 279,
+          "fitness": -837.9657675459316
+        },
+        {
+          "generation": 367,
+          "Elapse": 291,
+          "fitness": -837.9657693095259
+        },
+        {
+          "generation": 371,
+          "Elapse": 293,
+          "fitness": -837.9657717257653
+        },
+        {
+          "generation": 416,
+          "Elapse": 329,
+          "fitness": -837.9657744534258
+        },
+        {
+          "generation": 454,
+          "Elapse": 369,
+          "fitness": -837.965774489151
+        },
+        {
+          "generation": 472,
+          "Elapse": 389,
+          "fitness": -837.9657745308634
+        },
+        {
+          "generation": 495,
+          "Elapse": 414,
+          "fitness": -837.965774535508
+        },
+        {
+          "generation": 514,
+          "Elapse": 434,
+          "fitness": -837.965774543801
+        },
+        {
+          "generation": 519,
+          "Elapse": 438,
+          "fitness": -837.9657745446851
+        }
+      ],
+      "quality": 1.000000000006234
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a4baa"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.5,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.2
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 300
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745447746
+      },
+      "AmountOfGenerations": 935,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745447746,
+      "TotalTimeMs": 687,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -795.4081955830623
+        },
+        {
+          "generation": 6,
+          "Elapse": 4,
+          "fitness": -818.7220403660999
+        },
+        {
+          "generation": 12,
+          "Elapse": 8,
+          "fitness": -818.9097241996642
+        },
+        {
+          "generation": 20,
+          "Elapse": 14,
+          "fitness": -818.9106291838818
+        },
+        {
+          "generation": 21,
+          "Elapse": 15,
+          "fitness": -820.3606674573548
+        },
+        {
+          "generation": 23,
+          "Elapse": 16,
+          "fitness": -821.7250904078467
+        },
+        {
+          "generation": 27,
+          "Elapse": 18,
+          "fitness": -821.7305004237298
+        },
+        {
+          "generation": 28,
+          "Elapse": 19,
+          "fitness": -829.679861675766
+        },
+        {
+          "generation": 30,
+          "Elapse": 20,
+          "fitness": -831.2978147052038
+        },
+        {
+          "generation": 34,
+          "Elapse": 24,
+          "fitness": -834.5375602581471
+        },
+        {
+          "generation": 35,
+          "Elapse": 25,
+          "fitness": -834.5519597756523
+        },
+        {
+          "generation": 47,
+          "Elapse": 33,
+          "fitness": -834.603756345087
+        },
+        {
+          "generation": 51,
+          "Elapse": 36,
+          "fitness": -835.3717801422338
+        },
+        {
+          "generation": 53,
+          "Elapse": 37,
+          "fitness": -836.5312711430886
+        },
+        {
+          "generation": 55,
+          "Elapse": 38,
+          "fitness": -837.9057098413455
+        },
+        {
+          "generation": 89,
+          "Elapse": 63,
+          "fitness": -837.9607601757957
+        },
+        {
+          "generation": 96,
+          "Elapse": 69,
+          "fitness": -837.9608101528886
+        },
+        {
+          "generation": 104,
+          "Elapse": 76,
+          "fitness": -837.9637408960874
+        },
+        {
+          "generation": 105,
+          "Elapse": 77,
+          "fitness": -837.9655179718668
+        },
+        {
+          "generation": 114,
+          "Elapse": 83,
+          "fitness": -837.9655230796684
+        },
+        {
+          "generation": 126,
+          "Elapse": 94,
+          "fitness": -837.965526272208
+        },
+        {
+          "generation": 127,
+          "Elapse": 95,
+          "fitness": -837.9655507781661
+        },
+        {
+          "generation": 129,
+          "Elapse": 97,
+          "fitness": -837.9655514491978
+        },
+        {
+          "generation": 139,
+          "Elapse": 107,
+          "fitness": -837.9655606748379
+        },
+        {
+          "generation": 142,
+          "Elapse": 109,
+          "fitness": -837.9656620191238
+        },
+        {
+          "generation": 143,
+          "Elapse": 110,
+          "fitness": -837.9656645128541
+        },
+        {
+          "generation": 148,
+          "Elapse": 115,
+          "fitness": -837.9656996444082
+        },
+        {
+          "generation": 151,
+          "Elapse": 118,
+          "fitness": -837.9657192633147
+        },
+        {
+          "generation": 177,
+          "Elapse": 140,
+          "fitness": -837.965724090055
+        },
+        {
+          "generation": 188,
+          "Elapse": 149,
+          "fitness": -837.9657639026296
+        },
+        {
+          "generation": 196,
+          "Elapse": 155,
+          "fitness": -837.9657737029654
+        },
+        {
+          "generation": 232,
+          "Elapse": 182,
+          "fitness": -837.9657737735882
+        },
+        {
+          "generation": 286,
+          "Elapse": 225,
+          "fitness": -837.965774392115
+        },
+        {
+          "generation": 288,
+          "Elapse": 226,
+          "fitness": -837.9657745341192
+        },
+        {
+          "generation": 553,
+          "Elapse": 415,
+          "fitness": -837.9657745350033
+        },
+        {
+          "generation": 605,
+          "Elapse": 451,
+          "fitness": -837.9657745436327
+        },
+        {
+          "generation": 610,
+          "Elapse": 454,
+          "fitness": -837.9657745446291
+        },
+        {
+          "generation": 635,
+          "Elapse": 471,
+          "fitness": -837.9657745447746
+        }
+      ],
+      "quality": 1.0000000000063407
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a4bfe"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.5,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.9
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 300
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745446291
+      },
+      "AmountOfGenerations": 821,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745446291,
+      "TotalTimeMs": 693,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -534.4935892350384
+        },
+        {
+          "generation": 2,
+          "Elapse": 1,
+          "fitness": -669.8580409747051
+        },
+        {
+          "generation": 4,
+          "Elapse": 2,
+          "fitness": -717.1796201094542
+        },
+        {
+          "generation": 7,
+          "Elapse": 5,
+          "fitness": -722.2333952527365
+        },
+        {
+          "generation": 9,
+          "Elapse": 6,
+          "fitness": -791.3256660293009
+        },
+        {
+          "generation": 11,
+          "Elapse": 8,
+          "fitness": -817.3359706574608
+        },
+        {
+          "generation": 18,
+          "Elapse": 13,
+          "fitness": -835.9198715743026
+        },
+        {
+          "generation": 21,
+          "Elapse": 16,
+          "fitness": -836.491525459476
+        },
+        {
+          "generation": 31,
+          "Elapse": 23,
+          "fitness": -836.6907782474508
+        },
+        {
+          "generation": 34,
+          "Elapse": 26,
+          "fitness": -837.8732853371789
+        },
+        {
+          "generation": 40,
+          "Elapse": 31,
+          "fitness": -837.9459342685834
+        },
+        {
+          "generation": 48,
+          "Elapse": 37,
+          "fitness": -837.9530175308521
+        },
+        {
+          "generation": 54,
+          "Elapse": 43,
+          "fitness": -837.9534870176062
+        },
+        {
+          "generation": 56,
+          "Elapse": 44,
+          "fitness": -837.9541979378214
+        },
+        {
+          "generation": 60,
+          "Elapse": 47,
+          "fitness": -837.9546465853771
+        },
+        {
+          "generation": 61,
+          "Elapse": 49,
+          "fitness": -837.9546566793393
+        },
+        {
+          "generation": 63,
+          "Elapse": 50,
+          "fitness": -837.9602930215642
+        },
+        {
+          "generation": 81,
+          "Elapse": 65,
+          "fitness": -837.9602936494026
+        },
+        {
+          "generation": 82,
+          "Elapse": 66,
+          "fitness": -837.9604773055939
+        },
+        {
+          "generation": 86,
+          "Elapse": 69,
+          "fitness": -837.9650061228269
+        },
+        {
+          "generation": 87,
+          "Elapse": 69,
+          "fitness": -837.9653894650115
+        },
+        {
+          "generation": 124,
+          "Elapse": 100,
+          "fitness": -837.9655634251922
+        },
+        {
+          "generation": 128,
+          "Elapse": 104,
+          "fitness": -837.9655821554317
+        },
+        {
+          "generation": 139,
+          "Elapse": 112,
+          "fitness": -837.9656033053701
+        },
+        {
+          "generation": 158,
+          "Elapse": 128,
+          "fitness": -837.9656065585123
+        },
+        {
+          "generation": 180,
+          "Elapse": 148,
+          "fitness": -837.9656076752636
+        },
+        {
+          "generation": 183,
+          "Elapse": 150,
+          "fitness": -837.965759408808
+        },
+        {
+          "generation": 191,
+          "Elapse": 158,
+          "fitness": -837.9657609112699
+        },
+        {
+          "generation": 198,
+          "Elapse": 163,
+          "fitness": -837.9657715485239
+        },
+        {
+          "generation": 294,
+          "Elapse": 243,
+          "fitness": -837.9657717130915
+        },
+        {
+          "generation": 296,
+          "Elapse": 245,
+          "fitness": -837.9657717167399
+        },
+        {
+          "generation": 343,
+          "Elapse": 283,
+          "fitness": -837.9657743235397
+        },
+        {
+          "generation": 394,
+          "Elapse": 324,
+          "fitness": -837.9657743313853
+        },
+        {
+          "generation": 405,
+          "Elapse": 333,
+          "fitness": -837.9657743436633
+        },
+        {
+          "generation": 414,
+          "Elapse": 340,
+          "fitness": -837.9657744166709
+        },
+        {
+          "generation": 461,
+          "Elapse": 383,
+          "fitness": -837.9657745433083
+        },
+        {
+          "generation": 521,
+          "Elapse": 431,
+          "fitness": -837.9657745446291
+        }
+      ],
+      "quality": 1.000000000006167
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a4d39"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.4,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.4
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 300
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745444501
+      },
+      "AmountOfGenerations": 698,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745444501,
+      "TotalTimeMs": 721,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -713.1509386102192
+        },
+        {
+          "generation": 2,
+          "Elapse": 1,
+          "fitness": -814.5852143913016
+        },
+        {
+          "generation": 7,
+          "Elapse": 5,
+          "fitness": -821.538950840576
+        },
+        {
+          "generation": 10,
+          "Elapse": 9,
+          "fitness": -825.0151499465853
+        },
+        {
+          "generation": 13,
+          "Elapse": 12,
+          "fitness": -827.5356459581427
+        },
+        {
+          "generation": 16,
+          "Elapse": 14,
+          "fitness": -831.5458514421518
+        },
+        {
+          "generation": 20,
+          "Elapse": 18,
+          "fitness": -831.8610744406521
+        },
+        {
+          "generation": 21,
+          "Elapse": 20,
+          "fitness": -832.8539469989303
+        },
+        {
+          "generation": 23,
+          "Elapse": 22,
+          "fitness": -833.0226819519196
+        },
+        {
+          "generation": 33,
+          "Elapse": 32,
+          "fitness": -834.597799373251
+        },
+        {
+          "generation": 39,
+          "Elapse": 38,
+          "fitness": -834.6077748609111
+        },
+        {
+          "generation": 42,
+          "Elapse": 41,
+          "fitness": -834.6764936746547
+        },
+        {
+          "generation": 54,
+          "Elapse": 53,
+          "fitness": -835.2146981768487
+        },
+        {
+          "generation": 64,
+          "Elapse": 63,
+          "fitness": -835.4597936469665
+        },
+        {
+          "generation": 66,
+          "Elapse": 66,
+          "fitness": -835.4624976822573
+        },
+        {
+          "generation": 71,
+          "Elapse": 71,
+          "fitness": -835.6971696876496
+        },
+        {
+          "generation": 72,
+          "Elapse": 72,
+          "fitness": -835.9994144455045
+        },
+        {
+          "generation": 82,
+          "Elapse": 82,
+          "fitness": -836.0490716290559
+        },
+        {
+          "generation": 89,
+          "Elapse": 90,
+          "fitness": -836.0520330220219
+        },
+        {
+          "generation": 90,
+          "Elapse": 90,
+          "fitness": -837.3476490851375
+        },
+        {
+          "generation": 94,
+          "Elapse": 95,
+          "fitness": -837.3646956497796
+        },
+        {
+          "generation": 99,
+          "Elapse": 99,
+          "fitness": -837.3846052404406
+        },
+        {
+          "generation": 106,
+          "Elapse": 107,
+          "fitness": -837.5307149408692
+        },
+        {
+          "generation": 111,
+          "Elapse": 113,
+          "fitness": -837.6990024819676
+        },
+        {
+          "generation": 113,
+          "Elapse": 115,
+          "fitness": -837.6991767449995
+        },
+        {
+          "generation": 117,
+          "Elapse": 118,
+          "fitness": -837.7259755080082
+        },
+        {
+          "generation": 119,
+          "Elapse": 120,
+          "fitness": -837.8010003073857
+        },
+        {
+          "generation": 120,
+          "Elapse": 121,
+          "fitness": -837.8115738353277
+        },
+        {
+          "generation": 123,
+          "Elapse": 125,
+          "fitness": -837.9363909864727
+        },
+        {
+          "generation": 127,
+          "Elapse": 129,
+          "fitness": -837.9420687194564
+        },
+        {
+          "generation": 131,
+          "Elapse": 133,
+          "fitness": -837.9421180813138
+        },
+        {
+          "generation": 132,
+          "Elapse": 134,
+          "fitness": -837.9471428770764
+        },
+        {
+          "generation": 141,
+          "Elapse": 144,
+          "fitness": -837.947144074235
+        },
+        {
+          "generation": 142,
+          "Elapse": 145,
+          "fitness": -837.957820534437
+        },
+        {
+          "generation": 153,
+          "Elapse": 157,
+          "fitness": -837.9578216615612
+        },
+        {
+          "generation": 155,
+          "Elapse": 159,
+          "fitness": -837.9587722473599
+        },
+        {
+          "generation": 156,
+          "Elapse": 160,
+          "fitness": -837.9587871699043
+        },
+        {
+          "generation": 162,
+          "Elapse": 167,
+          "fitness": -837.9647680003022
+        },
+        {
+          "generation": 168,
+          "Elapse": 174,
+          "fitness": -837.9647727801198
+        },
+        {
+          "generation": 173,
+          "Elapse": 179,
+          "fitness": -837.9653479421132
+        },
+        {
+          "generation": 179,
+          "Elapse": 186,
+          "fitness": -837.9656495562317
+        },
+        {
+          "generation": 185,
+          "Elapse": 192,
+          "fitness": -837.9656760653331
+        },
+        {
+          "generation": 202,
+          "Elapse": 212,
+          "fitness": -837.9657193539972
+        },
+        {
+          "generation": 210,
+          "Elapse": 220,
+          "fitness": -837.9657215985806
+        },
+        {
+          "generation": 220,
+          "Elapse": 231,
+          "fitness": -837.9657279713242
+        },
+        {
+          "generation": 227,
+          "Elapse": 239,
+          "fitness": -837.965733146744
+        },
+        {
+          "generation": 232,
+          "Elapse": 244,
+          "fitness": -837.9657622390341
+        },
+        {
+          "generation": 243,
+          "Elapse": 255,
+          "fitness": -837.9657622840821
+        },
+        {
+          "generation": 250,
+          "Elapse": 262,
+          "fitness": -837.9657666031028
+        },
+        {
+          "generation": 256,
+          "Elapse": 268,
+          "fitness": -837.9657666481507
+        },
+        {
+          "generation": 261,
+          "Elapse": 273,
+          "fitness": -837.965766995716
+        },
+        {
+          "generation": 265,
+          "Elapse": 277,
+          "fitness": -837.9657744773207
+        },
+        {
+          "generation": 308,
+          "Elapse": 321,
+          "fitness": -837.9657744880761
+        },
+        {
+          "generation": 322,
+          "Elapse": 335,
+          "fitness": -837.9657745067668
+        },
+        {
+          "generation": 337,
+          "Elapse": 351,
+          "fitness": -837.9657745425698
+        },
+        {
+          "generation": 390,
+          "Elapse": 404,
+          "fitness": -837.9657745430959
+        },
+        {
+          "generation": 398,
+          "Elapse": 412,
+          "fitness": -837.9657745444501
+        }
+      ],
+      "quality": 1.0000000000059535
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a4e1c"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.4,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 8,
+        "MutationThreshold": 0.2
+      },
+      "TerminationName": "GenerationNumberTermination",
+      "Termination": {
+        "MaxGenerationsCount": 1000
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745442485
+      },
+      "AmountOfGenerations": 1001,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745442485,
+      "TotalTimeMs": 769,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -729.2474863803466
+        },
+        {
+          "generation": 2,
+          "Elapse": 1,
+          "fitness": -789.021998508658
+        },
+        {
+          "generation": 3,
+          "Elapse": 2,
+          "fitness": -802.5052841428915
+        },
+        {
+          "generation": 4,
+          "Elapse": 3,
+          "fitness": -830.132557585358
+        },
+        {
+          "generation": 15,
+          "Elapse": 15,
+          "fitness": -835.4898103714186
+        },
+        {
+          "generation": 21,
+          "Elapse": 21,
+          "fitness": -836.5072146473132
+        },
+        {
+          "generation": 25,
+          "Elapse": 24,
+          "fitness": -837.3156840515951
+        },
+        {
+          "generation": 29,
+          "Elapse": 28,
+          "fitness": -837.344879913667
+        },
+        {
+          "generation": 73,
+          "Elapse": 65,
+          "fitness": -837.3630981573169
+        },
+        {
+          "generation": 79,
+          "Elapse": 69,
+          "fitness": -837.6886677362801
+        },
+        {
+          "generation": 93,
+          "Elapse": 81,
+          "fitness": -837.9169482330632
+        },
+        {
+          "generation": 137,
+          "Elapse": 114,
+          "fitness": -837.9325895288785
+        },
+        {
+          "generation": 156,
+          "Elapse": 129,
+          "fitness": -837.93307818623
+        },
+        {
+          "generation": 180,
+          "Elapse": 146,
+          "fitness": -837.9331385446235
+        },
+        {
+          "generation": 198,
+          "Elapse": 159,
+          "fitness": -837.9349992480732
+        },
+        {
+          "generation": 199,
+          "Elapse": 160,
+          "fitness": -837.935000498376
+        },
+        {
+          "generation": 202,
+          "Elapse": 162,
+          "fitness": -837.9352888776209
+        },
+        {
+          "generation": 210,
+          "Elapse": 167,
+          "fitness": -837.9359295739225
+        },
+        {
+          "generation": 212,
+          "Elapse": 169,
+          "fitness": -837.9366464699931
+        },
+        {
+          "generation": 230,
+          "Elapse": 182,
+          "fitness": -837.9459271276198
+        },
+        {
+          "generation": 233,
+          "Elapse": 184,
+          "fitness": -837.9488402770669
+        },
+        {
+          "generation": 236,
+          "Elapse": 187,
+          "fitness": -837.948883668233
+        },
+        {
+          "generation": 241,
+          "Elapse": 190,
+          "fitness": -837.9634920347661
+        },
+        {
+          "generation": 256,
+          "Elapse": 201,
+          "fitness": -837.9635085641355
+        },
+        {
+          "generation": 265,
+          "Elapse": 207,
+          "fitness": -837.9637640176281
+        },
+        {
+          "generation": 268,
+          "Elapse": 209,
+          "fitness": -837.9645124636896
+        },
+        {
+          "generation": 277,
+          "Elapse": 216,
+          "fitness": -837.9645128945
+        },
+        {
+          "generation": 307,
+          "Elapse": 240,
+          "fitness": -837.9654071811128
+        },
+        {
+          "generation": 310,
+          "Elapse": 242,
+          "fitness": -837.9656897392942
+        },
+        {
+          "generation": 324,
+          "Elapse": 252,
+          "fitness": -837.9657575046538
+        },
+        {
+          "generation": 325,
+          "Elapse": 253,
+          "fitness": -837.9657627796333
+        },
+        {
+          "generation": 338,
+          "Elapse": 262,
+          "fitness": -837.9657636562965
+        },
+        {
+          "generation": 367,
+          "Elapse": 283,
+          "fitness": -837.965763799701
+        },
+        {
+          "generation": 382,
+          "Elapse": 294,
+          "fitness": -837.9657678296214
+        },
+        {
+          "generation": 396,
+          "Elapse": 307,
+          "fitness": -837.9657678748938
+        },
+        {
+          "generation": 446,
+          "Elapse": 350,
+          "fitness": -837.965771829264
+        },
+        {
+          "generation": 486,
+          "Elapse": 381,
+          "fitness": -837.9657739902894
+        },
+        {
+          "generation": 601,
+          "Elapse": 465,
+          "fitness": -837.9657739994666
+        },
+        {
+          "generation": 715,
+          "Elapse": 555,
+          "fitness": -837.9657740310174
+        },
+        {
+          "generation": 737,
+          "Elapse": 571,
+          "fitness": -837.9657745442485
+        }
+      ],
+      "quality": 1.0000000000057128
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a502c"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.2,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.4
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 100
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745444501
+      },
+      "AmountOfGenerations": 998,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745444501,
+      "TotalTimeMs": 777,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -756.0611985684295
+        },
+        {
+          "generation": 4,
+          "Elapse": 3,
+          "fitness": -812.956543165277
+        },
+        {
+          "generation": 6,
+          "Elapse": 4,
+          "fitness": -819.4990068597426
+        },
+        {
+          "generation": 9,
+          "Elapse": 6,
+          "fitness": -823.3106093589415
+        },
+        {
+          "generation": 11,
+          "Elapse": 8,
+          "fitness": -823.3364744231811
+        },
+        {
+          "generation": 12,
+          "Elapse": 8,
+          "fitness": -823.5411752456198
+        },
+        {
+          "generation": 14,
+          "Elapse": 9,
+          "fitness": -823.8851210392224
+        },
+        {
+          "generation": 18,
+          "Elapse": 13,
+          "fitness": -837.5894427797284
+        },
+        {
+          "generation": 24,
+          "Elapse": 17,
+          "fitness": -837.5902467560468
+        },
+        {
+          "generation": 26,
+          "Elapse": 20,
+          "fitness": -837.635881840339
+        },
+        {
+          "generation": 30,
+          "Elapse": 22,
+          "fitness": -837.6366253248185
+        },
+        {
+          "generation": 35,
+          "Elapse": 25,
+          "fitness": -837.6501325265268
+        },
+        {
+          "generation": 36,
+          "Elapse": 26,
+          "fitness": -837.8958334724316
+        },
+        {
+          "generation": 41,
+          "Elapse": 31,
+          "fitness": -837.9381782667216
+        },
+        {
+          "generation": 44,
+          "Elapse": 33,
+          "fitness": -837.9384774102401
+        },
+        {
+          "generation": 57,
+          "Elapse": 42,
+          "fitness": -837.9413713158087
+        },
+        {
+          "generation": 58,
+          "Elapse": 42,
+          "fitness": -837.9419760012179
+        },
+        {
+          "generation": 66,
+          "Elapse": 49,
+          "fitness": -837.9599307992036
+        },
+        {
+          "generation": 73,
+          "Elapse": 54,
+          "fitness": -837.9599423417206
+        },
+        {
+          "generation": 77,
+          "Elapse": 57,
+          "fitness": -837.9614116969594
+        },
+        {
+          "generation": 92,
+          "Elapse": 68,
+          "fitness": -837.9625347119853
+        },
+        {
+          "generation": 95,
+          "Elapse": 70,
+          "fitness": -837.9639711797647
+        },
+        {
+          "generation": 111,
+          "Elapse": 82,
+          "fitness": -837.9641760155123
+        },
+        {
+          "generation": 116,
+          "Elapse": 86,
+          "fitness": -837.9642469790493
+        },
+        {
+          "generation": 118,
+          "Elapse": 88,
+          "fitness": -837.9654917028731
+        },
+        {
+          "generation": 122,
+          "Elapse": 90,
+          "fitness": -837.9655181708242
+        },
+        {
+          "generation": 143,
+          "Elapse": 110,
+          "fitness": -837.9655190017393
+        },
+        {
+          "generation": 206,
+          "Elapse": 168,
+          "fitness": -837.9655192848352
+        },
+        {
+          "generation": 207,
+          "Elapse": 169,
+          "fitness": -837.965519340814
+        },
+        {
+          "generation": 216,
+          "Elapse": 175,
+          "fitness": -837.9655196239098
+        },
+        {
+          "generation": 227,
+          "Elapse": 183,
+          "fitness": -837.9655287394787
+        },
+        {
+          "generation": 234,
+          "Elapse": 188,
+          "fitness": -837.9655299200217
+        },
+        {
+          "generation": 240,
+          "Elapse": 194,
+          "fitness": -837.9655353132517
+        },
+        {
+          "generation": 244,
+          "Elapse": 196,
+          "fitness": -837.965568158412
+        },
+        {
+          "generation": 250,
+          "Elapse": 201,
+          "fitness": -837.9656072126681
+        },
+        {
+          "generation": 269,
+          "Elapse": 216,
+          "fitness": -837.9656361200459
+        },
+        {
+          "generation": 276,
+          "Elapse": 221,
+          "fitness": -837.9656362620639
+        },
+        {
+          "generation": 286,
+          "Elapse": 229,
+          "fitness": -837.9656382795166
+        },
+        {
+          "generation": 317,
+          "Elapse": 253,
+          "fitness": -837.9656425435851
+        },
+        {
+          "generation": 345,
+          "Elapse": 275,
+          "fitness": -837.9656466568351
+        },
+        {
+          "generation": 367,
+          "Elapse": 292,
+          "fitness": -837.9656468908872
+        },
+        {
+          "generation": 424,
+          "Elapse": 340,
+          "fitness": -837.9656468975243
+        },
+        {
+          "generation": 426,
+          "Elapse": 341,
+          "fitness": -837.9656487559375
+        },
+        {
+          "generation": 428,
+          "Elapse": 343,
+          "fitness": -837.9656488428789
+        },
+        {
+          "generation": 441,
+          "Elapse": 353,
+          "fitness": -837.965648855213
+        },
+        {
+          "generation": 453,
+          "Elapse": 364,
+          "fitness": -837.9656507798277
+        },
+        {
+          "generation": 490,
+          "Elapse": 394,
+          "fitness": -837.9657359187786
+        },
+        {
+          "generation": 531,
+          "Elapse": 423,
+          "fitness": -837.9657359767749
+        },
+        {
+          "generation": 532,
+          "Elapse": 424,
+          "fitness": -837.9657378061155
+        },
+        {
+          "generation": 541,
+          "Elapse": 431,
+          "fitness": -837.9657439355294
+        },
+        {
+          "generation": 552,
+          "Elapse": 439,
+          "fitness": -837.9657458228662
+        },
+        {
+          "generation": 553,
+          "Elapse": 440,
+          "fitness": -837.9657527894493
+        },
+        {
+          "generation": 577,
+          "Elapse": 459,
+          "fitness": -837.965770871001
+        },
+        {
+          "generation": 592,
+          "Elapse": 469,
+          "fitness": -837.9657709122215
+        },
+        {
+          "generation": 597,
+          "Elapse": 473,
+          "fitness": -837.9657710344727
+        },
+        {
+          "generation": 610,
+          "Elapse": 483,
+          "fitness": -837.9657742480051
+        },
+        {
+          "generation": 640,
+          "Elapse": 505,
+          "fitness": -837.965774328633
+        },
+        {
+          "generation": 644,
+          "Elapse": 508,
+          "fitness": -837.9657743549901
+        },
+        {
+          "generation": 682,
+          "Elapse": 538,
+          "fitness": -837.9657744989868
+        },
+        {
+          "generation": 748,
+          "Elapse": 587,
+          "fitness": -837.9657745022212
+        },
+        {
+          "generation": 754,
+          "Elapse": 591,
+          "fitness": -837.9657745396598
+        },
+        {
+          "generation": 763,
+          "Elapse": 598,
+          "fitness": -837.9657745402753
+        },
+        {
+          "generation": 847,
+          "Elapse": 662,
+          "fitness": -837.965774540656
+        },
+        {
+          "generation": 848,
+          "Elapse": 663,
+          "fitness": -837.9657745408017
+        },
+        {
+          "generation": 898,
+          "Elapse": 700,
+          "fitness": -837.9657745444501
+        }
+      ],
+      "quality": 1.0000000000059535
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a51b8"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.1,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.5
+      },
+      "TerminationName": "GenerationNumberTermination",
+      "Termination": {
+        "MaxGenerationsCount": 1000
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745438906
+      },
+      "AmountOfGenerations": 1001,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745438906,
+      "TotalTimeMs": 796,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -710.8032650783913
+        },
+        {
+          "generation": 3,
+          "Elapse": 1,
+          "fitness": -738.6541442064866
+        },
+        {
+          "generation": 4,
+          "Elapse": 2,
+          "fitness": -764.3332417974482
+        },
+        {
+          "generation": 5,
+          "Elapse": 3,
+          "fitness": -787.2921080764957
+        },
+        {
+          "generation": 6,
+          "Elapse": 4,
+          "fitness": -828.5914553233143
+        },
+        {
+          "generation": 14,
+          "Elapse": 12,
+          "fitness": -832.6287956395793
+        },
+        {
+          "generation": 16,
+          "Elapse": 13,
+          "fitness": -832.7162621749842
+        },
+        {
+          "generation": 20,
+          "Elapse": 16,
+          "fitness": -833.0395571417422
+        },
+        {
+          "generation": 22,
+          "Elapse": 18,
+          "fitness": -833.1309712331922
+        },
+        {
+          "generation": 23,
+          "Elapse": 18,
+          "fitness": -833.135430114326
+        },
+        {
+          "generation": 25,
+          "Elapse": 20,
+          "fitness": -833.1354767139186
+        },
+        {
+          "generation": 31,
+          "Elapse": 25,
+          "fitness": -833.1358471751968
+        },
+        {
+          "generation": 32,
+          "Elapse": 26,
+          "fitness": -833.3766002877042
+        },
+        {
+          "generation": 35,
+          "Elapse": 28,
+          "fitness": -833.4727097096552
+        },
+        {
+          "generation": 36,
+          "Elapse": 29,
+          "fitness": -833.8657373026492
+        },
+        {
+          "generation": 39,
+          "Elapse": 31,
+          "fitness": -835.0573146662954
+        },
+        {
+          "generation": 44,
+          "Elapse": 35,
+          "fitness": -835.6216251856818
+        },
+        {
+          "generation": 50,
+          "Elapse": 40,
+          "fitness": -835.634881386665
+        },
+        {
+          "generation": 52,
+          "Elapse": 42,
+          "fitness": -836.5532386390609
+        },
+        {
+          "generation": 62,
+          "Elapse": 49,
+          "fitness": -837.7987827747617
+        },
+        {
+          "generation": 63,
+          "Elapse": 50,
+          "fitness": -837.886995660398
+        },
+        {
+          "generation": 64,
+          "Elapse": 51,
+          "fitness": -837.8925102785797
+        },
+        {
+          "generation": 74,
+          "Elapse": 58,
+          "fitness": -837.9568121511526
+        },
+        {
+          "generation": 86,
+          "Elapse": 67,
+          "fitness": -837.9611535253648
+        },
+        {
+          "generation": 89,
+          "Elapse": 69,
+          "fitness": -837.9636778860366
+        },
+        {
+          "generation": 92,
+          "Elapse": 71,
+          "fitness": -837.963678878604
+        },
+        {
+          "generation": 109,
+          "Elapse": 84,
+          "fitness": -837.96370953883
+        },
+        {
+          "generation": 111,
+          "Elapse": 85,
+          "fitness": -837.9657379576661
+        },
+        {
+          "generation": 116,
+          "Elapse": 89,
+          "fitness": -837.9657725092441
+        },
+        {
+          "generation": 119,
+          "Elapse": 91,
+          "fitness": -837.9657725391828
+        },
+        {
+          "generation": 130,
+          "Elapse": 99,
+          "fitness": -837.9657740173918
+        },
+        {
+          "generation": 170,
+          "Elapse": 131,
+          "fitness": -837.9657741150875
+        },
+        {
+          "generation": 171,
+          "Elapse": 131,
+          "fitness": -837.9657741281039
+        },
+        {
+          "generation": 185,
+          "Elapse": 141,
+          "fitness": -837.9657741479591
+        },
+        {
+          "generation": 192,
+          "Elapse": 147,
+          "fitness": -837.965774243629
+        },
+        {
+          "generation": 346,
+          "Elapse": 290,
+          "fitness": -837.9657744844039
+        },
+        {
+          "generation": 383,
+          "Elapse": 318,
+          "fitness": -837.9657745070342
+        },
+        {
+          "generation": 390,
+          "Elapse": 324,
+          "fitness": -837.9657745087688
+        },
+        {
+          "generation": 433,
+          "Elapse": 355,
+          "fitness": -837.965774539302
+        },
+        {
+          "generation": 458,
+          "Elapse": 374,
+          "fitness": -837.9657745408017
+        },
+        {
+          "generation": 466,
+          "Elapse": 379,
+          "fitness": -837.9657745420664
+        },
+        {
+          "generation": 954,
+          "Elapse": 762,
+          "fitness": -837.9657745430959
+        },
+        {
+          "generation": 956,
+          "Elapse": 763,
+          "fitness": -837.9657745438906
+        }
+      ],
+      "quality": 1.0000000000052858
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a4d4a"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.4,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.5
+      },
+      "TerminationName": "GenerationNumberTermination",
+      "Termination": {
+        "MaxGenerationsCount": 1000
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745447746
+      },
+      "AmountOfGenerations": 1001,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745447746,
+      "TotalTimeMs": 797,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -713.0208579966495
+        },
+        {
+          "generation": 2,
+          "Elapse": 1,
+          "fitness": -837.6823035497257
+        },
+        {
+          "generation": 14,
+          "Elapse": 13,
+          "fitness": -837.7222683712656
+        },
+        {
+          "generation": 25,
+          "Elapse": 24,
+          "fitness": -837.7551543045133
+        },
+        {
+          "generation": 28,
+          "Elapse": 27,
+          "fitness": -837.7559464393717
+        },
+        {
+          "generation": 34,
+          "Elapse": 32,
+          "fitness": -837.8379011905665
+        },
+        {
+          "generation": 50,
+          "Elapse": 45,
+          "fitness": -837.8890892881736
+        },
+        {
+          "generation": 54,
+          "Elapse": 48,
+          "fitness": -837.8906240522834
+        },
+        {
+          "generation": 55,
+          "Elapse": 49,
+          "fitness": -837.9302656181642
+        },
+        {
+          "generation": 57,
+          "Elapse": 50,
+          "fitness": -837.9307789890214
+        },
+        {
+          "generation": 58,
+          "Elapse": 51,
+          "fitness": -837.930779694992
+        },
+        {
+          "generation": 59,
+          "Elapse": 52,
+          "fitness": -837.9323128768528
+        },
+        {
+          "generation": 61,
+          "Elapse": 53,
+          "fitness": -837.932435195499
+        },
+        {
+          "generation": 67,
+          "Elapse": 58,
+          "fitness": -837.9654370879678
+        },
+        {
+          "generation": 75,
+          "Elapse": 64,
+          "fitness": -837.9655008111192
+        },
+        {
+          "generation": 82,
+          "Elapse": 69,
+          "fitness": -837.9656500855517
+        },
+        {
+          "generation": 84,
+          "Elapse": 71,
+          "fitness": -837.9657091915876
+        },
+        {
+          "generation": 87,
+          "Elapse": 74,
+          "fitness": -837.9657396225641
+        },
+        {
+          "generation": 110,
+          "Elapse": 93,
+          "fitness": -837.9657600335249
+        },
+        {
+          "generation": 118,
+          "Elapse": 99,
+          "fitness": -837.9657653705913
+        },
+        {
+          "generation": 125,
+          "Elapse": 104,
+          "fitness": -837.9657653744973
+        },
+        {
+          "generation": 134,
+          "Elapse": 110,
+          "fitness": -837.9657658590693
+        },
+        {
+          "generation": 137,
+          "Elapse": 113,
+          "fitness": -837.965774452809
+        },
+        {
+          "generation": 151,
+          "Elapse": 124,
+          "fitness": -837.9657745048628
+        },
+        {
+          "generation": 273,
+          "Elapse": 214,
+          "fitness": -837.9657745076272
+        },
+        {
+          "generation": 289,
+          "Elapse": 226,
+          "fitness": -837.9657745419208
+        },
+        {
+          "generation": 340,
+          "Elapse": 263,
+          "fitness": -837.9657745420664
+        },
+        {
+          "generation": 449,
+          "Elapse": 348,
+          "fitness": -837.9657745447746
+        }
+      ],
+      "quality": 1.0000000000063407
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a5096"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.2,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 3,
+        "MutationThreshold": 0.2
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 300
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745443606
+      },
+      "AmountOfGenerations": 1061,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745443606,
+      "TotalTimeMs": 797,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -761.4197976941218
+        },
+        {
+          "generation": 2,
+          "Elapse": 1,
+          "fitness": -767.9095976162623
+        },
+        {
+          "generation": 4,
+          "Elapse": 3,
+          "fitness": -778.762005010518
+        },
+        {
+          "generation": 7,
+          "Elapse": 5,
+          "fitness": -827.0564919451565
+        },
+        {
+          "generation": 13,
+          "Elapse": 10,
+          "fitness": -830.0933931762884
+        },
+        {
+          "generation": 15,
+          "Elapse": 11,
+          "fitness": -830.9277422430189
+        },
+        {
+          "generation": 19,
+          "Elapse": 15,
+          "fitness": -831.0518308556484
+        },
+        {
+          "generation": 28,
+          "Elapse": 21,
+          "fitness": -837.7580945478383
+        },
+        {
+          "generation": 29,
+          "Elapse": 22,
+          "fitness": -837.7630957554023
+        },
+        {
+          "generation": 34,
+          "Elapse": 25,
+          "fitness": -837.7631626101653
+        },
+        {
+          "generation": 37,
+          "Elapse": 28,
+          "fitness": -837.7634838730505
+        },
+        {
+          "generation": 41,
+          "Elapse": 32,
+          "fitness": -837.7635460813665
+        },
+        {
+          "generation": 45,
+          "Elapse": 36,
+          "fitness": -837.7691674077792
+        },
+        {
+          "generation": 48,
+          "Elapse": 38,
+          "fitness": -837.7719872882135
+        },
+        {
+          "generation": 52,
+          "Elapse": 42,
+          "fitness": -837.7723983463331
+        },
+        {
+          "generation": 55,
+          "Elapse": 44,
+          "fitness": -837.772652449166
+        },
+        {
+          "generation": 60,
+          "Elapse": 47,
+          "fitness": -837.7752313018849
+        },
+        {
+          "generation": 63,
+          "Elapse": 49,
+          "fitness": -837.776902252502
+        },
+        {
+          "generation": 64,
+          "Elapse": 50,
+          "fitness": -837.7776776278839
+        },
+        {
+          "generation": 65,
+          "Elapse": 51,
+          "fitness": -837.7776858514444
+        },
+        {
+          "generation": 68,
+          "Elapse": 53,
+          "fitness": -837.7778364319149
+        },
+        {
+          "generation": 77,
+          "Elapse": 59,
+          "fitness": -837.9303707663678
+        },
+        {
+          "generation": 79,
+          "Elapse": 61,
+          "fitness": -837.9303709044214
+        },
+        {
+          "generation": 83,
+          "Elapse": 63,
+          "fitness": -837.9657099658523
+        },
+        {
+          "generation": 100,
+          "Elapse": 76,
+          "fitness": -837.9657181894128
+        },
+        {
+          "generation": 104,
+          "Elapse": 78,
+          "fitness": -837.9657183124245
+        },
+        {
+          "generation": 115,
+          "Elapse": 86,
+          "fitness": -837.9657295181678
+        },
+        {
+          "generation": 143,
+          "Elapse": 106,
+          "fitness": -837.9657413479295
+        },
+        {
+          "generation": 182,
+          "Elapse": 134,
+          "fitness": -837.9657418413867
+        },
+        {
+          "generation": 218,
+          "Elapse": 160,
+          "fitness": -837.9657739692227
+        },
+        {
+          "generation": 240,
+          "Elapse": 176,
+          "fitness": -837.9657739700172
+        },
+        {
+          "generation": 283,
+          "Elapse": 215,
+          "fitness": -837.9657739817355
+        },
+        {
+          "generation": 338,
+          "Elapse": 255,
+          "fitness": -837.9657745365042
+        },
+        {
+          "generation": 388,
+          "Elapse": 290,
+          "fitness": -837.9657745383283
+        },
+        {
+          "generation": 497,
+          "Elapse": 368,
+          "fitness": -837.9657745392125
+        },
+        {
+          "generation": 559,
+          "Elapse": 415,
+          "fitness": -837.9657745421223
+        },
+        {
+          "generation": 629,
+          "Elapse": 465,
+          "fitness": -837.9657745430064
+        },
+        {
+          "generation": 671,
+          "Elapse": 496,
+          "fitness": -837.9657745434764
+        },
+        {
+          "generation": 761,
+          "Elapse": 562,
+          "fitness": -837.9657745443606
+        }
+      ],
+      "quality": 1.0000000000058467
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a50a7"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.2,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 3,
+        "MutationThreshold": 0.4
+      },
+      "TerminationName": "GenerationNumberTermination",
+      "Termination": {
+        "MaxGenerationsCount": 1000
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745447186
+      },
+      "AmountOfGenerations": 1001,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745447186,
+      "TotalTimeMs": 800,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -808.271673438805
+        },
+        {
+          "generation": 6,
+          "Elapse": 5,
+          "fitness": -808.7261317653835
+        },
+        {
+          "generation": 7,
+          "Elapse": 6,
+          "fitness": -809.6633841528715
+        },
+        {
+          "generation": 9,
+          "Elapse": 7,
+          "fitness": -820.7377664819536
+        },
+        {
+          "generation": 17,
+          "Elapse": 14,
+          "fitness": -820.7378375607298
+        },
+        {
+          "generation": 20,
+          "Elapse": 16,
+          "fitness": -831.4305041675981
+        },
+        {
+          "generation": 22,
+          "Elapse": 17,
+          "fitness": -831.4808501512696
+        },
+        {
+          "generation": 25,
+          "Elapse": 19,
+          "fitness": -831.4808605165526
+        },
+        {
+          "generation": 29,
+          "Elapse": 23,
+          "fitness": -836.5696323699514
+        },
+        {
+          "generation": 30,
+          "Elapse": 23,
+          "fitness": -836.5696427347652
+        },
+        {
+          "generation": 31,
+          "Elapse": 24,
+          "fitness": -836.5977899920216
+        },
+        {
+          "generation": 42,
+          "Elapse": 32,
+          "fitness": -836.5987041656819
+        },
+        {
+          "generation": 69,
+          "Elapse": 53,
+          "fitness": -836.6713355154178
+        },
+        {
+          "generation": 70,
+          "Elapse": 54,
+          "fitness": -836.7591393855198
+        },
+        {
+          "generation": 71,
+          "Elapse": 55,
+          "fitness": -837.0060631393142
+        },
+        {
+          "generation": 74,
+          "Elapse": 57,
+          "fitness": -837.0343820113717
+        },
+        {
+          "generation": 75,
+          "Elapse": 57,
+          "fitness": -837.3342418017028
+        },
+        {
+          "generation": 80,
+          "Elapse": 61,
+          "fitness": -837.7635190311244
+        },
+        {
+          "generation": 93,
+          "Elapse": 71,
+          "fitness": -837.7641545345215
+        },
+        {
+          "generation": 94,
+          "Elapse": 72,
+          "fitness": -837.7657695823577
+        },
+        {
+          "generation": 97,
+          "Elapse": 74,
+          "fitness": -837.7731819312828
+        },
+        {
+          "generation": 99,
+          "Elapse": 75,
+          "fitness": -837.8136574818831
+        },
+        {
+          "generation": 102,
+          "Elapse": 78,
+          "fitness": -837.8141910679201
+        },
+        {
+          "generation": 103,
+          "Elapse": 78,
+          "fitness": -837.8180004310227
+        },
+        {
+          "generation": 106,
+          "Elapse": 80,
+          "fitness": -837.830736817225
+        },
+        {
+          "generation": 107,
+          "Elapse": 81,
+          "fitness": -837.8348878721024
+        },
+        {
+          "generation": 109,
+          "Elapse": 82,
+          "fitness": -837.8349901229147
+        },
+        {
+          "generation": 114,
+          "Elapse": 87,
+          "fitness": -837.8978307929128
+        },
+        {
+          "generation": 123,
+          "Elapse": 94,
+          "fitness": -837.9513107104993
+        },
+        {
+          "generation": 134,
+          "Elapse": 102,
+          "fitness": -837.9561520238149
+        },
+        {
+          "generation": 160,
+          "Elapse": 121,
+          "fitness": -837.9561537391968
+        },
+        {
+          "generation": 161,
+          "Elapse": 122,
+          "fitness": -837.9582967751784
+        },
+        {
+          "generation": 163,
+          "Elapse": 123,
+          "fitness": -837.959212947198
+        },
+        {
+          "generation": 180,
+          "Elapse": 136,
+          "fitness": -837.9593262577928
+        },
+        {
+          "generation": 222,
+          "Elapse": 177,
+          "fitness": -837.9593356129683
+        },
+        {
+          "generation": 231,
+          "Elapse": 186,
+          "fitness": -837.9593373283502
+        },
+        {
+          "generation": 238,
+          "Elapse": 193,
+          "fitness": -837.9593376168215
+        },
+        {
+          "generation": 241,
+          "Elapse": 197,
+          "fitness": -837.9593384808254
+        },
+        {
+          "generation": 264,
+          "Elapse": 220,
+          "fitness": -837.9656819478607
+        },
+        {
+          "generation": 267,
+          "Elapse": 223,
+          "fitness": -837.9656850688248
+        },
+        {
+          "generation": 272,
+          "Elapse": 229,
+          "fitness": -837.9656867849703
+        },
+        {
+          "generation": 275,
+          "Elapse": 232,
+          "fitness": -837.9656897571003
+        },
+        {
+          "generation": 276,
+          "Elapse": 233,
+          "fitness": -837.9657505477179
+        },
+        {
+          "generation": 277,
+          "Elapse": 234,
+          "fitness": -837.9657552359935
+        },
+        {
+          "generation": 282,
+          "Elapse": 239,
+          "fitness": -837.9657567935467
+        },
+        {
+          "generation": 291,
+          "Elapse": 248,
+          "fitness": -837.965764862576
+        },
+        {
+          "generation": 294,
+          "Elapse": 252,
+          "fitness": -837.965765997097
+        },
+        {
+          "generation": 315,
+          "Elapse": 268,
+          "fitness": -837.9657664324629
+        },
+        {
+          "generation": 337,
+          "Elapse": 284,
+          "fitness": -837.9657744279599
+        },
+        {
+          "generation": 370,
+          "Elapse": 309,
+          "fitness": -837.9657744346864
+        },
+        {
+          "generation": 390,
+          "Elapse": 324,
+          "fitness": -837.9657744800375
+        },
+        {
+          "generation": 441,
+          "Elapse": 363,
+          "fitness": -837.965774489551
+        },
+        {
+          "generation": 450,
+          "Elapse": 370,
+          "fitness": -837.9657745022989
+        },
+        {
+          "generation": 456,
+          "Elapse": 374,
+          "fitness": -837.9657745215611
+        },
+        {
+          "generation": 458,
+          "Elapse": 375,
+          "fitness": -837.9657745226468
+        },
+        {
+          "generation": 519,
+          "Elapse": 421,
+          "fitness": -837.9657745331004
+        },
+        {
+          "generation": 529,
+          "Elapse": 429,
+          "fitness": -837.9657745397936
+        },
+        {
+          "generation": 658,
+          "Elapse": 537,
+          "fitness": -837.9657745417298
+        },
+        {
+          "generation": 703,
+          "Elapse": 572,
+          "fitness": -837.9657745437223
+        },
+        {
+          "generation": 871,
+          "Elapse": 703,
+          "fitness": -837.9657745443379
+        },
+        {
+          "generation": 961,
+          "Elapse": 772,
+          "fitness": -837.9657745447186
+        }
+      ],
+      "quality": 1.0000000000062739
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a4be5"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.5,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.7
+      },
+      "TerminationName": "GenerationNumberTermination",
+      "Termination": {
+        "MaxGenerationsCount": 1000
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745446851
+      },
+      "AmountOfGenerations": 1001,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745446851,
+      "TotalTimeMs": 842,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -759.2258487650167
+        },
+        {
+          "generation": 3,
+          "Elapse": 3,
+          "fitness": -761.1140379711746
+        },
+        {
+          "generation": 4,
+          "Elapse": 4,
+          "fitness": -785.2469777598675
+        },
+        {
+          "generation": 14,
+          "Elapse": 12,
+          "fitness": -820.6215944131818
+        },
+        {
+          "generation": 22,
+          "Elapse": 19,
+          "fitness": -835.0027565146208
+        },
+        {
+          "generation": 29,
+          "Elapse": 24,
+          "fitness": -835.8218485463717
+        },
+        {
+          "generation": 31,
+          "Elapse": 26,
+          "fitness": -837.6423855651092
+        },
+        {
+          "generation": 38,
+          "Elapse": 33,
+          "fitness": -837.6665440218053
+        },
+        {
+          "generation": 44,
+          "Elapse": 40,
+          "fitness": -837.6668257881829
+        },
+        {
+          "generation": 45,
+          "Elapse": 41,
+          "fitness": -837.7855675773585
+        },
+        {
+          "generation": 49,
+          "Elapse": 46,
+          "fitness": -837.8281519093706
+        },
+        {
+          "generation": 51,
+          "Elapse": 48,
+          "fitness": -837.8296209706514
+        },
+        {
+          "generation": 56,
+          "Elapse": 54,
+          "fitness": -837.9651324947768
+        },
+        {
+          "generation": 120,
+          "Elapse": 122,
+          "fitness": -837.9651435054893
+        },
+        {
+          "generation": 139,
+          "Elapse": 138,
+          "fitness": -837.9651437406742
+        },
+        {
+          "generation": 147,
+          "Elapse": 146,
+          "fitness": -837.9656124022474
+        },
+        {
+          "generation": 156,
+          "Elapse": 153,
+          "fitness": -837.9656135039572
+        },
+        {
+          "generation": 158,
+          "Elapse": 154,
+          "fitness": -837.9656704727204
+        },
+        {
+          "generation": 162,
+          "Elapse": 158,
+          "fitness": -837.9656707963061
+        },
+        {
+          "generation": 165,
+          "Elapse": 160,
+          "fitness": -837.9656964485062
+        },
+        {
+          "generation": 204,
+          "Elapse": 198,
+          "fitness": -837.9656968307347
+        },
+        {
+          "generation": 223,
+          "Elapse": 214,
+          "fitness": -837.9656970142173
+        },
+        {
+          "generation": 236,
+          "Elapse": 223,
+          "fitness": -837.9657736953748
+        },
+        {
+          "generation": 287,
+          "Elapse": 263,
+          "fitness": -837.9657737455041
+        },
+        {
+          "generation": 293,
+          "Elapse": 269,
+          "fitness": -837.9657739918981
+        },
+        {
+          "generation": 302,
+          "Elapse": 276,
+          "fitness": -837.9657740233367
+        },
+        {
+          "generation": 316,
+          "Elapse": 287,
+          "fitness": -837.9657745278639
+        },
+        {
+          "generation": 452,
+          "Elapse": 399,
+          "fitness": -837.9657745305387
+        },
+        {
+          "generation": 457,
+          "Elapse": 404,
+          "fitness": -837.9657745329787
+        },
+        {
+          "generation": 459,
+          "Elapse": 405,
+          "fitness": -837.9657745351834
+        },
+        {
+          "generation": 526,
+          "Elapse": 459,
+          "fitness": -837.9657745443606
+        },
+        {
+          "generation": 574,
+          "Elapse": 497,
+          "fitness": -837.9657745446851
+        }
+      ],
+      "quality": 1.000000000006234
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a4d74"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.4,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.9
+      },
+      "TerminationName": "GenerationNumberTermination",
+      "Termination": {
+        "MaxGenerationsCount": 1000
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745446851
+      },
+      "AmountOfGenerations": 1001,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745446851,
+      "TotalTimeMs": 869,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -677.9119644884527
+        },
+        {
+          "generation": 3,
+          "Elapse": 2,
+          "fitness": -737.879228628947
+        },
+        {
+          "generation": 5,
+          "Elapse": 3,
+          "fitness": -762.1888446030217
+        },
+        {
+          "generation": 10,
+          "Elapse": 8,
+          "fitness": -810.8751004888277
+        },
+        {
+          "generation": 18,
+          "Elapse": 15,
+          "fitness": -821.6205037255653
+        },
+        {
+          "generation": 20,
+          "Elapse": 17,
+          "fitness": -821.779013801852
+        },
+        {
+          "generation": 22,
+          "Elapse": 18,
+          "fitness": -823.273450667615
+        },
+        {
+          "generation": 23,
+          "Elapse": 19,
+          "fitness": -826.2781088224997
+        },
+        {
+          "generation": 24,
+          "Elapse": 20,
+          "fitness": -828.6536784740631
+        },
+        {
+          "generation": 25,
+          "Elapse": 20,
+          "fitness": -829.6931407402969
+        },
+        {
+          "generation": 27,
+          "Elapse": 23,
+          "fitness": -829.9786438020436
+        },
+        {
+          "generation": 29,
+          "Elapse": 24,
+          "fitness": -832.8081191608267
+        },
+        {
+          "generation": 30,
+          "Elapse": 25,
+          "fitness": -833.5853052224536
+        },
+        {
+          "generation": 31,
+          "Elapse": 26,
+          "fitness": -837.3569889458456
+        },
+        {
+          "generation": 37,
+          "Elapse": 31,
+          "fitness": -837.7807079484589
+        },
+        {
+          "generation": 38,
+          "Elapse": 32,
+          "fitness": -837.7817365415976
+        },
+        {
+          "generation": 40,
+          "Elapse": 33,
+          "fitness": -837.7872119958922
+        },
+        {
+          "generation": 45,
+          "Elapse": 37,
+          "fitness": -837.805266425266
+        },
+        {
+          "generation": 59,
+          "Elapse": 48,
+          "fitness": -837.805871112485
+        },
+        {
+          "generation": 62,
+          "Elapse": 51,
+          "fitness": -837.8078279191532
+        },
+        {
+          "generation": 63,
+          "Elapse": 52,
+          "fitness": -837.8389049263099
+        },
+        {
+          "generation": 76,
+          "Elapse": 62,
+          "fitness": -837.8412199905199
+        },
+        {
+          "generation": 84,
+          "Elapse": 69,
+          "fitness": -837.8684705892205
+        },
+        {
+          "generation": 87,
+          "Elapse": 71,
+          "fitness": -837.8828870933127
+        },
+        {
+          "generation": 95,
+          "Elapse": 77,
+          "fitness": -837.9264891080975
+        },
+        {
+          "generation": 101,
+          "Elapse": 82,
+          "fitness": -837.9469820764075
+        },
+        {
+          "generation": 104,
+          "Elapse": 84,
+          "fitness": -837.9626260857085
+        },
+        {
+          "generation": 105,
+          "Elapse": 85,
+          "fitness": -837.96442849794
+        },
+        {
+          "generation": 118,
+          "Elapse": 96,
+          "fitness": -837.9657593673189
+        },
+        {
+          "generation": 156,
+          "Elapse": 126,
+          "fitness": -837.965759375724
+        },
+        {
+          "generation": 166,
+          "Elapse": 134,
+          "fitness": -837.9657642886318
+        },
+        {
+          "generation": 177,
+          "Elapse": 146,
+          "fitness": -837.9657644966259
+        },
+        {
+          "generation": 186,
+          "Elapse": 156,
+          "fitness": -837.9657645452888
+        },
+        {
+          "generation": 200,
+          "Elapse": 172,
+          "fitness": -837.9657645503141
+        },
+        {
+          "generation": 232,
+          "Elapse": 208,
+          "fitness": -837.9657740891919
+        },
+        {
+          "generation": 294,
+          "Elapse": 280,
+          "fitness": -837.9657742214151
+        },
+        {
+          "generation": 355,
+          "Elapse": 329,
+          "fitness": -837.9657743506498
+        },
+        {
+          "generation": 387,
+          "Elapse": 354,
+          "fitness": -837.9657743665762
+        },
+        {
+          "generation": 431,
+          "Elapse": 391,
+          "fitness": -837.965774415015
+        },
+        {
+          "generation": 480,
+          "Elapse": 433,
+          "fitness": -837.9657744177232
+        },
+        {
+          "generation": 539,
+          "Elapse": 482,
+          "fitness": -837.965774535508
+        },
+        {
+          "generation": 875,
+          "Elapse": 761,
+          "fitness": -837.9657745446851
+        }
+      ],
+      "quality": 1.000000000006234
+    },
+    {
+      "_id": {
+        "$oid": "60a6b4763fe48503070a5057"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.2,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.7
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 300
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -837.9657745448642
+      },
+      "AmountOfGenerations": 1074,
+      "RealTheBestValue": -837.9657745394613,
+      "TheBestFoundFitness": -837.9657745448642,
+      "TotalTimeMs": 904,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -816.9127027099423
+        },
+        {
+          "generation": 2,
+          "Elapse": 1,
+          "fitness": -818.3298202978681
+        },
+        {
+          "generation": 3,
+          "Elapse": 2,
+          "fitness": -835.2197334307315
+        },
+        {
+          "generation": 7,
+          "Elapse": 6,
+          "fitness": -835.219763567561
+        },
+        {
+          "generation": 9,
+          "Elapse": 8,
+          "fitness": -835.4987474148389
+        },
+        {
+          "generation": 12,
+          "Elapse": 10,
+          "fitness": -837.8442987170006
+        },
+        {
+          "generation": 23,
+          "Elapse": 19,
+          "fitness": -837.8447889650474
+        },
+        {
+          "generation": 25,
+          "Elapse": 21,
+          "fitness": -837.844797444326
+        },
+        {
+          "generation": 40,
+          "Elapse": 35,
+          "fitness": -837.9651142666651
+        },
+        {
+          "generation": 50,
+          "Elapse": 43,
+          "fitness": -837.9651144440295
+        },
+        {
+          "generation": 52,
+          "Elapse": 45,
+          "fitness": -837.9651166648649
+        },
+        {
+          "generation": 54,
+          "Elapse": 47,
+          "fitness": -837.9651801123455
+        },
+        {
+          "generation": 63,
+          "Elapse": 54,
+          "fitness": -837.9651828144952
+        },
+        {
+          "generation": 75,
+          "Elapse": 65,
+          "fitness": -837.9651909747813
+        },
+        {
+          "generation": 102,
+          "Elapse": 87,
+          "fitness": -837.9652452063583
+        },
+        {
+          "generation": 108,
+          "Elapse": 92,
+          "fitness": -837.965274606481
+        },
+        {
+          "generation": 148,
+          "Elapse": 124,
+          "fitness": -837.9652777557296
+        },
+        {
+          "generation": 158,
+          "Elapse": 131,
+          "fitness": -837.9656461785532
+        },
+        {
+          "generation": 171,
+          "Elapse": 142,
+          "fitness": -837.9656463304034
+        },
+        {
+          "generation": 211,
+          "Elapse": 174,
+          "fitness": -837.9656853620072
+        },
+        {
+          "generation": 217,
+          "Elapse": 178,
+          "fitness": -837.9657282543074
+        },
+        {
+          "generation": 219,
+          "Elapse": 179,
+          "fitness": -837.9657304960745
+        },
+        {
+          "generation": 221,
+          "Elapse": 182,
+          "fitness": -837.9657693334048
+        },
+        {
+          "generation": 223,
+          "Elapse": 183,
+          "fitness": -837.965770462921
+        },
+        {
+          "generation": 269,
+          "Elapse": 222,
+          "fitness": -837.9657705660347
+        },
+        {
+          "generation": 334,
+          "Elapse": 276,
+          "fitness": -837.9657705985258
+        },
+        {
+          "generation": 381,
+          "Elapse": 314,
+          "fitness": -837.9657737910776
+        },
+        {
+          "generation": 404,
+          "Elapse": 332,
+          "fitness": -837.9657743343932
+        },
+        {
+          "generation": 467,
+          "Elapse": 387,
+          "fitness": -837.9657745130771
+        },
+        {
+          "generation": 495,
+          "Elapse": 417,
+          "fitness": -837.965774515573
+        },
+        {
+          "generation": 521,
+          "Elapse": 444,
+          "fitness": -837.965774527079
+        },
+        {
+          "generation": 590,
+          "Elapse": 514,
+          "fitness": -837.9657745365926
+        },
+        {
+          "generation": 746,
+          "Elapse": 637,
+          "fitness": -837.9657745371187
+        },
+        {
+          "generation": 774,
+          "Elapse": 660,
+          "fitness": -837.9657745448642
+        }
+      ],
+      "quality": 1.0000000000064475
+    }
+  ]

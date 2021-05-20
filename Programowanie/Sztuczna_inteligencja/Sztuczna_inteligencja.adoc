@@ -1,4 +1,4 @@
-= Algorytmy Genetyczne
+= Własna implementacja wybranych operatorów algorytmu genetycznego: test rozwiązań problemu komiwojażera, plecakowego oraz znajdowania minimów wybranych funkcji testowych w porównaniu do PSO
 Mikołaj Dalecki <mikdal002@utp.edu.pl>; Mateusz Lewandowski <matlew13@utp.edu.pl>; Karol Appel <karapp002@utp.edu.pl>; Przemysław Nadobny <prznad005@utp.edu.pl>; Jacek Suty <jacsut000@utp.edu.pl>
 :toc2:
 :imagesdir: ./img
@@ -39,6 +39,9 @@ include::Wstep/index.adoc[]
 include::problemy_i_implementacja/index.adoc[]
 
 == Wnioski
+Praca nad implementacją algorytmu genetycznegeo jest niezwykle pouczająca. 
+
+
 #TODO: TBD# 
 
 [bibliography]

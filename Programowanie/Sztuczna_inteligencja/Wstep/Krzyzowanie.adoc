@@ -1,5 +1,5 @@
 == Krzyżowanie
-Krzyżowanie, czasem zwane również ((rekomobinowanie))m, to proces łączenia genów rodziców w taki sposób, aby uzyskać nowego potomka, reprezentujące nowe rozwiązanie <<Kumar2010>>. 
+Krzyżowanie, czasem zwane również ((rekombinowanie))m, to proces łączenia genów rodziców w taki sposób, aby uzyskać nowego potomka, reprezentującego nowe rozwiązanie <<Kumar2010>>. 
 
 === Krzyżowanie uporządkowane 
 indexterm:[Krzyżowanie, Ordered]
