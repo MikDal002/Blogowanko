@@ -211,8 +211,71 @@ public class SchwefelChromosomeFitness : IFitness<SimpleChromosome>
 
 === Wynik działania algorytmu genetycznego
 
+Na początku poszczególnych sekcji umieszczono wykres reprezentujący 20 najlepszych rozwiązań.
+Na osi OX mamy do czynienia z kolejnymi generacjami, natomiast w pionie mamy do czynienia z wartością dopasowania.
+
+==== Schwefel
+
 .Wyniki pracy algorytmu genetycznego dla funkcji Schwefela.
 image::szchwefel_results.jpg[]
 
+indexterm:[Krzyżowanie, Uniform]
+W przypadku szukania minimum funkcji testowej Schwefela wszystkie 20 najlepszych wyników korzystało z krzyżowania jednorodnego (UniformCrossover), a proporcje dzielenia się genami są w zakresie od 0.1 do 0.5 (czyli w całym dostępnym zakresie). 
+
+idnexterm:[Mutacja, Swap]
+Co ciekawe, tutaj, podobnie jak w przypadku problemu plecakowego, mutacją wykorzystywaną przez zwycięskie rozwiązania jest mutacja zamiany (SwapMutation). 
+Ilość mutacji to w większości wartości pojedyncze, tylko dwa rozwiązania korzystają z ilości zamian równej 8. 
+
+Najczęściej stosowanym zakończeniem algorytmu jest limit zwycięstw pojedynczego neuronu (TheSameNeuronWinner), a maksymalna ilość generacji mieści się w zakresie od 100 do 100, co stanowi dolną część dostępnego zakresu.
+
+Rzeczą wartą zauważenia jest fakt, że wszystkie najlepsze rozwiązania korzystają z populacji równej 100 osobnikom, a najszybsze rozwiązanie zajęło 473 milisekundy.
+
+.Tabela przedstawiająca 20 najlepszych rozwiązań znajdowania minimum funkcji Schwefela.
+|===
+| Crossover.Ratio |  AmountOfSwaps | MutationThreshold | TerminationNamefootnote:[TSNW – The Same Neuron Winer – zakończenie polegające na ograniczeniu ilości zwycięstw pojedynczego neuronu, GNT – Generation Number Termination – ograniczenie działania algorytmu poprzez całkowitą liczbę generacji.]  | MaxGenerationsCount | Population | AmountOfGenerations | TotalTimeMs 
+| 0,2 | 3 | 0,2 | TSNW | 100 | 100 | 606 | 473 
+| 0,2 | 1 | 0,7 | TSNW | 100 | 100 | 602 | 481 
+| 0,2 | 1 | 0,2 | TSNW | 100 | 100 | 685 | 518 
+| 0,5 | 8 | 0,2 | TSNW | 300 | 100 | 678 | 518 
+| 0,3 | 1 | 0,4 | TSNW | 100 | 100 | 618 | 533 
+| 0,3 | 1 | 0,2 | TSNW | 300 | 100 | 704 | 535 
+| 0,4 | 1 | 0,7 | TSNW | 300 | 100 | 710 | 600 
+| 0,3 | 1 | 0,7 | TSNW | 300 | 100 | 819 | 680 
+| 0,5 | 1 | 0,2 | TSNW | 300 | 100 | 935 | 687 
+| 0,5 | 1 | 0,9 | TSNW | 300 | 100 | 821 | 693 
+| 0,4 | 1 | 0,4 | TSNW | 300 | 100 | 698 | 721 
+| 0,4 | 8 | 0,2 | GNT | 1000 | 100 | 1001 | 769 
+| 0,2 | 1 | 0,4 | TSNW | 100 | 100 | 998 | 777 
+| 0,1 | 1 | 0,5 | GNT | 1000 | 100 | 1001 | 796 
+| 0,4 | 1 | 0,5 | GNT | 1000 | 100 | 1001 | 797 
+| 0,2 | 3 | 0,2 | TSNW | 300 | 100 | 1061 | 797 
+| 0,2 | 3 | 0,4 | GNT | 1000 | 100 | 1001 | 800 
+| 0,5 | 1 | 0,7 | GNT | 1000 | 100 | 1001 | 842 
+| 0,4 | 1 | 0,9 | GNT | 1000 | 100 | 1001 | 869 
+| 0,2 | 1 | 0,7 | TSNW | 300 | 100 | 1074 | 904 
+|===
+
+
 === Wynik działania PSO
-#TODO: TBA#
+
+Badań dokonano w podziale na kilka parametrów wejściowych:
+
+[horizontal]
+N::
+    liczba elementów w roju.
+W:: 
+    współczynnik bezwładności, określa wpływ prędkości w poprzednim kroku.
+C_1::
+    współczynnik dążenia do najlepszego lokalnego rozwiązania.
+C_2::
+    współczynnik dążenia do najlepszego globalnego rozwiązania.
+
+Czas działania algorytmu PSO, w zależności od ilości elementów w roju wynosi:
+
+* dla 10 elementów: od 1,9 do 2,1 milisekundy,
+* dla 25 elementów: od 5,0 do 5,6 milisekundy,
+* dla 50 elementów: od 9,7 do 10,4 milisekundy.
+
+image::wyniki_pso.jpg[]
+
+Tabela powyżej przedstawia przedstawia wyniki pracy algorytmu nad funkcją McCornic'a i Schwefela. 

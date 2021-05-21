@@ -13,10 +13,10 @@ Algorytm ten w implementacji jest podobny do algorytmu genetycznego, ponieważ s
 . Przesunięcia cząstek w pożądanym kierunku (krzyżowanie i utworzenie nowej populacji).
 
 W niniejszej pracy implementacji algorytmu optymalizacji rojem cząstek dokonano w języku JavaScript celem sprawdzenia, jak inaczej wprowadza się w życie elementy sztucznej inteligencji w tym języku.
+Dodatkowo wykorzystanie technologii webowej pozwala na zdecydowanie łatwiejsze realizowanie wizualizacji niż technologie typowo desktopowe czy serwerowe.
 
-#TODO: Rozbić to na kilka fragmentów.#
 [source,javascript]
-.Implementacja PSO w języku PHP
+.Przedstawienie głownego założenia PSO w PHP.
 ----
 let dataPoints = [];
 let bestGlobal = [];
@@ -39,7 +39,15 @@ initialization();
 pso();
 chartRenderer();
 chartPresentation();
+----
 
+Funkcja inicjujaca ustawia parametry początkowe takie jak: liczba iteracji, ilość elementów w roju.
+Należy ją również zmodyfikować w przypadku zmiany zakresu dla wartości X i Y. 
+Dodatkowo wylosowane zostają pozycje startowego dla każdego z elementów.
+
+[source,javascript]
+.Funkcja inicjująca PSO
+----
 function initialization()
 {
     t = 50;
@@ -95,56 +103,15 @@ function initialization()
     best_globals['y'] = particles[best_global_id]['y']['position'];
     best_globals['fitness'] = fitness(best_globals['x'], best_globals['y']);
 }
+----
 
-function chartRenderer()
-{
-    let chart = new CanvasJS.Chart("chartContainer", {
-        title:{
-            text: 'PSO'             
-        },
-        axisY:{
-            minimum: position_min * 10,
-            maximum: position_max * 10,
-        },
-        axisX:{
-            minimum: position_min * 10,
-            maximum: position_max * 10,
-        },
-        data: [              
-            {
-                showInLegend: true, 
-                name: "Position",
-                legendText: "Position",
-                lineColor: "blue",
-                type: "scatter",
-                markerSize: 5,
-                dataPoints: dataPoints,
-            },
-            {
-                showInLegend: true, 
-                name: "Best global position",
-                legendText: "Best global position",
-                lineColor: "red",
-                type: "scatter",
-                markerSize: 10,
-                dataPoints: bestGlobal,
-            }
-        ]
-    });
-    chart.render();
-}
+Najważniejsza funkcja, która odpowiada za bezpośrednią implementację algorytmu optymalizacji rojem cząstek. 
+Wyznacza najlepsze dopasowanie lokalne każdej z cząstek, wyznacza również najlepsze dopasowanie globalne i aktualizuje wektor prędkości każdej z cząstek.
+Wszystkie wartości są zapisywane do tablicy, co umożliwia wykonanie wizualizacji.
 
-function chartPresentation()
-{
-    for (let i = 1; i < t; i++) {
-        setTimeout(function timer() {
-            chart.options.data[0].dataPoints = dataPoints[i];
-            chart.options.data[1].dataPoints = bestGlobal[i];
-            chart.render();
-        }, i * 200);
-    }
-}
-
+[source,javascript]
+.Funkcja wykonująca algorytm PSO
+----
 function pso()
 {
     for (let i = 0; i < t; i++)
@@ -220,4 +187,59 @@ function inertia(i)
 {
     return 0.1;
  }
+----
+
+Funkcja generująca wizualizację działania algorytmu PSO.
+
+[source,javascript]
+.Funkcja odpowiedzialna za wyrysowanie wykresu do wizualizacji
+----
+function chartRenderer()
+{
+    let chart = new CanvasJS.Chart("chartContainer", {
+        title:{
+            text: 'PSO'             
+        },
+        axisY:{
+            minimum: position_min * 10,
+            maximum: position_max * 10,
+        },
+        axisX:{
+            minimum: position_min * 10,
+            maximum: position_max * 10,
+        },
+        data: [              
+            {
+                showInLegend: true, 
+                name: "Position",
+                legendText: "Position",
+                lineColor: "blue",
+                type: "scatter",
+                markerSize: 5,
+                dataPoints: dataPoints,
+            },
+            {
+                showInLegend: true, 
+                name: "Best global position",
+                legendText: "Best global position",
+                lineColor: "red",
+                type: "scatter",
+                markerSize: 10,
+                dataPoints: bestGlobal,
+            }
+        ]
+    });
+    chart.render();
+}
+
+function chartPresentation()
+{
+    for (let i = 1; i < t; i++) {
+        setTimeout(function timer() {
+            chart.options.data[0].dataPoints = dataPoints[i];
+            chart.options.data[1].dataPoints = bestGlobal[i];
+            chart.render();
+        }, i * 200);
+    }
+}
 ----

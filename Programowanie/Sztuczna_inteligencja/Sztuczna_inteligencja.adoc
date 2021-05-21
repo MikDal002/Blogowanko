@@ -39,10 +39,24 @@ include::Wstep/index.adoc[]
 include::problemy_i_implementacja/index.adoc[]
 
 == Wnioski
-Praca nad implementacją algorytmu genetycznegeo jest niezwykle pouczająca. 
-
+Praca nad implementacją algorytmu genetycznego jest niezwykle pouczająca. 
 
 #TODO: TBD# 
+
+W przypadku PSO pojawiły sie następujące wnioski:
+Funkcja McCornick'a w porównaniu do funkcji Schwefel'a wypada korzystniej dla całego spektrum badanych parametrów.
+Możemy zauważyć jednak następujące zależności:
+
+. W procesie optymalizacji duża prędkość zbieżności powoduje czasami szybką utratę różnorodności, co prowadzi do niepożądanej przedwczesnej konwergencji.
+. Im mniejszy współczynnik bezwładności tym obliczenia są precyzyjniejsze, ponieważ im większy jest ten współczynnik, tym większa skłonność cząstek do przeczesywania nowych obszarów.
+. Im większa liczba cząstek w roju tym należy zastosować mniejszy współczynnik bezwładności.
+. Im mniejszy współczynnik dążenia do najlepszego rozwiązania tym obliczenia się dokładniejsze, jednak wiąże się ten fakt ze zwiększeniem liczby wykonywanych iteracji.
+. Czas trwania epoki rośnie proporcjonalnie do wzrostu liczby cząstek w roju.
+. PSO ma stosunkowo niewielką liczbę parametrów i jest mało zależny od początkowego położenia cząstek.
+. Sprawdza się dobrze w układzie współrzędnych.
+. W PSO zachodzi konsolidacja. Z każdą iteracją "różnorodność opinii" dotycząca kierunku poruszania się roju cząstek maleje, ponieważ każda cząstka uwzględnia wspólne parametry globalne.
+. Pojedyncze cząstki wpływają na siebie wzajemnie, co z upływem czasu czyni je coraz bardziej podobnymi sobie (ustalanie szukanego optimum).
+ 
 
 [bibliography]
 = Bibliografia
