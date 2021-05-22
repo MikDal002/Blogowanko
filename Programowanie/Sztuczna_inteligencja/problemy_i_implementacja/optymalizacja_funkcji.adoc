@@ -133,6 +133,12 @@ public class SimpleChromosome : FitnessComparableChromosome, IGenableChromosome<
 
 === Funkcja McCormick'a
 
+Funkcja McCormick'a jest określona następującym równaniem:
+
+latexmath:[$f(x, y)=sin(x + y) + (x - y) ^2 - 1.5x + 2.5y + 1$] footnote:[http://benchmarkfcns.xyz/benchmarkfcns/mccormickfcn.html] footnote:[https://www.sfu.ca/~ssurjano/mccorm.html]
+
+i jej minimum znajduje się w punkcje x,y = (-0,547, -1,547) o wartości -1,9133, kiedy x i y rozpatrywane są w zakresie od -3 do 3.
+
 .Wykres funkcji McCormick'a w zakresie od -2 do 4.
 image::mccorm.png[]
 
@@ -171,8 +177,8 @@ Funkcję Schwefela zaobserwowano w dwóch wariantach.
 +
 gdzie `n` – liczba wymiarów.
 
-Wartość na początku pierwszego równiania jest w rzeczywistości podniesieniem wartości funkcji o minimum globalne w celu uniknięcia ujemnych wartości. 
-W przypadku niniejszej pracy wykorzystano drugi wariant funkcji Schwefela.
+Wartość na początku pierwszego równania jest w rzeczywistości podniesieniem wartości funkcji o minimum globalne w celu uniknięcia ujemnych wartości. 
+W przypadku niniejszej pracy wykorzystano drugi wariant funkcji Schwefela, której minimum sięga -837,9658 w punkcie (x,y) = (420,9687, 420,9687), gdy wartości x i y rozpatrywane są w zakresie od -500 do 500.
 
 .Wykres funkcji Schefela w zakresie od -500 do 500. Na ilustracji wszystkie wartości sa podeniesione o wartość minimum. 
 image::schwef.png[footnote:[https://www.sfu.ca/~ssurjano/schwef.html]]
@@ -231,8 +237,9 @@ Najczęściej stosowanym zakończeniem algorytmu jest limit zwycięstw pojedyncz
 Rzeczą wartą zauważenia jest fakt, że wszystkie najlepsze rozwiązania korzystają z populacji równej 100 osobnikom, a najszybsze rozwiązanie zajęło 473 milisekundy.
 
 .Tabela przedstawiająca 20 najlepszych rozwiązań znajdowania minimum funkcji Schwefela.
+[options="header"]
 |===
-| Crossover.Ratio |  AmountOfSwaps | MutationThreshold | TerminationNamefootnote:[TSNW – The Same Neuron Winer – zakończenie polegające na ograniczeniu ilości zwycięstw pojedynczego neuronu, GNT – Generation Number Termination – ograniczenie działania algorytmu poprzez całkowitą liczbę generacji.]  | MaxGenerationsCount | Population | AmountOfGenerations | TotalTimeMs 
+| Crossover Ratio | Amount Of Swaps | Mutation Threshold | Termination Namefootnote:[TSNW – The Same Neuron Winer – zakończenie polegające na ograniczeniu ilości zwycięstw pojedynczego neuronu, GNT – Generation Number Termination – ograniczenie działania algorytmu poprzez całkowitą liczbę generacji.]  | Max Generations Count | Population | Amount Of Generations | Total Time (Ms) 
 | 0,2 | 3 | 0,2 | TSNW | 100 | 100 | 606 | 473 
 | 0,2 | 1 | 0,7 | TSNW | 100 | 100 | 602 | 481 
 | 0,2 | 1 | 0,2 | TSNW | 100 | 100 | 685 | 518 
@@ -272,10 +279,44 @@ C_2::
 
 Czas działania algorytmu PSO, w zależności od ilości elementów w roju wynosi:
 
-* dla 10 elementów: od 1,9 do 2,1 milisekundy,
+* dla 10 elementów: od 1,9 do 2,1 milisekundy, 
 * dla 25 elementów: od 5,0 do 5,6 milisekundy,
 * dla 50 elementów: od 9,7 do 10,4 milisekundy.
+ 
+.Wyniki algorytmu PSO
+[cols="5*",options="header"]  
+|===
+| c1 = c2   | w (inertia) |  n 2+| Liczba zwycięstw na 10  pomiarów (błąd 5%)           
+|           |             |    |                  McCornick                 | Schwefel 
+|     2     |     0.1     | 10 |                      6                     |     0    
+|     2     |     0.5     | 10 |                      4                     |     0    
+|     2     |      1      | 10 |                      0                     |     0    
+|     2     |     0.1     | 25 |                      2                     |     0    
+|     2     |     0.5     | 25 |                      0                     |     0    
+|     2     |      1      | 25 |                      0                     |     0    
+|     2     |     0.1     | 50 |                      1                     |     0    
+|     2     |     0.5     | 50 |                      0                     |     0    
+|     2     |      1      | 50 |                      0                     |     0    
+|    1.5    |     0.1     | 10 |                     10                     |     1    
+|    1.5    |     0.5     | 10 |                      7                     |     0    
+|    1.5    |      1      | 10 |                      0                     |     0    
+|    1.5    |     0.1     | 25 |                      9                     |     1    
+|    1.5    |     0.5     | 25 |                      6                     |     0    
+|    1.5    |      1      | 25 |                      0                     |     0    
+|    1.5    |     0.1     | 50 |                     10                     |     0    
+|    1.5    |     0.5     | 50 |                      2                     |     0    
+|    1.5    |      1      | 50 |                      0                     |     0    
+|     1     |     0.1     | 10 |                      8                     |     4    
+|     1     |     0.5     | 10 |                     10                     |     1    
+|     1     |      1      | 10 |                      0                     |     0    
+|     1     |     0.1     | 25 |                      9                     |     5    
+|     1     |     0.5     | 25 |                     10                     |     1    
+|     1     |      1      | 25 |                      0                     |     0    
+|     1     |     0.1     | 50 |                     10                     |     8    
+|     1     |     0.5     | 50 |                      5                     |     0    
+|     1     |      1      | 50 |                      0                     |     0    
+|===
 
-image::wyniki_pso.jpg[]
+// image::wyniki_pso.jpg[]
 
 Tabela powyżej przedstawia przedstawia wyniki pracy algorytmu nad funkcją McCornic'a i Schwefela. 

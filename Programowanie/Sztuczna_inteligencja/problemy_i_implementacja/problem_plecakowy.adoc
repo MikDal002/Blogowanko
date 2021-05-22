@@ -169,9 +169,9 @@ Szczegółowa tabela jest dostępna poniżej.
 
 indexterm:[Krzyżowanie, Ordered]
 Wszystkie zwycięskie rozwiązania zostały oparte o standardową procedurę krzyżowania uporządkowania (OrderedCrossover), w której wykorzystano dwójkę rodziców.
-Co ciekawe praktycznie wszystkie rozwiązania dokonują dość małego krzyżowania (wymieniane jest pierwsze i ostatnie 10% genów, po za jednym wyjątkiem).
+Co ciekawe praktycznie wszystkie rozwiązania dokonują dość małego krzyżowania (wymieniane jest pierwsze i ostatnie 10% genów, poza jednym wyjątkiem).
 
-idnexterm:[Mutaja, Swap]
+indexterm:[Mutacja, Swap]
 Mutacja w zwycięskich chromosomach to mutacja zamiany genów (SwapMutation). 
 Ilość zamian waha się od 1 do 13 z przewagą wartości 13 i 8 – oznacza to, że gdy dochodziło do mutacji, zamieniane miejscami było 13 lub 8 genów.
 Dodatkowo prawdopodobieństwo dokonania mutacji waha się od 20% do aż 90% znowuż z przewagą tych większych wartości. 
@@ -182,6 +182,7 @@ Ilość osobników populacji również dość mocno się waha, to jest od 100 do
 Najszybciej rezultat otrzymano w 61 441 milisekund, to jest w trochę ponad minutę.
 
 .Tabela przedstawiająca 20 najlepszych rozwiązań problemu plecakowego
+[options="header"]
 |===
 | Crossover begining | Crossover end | Amount Of Swaps | Mutation Threshold | Termination Namefootnote:[TSNW – The Same Neuron Winer – zakończenie polegające na ograniczeniu ilości zwycięstw pojedynczego neuronu, GNT – Generation Number Termination – ograniczenie działania algorytmu poprzez całkowitą liczbę generacji.]            | Max Generations Count | Population | Amount Of Generations | Total Time (Ms)
 | 0,1                | 0,9           | 8             | 0,2               | TSNW   | 500                 | 500        | 1493                | 61441      
