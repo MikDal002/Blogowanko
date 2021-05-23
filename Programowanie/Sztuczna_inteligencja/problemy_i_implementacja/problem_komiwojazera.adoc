@@ -1,5 +1,5 @@
 == Problem komiwojażera
-Drugim problemem optymalizacyjnym, nad którym pochyliliśmy się w trakcie prac, jest problem komiwojażera. 
+Drugim problemem optymalizacyjnym, którego implementację i testy zrealizowano, jest problem komiwojażera. 
 
 Problem ten polega na znalezieniu najlepszej możliwej drogi pomiędzy kolejnymi punktami. 
 Połączenie pomiędzy miastami może być określone jako odległość lub koszt przejazdu. 
@@ -82,14 +82,10 @@ public class TravelerProblemFactory : IGenableChromosomeFactory<TravelerProblemC
     }
 
     public TravelerProblemChromosome FromGenes(IList<City> genes) <3>
-    {
-        return new TravelerProblemChromosome(genes);
-    }
+        => return new TravelerProblemChromosome(genes);
 
     public City GetGene(int geneNumber) <4>
-    {
-        throw new NotImplementedException();
-    }
+        => throw new NotImplementedException();
 }
 ----
 

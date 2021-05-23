@@ -38,9 +38,7 @@ public class BitChromosomeFactory : IGenableChromosomeFactory<SimpleChromosome, 
     }
 
     public virtual bool GetGene(int geneNumber)
-    {
-        return _random.Next() % 2 == 0;
-    }
+        => _random.Next() % 2 == 0;
 }
 ----
 
@@ -125,9 +123,7 @@ public class SimpleChromosome : FitnessComparableChromosome, IGenableChromosome<
     public IReadOnlyList<bool> Genes { get; }
 
     public int CompareTo(object? obj)
-    {
-        return -base.CompareTo(obj);
-    }
+        => -base.CompareTo(obj);
 }
 ----
 
@@ -159,9 +155,7 @@ public class MCCORMICKChromosomeFitness : IFitness<SimpleChromosome>
         var val2 = BitConverter.ToSingle(chromosome.Genes.Skip(32).Take(32).ToBytes());
         var result = Math.Sin(val1 + val2) + Math.Pow(val1 - val2, 2) - 1.5 * val1 + 2.5 * val2 + 1;
         if (double.IsNaN(result))
-        {
             return double.PositiveInfinity;
-        }
 
         return result;
     }
@@ -206,10 +200,8 @@ public class SchwefelChromosomeFitness : IFitness<SimpleChromosome>
         for (int i = 0; i < values.Length; i++) sum += -values[i] * Math.Sin(Math.Sqrt(Math.Abs(values[i])));
         var result = sum;
         if (double.IsNaN(result))
-        {
             return double.PositiveInfinity;
-        }
-
+        
         return result;
     }
 }

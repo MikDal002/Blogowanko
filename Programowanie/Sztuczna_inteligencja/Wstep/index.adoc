@@ -1,5 +1,16 @@
 
 = Wstęp
+Niniejsze sprawozdanie jest rezultatem prac nad algorytmami genetycznymi i ich wykorzystaniem w znajdowaniu rozwiązania problemu komiwojażera/plecakowego i optymalizacji funkcji w porównaniu z algorytmem optymalizacji rojem cząstek (PSO). 
+Całość została wykonana przez dwa zespoły:
+
+* Jacek Suty, Przemysław Nadobny i Karol Appel.
+* Mikołaj Dalecki i Mateusz Lewandowski,
+
+Zespół pierwszy wykonał i przeanalizował problem plecakowy oraz znalezienia minimum funkcji McCormick'a. 
+Do tego odpowiadał za implementację selekcji ruletkowej, krzyżowanie jednorodne (z ang. _uniform selection_), mutację przestawną, mutację losowego resetu i zakończenie pracy algorytmu na podstawie globalnego limitu generacji.
+Zespół drugi wykonał i przeanalizował problem komiwojażera, znalezienia minimum funkcji Schwefela i odpowiadał za implementacje pozostałych elementów. 
+Fakt odpowiadania za implementację pewnego elementu nie zmienia faktu, że nad całością czuwały oba zespoły i z racji potrzeb oba zespoły nanosiły poprawki i ulepszenia.
+
 indexterm:[John Holland]
 ((Algorytm genetyczny)) (dalej w pracy w skrócie AG) znajduje się w grupie algorytmów ewolucyjnych i jest powszechnie używany do problemów optymalizacyjnych, takich jak znajdowanie najkrótszej drogi, bądź modelowania systemów, gdzie zmienność odgrywa znaczącą rolę (na przykład przewidywanie cen na giełdzie).
 Jest on wyszukiwaniem heurystycznym zainspirowanym zmianami genetycznymi w populacji i został przedstawiony przez Johna Hollanda na początku lat 70. XX wieku. 

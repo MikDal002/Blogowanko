@@ -22,18 +22,6 @@ Mikołaj Dalecki <mikdal002@utp.edu.pl>; Mateusz Lewandowski <matlew13@utp.edu.p
 :lang: PL
 :hyphens:
 
-[.normal]
-Niniejsze sprawozdanie jest rezultatem prac nad algorytmami genetycznymi i ich wykorzystaniem w znajdowaniu rozwiązania problemu komiwojażera/plecakowego i optymalizacji funkcji w porównaniu z algorytmem optymalizacji rojem cząstek (PSO). 
-Całość została wykonana przez dwa zespoły:
-
-* Jacek Suty, Przemysław Nadobny i Karol Appel.
-* Mikołaj Dalecki i Mateusz Lewandowski,
-
-Zespół pierwszy wykonał i przeanalizował problem plecakowy oraz znalezienia minimum funkcji McCormick'a. 
-Do tego odpowiadał za implementację selekcji ruletkowej, krzyżowanie jednorodne (z ang. _uniform selection_), mutację przestawną, mutację losowego resetu i zakończenie pracy algorytmu na podstawie globalnego limitu generacji.
-Zespół drugi wykonał i przeanalizował problem komiwojażera, znalezienia minimum funkcji Schwefela i odpowiadał za implementacje pozostałych elementów. 
-Fakt odpowiadania za implementację pewnego elementu nie zmienia faktu, że nad całością czuwały oba zespoły i z racji potrzeb oba zespoły nanosiły poprawki i ulepszenia.
-
 include::Wstep/index.adoc[]
 
 include::problemy_i_implementacja/index.adoc[]

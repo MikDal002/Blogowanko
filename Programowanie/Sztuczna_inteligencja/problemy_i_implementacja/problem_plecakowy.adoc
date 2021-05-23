@@ -86,14 +86,10 @@ public class KnapsackProblemFactory : IGenableChromosomeFactory<KnapsackProblemC
     }
 
     public KnapsackProblemChromosome FromGenes(IList<Insert> genes) <3>
-    {
-        return new KnapsackProblemChromosome(MaxWeight, genes);
-    }
+    => return new KnapsackProblemChromosome(MaxWeight, genes);
 
     public Insert GetGene(int geneNumber) <4>
-    {
-        throw new NotImplementedException();
-    }
+        => throw new NotImplementedException();
 }
 ----
 
@@ -161,9 +157,6 @@ public class KnapsackProblemChromosome : FitnessComparableChromosome, IGenableCh
 
 === Wyniki badań
 
-.Wykres najlepszych 25 wyników w szukaniu najlepszej wartości plecaka.
-image::knapsack_results.png[]
-
 Wybrano 20 wyników, które osiągnęły najlepsze możliwe dopasowanie, a następnie posortowano je według czasu trwania.
 Szczegółowa tabela jest dostępna poniżej.
 
@@ -206,3 +199,9 @@ Najszybciej rezultat otrzymano w 61 441 milisekund, to jest w trochę ponad minu
 | 0,1                | 0,9           | 13            | 0,8               | TSNW   | 1300                | 1300       | 2154                | 267282     
 | 0,1                | 0,9           | 13            | 0,7               | TSNW   | 2100                | 800        | 4219                | 321047     
 |===
+
+Poniżej widać najlepsze 25 wyników przedstawione w formie graficznej. 
+Widać na nim, że większość wyników mieści się w mniej niż 4000 tysiącach generacji.
+
+.Wykres najlepszych 25 wyników w szukaniu najlepszej wartości plecaka.
+image::knapsack_results.png[]
