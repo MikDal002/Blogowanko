@@ -29,16 +29,17 @@ Dla przykładu po zakończeniu prac chciałbym napisać krótki artykuł o tym, 
 * [ ] Rozeznać się w Wordpress,
 * [ ] Rozeznać się w Netlify https://www.netlifycms.org/, footnote:rozw[]
 * [ ] Rozeznać się w Gatsby https://www.gatsbyjs.com/,
-* [ ] Zapoznać się z innymi generatorami stron: https://jamstack.org/generators/
+* [ ] Zapoznać się z innymi generatorami stron: https://jamstack.org/generators/.
 
-* [ ] Ogarnąć AsciiDoctor Bibliography
-* [ ] Zapoznać się z możliwościami DocBook'a, gdzie AsciiDoctor mógłby pełnić rolę frontendu (sposobu edycji) dla tego formatu, a ten następnie byłby konwertowany do innych, jak LaTeX czy HTML.
-Jego zaletą jest również to, że jest on bardzo dobrze ustrukturyzowany, co pozwoli mi łatwo wyciągnąć z niego informacje
+* [ ] Ogarnąć AsciiDoctor Bibliography,
+* [ ] Zapoznać się z możliwościami DocBook'a, gdzie AsciiDoctor mógłby odgrywać rolę frontendu (sposobu edycji) dla tego formatu, a ten następnie byłby konwertowany do innych, jak LaTeX czy HTML.
+Jego zaletą jest również to, że jest on bardzo dobrze ustrukturyzowany, co pozwoli mi łatwo wyciągnąć z niego informacje.
+
 == Wady i zalety języka znaczników AsciiDoctor'a, (rozwiązania, które na ten moment stosuję przy pisaniu):
 
 - nie działa matma :(. 
 Nie wiem na ten moment jak używać makra `latexmath`. 
-Moim celem jest osiągnięcie renderowania się równań zarówno w druku jak i w przeglądarce – na ten moment nie udało mi się tego osiągnąć.
+Moim celem jest osiągnięcie renderowania się równań zarówno w druku, jak i w przeglądarce – na ten moment nie udało mi się tego osiągnąć.
 - Brak wykresów prosto z kodu. 
 Brakuje mi funkcjonalności pozwalającej na generowanie wykresów w ten sam sposób, jak generowane są diagramy.
 Niby to (https://github.com/asciidoctor/asciidoctor-chart), ale jednak nie udało mi się tego uruchomić.
@@ -46,9 +47,14 @@ Niby to (https://github.com/asciidoctor/asciidoctor-chart), ale jednak nie udał
 
 Problemy przy generowaniu PDF'a:
 
-- kompletny brak kontroli wdów i innych błędów typograficznych, np. opis zdjecia/tabeli/kodu potrfi być na innej stronie niż na tej co najważniejszy obraz.
-- brak płynnej kontroli elementów: obrazy pojawiają się DOKŁADNIE tam gdzie wprwowadzisz je w kodzie.
+- kompletny brak kontroli wdów i innych błędów typograficznych, np. opis zdjęcia/tabeli/kodu potrafi być na innej stronie niż na tej, co obraz.
+- brak płynnej kontroli elementów: obrazy pojawiają się DOKŁADNIE tam, gdzie wprowadzisz je w kodzie.
 W LaTeX'u są one płynne.
 
 = Pomysły na artykuły i serie
+
+= Inne blogi warte uwagi
+
+- https://programistanaswoim.pl/ #TODO: Dodać opis#.
+- https://cezarywalenciuk.pl/ #TODO: Dodać opis#.
 
