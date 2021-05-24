@@ -4,4 +4,7 @@
     "languageTool.language": "pl",
     "asciidoc.use_asciidoctor_js": false,
     "asciidoc.use_asciidoctorpdf": true,
+    "languageToolLinter.languageTool.ignoredWordsInWorkspace": [
+        "pso"
+    ],
 }

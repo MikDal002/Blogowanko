@@ -1,0 +1,7277 @@
+[
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc305670a"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.1,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.7
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 2100
+      },
+      "Population": 300,
+      "WinnerChromosome": {
+        "Fitness": -1.913223044388002
+      },
+      "AmountOfGenerations": 8633,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.913223044388002,
+      "TotalTimeMs": 32020,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 1,
+          "fitness": -1.9057071242585275
+        },
+        {
+          "generation": 2,
+          "Elapse": 4,
+          "fitness": -1.9105151286819808
+        },
+        {
+          "generation": 7,
+          "Elapse": 27,
+          "fitness": -1.9106449458778445
+        },
+        {
+          "generation": 10,
+          "Elapse": 41,
+          "fitness": -1.9109706626711187
+        },
+        {
+          "generation": 19,
+          "Elapse": 77,
+          "fitness": -1.9111263206777442
+        },
+        {
+          "generation": 39,
+          "Elapse": 157,
+          "fitness": -1.911126367531212
+        },
+        {
+          "generation": 40,
+          "Elapse": 161,
+          "fitness": -1.9111302485140156
+        },
+        {
+          "generation": 41,
+          "Elapse": 165,
+          "fitness": -1.912066749833055
+        },
+        {
+          "generation": 49,
+          "Elapse": 193,
+          "fitness": -1.9131649420078545
+        },
+        {
+          "generation": 56,
+          "Elapse": 219,
+          "fitness": -1.9131649715692283
+        },
+        {
+          "generation": 59,
+          "Elapse": 231,
+          "fitness": -1.9131650047625466
+        },
+        {
+          "generation": 100,
+          "Elapse": 392,
+          "fitness": -1.9131704704381662
+        },
+        {
+          "generation": 103,
+          "Elapse": 402,
+          "fitness": -1.913170496179788
+        },
+        {
+          "generation": 148,
+          "Elapse": 581,
+          "fitness": -1.9131714590893152
+        },
+        {
+          "generation": 151,
+          "Elapse": 594,
+          "fitness": -1.9131715484962823
+        },
+        {
+          "generation": 214,
+          "Elapse": 835,
+          "fitness": -1.9132145288349838
+        },
+        {
+          "generation": 231,
+          "Elapse": 901,
+          "fitness": -1.9132191246623038
+        },
+        {
+          "generation": 250,
+          "Elapse": 974,
+          "fitness": -1.913219214069271
+        },
+        {
+          "generation": 259,
+          "Elapse": 1008,
+          "fitness": -1.9132192743648972
+        },
+        {
+          "generation": 293,
+          "Elapse": 1157,
+          "fitness": -1.913219303673087
+        },
+        {
+          "generation": 302,
+          "Elapse": 1201,
+          "fitness": -1.913220187235968
+        },
+        {
+          "generation": 335,
+          "Elapse": 1330,
+          "fitness": -1.913220321317171
+        },
+        {
+          "generation": 340,
+          "Elapse": 1350,
+          "fitness": -1.9132217504233426
+        },
+        {
+          "generation": 344,
+          "Elapse": 1365,
+          "fitness": -1.9132218528334102
+        },
+        {
+          "generation": 348,
+          "Elapse": 1380,
+          "fitness": -1.9132229119657715
+        },
+        {
+          "generation": 413,
+          "Elapse": 1631,
+          "fitness": -1.913222933498214
+        },
+        {
+          "generation": 471,
+          "Elapse": 1855,
+          "fitness": -1.9132229526181437
+        },
+        {
+          "generation": 490,
+          "Elapse": 1927,
+          "fitness": -1.9132229894946082
+        },
+        {
+          "generation": 616,
+          "Elapse": 2478,
+          "fitness": -1.9132229913187229
+        },
+        {
+          "generation": 976,
+          "Elapse": 3899,
+          "fitness": -1.9132229957690314
+        },
+        {
+          "generation": 1054,
+          "Elapse": 4195,
+          "fitness": -1.9132229958161995
+        },
+        {
+          "generation": 1417,
+          "Elapse": 5620,
+          "fitness": -1.9132230085458128
+        },
+        {
+          "generation": 1507,
+          "Elapse": 5983,
+          "fitness": -1.9132230141653368
+        },
+        {
+          "generation": 1566,
+          "Elapse": 6211,
+          "fitness": -1.9132230291462307
+        },
+        {
+          "generation": 1705,
+          "Elapse": 6743,
+          "fitness": -1.9132230299018342
+        },
+        {
+          "generation": 1849,
+          "Elapse": 7322,
+          "fitness": -1.9132230299086146
+        },
+        {
+          "generation": 1935,
+          "Elapse": 7654,
+          "fitness": -1.9132230299949424
+        },
+        {
+          "generation": 2107,
+          "Elapse": 8364,
+          "fitness": -1.9132230300028006
+        },
+        {
+          "generation": 2231,
+          "Elapse": 8842,
+          "fitness": -1.9132230441441496
+        },
+        {
+          "generation": 2437,
+          "Elapse": 9646,
+          "fitness": -1.9132230441483853
+        },
+        {
+          "generation": 2662,
+          "Elapse": 10514,
+          "fitness": -1.9132230441590963
+        },
+        {
+          "generation": 3129,
+          "Elapse": 12365,
+          "fitness": -1.9132230441673368
+        },
+        {
+          "generation": 3456,
+          "Elapse": 13625,
+          "fitness": -1.9132230441734865
+        },
+        {
+          "generation": 3504,
+          "Elapse": 13804,
+          "fitness": -1.9132230441791753
+        },
+        {
+          "generation": 3711,
+          "Elapse": 14616,
+          "fitness": -1.9132230441954658
+        },
+        {
+          "generation": 4323,
+          "Elapse": 17027,
+          "fitness": -1.9132230442322191
+        },
+        {
+          "generation": 5572,
+          "Elapse": 21917,
+          "fitness": -1.9132230443015543
+        },
+        {
+          "generation": 5826,
+          "Elapse": 22931,
+          "fitness": -1.9132230443114624
+        },
+        {
+          "generation": 5989,
+          "Elapse": 23568,
+          "fitness": -1.9132230443161697
+        },
+        {
+          "generation": 5991,
+          "Elapse": 23574,
+          "fitness": -1.913223044325027
+        },
+        {
+          "generation": 5992,
+          "Elapse": 23578,
+          "fitness": -1.9132230443307305
+        },
+        {
+          "generation": 5993,
+          "Elapse": 23581,
+          "fitness": -1.9132230443852905
+        },
+        {
+          "generation": 5998,
+          "Elapse": 23598,
+          "fitness": -1.9132230443866547
+        },
+        {
+          "generation": 6106,
+          "Elapse": 23934,
+          "fitness": -1.9132230443870437
+        },
+        {
+          "generation": 6166,
+          "Elapse": 24115,
+          "fitness": -1.9132230443873328
+        },
+        {
+          "generation": 6195,
+          "Elapse": 24203,
+          "fitness": -1.9132230443878795
+        },
+        {
+          "generation": 6509,
+          "Elapse": 25214,
+          "fitness": -1.9132230443879088
+        },
+        {
+          "generation": 6533,
+          "Elapse": 25288,
+          "fitness": -1.913223044388002
+        }
+      ],
+      "quality": 0.9999597785961438
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc3056493"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.3,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 3,
+        "MutationThreshold": 0.7
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 800
+      },
+      "Population": 300,
+      "WinnerChromosome": {
+        "Fitness": -1.913223044388002
+      },
+      "AmountOfGenerations": 7192,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.913223044388002,
+      "TotalTimeMs": 27696,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 1,
+          "fitness": -1.8934370052213243
+        },
+        {
+          "generation": 3,
+          "Elapse": 7,
+          "fitness": -1.908186640055526
+        },
+        {
+          "generation": 17,
+          "Elapse": 60,
+          "fitness": -1.9110925928653066
+        },
+        {
+          "generation": 151,
+          "Elapse": 579,
+          "fitness": -1.911092665016648
+        },
+        {
+          "generation": 168,
+          "Elapse": 642,
+          "fitness": -1.9112143131542347
+        },
+        {
+          "generation": 220,
+          "Elapse": 878,
+          "fitness": -1.9116815658715813
+        },
+        {
+          "generation": 250,
+          "Elapse": 996,
+          "fitness": -1.911921457642705
+        },
+        {
+          "generation": 276,
+          "Elapse": 1098,
+          "fitness": -1.9119247784366524
+        },
+        {
+          "generation": 395,
+          "Elapse": 1551,
+          "fitness": -1.911932907912715
+        },
+        {
+          "generation": 434,
+          "Elapse": 1703,
+          "fitness": -1.9129631695233984
+        },
+        {
+          "generation": 473,
+          "Elapse": 1863,
+          "fitness": -1.9131636516357742
+        },
+        {
+          "generation": 489,
+          "Elapse": 1924,
+          "fitness": -1.9131645007431803
+        },
+        {
+          "generation": 630,
+          "Elapse": 2490,
+          "fitness": -1.9132088119450135
+        },
+        {
+          "generation": 654,
+          "Elapse": 2580,
+          "fitness": -1.913209038599728
+        },
+        {
+          "generation": 921,
+          "Elapse": 3637,
+          "fitness": -1.9132101697926953
+        },
+        {
+          "generation": 1172,
+          "Elapse": 4636,
+          "fitness": -1.913211298589356
+        },
+        {
+          "generation": 1484,
+          "Elapse": 5854,
+          "fitness": -1.9132113332392615
+        },
+        {
+          "generation": 1847,
+          "Elapse": 7275,
+          "fitness": -1.913212694037925
+        },
+        {
+          "generation": 2267,
+          "Elapse": 8960,
+          "fitness": -1.9132144507813131
+        },
+        {
+          "generation": 2284,
+          "Elapse": 9028,
+          "fitness": -1.9132146226148823
+        },
+        {
+          "generation": 2817,
+          "Elapse": 11136,
+          "fitness": -1.9132146259465888
+        },
+        {
+          "generation": 3261,
+          "Elapse": 12916,
+          "fitness": -1.9132152610331103
+        },
+        {
+          "generation": 3370,
+          "Elapse": 13336,
+          "fitness": -1.913218806982686
+        },
+        {
+          "generation": 3924,
+          "Elapse": 15554,
+          "fitness": -1.9132193867617926
+        },
+        {
+          "generation": 4379,
+          "Elapse": 17374,
+          "fitness": -1.9132193899172893
+        },
+        {
+          "generation": 4579,
+          "Elapse": 18141,
+          "fitness": -1.9132194172386705
+        },
+        {
+          "generation": 4977,
+          "Elapse": 19786,
+          "fitness": -1.9132194944261354
+        },
+        {
+          "generation": 5365,
+          "Elapse": 21297,
+          "fitness": -1.9132195226234723
+        },
+        {
+          "generation": 5781,
+          "Elapse": 22968,
+          "fitness": -1.9132223351875282
+        },
+        {
+          "generation": 5851,
+          "Elapse": 23263,
+          "fitness": -1.9132226218674386
+        },
+        {
+          "generation": 5927,
+          "Elapse": 23559,
+          "fitness": -1.9132228628406414
+        },
+        {
+          "generation": 5928,
+          "Elapse": 23562,
+          "fitness": -1.913222887918244
+        },
+        {
+          "generation": 5930,
+          "Elapse": 23568,
+          "fitness": -1.9132230419537999
+        },
+        {
+          "generation": 5933,
+          "Elapse": 23578,
+          "fitness": -1.9132230423829224
+        },
+        {
+          "generation": 5934,
+          "Elapse": 23580,
+          "fitness": -1.913223042492453
+        },
+        {
+          "generation": 5936,
+          "Elapse": 23587,
+          "fitness": -1.9132230427118282
+        },
+        {
+          "generation": 5937,
+          "Elapse": 23591,
+          "fitness": -1.9132230429646357
+        },
+        {
+          "generation": 5943,
+          "Elapse": 23614,
+          "fitness": -1.91322304387094
+        },
+        {
+          "generation": 5944,
+          "Elapse": 23617,
+          "fitness": -1.9132230442055063
+        },
+        {
+          "generation": 5954,
+          "Elapse": 23648,
+          "fitness": -1.913223044206359
+        },
+        {
+          "generation": 6005,
+          "Elapse": 23810,
+          "fitness": -1.9132230442399152
+        },
+        {
+          "generation": 6007,
+          "Elapse": 23817,
+          "fitness": -1.9132230443237903
+        },
+        {
+          "generation": 6015,
+          "Elapse": 23847,
+          "fitness": -1.9132230443248277
+        },
+        {
+          "generation": 6022,
+          "Elapse": 23870,
+          "fitness": -1.9132230443392548
+        },
+        {
+          "generation": 6033,
+          "Elapse": 23905,
+          "fitness": -1.9132230443402802
+        },
+        {
+          "generation": 6076,
+          "Elapse": 24040,
+          "fitness": -1.9132230443801728
+        },
+        {
+          "generation": 6101,
+          "Elapse": 24117,
+          "fitness": -1.9132230443808624
+        },
+        {
+          "generation": 6110,
+          "Elapse": 24146,
+          "fitness": -1.9132230443822267
+        },
+        {
+          "generation": 6175,
+          "Elapse": 24396,
+          "fitness": -1.9132230443830092
+        },
+        {
+          "generation": 6184,
+          "Elapse": 24428,
+          "fitness": -1.9132230443831744
+        },
+        {
+          "generation": 6234,
+          "Elapse": 24593,
+          "fitness": -1.9132230443834706
+        },
+        {
+          "generation": 6240,
+          "Elapse": 24612,
+          "fitness": -1.9132230443845106
+        },
+        {
+          "generation": 6351,
+          "Elapse": 24968,
+          "fitness": -1.9132230443872698
+        },
+        {
+          "generation": 6369,
+          "Elapse": 25022,
+          "fitness": -1.9132230443873328
+        },
+        {
+          "generation": 6392,
+          "Elapse": 25091,
+          "fitness": -1.913223044388002
+        }
+      ],
+      "quality": 0.9999597785961438
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc30561e6"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.5,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 8,
+        "MutationThreshold": 0.2
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 2100
+      },
+      "Population": 800,
+      "WinnerChromosome": {
+        "Fitness": -1.913223044388002
+      },
+      "AmountOfGenerations": 10643,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.913223044388002,
+      "TotalTimeMs": 202244,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 4,
+          "fitness": -1.9121181049148714
+        },
+        {
+          "generation": 14,
+          "Elapse": 282,
+          "fitness": -1.912198879822523
+        },
+        {
+          "generation": 16,
+          "Elapse": 323,
+          "fitness": -1.9125718679321047
+        },
+        {
+          "generation": 49,
+          "Elapse": 1016,
+          "fitness": -1.912838849472441
+        },
+        {
+          "generation": 161,
+          "Elapse": 3430,
+          "fitness": -1.9129739252882452
+        },
+        {
+          "generation": 267,
+          "Elapse": 5731,
+          "fitness": -1.9131262040114767
+        },
+        {
+          "generation": 313,
+          "Elapse": 6766,
+          "fitness": -1.913218540963209
+        },
+        {
+          "generation": 503,
+          "Elapse": 10894,
+          "fitness": -1.9132191743664242
+        },
+        {
+          "generation": 828,
+          "Elapse": 17951,
+          "fitness": -1.9132212909355908
+        },
+        {
+          "generation": 1449,
+          "Elapse": 31502,
+          "fitness": -1.9132214698110337
+        },
+        {
+          "generation": 1868,
+          "Elapse": 40628,
+          "fitness": -1.913221477010699
+        },
+        {
+          "generation": 2088,
+          "Elapse": 45708,
+          "fitness": -1.9132214984045763
+        },
+        {
+          "generation": 2873,
+          "Elapse": 62893,
+          "fitness": -1.913222056986947
+        },
+        {
+          "generation": 3451,
+          "Elapse": 75460,
+          "fitness": -1.9132221197435113
+        },
+        {
+          "generation": 3560,
+          "Elapse": 77831,
+          "fitness": -1.9132221207066387
+        },
+        {
+          "generation": 4139,
+          "Elapse": 90393,
+          "fitness": -1.9132226365936527
+        },
+        {
+          "generation": 4142,
+          "Elapse": 90441,
+          "fitness": -1.9132226367405916
+        },
+        {
+          "generation": 4144,
+          "Elapse": 90477,
+          "fitness": -1.913222689814067
+        },
+        {
+          "generation": 4147,
+          "Elapse": 90527,
+          "fitness": -1.9132228047938202
+        },
+        {
+          "generation": 4149,
+          "Elapse": 90559,
+          "fitness": -1.9132228687478148
+        },
+        {
+          "generation": 4152,
+          "Elapse": 90614,
+          "fitness": -1.9132229281129507
+        },
+        {
+          "generation": 4155,
+          "Elapse": 90662,
+          "fitness": -1.9132229547998518
+        },
+        {
+          "generation": 4157,
+          "Elapse": 90695,
+          "fitness": -1.9132229623300958
+        },
+        {
+          "generation": 4191,
+          "Elapse": 91279,
+          "fitness": -1.9132229625066333
+        },
+        {
+          "generation": 4197,
+          "Elapse": 91377,
+          "fitness": -1.913222975115724
+        },
+        {
+          "generation": 4199,
+          "Elapse": 91414,
+          "fitness": -1.9132229767502054
+        },
+        {
+          "generation": 4223,
+          "Elapse": 91815,
+          "fitness": -1.9132230021551817
+        },
+        {
+          "generation": 4225,
+          "Elapse": 91847,
+          "fitness": -1.9132230247190467
+        },
+        {
+          "generation": 4228,
+          "Elapse": 91897,
+          "fitness": -1.913223028711731
+        },
+        {
+          "generation": 4231,
+          "Elapse": 91948,
+          "fitness": -1.9132230407804554
+        },
+        {
+          "generation": 4245,
+          "Elapse": 92196,
+          "fitness": -1.9132230437091051
+        },
+        {
+          "generation": 4271,
+          "Elapse": 92646,
+          "fitness": -1.913223043830898
+        },
+        {
+          "generation": 4274,
+          "Elapse": 92695,
+          "fitness": -1.9132230440164348
+        },
+        {
+          "generation": 4281,
+          "Elapse": 92814,
+          "fitness": -1.9132230440179248
+        },
+        {
+          "generation": 4355,
+          "Elapse": 94069,
+          "fitness": -1.9132230440180371
+        },
+        {
+          "generation": 4532,
+          "Elapse": 97036,
+          "fitness": -1.9132230440230962
+        },
+        {
+          "generation": 4709,
+          "Elapse": 100103,
+          "fitness": -1.9132230442963176
+        },
+        {
+          "generation": 4739,
+          "Elapse": 100604,
+          "fitness": -1.9132230443187739
+        },
+        {
+          "generation": 4778,
+          "Elapse": 101270,
+          "fitness": -1.9132230443248277
+        },
+        {
+          "generation": 4904,
+          "Elapse": 103390,
+          "fitness": -1.913223044353623
+        },
+        {
+          "generation": 4944,
+          "Elapse": 104055,
+          "fitness": -1.9132230443539227
+        },
+        {
+          "generation": 5089,
+          "Elapse": 106547,
+          "fitness": -1.913223044356008
+        },
+        {
+          "generation": 5313,
+          "Elapse": 110912,
+          "fitness": -1.9132230443602891
+        },
+        {
+          "generation": 5424,
+          "Elapse": 112779,
+          "fitness": -1.9132230443654397
+        },
+        {
+          "generation": 5464,
+          "Elapse": 113472,
+          "fitness": -1.9132230443741092
+        },
+        {
+          "generation": 5475,
+          "Elapse": 113653,
+          "fitness": -1.9132230443774665
+        },
+        {
+          "generation": 5568,
+          "Elapse": 115212,
+          "fitness": -1.9132230443801728
+        },
+        {
+          "generation": 5680,
+          "Elapse": 117110,
+          "fitness": -1.913223044380599
+        },
+        {
+          "generation": 5716,
+          "Elapse": 117745,
+          "fitness": -1.9132230443808624
+        },
+        {
+          "generation": 5718,
+          "Elapse": 117782,
+          "fitness": -1.9132230443809628
+        },
+        {
+          "generation": 5731,
+          "Elapse": 118015,
+          "fitness": -1.913223044383404
+        },
+        {
+          "generation": 5779,
+          "Elapse": 118823,
+          "fitness": -1.913223044384086
+        },
+        {
+          "generation": 5781,
+          "Elapse": 118858,
+          "fitness": -1.91322304438438
+        },
+        {
+          "generation": 5978,
+          "Elapse": 122185,
+          "fitness": -1.913223044384479
+        },
+        {
+          "generation": 6058,
+          "Elapse": 123542,
+          "fitness": -1.9132230443845106
+        },
+        {
+          "generation": 7044,
+          "Elapse": 140281,
+          "fitness": -1.9132230443873328
+        },
+        {
+          "generation": 7343,
+          "Elapse": 145331,
+          "fitness": -1.9132230443878795
+        },
+        {
+          "generation": 8528,
+          "Elapse": 166021,
+          "fitness": -1.9132230443879088
+        },
+        {
+          "generation": 8543,
+          "Elapse": 166283,
+          "fitness": -1.913223044388002
+        }
+      ],
+      "quality": 0.9999597785961438
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc3056176"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.5,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 3,
+        "MutationThreshold": 0.4
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 2100
+      },
+      "Population": 300,
+      "WinnerChromosome": {
+        "Fitness": -1.913223044388002
+      },
+      "AmountOfGenerations": 5051,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.913223044388002,
+      "TotalTimeMs": 16450,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 1,
+          "fitness": -1.9125292313451263
+        },
+        {
+          "generation": 12,
+          "Elapse": 40,
+          "fitness": -1.912720446184034
+        },
+        {
+          "generation": 46,
+          "Elapse": 164,
+          "fitness": -1.9127987828685034
+        },
+        {
+          "generation": 61,
+          "Elapse": 221,
+          "fitness": -1.9128193581923267
+        },
+        {
+          "generation": 90,
+          "Elapse": 339,
+          "fitness": -1.9131927351819193
+        },
+        {
+          "generation": 102,
+          "Elapse": 389,
+          "fitness": -1.9131948556558758
+        },
+        {
+          "generation": 141,
+          "Elapse": 536,
+          "fitness": -1.913194898062481
+        },
+        {
+          "generation": 182,
+          "Elapse": 693,
+          "fitness": -1.913218381759374
+        },
+        {
+          "generation": 306,
+          "Elapse": 1139,
+          "fitness": -1.9132185092864669
+        },
+        {
+          "generation": 614,
+          "Elapse": 2342,
+          "fitness": -1.913218509362037
+        },
+        {
+          "generation": 764,
+          "Elapse": 2924,
+          "fitness": -1.913222120784237
+        },
+        {
+          "generation": 788,
+          "Elapse": 3010,
+          "fitness": -1.913222852704827
+        },
+        {
+          "generation": 794,
+          "Elapse": 3032,
+          "fitness": -1.9132229609951406
+        },
+        {
+          "generation": 814,
+          "Elapse": 3105,
+          "fitness": -1.913222975865922
+        },
+        {
+          "generation": 817,
+          "Elapse": 3115,
+          "fitness": -1.9132229760148016
+        },
+        {
+          "generation": 818,
+          "Elapse": 3117,
+          "fitness": -1.9132230314895766
+        },
+        {
+          "generation": 821,
+          "Elapse": 3126,
+          "fitness": -1.913223033643428
+        },
+        {
+          "generation": 823,
+          "Elapse": 3134,
+          "fitness": -1.9132230337013936
+        },
+        {
+          "generation": 824,
+          "Elapse": 3136,
+          "fitness": -1.9132230362419964
+        },
+        {
+          "generation": 827,
+          "Elapse": 3145,
+          "fitness": -1.9132230412176705
+        },
+        {
+          "generation": 830,
+          "Elapse": 3153,
+          "fitness": -1.9132230413400082
+        },
+        {
+          "generation": 836,
+          "Elapse": 3174,
+          "fitness": -1.9132230416577753
+        },
+        {
+          "generation": 840,
+          "Elapse": 3188,
+          "fitness": -1.9132230416745806
+        },
+        {
+          "generation": 842,
+          "Elapse": 3197,
+          "fitness": -1.9132230416775458
+        },
+        {
+          "generation": 854,
+          "Elapse": 3235,
+          "fitness": -1.9132230416935667
+        },
+        {
+          "generation": 855,
+          "Elapse": 3238,
+          "fitness": -1.9132230416989824
+        },
+        {
+          "generation": 868,
+          "Elapse": 3275,
+          "fitness": -1.913223041778084
+        },
+        {
+          "generation": 884,
+          "Elapse": 3330,
+          "fitness": -1.913223041785404
+        },
+        {
+          "generation": 885,
+          "Elapse": 3333,
+          "fitness": -1.9132230418041258
+        },
+        {
+          "generation": 901,
+          "Elapse": 3381,
+          "fitness": -1.9132230418300042
+        },
+        {
+          "generation": 904,
+          "Elapse": 3390,
+          "fitness": -1.9132230419818548
+        },
+        {
+          "generation": 988,
+          "Elapse": 3637,
+          "fitness": -1.9132230419931666
+        },
+        {
+          "generation": 1009,
+          "Elapse": 3698,
+          "fitness": -1.913223042017791
+        },
+        {
+          "generation": 1036,
+          "Elapse": 3776,
+          "fitness": -1.9132230420422527
+        },
+        {
+          "generation": 1102,
+          "Elapse": 4005,
+          "fitness": -1.9132230420665515
+        },
+        {
+          "generation": 1195,
+          "Elapse": 4300,
+          "fitness": -1.9132230420710044
+        },
+        {
+          "generation": 1198,
+          "Elapse": 4309,
+          "fitness": -1.9132230420729863
+        },
+        {
+          "generation": 1199,
+          "Elapse": 4311,
+          "fitness": -1.9132230420839282
+        },
+        {
+          "generation": 2096,
+          "Elapse": 7020,
+          "fitness": -1.913223044149741
+        },
+        {
+          "generation": 2098,
+          "Elapse": 7025,
+          "fitness": -1.913223044268861
+        },
+        {
+          "generation": 2100,
+          "Elapse": 7031,
+          "fitness": -1.913223044350525
+        },
+        {
+          "generation": 2136,
+          "Elapse": 7139,
+          "fitness": -1.9132230443836291
+        },
+        {
+          "generation": 2139,
+          "Elapse": 7148,
+          "fitness": -1.9132230443845106
+        },
+        {
+          "generation": 2730,
+          "Elapse": 8976,
+          "fitness": -1.9132230443872698
+        },
+        {
+          "generation": 2735,
+          "Elapse": 8994,
+          "fitness": -1.9132230443873328
+        },
+        {
+          "generation": 2745,
+          "Elapse": 9022,
+          "fitness": -1.9132230443878795
+        },
+        {
+          "generation": 2905,
+          "Elapse": 9505,
+          "fitness": -1.9132230443879088
+        },
+        {
+          "generation": 2951,
+          "Elapse": 9666,
+          "fitness": -1.913223044388002
+        }
+      ],
+      "quality": 0.9999597785961438
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc3056558"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.2,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.2
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 2100
+      },
+      "Population": 800,
+      "WinnerChromosome": {
+        "Fitness": -1.913223044388002
+      },
+      "AmountOfGenerations": 11063,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.913223044388002,
+      "TotalTimeMs": 215253,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 3,
+          "fitness": -1.8918984645215624
+        },
+        {
+          "generation": 2,
+          "Elapse": 18,
+          "fitness": -1.9094031968870473
+        },
+        {
+          "generation": 6,
+          "Elapse": 109,
+          "fitness": -1.9109310290342538
+        },
+        {
+          "generation": 15,
+          "Elapse": 298,
+          "fitness": -1.911156196545409
+        },
+        {
+          "generation": 26,
+          "Elapse": 532,
+          "fitness": -1.9115872780378362
+        },
+        {
+          "generation": 42,
+          "Elapse": 876,
+          "fitness": -1.911745296796338
+        },
+        {
+          "generation": 49,
+          "Elapse": 1021,
+          "fitness": -1.9126163448316693
+        },
+        {
+          "generation": 50,
+          "Elapse": 1041,
+          "fitness": -1.9126223380401255
+        },
+        {
+          "generation": 52,
+          "Elapse": 1082,
+          "fitness": -1.9127869398660433
+        },
+        {
+          "generation": 55,
+          "Elapse": 1161,
+          "fitness": -1.912789258260437
+        },
+        {
+          "generation": 62,
+          "Elapse": 1349,
+          "fitness": -1.9127949873818357
+        },
+        {
+          "generation": 63,
+          "Elapse": 1371,
+          "fitness": -1.9128021356063707
+        },
+        {
+          "generation": 68,
+          "Elapse": 1482,
+          "fitness": -1.913139854631312
+        },
+        {
+          "generation": 92,
+          "Elapse": 2023,
+          "fitness": -1.9131399624317948
+        },
+        {
+          "generation": 93,
+          "Elapse": 2044,
+          "fitness": -1.9131400232383071
+        },
+        {
+          "generation": 111,
+          "Elapse": 2434,
+          "fitness": -1.9131423548639885
+        },
+        {
+          "generation": 116,
+          "Elapse": 2544,
+          "fitness": -1.9131447409832347
+        },
+        {
+          "generation": 147,
+          "Elapse": 3211,
+          "fitness": -1.9131448303511647
+        },
+        {
+          "generation": 196,
+          "Elapse": 4315,
+          "fitness": -1.913208654157044
+        },
+        {
+          "generation": 199,
+          "Elapse": 4377,
+          "fitness": -1.913209000736252
+        },
+        {
+          "generation": 217,
+          "Elapse": 4782,
+          "fitness": -1.9132207563979575
+        },
+        {
+          "generation": 232,
+          "Elapse": 5156,
+          "fitness": -1.9132207650077167
+        },
+        {
+          "generation": 255,
+          "Elapse": 5709,
+          "fitness": -1.9132207658463276
+        },
+        {
+          "generation": 283,
+          "Elapse": 6421,
+          "fitness": -1.9132208708462954
+        },
+        {
+          "generation": 315,
+          "Elapse": 7299,
+          "fitness": -1.9132209220805803
+        },
+        {
+          "generation": 326,
+          "Elapse": 7576,
+          "fitness": -1.9132212728050657
+        },
+        {
+          "generation": 343,
+          "Elapse": 7985,
+          "fitness": -1.9132212967295823
+        },
+        {
+          "generation": 364,
+          "Elapse": 8456,
+          "fitness": -1.9132227655484444
+        },
+        {
+          "generation": 376,
+          "Elapse": 8762,
+          "fitness": -1.9132227960075436
+        },
+        {
+          "generation": 404,
+          "Elapse": 9362,
+          "fitness": -1.9132228291536695
+        },
+        {
+          "generation": 420,
+          "Elapse": 9716,
+          "fitness": -1.9132228296314135
+        },
+        {
+          "generation": 494,
+          "Elapse": 11359,
+          "fitness": -1.9132228309800334
+        },
+        {
+          "generation": 507,
+          "Elapse": 11647,
+          "fitness": -1.9132228768969544
+        },
+        {
+          "generation": 514,
+          "Elapse": 11795,
+          "fitness": -1.913222906690775
+        },
+        {
+          "generation": 590,
+          "Elapse": 13502,
+          "fitness": -1.913222907635907
+        },
+        {
+          "generation": 628,
+          "Elapse": 14319,
+          "fitness": -1.913222919658601
+        },
+        {
+          "generation": 659,
+          "Elapse": 15046,
+          "fitness": -1.9132229200442268
+        },
+        {
+          "generation": 669,
+          "Elapse": 15267,
+          "fitness": -1.9132229211011627
+        },
+        {
+          "generation": 672,
+          "Elapse": 15337,
+          "fitness": -1.913222922470713
+        },
+        {
+          "generation": 752,
+          "Elapse": 17175,
+          "fitness": -1.9132230069389053
+        },
+        {
+          "generation": 903,
+          "Elapse": 20560,
+          "fitness": -1.9132230075000325
+        },
+        {
+          "generation": 1055,
+          "Elapse": 23944,
+          "fitness": -1.913223007764957
+        },
+        {
+          "generation": 1337,
+          "Elapse": 30142,
+          "fitness": -1.913223008497174
+        },
+        {
+          "generation": 1728,
+          "Elapse": 38696,
+          "fitness": -1.9132230214599026
+        },
+        {
+          "generation": 1818,
+          "Elapse": 40743,
+          "fitness": -1.9132230216168944
+        },
+        {
+          "generation": 1849,
+          "Elapse": 41416,
+          "fitness": -1.9132230299278818
+        },
+        {
+          "generation": 1879,
+          "Elapse": 42053,
+          "fitness": -1.9132230300567379
+        },
+        {
+          "generation": 1886,
+          "Elapse": 42197,
+          "fitness": -1.9132230301445894
+        },
+        {
+          "generation": 1890,
+          "Elapse": 42286,
+          "fitness": -1.9132230302755078
+        },
+        {
+          "generation": 1893,
+          "Elapse": 42348,
+          "fitness": -1.913223031124521
+        },
+        {
+          "generation": 1940,
+          "Elapse": 43371,
+          "fitness": -1.913223031873081
+        },
+        {
+          "generation": 1969,
+          "Elapse": 44009,
+          "fitness": -1.91322303530864
+        },
+        {
+          "generation": 2002,
+          "Elapse": 44713,
+          "fitness": -1.9132230353562423
+        },
+        {
+          "generation": 2299,
+          "Elapse": 51167,
+          "fitness": -1.9132230353613902
+        },
+        {
+          "generation": 2335,
+          "Elapse": 51925,
+          "fitness": -1.9132230359834845
+        },
+        {
+          "generation": 2344,
+          "Elapse": 52135,
+          "fitness": -1.9132230366657876
+        },
+        {
+          "generation": 2367,
+          "Elapse": 52637,
+          "fitness": -1.9132230369552135
+        },
+        {
+          "generation": 2873,
+          "Elapse": 63662,
+          "fitness": -1.9132230369555288
+        },
+        {
+          "generation": 3310,
+          "Elapse": 73570,
+          "fitness": -1.91322303695627
+        },
+        {
+          "generation": 4671,
+          "Elapse": 103279,
+          "fitness": -1.9132230369564276
+        },
+        {
+          "generation": 4681,
+          "Elapse": 103449,
+          "fitness": -1.9132230369566328
+        },
+        {
+          "generation": 5148,
+          "Elapse": 111403,
+          "fitness": -1.9132230369566745
+        },
+        {
+          "generation": 6149,
+          "Elapse": 128775,
+          "fitness": -1.9132230429048347
+        },
+        {
+          "generation": 6156,
+          "Elapse": 128895,
+          "fitness": -1.9132230429225299
+        },
+        {
+          "generation": 6170,
+          "Elapse": 129160,
+          "fitness": -1.9132230429821933
+        },
+        {
+          "generation": 6172,
+          "Elapse": 129194,
+          "fitness": -1.9132230434929953
+        },
+        {
+          "generation": 6177,
+          "Elapse": 129281,
+          "fitness": -1.9132230435766688
+        },
+        {
+          "generation": 6178,
+          "Elapse": 129302,
+          "fitness": -1.9132230435946296
+        },
+        {
+          "generation": 6180,
+          "Elapse": 129336,
+          "fitness": -1.9132230437666187
+        },
+        {
+          "generation": 6188,
+          "Elapse": 129481,
+          "fitness": -1.9132230438192384
+        },
+        {
+          "generation": 6191,
+          "Elapse": 129536,
+          "fitness": -1.913223043963197
+        },
+        {
+          "generation": 6204,
+          "Elapse": 129760,
+          "fitness": -1.9132230440468705
+        },
+        {
+          "generation": 6235,
+          "Elapse": 130343,
+          "fitness": -1.913223044048431
+        },
+        {
+          "generation": 6309,
+          "Elapse": 131741,
+          "fitness": -1.9132230441226854
+        },
+        {
+          "generation": 6424,
+          "Elapse": 134073,
+          "fitness": -1.9132230443248277
+        },
+        {
+          "generation": 6441,
+          "Elapse": 134403,
+          "fitness": -1.913223044327803
+        },
+        {
+          "generation": 6549,
+          "Elapse": 136395,
+          "fitness": -1.9132230443330078
+        },
+        {
+          "generation": 6558,
+          "Elapse": 136564,
+          "fitness": -1.9132230443348321
+        },
+        {
+          "generation": 6559,
+          "Elapse": 136581,
+          "fitness": -1.9132230443402802
+        },
+        {
+          "generation": 6561,
+          "Elapse": 136617,
+          "fitness": -1.913223044343995
+        },
+        {
+          "generation": 6564,
+          "Elapse": 136665,
+          "fitness": -1.9132230443475473
+        },
+        {
+          "generation": 6596,
+          "Elapse": 137187,
+          "fitness": -1.9132230443822267
+        },
+        {
+          "generation": 6725,
+          "Elapse": 139398,
+          "fitness": -1.9132230443827818
+        },
+        {
+          "generation": 6728,
+          "Elapse": 139448,
+          "fitness": -1.9132230443830092
+        },
+        {
+          "generation": 6729,
+          "Elapse": 139466,
+          "fitness": -1.9132230443834706
+        },
+        {
+          "generation": 6754,
+          "Elapse": 139886,
+          "fitness": -1.9132230443845106
+        },
+        {
+          "generation": 8780,
+          "Elapse": 175469,
+          "fitness": -1.9132230443873328
+        },
+        {
+          "generation": 8798,
+          "Elapse": 175772,
+          "fitness": -1.9132230443878795
+        },
+        {
+          "generation": 8963,
+          "Elapse": 178598,
+          "fitness": -1.913223044388002
+        }
+      ],
+      "quality": 0.9999597785961438
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc30565d6"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.2,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 3,
+        "MutationThreshold": 0.2
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 2100
+      },
+      "Population": 800,
+      "WinnerChromosome": {
+        "Fitness": -1.9132230443879656
+      },
+      "AmountOfGenerations": 7117,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.9132230443879656,
+      "TotalTimeMs": 131308,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 2,
+          "fitness": -1.889248926744878
+        },
+        {
+          "generation": 2,
+          "Elapse": 16,
+          "fitness": -1.9028178800019138
+        },
+        {
+          "generation": 4,
+          "Elapse": 59,
+          "fitness": -1.9049326007037144
+        },
+        {
+          "generation": 5,
+          "Elapse": 80,
+          "fitness": -1.909310761280599
+        },
+        {
+          "generation": 7,
+          "Elapse": 122,
+          "fitness": -1.9118521005155125
+        },
+        {
+          "generation": 11,
+          "Elapse": 210,
+          "fitness": -1.9118686578589568
+        },
+        {
+          "generation": 15,
+          "Elapse": 294,
+          "fitness": -1.9119930777211307
+        },
+        {
+          "generation": 17,
+          "Elapse": 337,
+          "fitness": -1.9122986698869102
+        },
+        {
+          "generation": 18,
+          "Elapse": 357,
+          "fitness": -1.9123579872727436
+        },
+        {
+          "generation": 20,
+          "Elapse": 402,
+          "fitness": -1.9127494334868569
+        },
+        {
+          "generation": 25,
+          "Elapse": 512,
+          "fitness": -1.9128922639440895
+        },
+        {
+          "generation": 44,
+          "Elapse": 917,
+          "fitness": -1.9128924961692104
+        },
+        {
+          "generation": 55,
+          "Elapse": 1179,
+          "fitness": -1.912894109081941
+        },
+        {
+          "generation": 73,
+          "Elapse": 1573,
+          "fitness": -1.9128952161685318
+        },
+        {
+          "generation": 85,
+          "Elapse": 1827,
+          "fitness": -1.9128954259554365
+        },
+        {
+          "generation": 95,
+          "Elapse": 2041,
+          "fitness": -1.9128969301132188
+        },
+        {
+          "generation": 102,
+          "Elapse": 2199,
+          "fitness": -1.9128974744230582
+        },
+        {
+          "generation": 112,
+          "Elapse": 2433,
+          "fitness": -1.9128978661700868
+        },
+        {
+          "generation": 127,
+          "Elapse": 2753,
+          "fitness": -1.9128982695992036
+        },
+        {
+          "generation": 140,
+          "Elapse": 3033,
+          "fitness": -1.9130340314181717
+        },
+        {
+          "generation": 148,
+          "Elapse": 3206,
+          "fitness": -1.9130389658399003
+        },
+        {
+          "generation": 155,
+          "Elapse": 3357,
+          "fitness": -1.9131430035686297
+        },
+        {
+          "generation": 172,
+          "Elapse": 3744,
+          "fitness": -1.9131470027009128
+        },
+        {
+          "generation": 214,
+          "Elapse": 4636,
+          "fitness": -1.9131516288498105
+        },
+        {
+          "generation": 215,
+          "Elapse": 4657,
+          "fitness": -1.913186575322968
+        },
+        {
+          "generation": 264,
+          "Elapse": 5751,
+          "fitness": -1.9131905232231192
+        },
+        {
+          "generation": 279,
+          "Elapse": 6103,
+          "fitness": -1.9131934863047686
+        },
+        {
+          "generation": 286,
+          "Elapse": 6257,
+          "fitness": -1.9132207230328229
+        },
+        {
+          "generation": 349,
+          "Elapse": 7626,
+          "fitness": -1.913220909979827
+        },
+        {
+          "generation": 404,
+          "Elapse": 8887,
+          "fitness": -1.9132209154749806
+        },
+        {
+          "generation": 518,
+          "Elapse": 11413,
+          "fitness": -1.9132209176489767
+        },
+        {
+          "generation": 535,
+          "Elapse": 11779,
+          "fitness": -1.913221066998426
+        },
+        {
+          "generation": 635,
+          "Elapse": 13972,
+          "fitness": -1.9132211828856036
+        },
+        {
+          "generation": 868,
+          "Elapse": 19067,
+          "fitness": -1.913222031123674
+        },
+        {
+          "generation": 913,
+          "Elapse": 20051,
+          "fitness": -1.9132220498130934
+        },
+        {
+          "generation": 930,
+          "Elapse": 20418,
+          "fitness": -1.9132222902773686
+        },
+        {
+          "generation": 1007,
+          "Elapse": 22113,
+          "fitness": -1.9132222973089603
+        },
+        {
+          "generation": 1027,
+          "Elapse": 22543,
+          "fitness": -1.9132228648263205
+        },
+        {
+          "generation": 1137,
+          "Elapse": 24950,
+          "fitness": -1.9132229242628056
+        },
+        {
+          "generation": 1144,
+          "Elapse": 25097,
+          "fitness": -1.9132229553182385
+        },
+        {
+          "generation": 1189,
+          "Elapse": 26095,
+          "fitness": -1.913222955869815
+        },
+        {
+          "generation": 1260,
+          "Elapse": 27628,
+          "fitness": -1.913222985709726
+        },
+        {
+          "generation": 1282,
+          "Elapse": 28111,
+          "fitness": -1.9132229868044828
+        },
+        {
+          "generation": 1318,
+          "Elapse": 28884,
+          "fitness": -1.9132229905540257
+        },
+        {
+          "generation": 1685,
+          "Elapse": 37070,
+          "fitness": -1.9132229928227802
+        },
+        {
+          "generation": 1688,
+          "Elapse": 37126,
+          "fitness": -1.91322299383631
+        },
+        {
+          "generation": 1689,
+          "Elapse": 37141,
+          "fitness": -1.913223000639086
+        },
+        {
+          "generation": 1692,
+          "Elapse": 37193,
+          "fitness": -1.9132230014589968
+        },
+        {
+          "generation": 1695,
+          "Elapse": 37242,
+          "fitness": -1.9132230017595035
+        },
+        {
+          "generation": 1696,
+          "Elapse": 37258,
+          "fitness": -1.9132230027250134
+        },
+        {
+          "generation": 1700,
+          "Elapse": 37323,
+          "fitness": -1.9132230030146062
+        },
+        {
+          "generation": 1702,
+          "Elapse": 37355,
+          "fitness": -1.9132230057616857
+        },
+        {
+          "generation": 1703,
+          "Elapse": 37372,
+          "fitness": -1.9132230081512214
+        },
+        {
+          "generation": 1706,
+          "Elapse": 37422,
+          "fitness": -1.9132230087395898
+        },
+        {
+          "generation": 1708,
+          "Elapse": 37454,
+          "fitness": -1.913223008903346
+        },
+        {
+          "generation": 1709,
+          "Elapse": 37472,
+          "fitness": -1.9132230100705687
+        },
+        {
+          "generation": 1711,
+          "Elapse": 37505,
+          "fitness": -1.913223010854327
+        },
+        {
+          "generation": 1718,
+          "Elapse": 37622,
+          "fitness": -1.913223010898267
+        },
+        {
+          "generation": 1721,
+          "Elapse": 37678,
+          "fitness": -1.913223010903109
+        },
+        {
+          "generation": 1733,
+          "Elapse": 37890,
+          "fitness": -1.913223010991699
+        },
+        {
+          "generation": 1773,
+          "Elapse": 38632,
+          "fitness": -1.9132230110329789
+        },
+        {
+          "generation": 1778,
+          "Elapse": 38726,
+          "fitness": -1.9132230110638324
+        },
+        {
+          "generation": 1780,
+          "Elapse": 38765,
+          "fitness": -1.91322301108426
+        },
+        {
+          "generation": 1793,
+          "Elapse": 39032,
+          "fitness": -1.9132230110938369
+        },
+        {
+          "generation": 1804,
+          "Elapse": 39251,
+          "fitness": -1.9132230111267639
+        },
+        {
+          "generation": 1813,
+          "Elapse": 39420,
+          "fitness": -1.913223011158133
+        },
+        {
+          "generation": 1815,
+          "Elapse": 39459,
+          "fitness": -1.9132230111790762
+        },
+        {
+          "generation": 1848,
+          "Elapse": 40108,
+          "fitness": -1.9132230111793493
+        },
+        {
+          "generation": 1851,
+          "Elapse": 40173,
+          "fitness": -1.9132230111909423
+        },
+        {
+          "generation": 1949,
+          "Elapse": 41949,
+          "fitness": -1.9132230262371732
+        },
+        {
+          "generation": 1952,
+          "Elapse": 42000,
+          "fitness": -1.9132230276086566
+        },
+        {
+          "generation": 1953,
+          "Elapse": 42015,
+          "fitness": -1.9132230318345593
+        },
+        {
+          "generation": 1954,
+          "Elapse": 42032,
+          "fitness": -1.9132230321561714
+        },
+        {
+          "generation": 1956,
+          "Elapse": 42064,
+          "fitness": -1.9132230348872112
+        },
+        {
+          "generation": 1960,
+          "Elapse": 42131,
+          "fitness": -1.9132230350269457
+        },
+        {
+          "generation": 1962,
+          "Elapse": 42164,
+          "fitness": -1.9132230359640303
+        },
+        {
+          "generation": 1966,
+          "Elapse": 42232,
+          "fitness": -1.9132230362632794
+        },
+        {
+          "generation": 1974,
+          "Elapse": 42378,
+          "fitness": -1.9132230363436027
+        },
+        {
+          "generation": 2021,
+          "Elapse": 43182,
+          "fitness": -1.9132230438975988
+        },
+        {
+          "generation": 2028,
+          "Elapse": 43305,
+          "fitness": -1.913223043907558
+        },
+        {
+          "generation": 2031,
+          "Elapse": 43357,
+          "fitness": -1.913223043942625
+        },
+        {
+          "generation": 2036,
+          "Elapse": 43443,
+          "fitness": -1.9132230439494982
+        },
+        {
+          "generation": 2065,
+          "Elapse": 43957,
+          "fitness": -1.9132230439529216
+        },
+        {
+          "generation": 2069,
+          "Elapse": 44023,
+          "fitness": -1.9132230439630558
+        },
+        {
+          "generation": 2076,
+          "Elapse": 44142,
+          "fitness": -1.913223043982835
+        },
+        {
+          "generation": 2112,
+          "Elapse": 44754,
+          "fitness": -1.9132230439886064
+        },
+        {
+          "generation": 2116,
+          "Elapse": 44821,
+          "fitness": -1.9132230440019624
+        },
+        {
+          "generation": 2141,
+          "Elapse": 45261,
+          "fitness": -1.9132230440037787
+        },
+        {
+          "generation": 2151,
+          "Elapse": 45425,
+          "fitness": -1.9132230440082494
+        },
+        {
+          "generation": 2154,
+          "Elapse": 45478,
+          "fitness": -1.913223044011282
+        },
+        {
+          "generation": 2161,
+          "Elapse": 45595,
+          "fitness": -1.9132230440119296
+        },
+        {
+          "generation": 2163,
+          "Elapse": 45627,
+          "fitness": -1.9132230440217648
+        },
+        {
+          "generation": 2167,
+          "Elapse": 45693,
+          "fitness": -1.9132230440218212
+        },
+        {
+          "generation": 4104,
+          "Elapse": 79006,
+          "fitness": -1.9132230442780882
+        },
+        {
+          "generation": 4108,
+          "Elapse": 79070,
+          "fitness": -1.9132230443119402
+        },
+        {
+          "generation": 4112,
+          "Elapse": 79138,
+          "fitness": -1.913223044313761
+        },
+        {
+          "generation": 4115,
+          "Elapse": 79192,
+          "fitness": -1.9132230443284604
+        },
+        {
+          "generation": 4117,
+          "Elapse": 79227,
+          "fitness": -1.9132230443405525
+        },
+        {
+          "generation": 4127,
+          "Elapse": 79395,
+          "fitness": -1.9132230443475473
+        },
+        {
+          "generation": 4132,
+          "Elapse": 79479,
+          "fitness": -1.9132230443822267
+        },
+        {
+          "generation": 4402,
+          "Elapse": 84077,
+          "fitness": -1.9132230443831744
+        },
+        {
+          "generation": 4444,
+          "Elapse": 84806,
+          "fitness": -1.913223044386815
+        },
+        {
+          "generation": 4451,
+          "Elapse": 84924,
+          "fitness": -1.9132230443868163
+        },
+        {
+          "generation": 4474,
+          "Elapse": 85310,
+          "fitness": -1.9132230443875602
+        },
+        {
+          "generation": 4483,
+          "Elapse": 85458,
+          "fitness": -1.9132230443876876
+        },
+        {
+          "generation": 4531,
+          "Elapse": 86288,
+          "fitness": -1.9132230443878795
+        },
+        {
+          "generation": 5017,
+          "Elapse": 94626,
+          "fitness": -1.9132230443879656
+        }
+      ],
+      "quality": 0.9999597785961248
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc30565f5"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.2,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 3,
+        "MutationThreshold": 0.5
+      },
+      "TerminationName": "GenerationNumberTermination",
+      "Termination": {
+        "MaxGenerationsCount": 8000
+      },
+      "Population": 300,
+      "WinnerChromosome": {
+        "Fitness": -1.9132230443879328
+      },
+      "AmountOfGenerations": 8001,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.9132230443879328,
+      "TotalTimeMs": 25498,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 1,
+          "fitness": -1.9015751263192389
+        },
+        {
+          "generation": 2,
+          "Elapse": 5,
+          "fitness": -1.911153873230389
+        },
+        {
+          "generation": 36,
+          "Elapse": 158,
+          "fitness": -1.911311017752002
+        },
+        {
+          "generation": 39,
+          "Elapse": 169,
+          "fitness": -1.9119552874809491
+        },
+        {
+          "generation": 45,
+          "Elapse": 191,
+          "fitness": -1.9120230802162608
+        },
+        {
+          "generation": 123,
+          "Elapse": 485,
+          "fitness": -1.9120268547791768
+        },
+        {
+          "generation": 128,
+          "Elapse": 504,
+          "fitness": -1.9120268839340726
+        },
+        {
+          "generation": 135,
+          "Elapse": 535,
+          "fitness": -1.9120275797842616
+        },
+        {
+          "generation": 137,
+          "Elapse": 542,
+          "fitness": -1.9120488989630249
+        },
+        {
+          "generation": 142,
+          "Elapse": 561,
+          "fitness": -1.9120494951674418
+        },
+        {
+          "generation": 188,
+          "Elapse": 729,
+          "fitness": -1.9128867415170596
+        },
+        {
+          "generation": 278,
+          "Elapse": 1063,
+          "fitness": -1.9128869087893365
+        },
+        {
+          "generation": 313,
+          "Elapse": 1195,
+          "fitness": -1.9132121455660753
+        },
+        {
+          "generation": 317,
+          "Elapse": 1214,
+          "fitness": -1.9132183939683922
+        },
+        {
+          "generation": 354,
+          "Elapse": 1378,
+          "fitness": -1.9132224142401064
+        },
+        {
+          "generation": 397,
+          "Elapse": 1536,
+          "fitness": -1.9132229096104516
+        },
+        {
+          "generation": 398,
+          "Elapse": 1538,
+          "fitness": -1.913222966589628
+        },
+        {
+          "generation": 400,
+          "Elapse": 1545,
+          "fitness": -1.9132229801572658
+        },
+        {
+          "generation": 401,
+          "Elapse": 1548,
+          "fitness": -1.9132229830670542
+        },
+        {
+          "generation": 405,
+          "Elapse": 1560,
+          "fitness": -1.9132230297251813
+        },
+        {
+          "generation": 408,
+          "Elapse": 1570,
+          "fitness": -1.913223031055491
+        },
+        {
+          "generation": 412,
+          "Elapse": 1582,
+          "fitness": -1.9132230379663584
+        },
+        {
+          "generation": 419,
+          "Elapse": 1605,
+          "fitness": -1.9132230380826534
+        },
+        {
+          "generation": 420,
+          "Elapse": 1608,
+          "fitness": -1.913223039999715
+        },
+        {
+          "generation": 423,
+          "Elapse": 1617,
+          "fitness": -1.9132230400270398
+        },
+        {
+          "generation": 424,
+          "Elapse": 1620,
+          "fitness": -1.91322304024584
+        },
+        {
+          "generation": 428,
+          "Elapse": 1632,
+          "fitness": -1.913223040610549
+        },
+        {
+          "generation": 431,
+          "Elapse": 1641,
+          "fitness": -1.9132230409446689
+        },
+        {
+          "generation": 435,
+          "Elapse": 1653,
+          "fitness": -1.9132230410642226
+        },
+        {
+          "generation": 438,
+          "Elapse": 1662,
+          "fitness": -1.9132230415655673
+        },
+        {
+          "generation": 440,
+          "Elapse": 1668,
+          "fitness": -1.9132230416719067
+        },
+        {
+          "generation": 441,
+          "Elapse": 1671,
+          "fitness": -1.9132230417606637
+        },
+        {
+          "generation": 470,
+          "Elapse": 1757,
+          "fitness": -1.9132230417886542
+        },
+        {
+          "generation": 474,
+          "Elapse": 1769,
+          "fitness": -1.913223041980027
+        },
+        {
+          "generation": 476,
+          "Elapse": 1774,
+          "fitness": -1.913223042006714
+        },
+        {
+          "generation": 496,
+          "Elapse": 1835,
+          "fitness": -1.9132230420332381
+        },
+        {
+          "generation": 922,
+          "Elapse": 3184,
+          "fitness": -1.9132230440937423
+        },
+        {
+          "generation": 926,
+          "Elapse": 3195,
+          "fitness": -1.91322304410349
+        },
+        {
+          "generation": 927,
+          "Elapse": 3199,
+          "fitness": -1.9132230441715339
+        },
+        {
+          "generation": 950,
+          "Elapse": 3267,
+          "fitness": -1.9132230442780882
+        },
+        {
+          "generation": 956,
+          "Elapse": 3285,
+          "fitness": -1.9132230443119402
+        },
+        {
+          "generation": 970,
+          "Elapse": 3329,
+          "fitness": -1.913223044327803
+        },
+        {
+          "generation": 983,
+          "Elapse": 3370,
+          "fitness": -1.9132230443304867
+        },
+        {
+          "generation": 988,
+          "Elapse": 3386,
+          "fitness": -1.9132230443392548
+        },
+        {
+          "generation": 996,
+          "Elapse": 3410,
+          "fitness": -1.9132230443402802
+        },
+        {
+          "generation": 998,
+          "Elapse": 3416,
+          "fitness": -1.9132230443790221
+        },
+        {
+          "generation": 1004,
+          "Elapse": 3434,
+          "fitness": -1.913223044387454
+        },
+        {
+          "generation": 1233,
+          "Elapse": 4170,
+          "fitness": -1.9132230443877747
+        },
+        {
+          "generation": 1257,
+          "Elapse": 4243,
+          "fitness": -1.9132230443879328
+        }
+      ],
+      "quality": 0.9999597785961076
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc30565c8"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.2,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 3,
+        "MutationThreshold": 0.2
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 2100
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -1.9132230443879328
+      },
+      "AmountOfGenerations": 8119,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.9132230443879328,
+      "TotalTimeMs": 5818,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -1.8291239948350642
+        },
+        {
+          "generation": 2,
+          "Elapse": 1,
+          "fitness": -1.8295551581387874
+        },
+        {
+          "generation": 3,
+          "Elapse": 1,
+          "fitness": -1.832220789691294
+        },
+        {
+          "generation": 4,
+          "Elapse": 2,
+          "fitness": -1.8597904728027932
+        },
+        {
+          "generation": 5,
+          "Elapse": 3,
+          "fitness": -1.8683848702640073
+        },
+        {
+          "generation": 9,
+          "Elapse": 6,
+          "fitness": -1.8995118882482713
+        },
+        {
+          "generation": 10,
+          "Elapse": 7,
+          "fitness": -1.9002041487487782
+        },
+        {
+          "generation": 13,
+          "Elapse": 9,
+          "fitness": -1.9089780567752386
+        },
+        {
+          "generation": 16,
+          "Elapse": 11,
+          "fitness": -1.912620407804369
+        },
+        {
+          "generation": 22,
+          "Elapse": 15,
+          "fitness": -1.912750915688103
+        },
+        {
+          "generation": 26,
+          "Elapse": 18,
+          "fitness": -1.912751458649164
+        },
+        {
+          "generation": 30,
+          "Elapse": 21,
+          "fitness": -1.9127568159441881
+        },
+        {
+          "generation": 34,
+          "Elapse": 24,
+          "fitness": -1.9128015131706513
+        },
+        {
+          "generation": 35,
+          "Elapse": 25,
+          "fitness": -1.9128997577609308
+        },
+        {
+          "generation": 40,
+          "Elapse": 29,
+          "fitness": -1.9129782234100028
+        },
+        {
+          "generation": 80,
+          "Elapse": 58,
+          "fitness": -1.9129802343443778
+        },
+        {
+          "generation": 105,
+          "Elapse": 80,
+          "fitness": -1.9130114944032743
+        },
+        {
+          "generation": 114,
+          "Elapse": 91,
+          "fitness": -1.9130154194831892
+        },
+        {
+          "generation": 135,
+          "Elapse": 107,
+          "fitness": -1.9130155714491384
+        },
+        {
+          "generation": 148,
+          "Elapse": 116,
+          "fitness": -1.9130195356370923
+        },
+        {
+          "generation": 153,
+          "Elapse": 122,
+          "fitness": -1.9130197525767163
+        },
+        {
+          "generation": 163,
+          "Elapse": 129,
+          "fitness": -1.9130705588479313
+        },
+        {
+          "generation": 169,
+          "Elapse": 134,
+          "fitness": -1.913071324591296
+        },
+        {
+          "generation": 172,
+          "Elapse": 136,
+          "fitness": -1.9130729534092126
+        },
+        {
+          "generation": 173,
+          "Elapse": 136,
+          "fitness": -1.9131170617479585
+        },
+        {
+          "generation": 174,
+          "Elapse": 137,
+          "fitness": -1.9131383958501487
+        },
+        {
+          "generation": 212,
+          "Elapse": 165,
+          "fitness": -1.9131467865344756
+        },
+        {
+          "generation": 219,
+          "Elapse": 170,
+          "fitness": -1.913147893389879
+        },
+        {
+          "generation": 224,
+          "Elapse": 174,
+          "fitness": -1.913147945524893
+        },
+        {
+          "generation": 227,
+          "Elapse": 176,
+          "fitness": -1.9131480349318601
+        },
+        {
+          "generation": 250,
+          "Elapse": 193,
+          "fitness": -1.9131480358742774
+        },
+        {
+          "generation": 263,
+          "Elapse": 202,
+          "fitness": -1.913149273806808
+        },
+        {
+          "generation": 278,
+          "Elapse": 215,
+          "fitness": -1.913150411734017
+        },
+        {
+          "generation": 285,
+          "Elapse": 220,
+          "fitness": -1.9131562122122103
+        },
+        {
+          "generation": 290,
+          "Elapse": 224,
+          "fitness": -1.913208208840659
+        },
+        {
+          "generation": 317,
+          "Elapse": 243,
+          "fitness": -1.9132098389070764
+        },
+        {
+          "generation": 345,
+          "Elapse": 264,
+          "fitness": -1.9132099236816642
+        },
+        {
+          "generation": 350,
+          "Elapse": 268,
+          "fitness": -1.91320992410773
+        },
+        {
+          "generation": 351,
+          "Elapse": 269,
+          "fitness": -1.9132160169792263
+        },
+        {
+          "generation": 360,
+          "Elapse": 276,
+          "fitness": -1.9132210966646985
+        },
+        {
+          "generation": 402,
+          "Elapse": 308,
+          "fitness": -1.913221668277668
+        },
+        {
+          "generation": 406,
+          "Elapse": 310,
+          "fitness": -1.913221896019095
+        },
+        {
+          "generation": 407,
+          "Elapse": 311,
+          "fitness": -1.9132219099266745
+        },
+        {
+          "generation": 416,
+          "Elapse": 318,
+          "fitness": -1.913221910715425
+        },
+        {
+          "generation": 419,
+          "Elapse": 320,
+          "fitness": -1.9132226083834372
+        },
+        {
+          "generation": 424,
+          "Elapse": 324,
+          "fitness": -1.9132226105826056
+        },
+        {
+          "generation": 443,
+          "Elapse": 338,
+          "fitness": -1.9132226463671609
+        },
+        {
+          "generation": 479,
+          "Elapse": 365,
+          "fitness": -1.9132226770819631
+        },
+        {
+          "generation": 654,
+          "Elapse": 493,
+          "fitness": -1.9132228645861158
+        },
+        {
+          "generation": 675,
+          "Elapse": 509,
+          "fitness": -1.913222953993083
+        },
+        {
+          "generation": 678,
+          "Elapse": 511,
+          "fitness": -1.91322298146008
+        },
+        {
+          "generation": 693,
+          "Elapse": 522,
+          "fitness": -1.9132229828221687
+        },
+        {
+          "generation": 704,
+          "Elapse": 530,
+          "fitness": -1.9132229840709378
+        },
+        {
+          "generation": 833,
+          "Elapse": 626,
+          "fitness": -1.9132229840990589
+        },
+        {
+          "generation": 842,
+          "Elapse": 632,
+          "fitness": -1.9132229841795123
+        },
+        {
+          "generation": 992,
+          "Elapse": 743,
+          "fitness": -1.9132229845095456
+        },
+        {
+          "generation": 1067,
+          "Elapse": 820,
+          "fitness": -1.9132230143111468
+        },
+        {
+          "generation": 1084,
+          "Elapse": 836,
+          "fitness": -1.9132230424689238
+        },
+        {
+          "generation": 1142,
+          "Elapse": 890,
+          "fitness": -1.9132230424772279
+        },
+        {
+          "generation": 1239,
+          "Elapse": 972,
+          "fitness": -1.9132230426403525
+        },
+        {
+          "generation": 1270,
+          "Elapse": 998,
+          "fitness": -1.9132230434902828
+        },
+        {
+          "generation": 1379,
+          "Elapse": 1084,
+          "fitness": -1.9132230435699955
+        },
+        {
+          "generation": 1384,
+          "Elapse": 1089,
+          "fitness": -1.9132230437584559
+        },
+        {
+          "generation": 1495,
+          "Elapse": 1171,
+          "fitness": -1.9132230438219198
+        },
+        {
+          "generation": 1514,
+          "Elapse": 1186,
+          "fitness": -1.9132230439715112
+        },
+        {
+          "generation": 1538,
+          "Elapse": 1203,
+          "fitness": -1.9132230439806914
+        },
+        {
+          "generation": 1562,
+          "Elapse": 1221,
+          "fitness": -1.9132230440307136
+        },
+        {
+          "generation": 1642,
+          "Elapse": 1279,
+          "fitness": -1.9132230441754103
+        },
+        {
+          "generation": 1762,
+          "Elapse": 1370,
+          "fitness": -1.9132230441791052
+        },
+        {
+          "generation": 2747,
+          "Elapse": 2053,
+          "fitness": -1.9132230443375606
+        },
+        {
+          "generation": 2750,
+          "Elapse": 2055,
+          "fitness": -1.9132230443389107
+        },
+        {
+          "generation": 2765,
+          "Elapse": 2067,
+          "fitness": -1.913223044346318
+        },
+        {
+          "generation": 2808,
+          "Elapse": 2104,
+          "fitness": -1.9132230443470712
+        },
+        {
+          "generation": 2850,
+          "Elapse": 2134,
+          "fitness": -1.9132230443827818
+        },
+        {
+          "generation": 2943,
+          "Elapse": 2196,
+          "fitness": -1.9132230443836291
+        },
+        {
+          "generation": 2993,
+          "Elapse": 2230,
+          "fitness": -1.9132230443845106
+        },
+        {
+          "generation": 3687,
+          "Elapse": 2705,
+          "fitness": -1.9132230443862959
+        },
+        {
+          "generation": 3843,
+          "Elapse": 2812,
+          "fitness": -1.913223044387188
+        },
+        {
+          "generation": 4371,
+          "Elapse": 3194,
+          "fitness": -1.9132230443879275
+        },
+        {
+          "generation": 6019,
+          "Elapse": 4357,
+          "fitness": -1.9132230443879328
+        }
+      ],
+      "quality": 0.9999597785961076
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc30564a2"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.3,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 3,
+        "MutationThreshold": 0.9
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 2100
+      },
+      "Population": 100,
+      "WinnerChromosome": {
+        "Fitness": -1.9132230443879328
+      },
+      "AmountOfGenerations": 14457,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.9132230443879328,
+      "TotalTimeMs": 12490,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 0,
+          "fitness": -1.7281109045043022
+        },
+        {
+          "generation": 2,
+          "Elapse": 2,
+          "fitness": -1.907628825639545
+        },
+        {
+          "generation": 75,
+          "Elapse": 73,
+          "fitness": -1.9085757266868093
+        },
+        {
+          "generation": 79,
+          "Elapse": 76,
+          "fitness": -1.9108720383635367
+        },
+        {
+          "generation": 108,
+          "Elapse": 100,
+          "fitness": -1.9112193435223075
+        },
+        {
+          "generation": 136,
+          "Elapse": 128,
+          "fitness": -1.9127751968206956
+        },
+        {
+          "generation": 201,
+          "Elapse": 200,
+          "fitness": -1.9131168130354328
+        },
+        {
+          "generation": 226,
+          "Elapse": 227,
+          "fitness": -1.9132164960393605
+        },
+        {
+          "generation": 637,
+          "Elapse": 582,
+          "fitness": -1.9132165610133018
+        },
+        {
+          "generation": 1047,
+          "Elapse": 938,
+          "fitness": -1.9132166302633715
+        },
+        {
+          "generation": 1812,
+          "Elapse": 1631,
+          "fitness": -1.913216803527546
+        },
+        {
+          "generation": 1887,
+          "Elapse": 1692,
+          "fitness": -1.913217136249557
+        },
+        {
+          "generation": 1908,
+          "Elapse": 1713,
+          "fitness": -1.9132172541368306
+        },
+        {
+          "generation": 2312,
+          "Elapse": 2052,
+          "fitness": -1.9132193846323569
+        },
+        {
+          "generation": 2581,
+          "Elapse": 2274,
+          "fitness": -1.913219398740039
+        },
+        {
+          "generation": 3151,
+          "Elapse": 2800,
+          "fitness": -1.9132194282179547
+        },
+        {
+          "generation": 4071,
+          "Elapse": 3588,
+          "fitness": -1.9132196440205234
+        },
+        {
+          "generation": 4213,
+          "Elapse": 3736,
+          "fitness": -1.9132196452478558
+        },
+        {
+          "generation": 4669,
+          "Elapse": 4128,
+          "fitness": -1.913219706654853
+        },
+        {
+          "generation": 5496,
+          "Elapse": 4869,
+          "fitness": -1.913219708921262
+        },
+        {
+          "generation": 6303,
+          "Elapse": 5575,
+          "fitness": -1.913219723709855
+        },
+        {
+          "generation": 6577,
+          "Elapse": 5809,
+          "fitness": -1.9132197260162975
+        },
+        {
+          "generation": 8589,
+          "Elapse": 7610,
+          "fitness": -1.9132197895808707
+        },
+        {
+          "generation": 9524,
+          "Elapse": 8476,
+          "fitness": -1.9132218044413025
+        },
+        {
+          "generation": 10121,
+          "Elapse": 9024,
+          "fitness": -1.9132221173961121
+        },
+        {
+          "generation": 10123,
+          "Elapse": 9025,
+          "fitness": -1.9132222159204746
+        },
+        {
+          "generation": 10127,
+          "Elapse": 9027,
+          "fitness": -1.9132223984546322
+        },
+        {
+          "generation": 10129,
+          "Elapse": 9029,
+          "fitness": -1.9132228225758952
+        },
+        {
+          "generation": 10131,
+          "Elapse": 9030,
+          "fitness": -1.91322285659987
+        },
+        {
+          "generation": 10135,
+          "Elapse": 9033,
+          "fitness": -1.9132229176504607
+        },
+        {
+          "generation": 10139,
+          "Elapse": 9037,
+          "fitness": -1.9132229445794806
+        },
+        {
+          "generation": 10144,
+          "Elapse": 9040,
+          "fitness": -1.9132229512384442
+        },
+        {
+          "generation": 10155,
+          "Elapse": 9048,
+          "fitness": -1.913222981095101
+        },
+        {
+          "generation": 10156,
+          "Elapse": 9049,
+          "fitness": -1.9132229814653487
+        },
+        {
+          "generation": 10168,
+          "Elapse": 9058,
+          "fitness": -1.9132229843210116
+        },
+        {
+          "generation": 10171,
+          "Elapse": 9060,
+          "fitness": -1.9132229843471595
+        },
+        {
+          "generation": 10174,
+          "Elapse": 9062,
+          "fitness": -1.91322298470332
+        },
+        {
+          "generation": 10180,
+          "Elapse": 9067,
+          "fitness": -1.9132229891298556
+        },
+        {
+          "generation": 10183,
+          "Elapse": 9069,
+          "fitness": -1.913222995695158
+        },
+        {
+          "generation": 10188,
+          "Elapse": 9073,
+          "fitness": -1.9132230071561453
+        },
+        {
+          "generation": 10191,
+          "Elapse": 9075,
+          "fitness": -1.9132230071856364
+        },
+        {
+          "generation": 10195,
+          "Elapse": 9078,
+          "fitness": -1.9132230074678658
+        },
+        {
+          "generation": 10201,
+          "Elapse": 9083,
+          "fitness": -1.9132230075312067
+        },
+        {
+          "generation": 10206,
+          "Elapse": 9087,
+          "fitness": -1.9132230080434303
+        },
+        {
+          "generation": 10208,
+          "Elapse": 9089,
+          "fitness": -1.9132230096639482
+        },
+        {
+          "generation": 10214,
+          "Elapse": 9093,
+          "fitness": -1.9132230100717553
+        },
+        {
+          "generation": 10218,
+          "Elapse": 9096,
+          "fitness": -1.9132230101236876
+        },
+        {
+          "generation": 10240,
+          "Elapse": 9114,
+          "fitness": -1.9132230104142298
+        },
+        {
+          "generation": 10244,
+          "Elapse": 9116,
+          "fitness": -1.9132230105987258
+        },
+        {
+          "generation": 10253,
+          "Elapse": 9123,
+          "fitness": -1.9132230106959036
+        },
+        {
+          "generation": 10255,
+          "Elapse": 9124,
+          "fitness": -1.9132230107432942
+        },
+        {
+          "generation": 10260,
+          "Elapse": 9128,
+          "fitness": -1.9132230111301798
+        },
+        {
+          "generation": 10263,
+          "Elapse": 9130,
+          "fitness": -1.9132230111414246
+        },
+        {
+          "generation": 10287,
+          "Elapse": 9156,
+          "fitness": -1.913223011143137
+        },
+        {
+          "generation": 10310,
+          "Elapse": 9172,
+          "fitness": -1.9132230111909423
+        },
+        {
+          "generation": 11730,
+          "Elapse": 10279,
+          "fitness": -1.9132230310695082
+        },
+        {
+          "generation": 11733,
+          "Elapse": 10281,
+          "fitness": -1.913223036489068
+        },
+        {
+          "generation": 11734,
+          "Elapse": 10282,
+          "fitness": -1.9132230389956004
+        },
+        {
+          "generation": 11735,
+          "Elapse": 10283,
+          "fitness": -1.9132230396623373
+        },
+        {
+          "generation": 11743,
+          "Elapse": 10289,
+          "fitness": -1.913223040831915
+        },
+        {
+          "generation": 11744,
+          "Elapse": 10289,
+          "fitness": -1.913223042039724
+        },
+        {
+          "generation": 11797,
+          "Elapse": 10328,
+          "fitness": -1.913223042050395
+        },
+        {
+          "generation": 11799,
+          "Elapse": 10329,
+          "fitness": -1.9132230420536263
+        },
+        {
+          "generation": 11812,
+          "Elapse": 10339,
+          "fitness": -1.9132230420595997
+        },
+        {
+          "generation": 11848,
+          "Elapse": 10365,
+          "fitness": -1.913223044094197
+        },
+        {
+          "generation": 11864,
+          "Elapse": 10377,
+          "fitness": -1.9132230441057647
+        },
+        {
+          "generation": 11865,
+          "Elapse": 10378,
+          "fitness": -1.9132230441791052
+        },
+        {
+          "generation": 11902,
+          "Elapse": 10405,
+          "fitness": -1.9132230441792375
+        },
+        {
+          "generation": 12238,
+          "Elapse": 10698,
+          "fitness": -1.9132230442193778
+        },
+        {
+          "generation": 12250,
+          "Elapse": 10710,
+          "fitness": -1.9132230442339155
+        },
+        {
+          "generation": 12254,
+          "Elapse": 10713,
+          "fitness": -1.9132230442547202
+        },
+        {
+          "generation": 12278,
+          "Elapse": 10736,
+          "fitness": -1.9132230442557088
+        },
+        {
+          "generation": 12280,
+          "Elapse": 10738,
+          "fitness": -1.9132230443794982
+        },
+        {
+          "generation": 12285,
+          "Elapse": 10743,
+          "fitness": -1.9132230443827818
+        },
+        {
+          "generation": 12290,
+          "Elapse": 10747,
+          "fitness": -1.9132230443831744
+        },
+        {
+          "generation": 12303,
+          "Elapse": 10758,
+          "fitness": -1.9132230443834706
+        },
+        {
+          "generation": 12357,
+          "Elapse": 10797,
+          "fitness": -1.9132230443879328
+        }
+      ],
+      "quality": 0.9999597785961076
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc3056466"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.3,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 3,
+        "MutationThreshold": 0.4
+      },
+      "TerminationName": "GenerationNumberTermination",
+      "Termination": {
+        "MaxGenerationsCount": 8000
+      },
+      "Population": 300,
+      "WinnerChromosome": {
+        "Fitness": -1.9132230443879328
+      },
+      "AmountOfGenerations": 8001,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.9132230443879328,
+      "TotalTimeMs": 26506,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 1,
+          "fitness": -1.8435830348498943
+        },
+        {
+          "generation": 2,
+          "Elapse": 4,
+          "fitness": -1.853252710335017
+        },
+        {
+          "generation": 3,
+          "Elapse": 8,
+          "fitness": -1.875053414255976
+        },
+        {
+          "generation": 4,
+          "Elapse": 15,
+          "fitness": -1.8896162603214215
+        },
+        {
+          "generation": 5,
+          "Elapse": 20,
+          "fitness": -1.909203110292292
+        },
+        {
+          "generation": 8,
+          "Elapse": 34,
+          "fitness": -1.9106725575663162
+        },
+        {
+          "generation": 34,
+          "Elapse": 144,
+          "fitness": -1.910898540127293
+        },
+        {
+          "generation": 39,
+          "Elapse": 162,
+          "fitness": -1.9115645629607396
+        },
+        {
+          "generation": 53,
+          "Elapse": 212,
+          "fitness": -1.9121085594773737
+        },
+        {
+          "generation": 103,
+          "Elapse": 401,
+          "fitness": -1.9124429072071507
+        },
+        {
+          "generation": 118,
+          "Elapse": 455,
+          "fitness": -1.912460490972463
+        },
+        {
+          "generation": 126,
+          "Elapse": 490,
+          "fitness": -1.9124640826933188
+        },
+        {
+          "generation": 139,
+          "Elapse": 538,
+          "fitness": -1.9126389574104827
+        },
+        {
+          "generation": 149,
+          "Elapse": 574,
+          "fitness": -1.9126635169415263
+        },
+        {
+          "generation": 171,
+          "Elapse": 653,
+          "fitness": -1.9126807775253054
+        },
+        {
+          "generation": 218,
+          "Elapse": 823,
+          "fitness": -1.9127217987463272
+        },
+        {
+          "generation": 226,
+          "Elapse": 857,
+          "fitness": -1.912722153253203
+        },
+        {
+          "generation": 236,
+          "Elapse": 892,
+          "fitness": -1.9127837759872945
+        },
+        {
+          "generation": 246,
+          "Elapse": 933,
+          "fitness": -1.9129805091866556
+        },
+        {
+          "generation": 291,
+          "Elapse": 1103,
+          "fitness": -1.9130433415835766
+        },
+        {
+          "generation": 298,
+          "Elapse": 1129,
+          "fitness": -1.9130489004349096
+        },
+        {
+          "generation": 314,
+          "Elapse": 1198,
+          "fitness": -1.913049151234611
+        },
+        {
+          "generation": 319,
+          "Elapse": 1220,
+          "fitness": -1.9132008322148577
+        },
+        {
+          "generation": 514,
+          "Elapse": 1971,
+          "fitness": -1.913201109554401
+        },
+        {
+          "generation": 561,
+          "Elapse": 2149,
+          "fitness": -1.913201244526304
+        },
+        {
+          "generation": 657,
+          "Elapse": 2528,
+          "fitness": -1.9132211658802878
+        },
+        {
+          "generation": 810,
+          "Elapse": 3097,
+          "fitness": -1.9132226354695772
+        },
+        {
+          "generation": 818,
+          "Elapse": 3126,
+          "fitness": -1.9132227171950857
+        },
+        {
+          "generation": 903,
+          "Elapse": 3496,
+          "fitness": -1.9132227603269132
+        },
+        {
+          "generation": 1371,
+          "Elapse": 5308,
+          "fitness": -1.9132229700271988
+        },
+        {
+          "generation": 1372,
+          "Elapse": 5311,
+          "fitness": -1.9132230088070674
+        },
+        {
+          "generation": 1375,
+          "Elapse": 5320,
+          "fitness": -1.9132230101071799
+        },
+        {
+          "generation": 1376,
+          "Elapse": 5323,
+          "fitness": -1.9132230130982304
+        },
+        {
+          "generation": 1378,
+          "Elapse": 5328,
+          "fitness": -1.9132230136393664
+        },
+        {
+          "generation": 1381,
+          "Elapse": 5337,
+          "fitness": -1.9132230145023437
+        },
+        {
+          "generation": 1391,
+          "Elapse": 5366,
+          "fitness": -1.9132230145184872
+        },
+        {
+          "generation": 1392,
+          "Elapse": 5369,
+          "fitness": -1.9132230145543825
+        },
+        {
+          "generation": 1393,
+          "Elapse": 5371,
+          "fitness": -1.9132230145728055
+        },
+        {
+          "generation": 1394,
+          "Elapse": 5374,
+          "fitness": -1.9132230398589076
+        },
+        {
+          "generation": 1398,
+          "Elapse": 5385,
+          "fitness": -1.913223040188571
+        },
+        {
+          "generation": 1405,
+          "Elapse": 5406,
+          "fitness": -1.9132230432005581
+        },
+        {
+          "generation": 1412,
+          "Elapse": 5427,
+          "fitness": -1.9132230436731295
+        },
+        {
+          "generation": 1414,
+          "Elapse": 5433,
+          "fitness": -1.9132230436857673
+        },
+        {
+          "generation": 1416,
+          "Elapse": 5438,
+          "fitness": -1.9132230437749929
+        },
+        {
+          "generation": 1422,
+          "Elapse": 5457,
+          "fitness": -1.9132230438489843
+        },
+        {
+          "generation": 1427,
+          "Elapse": 5471,
+          "fitness": -1.9132230439381344
+        },
+        {
+          "generation": 1470,
+          "Elapse": 5607,
+          "fitness": -1.913223043942625
+        },
+        {
+          "generation": 1478,
+          "Elapse": 5630,
+          "fitness": -1.9132230439630558
+        },
+        {
+          "generation": 1529,
+          "Elapse": 5787,
+          "fitness": -1.913223043982835
+        },
+        {
+          "generation": 1531,
+          "Elapse": 5792,
+          "fitness": -1.9132230440019624
+        },
+        {
+          "generation": 1541,
+          "Elapse": 5823,
+          "fitness": -1.9132230440119296
+        },
+        {
+          "generation": 1624,
+          "Elapse": 6112,
+          "fitness": -1.9132230440217648
+        },
+        {
+          "generation": 1661,
+          "Elapse": 6224,
+          "fitness": -1.9132230440223421
+        },
+        {
+          "generation": 1742,
+          "Elapse": 6465,
+          "fitness": -1.9132230440227564
+        },
+        {
+          "generation": 1754,
+          "Elapse": 6504,
+          "fitness": -1.9132230440230962
+        },
+        {
+          "generation": 4473,
+          "Elapse": 15569,
+          "fitness": -1.9132230440821014
+        },
+        {
+          "generation": 4478,
+          "Elapse": 15587,
+          "fitness": -1.9132230440960618
+        },
+        {
+          "generation": 4482,
+          "Elapse": 15601,
+          "fitness": -1.9132230441638
+        },
+        {
+          "generation": 4500,
+          "Elapse": 15667,
+          "fitness": -1.9132230441715339
+        },
+        {
+          "generation": 4502,
+          "Elapse": 15676,
+          "fitness": -1.9132230441791052
+        },
+        {
+          "generation": 4606,
+          "Elapse": 16019,
+          "fitness": -1.9132230441792069
+        },
+        {
+          "generation": 4635,
+          "Elapse": 16107,
+          "fitness": -1.9132230441792375
+        },
+        {
+          "generation": 4895,
+          "Elapse": 16918,
+          "fitness": -1.9132230443792881
+        },
+        {
+          "generation": 5003,
+          "Elapse": 17248,
+          "fitness": -1.9132230443802438
+        },
+        {
+          "generation": 5007,
+          "Elapse": 17259,
+          "fitness": -1.913223044380552
+        },
+        {
+          "generation": 5014,
+          "Elapse": 17281,
+          "fitness": -1.91322304438697
+        },
+        {
+          "generation": 5026,
+          "Elapse": 17320,
+          "fitness": -1.9132230443877747
+        },
+        {
+          "generation": 5093,
+          "Elapse": 17517,
+          "fitness": -1.9132230443879328
+        }
+      ],
+      "quality": 0.9999597785961076
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc3056482"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.3,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 3,
+        "MutationThreshold": 0.5
+      },
+      "TerminationName": "GenerationNumberTermination",
+      "Termination": {
+        "MaxGenerationsCount": 8000
+      },
+      "Population": 800,
+      "WinnerChromosome": {
+        "Fitness": -1.9132230443879328
+      },
+      "AmountOfGenerations": 8001,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.9132230443879328,
+      "TotalTimeMs": 144924,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 2,
+          "fitness": -1.9053290287447
+        },
+        {
+          "generation": 2,
+          "Elapse": 15,
+          "fitness": -1.9111192568698057
+        },
+        {
+          "generation": 22,
+          "Elapse": 465,
+          "fitness": -1.9113204801851165
+        },
+        {
+          "generation": 28,
+          "Elapse": 598,
+          "fitness": -1.9128055259020011
+        },
+        {
+          "generation": 38,
+          "Elapse": 814,
+          "fitness": -1.9128610609876335
+        },
+        {
+          "generation": 43,
+          "Elapse": 924,
+          "fitness": -1.9129465921825495
+        },
+        {
+          "generation": 67,
+          "Elapse": 1440,
+          "fitness": -1.9131039347932073
+        },
+        {
+          "generation": 156,
+          "Elapse": 3441,
+          "fitness": -1.913104896471201
+        },
+        {
+          "generation": 220,
+          "Elapse": 4858,
+          "fitness": -1.9131333464583635
+        },
+        {
+          "generation": 441,
+          "Elapse": 9792,
+          "fitness": -1.9131333754608528
+        },
+        {
+          "generation": 1127,
+          "Elapse": 25058,
+          "fitness": -1.913219318850099
+        },
+        {
+          "generation": 1128,
+          "Elapse": 25075,
+          "fitness": -1.9132194340653466
+        },
+        {
+          "generation": 1129,
+          "Elapse": 25093,
+          "fitness": -1.9132194993973433
+        },
+        {
+          "generation": 1130,
+          "Elapse": 25111,
+          "fitness": -1.9132223409315778
+        },
+        {
+          "generation": 1134,
+          "Elapse": 25175,
+          "fitness": -1.9132223978658702
+        },
+        {
+          "generation": 1135,
+          "Elapse": 25192,
+          "fitness": -1.9132224857764752
+        },
+        {
+          "generation": 1136,
+          "Elapse": 25209,
+          "fitness": -1.9132226661909262
+        },
+        {
+          "generation": 1139,
+          "Elapse": 25258,
+          "fitness": -1.9132227169925917
+        },
+        {
+          "generation": 1140,
+          "Elapse": 25275,
+          "fitness": -1.9132227225298375
+        },
+        {
+          "generation": 1143,
+          "Elapse": 25323,
+          "fitness": -1.913222759696712
+        },
+        {
+          "generation": 1145,
+          "Elapse": 25358,
+          "fitness": -1.9132227694994275
+        },
+        {
+          "generation": 1149,
+          "Elapse": 25425,
+          "fitness": -1.9132227786493088
+        },
+        {
+          "generation": 1164,
+          "Elapse": 25685,
+          "fitness": -1.9132227896574623
+        },
+        {
+          "generation": 1166,
+          "Elapse": 25722,
+          "fitness": -1.9132228086109744
+        },
+        {
+          "generation": 1179,
+          "Elapse": 25955,
+          "fitness": -1.913222809160258
+        },
+        {
+          "generation": 1182,
+          "Elapse": 26003,
+          "fitness": -1.9132228189347749
+        },
+        {
+          "generation": 1204,
+          "Elapse": 26377,
+          "fitness": -1.9132228214114466
+        },
+        {
+          "generation": 1208,
+          "Elapse": 26445,
+          "fitness": -1.913222827674422
+        },
+        {
+          "generation": 1211,
+          "Elapse": 26494,
+          "fitness": -1.9132228375947822
+        },
+        {
+          "generation": 1227,
+          "Elapse": 26771,
+          "fitness": -1.9132228386733057
+        },
+        {
+          "generation": 1232,
+          "Elapse": 26858,
+          "fitness": -1.913222842304695
+        },
+        {
+          "generation": 1234,
+          "Elapse": 26894,
+          "fitness": -1.9132228433997152
+        },
+        {
+          "generation": 1235,
+          "Elapse": 26913,
+          "fitness": -1.913222844597085
+        },
+        {
+          "generation": 1239,
+          "Elapse": 26985,
+          "fitness": -1.913222845700353
+        },
+        {
+          "generation": 1242,
+          "Elapse": 27035,
+          "fitness": -1.913222845727638
+        },
+        {
+          "generation": 1243,
+          "Elapse": 27052,
+          "fitness": -1.9132228489475915
+        },
+        {
+          "generation": 1255,
+          "Elapse": 27254,
+          "fitness": -1.9132228534732239
+        },
+        {
+          "generation": 1259,
+          "Elapse": 27326,
+          "fitness": -1.9132228540271967
+        },
+        {
+          "generation": 1270,
+          "Elapse": 27510,
+          "fitness": -1.913222855618904
+        },
+        {
+          "generation": 1275,
+          "Elapse": 27591,
+          "fitness": -1.9132228558841815
+        },
+        {
+          "generation": 1284,
+          "Elapse": 27741,
+          "fitness": -1.9132228610843813
+        },
+        {
+          "generation": 1295,
+          "Elapse": 27932,
+          "fitness": -1.9132228613543591
+        },
+        {
+          "generation": 1303,
+          "Elapse": 28071,
+          "fitness": -1.913222861623685
+        },
+        {
+          "generation": 1304,
+          "Elapse": 28092,
+          "fitness": -1.9132228618923595
+        },
+        {
+          "generation": 1310,
+          "Elapse": 28205,
+          "fitness": -1.9132228621576535
+        },
+        {
+          "generation": 1313,
+          "Elapse": 28258,
+          "fitness": -1.913222862695381
+        },
+        {
+          "generation": 1337,
+          "Elapse": 28657,
+          "fitness": -1.9132228629632673
+        },
+        {
+          "generation": 1342,
+          "Elapse": 28744,
+          "fitness": -1.913222863096966
+        },
+        {
+          "generation": 1346,
+          "Elapse": 28817,
+          "fitness": -1.9132228632300472
+        },
+        {
+          "generation": 1348,
+          "Elapse": 28853,
+          "fitness": -1.9132228633638748
+        },
+        {
+          "generation": 1349,
+          "Elapse": 28872,
+          "fitness": -1.9132228634975394
+        },
+        {
+          "generation": 1351,
+          "Elapse": 28904,
+          "fitness": -1.9132228637643802
+        },
+        {
+          "generation": 1354,
+          "Elapse": 28959,
+          "fitness": -1.9132228638977833
+        },
+        {
+          "generation": 1725,
+          "Elapse": 35377,
+          "fitness": -1.9132228640310807
+        },
+        {
+          "generation": 6429,
+          "Elapse": 117600,
+          "fitness": -1.9132229215520864
+        },
+        {
+          "generation": 6431,
+          "Elapse": 117638,
+          "fitness": -1.9132229417702264
+        },
+        {
+          "generation": 6432,
+          "Elapse": 117655,
+          "fitness": -1.9132230021069416
+        },
+        {
+          "generation": 6434,
+          "Elapse": 117688,
+          "fitness": -1.9132230024088157
+        },
+        {
+          "generation": 6436,
+          "Elapse": 117723,
+          "fitness": -1.9132230101127248
+        },
+        {
+          "generation": 6439,
+          "Elapse": 117772,
+          "fitness": -1.9132230398991452
+        },
+        {
+          "generation": 6440,
+          "Elapse": 117794,
+          "fitness": -1.9132230409193665
+        },
+        {
+          "generation": 6441,
+          "Elapse": 117809,
+          "fitness": -1.9132230411167788
+        },
+        {
+          "generation": 6442,
+          "Elapse": 117827,
+          "fitness": -1.9132230428891814
+        },
+        {
+          "generation": 6443,
+          "Elapse": 117845,
+          "fitness": -1.9132230437064228
+        },
+        {
+          "generation": 6446,
+          "Elapse": 117895,
+          "fitness": -1.9132230438731828
+        },
+        {
+          "generation": 6447,
+          "Elapse": 117912,
+          "fitness": -1.9132230439543867
+        },
+        {
+          "generation": 6451,
+          "Elapse": 117979,
+          "fitness": -1.913223044023022
+        },
+        {
+          "generation": 6483,
+          "Elapse": 118544,
+          "fitness": -1.9132230440230962
+        },
+        {
+          "generation": 6657,
+          "Elapse": 121535,
+          "fitness": -1.913223044044012
+        },
+        {
+          "generation": 6660,
+          "Elapse": 121587,
+          "fitness": -1.9132230440656004
+        },
+        {
+          "generation": 6661,
+          "Elapse": 121601,
+          "fitness": -1.9132230440884657
+        },
+        {
+          "generation": 6665,
+          "Elapse": 121666,
+          "fitness": -1.9132230441193716
+        },
+        {
+          "generation": 6668,
+          "Elapse": 121718,
+          "fitness": -1.9132230441205027
+        },
+        {
+          "generation": 6671,
+          "Elapse": 121770,
+          "fitness": -1.9132230441347229
+        },
+        {
+          "generation": 6679,
+          "Elapse": 121914,
+          "fitness": -1.9132230441396514
+        },
+        {
+          "generation": 6684,
+          "Elapse": 122005,
+          "fitness": -1.913223044143928
+        },
+        {
+          "generation": 6685,
+          "Elapse": 122022,
+          "fitness": -1.9132230441556177
+        },
+        {
+          "generation": 6693,
+          "Elapse": 122153,
+          "fitness": -1.9132230441715339
+        },
+        {
+          "generation": 6791,
+          "Elapse": 123863,
+          "fitness": -1.9132230443330078
+        },
+        {
+          "generation": 6795,
+          "Elapse": 123931,
+          "fitness": -1.9132230443402802
+        },
+        {
+          "generation": 6802,
+          "Elapse": 124052,
+          "fitness": -1.9132230443801728
+        },
+        {
+          "generation": 6855,
+          "Elapse": 124981,
+          "fitness": -1.9132230443808624
+        },
+        {
+          "generation": 6859,
+          "Elapse": 125051,
+          "fitness": -1.9132230443822267
+        },
+        {
+          "generation": 6861,
+          "Elapse": 125089,
+          "fitness": -1.9132230443831744
+        },
+        {
+          "generation": 6867,
+          "Elapse": 125187,
+          "fitness": -1.9132230443834706
+        },
+        {
+          "generation": 6870,
+          "Elapse": 125236,
+          "fitness": -1.9132230443845106
+        },
+        {
+          "generation": 7129,
+          "Elapse": 129685,
+          "fitness": -1.9132230443856102
+        },
+        {
+          "generation": 7133,
+          "Elapse": 129758,
+          "fitness": -1.913223044387018
+        },
+        {
+          "generation": 7135,
+          "Elapse": 129792,
+          "fitness": -1.9132230443877747
+        },
+        {
+          "generation": 7148,
+          "Elapse": 130046,
+          "fitness": -1.9132230443879328
+        }
+      ],
+      "quality": 0.9999597785961076
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc30562f7"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.4,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 3,
+        "MutationThreshold": 0.4
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 2100
+      },
+      "Population": 800,
+      "WinnerChromosome": {
+        "Fitness": -1.9132230443879328
+      },
+      "AmountOfGenerations": 11187,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.9132230443879328,
+      "TotalTimeMs": 224876,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 3,
+          "fitness": -1.9100058324733857
+        },
+        {
+          "generation": 2,
+          "Elapse": 14,
+          "fitness": -1.9115838469960615
+        },
+        {
+          "generation": 16,
+          "Elapse": 319,
+          "fitness": -1.9115841920073762
+        },
+        {
+          "generation": 23,
+          "Elapse": 468,
+          "fitness": -1.9119716752497995
+        },
+        {
+          "generation": 32,
+          "Elapse": 661,
+          "fitness": -1.9131569281431062
+        },
+        {
+          "generation": 130,
+          "Elapse": 2816,
+          "fitness": -1.913190007265746
+        },
+        {
+          "generation": 157,
+          "Elapse": 3422,
+          "fitness": -1.9131952660356664
+        },
+        {
+          "generation": 316,
+          "Elapse": 6931,
+          "fitness": -1.9131953044333954
+        },
+        {
+          "generation": 712,
+          "Elapse": 15911,
+          "fitness": -1.9131998366717156
+        },
+        {
+          "generation": 926,
+          "Elapse": 20773,
+          "fitness": -1.9132218703252537
+        },
+        {
+          "generation": 1042,
+          "Elapse": 23320,
+          "fitness": -1.9132220100158612
+        },
+        {
+          "generation": 1083,
+          "Elapse": 24226,
+          "fitness": -1.9132220107905633
+        },
+        {
+          "generation": 1513,
+          "Elapse": 33785,
+          "fitness": -1.913222010965404
+        },
+        {
+          "generation": 2524,
+          "Elapse": 56059,
+          "fitness": -1.9132226919766868
+        },
+        {
+          "generation": 3635,
+          "Elapse": 80873,
+          "fitness": -1.9132228539512024
+        },
+        {
+          "generation": 4370,
+          "Elapse": 97092,
+          "fitness": -1.9132229135923122
+        },
+        {
+          "generation": 5297,
+          "Elapse": 117470,
+          "fitness": -1.9132229303721808
+        },
+        {
+          "generation": 5626,
+          "Elapse": 124708,
+          "fitness": -1.913222947075159
+        },
+        {
+          "generation": 5858,
+          "Elapse": 129821,
+          "fitness": -1.9132230224776579
+        },
+        {
+          "generation": 6307,
+          "Elapse": 139720,
+          "fitness": -1.9132230225360822
+        },
+        {
+          "generation": 6308,
+          "Elapse": 139740,
+          "fitness": -1.9132230244612303
+        },
+        {
+          "generation": 6311,
+          "Elapse": 139794,
+          "fitness": -1.913223025341408
+        },
+        {
+          "generation": 6312,
+          "Elapse": 139812,
+          "fitness": -1.913223027639095
+        },
+        {
+          "generation": 6315,
+          "Elapse": 139864,
+          "fitness": -1.9132230294595942
+        },
+        {
+          "generation": 6317,
+          "Elapse": 139900,
+          "fitness": -1.9132230301760131
+        },
+        {
+          "generation": 6320,
+          "Elapse": 139949,
+          "fitness": -1.9132230307390565
+        },
+        {
+          "generation": 6325,
+          "Elapse": 140036,
+          "fitness": -1.9132230313477043
+        },
+        {
+          "generation": 6327,
+          "Elapse": 140069,
+          "fitness": -1.91322303158814
+        },
+        {
+          "generation": 6333,
+          "Elapse": 140180,
+          "fitness": -1.913223031853148
+        },
+        {
+          "generation": 6337,
+          "Elapse": 140247,
+          "fitness": -1.9132230324355572
+        },
+        {
+          "generation": 6430,
+          "Elapse": 142069,
+          "fitness": -1.9132230326983888
+        },
+        {
+          "generation": 6441,
+          "Elapse": 142278,
+          "fitness": -1.9132230329780784
+        },
+        {
+          "generation": 6448,
+          "Elapse": 142412,
+          "fitness": -1.9132230330463713
+        },
+        {
+          "generation": 6454,
+          "Elapse": 142524,
+          "fitness": -1.9132230331076467
+        },
+        {
+          "generation": 6478,
+          "Elapse": 142985,
+          "fitness": -1.9132230331140132
+        },
+        {
+          "generation": 6490,
+          "Elapse": 143234,
+          "fitness": -1.9132230331475895
+        },
+        {
+          "generation": 6492,
+          "Elapse": 143273,
+          "fitness": -1.9132230332446123
+        },
+        {
+          "generation": 6515,
+          "Elapse": 143667,
+          "fitness": -1.9132230333789715
+        },
+        {
+          "generation": 6591,
+          "Elapse": 144989,
+          "fitness": -1.9132230334438094
+        },
+        {
+          "generation": 6600,
+          "Elapse": 145143,
+          "fitness": -1.9132230334451736
+        },
+        {
+          "generation": 6602,
+          "Elapse": 145179,
+          "fitness": -1.9132230335102696
+        },
+        {
+          "generation": 6616,
+          "Elapse": 145405,
+          "fitness": -1.9132230335760778
+        },
+        {
+          "generation": 6631,
+          "Elapse": 145673,
+          "fitness": -1.9132230336087375
+        },
+        {
+          "generation": 6712,
+          "Elapse": 147089,
+          "fitness": -1.9132230336412341
+        },
+        {
+          "generation": 6722,
+          "Elapse": 147256,
+          "fitness": -1.9132230336737956
+        },
+        {
+          "generation": 6724,
+          "Elapse": 147288,
+          "fitness": -1.9132230337062506
+        },
+        {
+          "generation": 7214,
+          "Elapse": 155806,
+          "fitness": -1.9132230341479568
+        },
+        {
+          "generation": 7219,
+          "Elapse": 155893,
+          "fitness": -1.913223035742615
+        },
+        {
+          "generation": 7222,
+          "Elapse": 155943,
+          "fitness": -1.913223035778938
+        },
+        {
+          "generation": 7225,
+          "Elapse": 156001,
+          "fitness": -1.913223036007825
+        },
+        {
+          "generation": 7226,
+          "Elapse": 156016,
+          "fitness": -1.9132230369517766
+        },
+        {
+          "generation": 8324,
+          "Elapse": 174990,
+          "fitness": -1.9132230434236446
+        },
+        {
+          "generation": 8357,
+          "Elapse": 175560,
+          "fitness": -1.9132230435439563
+        },
+        {
+          "generation": 8361,
+          "Elapse": 175630,
+          "fitness": -1.9132230438686424
+        },
+        {
+          "generation": 8367,
+          "Elapse": 175733,
+          "fitness": -1.9132230438763402
+        },
+        {
+          "generation": 8369,
+          "Elapse": 175765,
+          "fitness": -1.9132230438811009
+        },
+        {
+          "generation": 8371,
+          "Elapse": 175799,
+          "fitness": -1.913223043882939
+        },
+        {
+          "generation": 8372,
+          "Elapse": 175815,
+          "fitness": -1.913223043930031
+        },
+        {
+          "generation": 8373,
+          "Elapse": 175834,
+          "fitness": -1.913223044048431
+        },
+        {
+          "generation": 8388,
+          "Elapse": 176086,
+          "fitness": -1.9132230443456213
+        },
+        {
+          "generation": 8392,
+          "Elapse": 176158,
+          "fitness": -1.9132230443602891
+        },
+        {
+          "generation": 8407,
+          "Elapse": 176413,
+          "fitness": -1.9132230443654397
+        },
+        {
+          "generation": 8412,
+          "Elapse": 176504,
+          "fitness": -1.9132230443741092
+        },
+        {
+          "generation": 8414,
+          "Elapse": 176539,
+          "fitness": -1.9132230443801728
+        },
+        {
+          "generation": 8436,
+          "Elapse": 176915,
+          "fitness": -1.913223044380599
+        },
+        {
+          "generation": 8442,
+          "Elapse": 177020,
+          "fitness": -1.9132230443822267
+        },
+        {
+          "generation": 8483,
+          "Elapse": 177708,
+          "fitness": -1.9132230443827818
+        },
+        {
+          "generation": 8494,
+          "Elapse": 177909,
+          "fitness": -1.9132230443830092
+        },
+        {
+          "generation": 8496,
+          "Elapse": 177941,
+          "fitness": -1.9132230443836291
+        },
+        {
+          "generation": 8499,
+          "Elapse": 177989,
+          "fitness": -1.913223044384086
+        },
+        {
+          "generation": 8501,
+          "Elapse": 178025,
+          "fitness": -1.91322304438438
+        },
+        {
+          "generation": 8521,
+          "Elapse": 178360,
+          "fitness": -1.913223044384479
+        },
+        {
+          "generation": 8662,
+          "Elapse": 180755,
+          "fitness": -1.9132230443845106
+        },
+        {
+          "generation": 8734,
+          "Elapse": 182000,
+          "fitness": -1.9132230443862785
+        },
+        {
+          "generation": 8738,
+          "Elapse": 182071,
+          "fitness": -1.9132230443874292
+        },
+        {
+          "generation": 8739,
+          "Elapse": 182090,
+          "fitness": -1.9132230443877596
+        },
+        {
+          "generation": 8822,
+          "Elapse": 183570,
+          "fitness": -1.9132230443879275
+        },
+        {
+          "generation": 9087,
+          "Elapse": 188315,
+          "fitness": -1.9132230443879328
+        }
+      ],
+      "quality": 0.9999597785961076
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc30563ef"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.3,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.4
+      },
+      "TerminationName": "GenerationNumberTermination",
+      "Termination": {
+        "MaxGenerationsCount": 8000
+      },
+      "Population": 800,
+      "WinnerChromosome": {
+        "Fitness": -1.9132230443879328
+      },
+      "AmountOfGenerations": 8001,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.9132230443879328,
+      "TotalTimeMs": 155744,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 2,
+          "fitness": -1.8543349678505656
+        },
+        {
+          "generation": 2,
+          "Elapse": 15,
+          "fitness": -1.8978056195913986
+        },
+        {
+          "generation": 3,
+          "Elapse": 36,
+          "fitness": -1.9120128124290154
+        },
+        {
+          "generation": 5,
+          "Elapse": 80,
+          "fitness": -1.912443569120935
+        },
+        {
+          "generation": 10,
+          "Elapse": 186,
+          "fitness": -1.913086252395325
+        },
+        {
+          "generation": 16,
+          "Elapse": 326,
+          "fitness": -1.9130888273918845
+        },
+        {
+          "generation": 35,
+          "Elapse": 745,
+          "fitness": -1.913183455406143
+        },
+        {
+          "generation": 46,
+          "Elapse": 977,
+          "fitness": -1.9131836594004863
+        },
+        {
+          "generation": 50,
+          "Elapse": 1064,
+          "fitness": -1.9132131247544741
+        },
+        {
+          "generation": 54,
+          "Elapse": 1154,
+          "fitness": -1.9132131499607978
+        },
+        {
+          "generation": 71,
+          "Elapse": 1523,
+          "fitness": -1.913215173642211
+        },
+        {
+          "generation": 82,
+          "Elapse": 1768,
+          "fitness": -1.9132155039833414
+        },
+        {
+          "generation": 149,
+          "Elapse": 3217,
+          "fitness": -1.9132155155437323
+        },
+        {
+          "generation": 210,
+          "Elapse": 4536,
+          "fitness": -1.9132155164399736
+        },
+        {
+          "generation": 233,
+          "Elapse": 5026,
+          "fitness": -1.913215953935672
+        },
+        {
+          "generation": 262,
+          "Elapse": 5660,
+          "fitness": -1.9132172505078868
+        },
+        {
+          "generation": 269,
+          "Elapse": 5816,
+          "fitness": -1.913222944998167
+        },
+        {
+          "generation": 342,
+          "Elapse": 7386,
+          "fitness": -1.9132229495009319
+        },
+        {
+          "generation": 429,
+          "Elapse": 9278,
+          "fitness": -1.9132229497949647
+        },
+        {
+          "generation": 534,
+          "Elapse": 11558,
+          "fitness": -1.91322295086683
+        },
+        {
+          "generation": 535,
+          "Elapse": 11582,
+          "fitness": -1.913223011335972
+        },
+        {
+          "generation": 580,
+          "Elapse": 12566,
+          "fitness": -1.9132230120796452
+        },
+        {
+          "generation": 662,
+          "Elapse": 14345,
+          "fitness": -1.9132230124799041
+        },
+        {
+          "generation": 746,
+          "Elapse": 16177,
+          "fitness": -1.913223012518782
+        },
+        {
+          "generation": 778,
+          "Elapse": 16858,
+          "fitness": -1.9132230425473802
+        },
+        {
+          "generation": 793,
+          "Elapse": 17184,
+          "fitness": -1.9132230432655986
+        },
+        {
+          "generation": 892,
+          "Elapse": 19373,
+          "fitness": -1.9132230432825486
+        },
+        {
+          "generation": 2293,
+          "Elapse": 50226,
+          "fitness": -1.913223043324284
+        },
+        {
+          "generation": 2440,
+          "Elapse": 53442,
+          "fitness": -1.9132230440491442
+        },
+        {
+          "generation": 3275,
+          "Elapse": 72504,
+          "fitness": -1.9132230440551758
+        },
+        {
+          "generation": 3538,
+          "Elapse": 78461,
+          "fitness": -1.9132230440732103
+        },
+        {
+          "generation": 3541,
+          "Elapse": 78510,
+          "fitness": -1.9132230441037392
+        },
+        {
+          "generation": 3543,
+          "Elapse": 78542,
+          "fitness": -1.913223044312205
+        },
+        {
+          "generation": 3546,
+          "Elapse": 78593,
+          "fitness": -1.9132230443460232
+        },
+        {
+          "generation": 3550,
+          "Elapse": 78661,
+          "fitness": -1.913223044351271
+        },
+        {
+          "generation": 3901,
+          "Elapse": 84627,
+          "fitness": -1.9132230443856608
+        },
+        {
+          "generation": 3905,
+          "Elapse": 84693,
+          "fitness": -1.9132230443862785
+        },
+        {
+          "generation": 3909,
+          "Elapse": 84766,
+          "fitness": -1.9132230443877596
+        },
+        {
+          "generation": 3911,
+          "Elapse": 84798,
+          "fitness": -1.9132230443879275
+        },
+        {
+          "generation": 3918,
+          "Elapse": 84916,
+          "fitness": -1.9132230443879328
+        }
+      ],
+      "quality": 0.9999597785961076
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc30565e0"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.2,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 3,
+        "MutationThreshold": 0.4
+      },
+      "TerminationName": "GenerationNumberTermination",
+      "Termination": {
+        "MaxGenerationsCount": 8000
+      },
+      "Population": 300,
+      "WinnerChromosome": {
+        "Fitness": -1.9132230443879328
+      },
+      "AmountOfGenerations": 8001,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.9132230443879328,
+      "TotalTimeMs": 27770,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 1,
+          "fitness": -1.6839019912177657
+        },
+        {
+          "generation": 2,
+          "Elapse": 4,
+          "fitness": -1.7999926650624838
+        },
+        {
+          "generation": 3,
+          "Elapse": 8,
+          "fitness": -1.9001514907306176
+        },
+        {
+          "generation": 4,
+          "Elapse": 13,
+          "fitness": -1.9012010829804762
+        },
+        {
+          "generation": 7,
+          "Elapse": 26,
+          "fitness": -1.9021867944319588
+        },
+        {
+          "generation": 11,
+          "Elapse": 40,
+          "fitness": -1.9024436120448853
+        },
+        {
+          "generation": 15,
+          "Elapse": 55,
+          "fitness": -1.9040937137803242
+        },
+        {
+          "generation": 21,
+          "Elapse": 76,
+          "fitness": -1.911189528925127
+        },
+        {
+          "generation": 78,
+          "Elapse": 315,
+          "fitness": -1.9120497706748756
+        },
+        {
+          "generation": 101,
+          "Elapse": 401,
+          "fitness": -1.9122129296209218
+        },
+        {
+          "generation": 106,
+          "Elapse": 418,
+          "fitness": -1.9124731076428234
+        },
+        {
+          "generation": 128,
+          "Elapse": 503,
+          "fitness": -1.9125003945449266
+        },
+        {
+          "generation": 130,
+          "Elapse": 510,
+          "fitness": -1.9129479073090776
+        },
+        {
+          "generation": 134,
+          "Elapse": 524,
+          "fitness": -1.9129658812848906
+        },
+        {
+          "generation": 140,
+          "Elapse": 546,
+          "fitness": -1.9131081225172695
+        },
+        {
+          "generation": 159,
+          "Elapse": 617,
+          "fitness": -1.9131147469105096
+        },
+        {
+          "generation": 182,
+          "Elapse": 700,
+          "fitness": -1.9131381256731927
+        },
+        {
+          "generation": 208,
+          "Elapse": 795,
+          "fitness": -1.9131532109833231
+        },
+        {
+          "generation": 331,
+          "Elapse": 1246,
+          "fitness": -1.91315394735763
+        },
+        {
+          "generation": 385,
+          "Elapse": 1475,
+          "fitness": -1.9131541320540761
+        },
+        {
+          "generation": 465,
+          "Elapse": 1770,
+          "fitness": -1.913154377134866
+        },
+        {
+          "generation": 575,
+          "Elapse": 2189,
+          "fitness": -1.9132195301545036
+        },
+        {
+          "generation": 606,
+          "Elapse": 2310,
+          "fitness": -1.9132223964781843
+        },
+        {
+          "generation": 661,
+          "Elapse": 2529,
+          "fitness": -1.9132224024132771
+        },
+        {
+          "generation": 688,
+          "Elapse": 2637,
+          "fitness": -1.9132230050092343
+        },
+        {
+          "generation": 725,
+          "Elapse": 2773,
+          "fitness": -1.9132230058232258
+        },
+        {
+          "generation": 1399,
+          "Elapse": 5337,
+          "fitness": -1.9132230058397766
+        },
+        {
+          "generation": 2677,
+          "Elapse": 10204,
+          "fitness": -1.9132230089749305
+        },
+        {
+          "generation": 3356,
+          "Elapse": 12787,
+          "fitness": -1.9132230092277638
+        },
+        {
+          "generation": 3884,
+          "Elapse": 14794,
+          "fitness": -1.913223009492743
+        },
+        {
+          "generation": 4223,
+          "Elapse": 16087,
+          "fitness": -1.9132230108551607
+        },
+        {
+          "generation": 4236,
+          "Elapse": 16125,
+          "fitness": -1.9132230110472008
+        },
+        {
+          "generation": 4248,
+          "Elapse": 16160,
+          "fitness": -1.9132230110474335
+        },
+        {
+          "generation": 4257,
+          "Elapse": 16186,
+          "fitness": -1.9132230110953525
+        },
+        {
+          "generation": 4263,
+          "Elapse": 16203,
+          "fitness": -1.9132230111895936
+        },
+        {
+          "generation": 4307,
+          "Elapse": 16331,
+          "fitness": -1.913223011190175
+        },
+        {
+          "generation": 4349,
+          "Elapse": 16454,
+          "fitness": -1.9132230111905937
+        },
+        {
+          "generation": 4415,
+          "Elapse": 16664,
+          "fitness": -1.9132230111909423
+        },
+        {
+          "generation": 5170,
+          "Elapse": 18976,
+          "fitness": -1.9132230398936603
+        },
+        {
+          "generation": 5172,
+          "Elapse": 18984,
+          "fitness": -1.9132230403959172
+        },
+        {
+          "generation": 5173,
+          "Elapse": 18988,
+          "fitness": -1.9132230409308244
+        },
+        {
+          "generation": 5175,
+          "Elapse": 18995,
+          "fitness": -1.913223040950672
+        },
+        {
+          "generation": 5176,
+          "Elapse": 18998,
+          "fitness": -1.9132230426470969
+        },
+        {
+          "generation": 5178,
+          "Elapse": 19006,
+          "fitness": -1.9132230426536356
+        },
+        {
+          "generation": 5179,
+          "Elapse": 19010,
+          "fitness": -1.9132230428225516
+        },
+        {
+          "generation": 5181,
+          "Elapse": 19017,
+          "fitness": -1.9132230429810413
+        },
+        {
+          "generation": 5183,
+          "Elapse": 19023,
+          "fitness": -1.9132230437936348
+        },
+        {
+          "generation": 5186,
+          "Elapse": 19032,
+          "fitness": -1.9132230438692481
+        },
+        {
+          "generation": 5189,
+          "Elapse": 19042,
+          "fitness": -1.9132230439107567
+        },
+        {
+          "generation": 5199,
+          "Elapse": 19082,
+          "fitness": -1.9132230439215423
+        },
+        {
+          "generation": 5204,
+          "Elapse": 19101,
+          "fitness": -1.913223043982835
+        },
+        {
+          "generation": 5213,
+          "Elapse": 19130,
+          "fitness": -1.9132230439902802
+        },
+        {
+          "generation": 5218,
+          "Elapse": 19144,
+          "fitness": -1.9132230439917706
+        },
+        {
+          "generation": 5221,
+          "Elapse": 19153,
+          "fitness": -1.9132230439924802
+        },
+        {
+          "generation": 5229,
+          "Elapse": 19176,
+          "fitness": -1.9132230440019624
+        },
+        {
+          "generation": 5353,
+          "Elapse": 19545,
+          "fitness": -1.9132230440119296
+        },
+        {
+          "generation": 5392,
+          "Elapse": 19662,
+          "fitness": -1.9132230440127924
+        },
+        {
+          "generation": 5429,
+          "Elapse": 19788,
+          "fitness": -1.9132230440217648
+        },
+        {
+          "generation": 5504,
+          "Elapse": 20053,
+          "fitness": -1.9132230440218212
+        },
+        {
+          "generation": 5747,
+          "Elapse": 20810,
+          "fitness": -1.9132230442780882
+        },
+        {
+          "generation": 5751,
+          "Elapse": 20821,
+          "fitness": -1.9132230443249565
+        },
+        {
+          "generation": 5754,
+          "Elapse": 20831,
+          "fitness": -1.9132230443304867
+        },
+        {
+          "generation": 5755,
+          "Elapse": 20833,
+          "fitness": -1.9132230443330078
+        },
+        {
+          "generation": 5762,
+          "Elapse": 20854,
+          "fitness": -1.9132230443402802
+        },
+        {
+          "generation": 5764,
+          "Elapse": 20859,
+          "fitness": -1.9132230443475473
+        },
+        {
+          "generation": 5796,
+          "Elapse": 20954,
+          "fitness": -1.9132230443822267
+        },
+        {
+          "generation": 5906,
+          "Elapse": 21284,
+          "fitness": -1.9132230443827818
+        },
+        {
+          "generation": 5913,
+          "Elapse": 21306,
+          "fitness": -1.9132230443831744
+        },
+        {
+          "generation": 5916,
+          "Elapse": 21317,
+          "fitness": -1.9132230443873048
+        },
+        {
+          "generation": 5970,
+          "Elapse": 21509,
+          "fitness": -1.9132230443879328
+        }
+      ],
+      "quality": 0.9999597785961076
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc305642e"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.3,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.9
+      },
+      "TerminationName": "GenerationNumberTermination",
+      "Termination": {
+        "MaxGenerationsCount": 8000
+      },
+      "Population": 800,
+      "WinnerChromosome": {
+        "Fitness": -1.9132230443879328
+      },
+      "AmountOfGenerations": 8001,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.9132230443879328,
+      "TotalTimeMs": 174089,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 2,
+          "fitness": -1.9101264128087472
+        },
+        {
+          "generation": 2,
+          "Elapse": 16,
+          "fitness": -1.9116024944104852
+        },
+        {
+          "generation": 4,
+          "Elapse": 59,
+          "fitness": -1.911666301006116
+        },
+        {
+          "generation": 7,
+          "Elapse": 126,
+          "fitness": -1.9121930955530848
+        },
+        {
+          "generation": 12,
+          "Elapse": 233,
+          "fitness": -1.9125588549866719
+        },
+        {
+          "generation": 32,
+          "Elapse": 683,
+          "fitness": -1.9131805697127349
+        },
+        {
+          "generation": 54,
+          "Elapse": 1185,
+          "fitness": -1.9132064316764401
+        },
+        {
+          "generation": 398,
+          "Elapse": 9275,
+          "fitness": -1.9132064351512934
+        },
+        {
+          "generation": 798,
+          "Elapse": 18380,
+          "fitness": -1.9132182663491557
+        },
+        {
+          "generation": 906,
+          "Elapse": 20820,
+          "fitness": -1.9132191911111898
+        },
+        {
+          "generation": 1497,
+          "Elapse": 34173,
+          "fitness": -1.9132191925258137
+        },
+        {
+          "generation": 1541,
+          "Elapse": 35127,
+          "fitness": -1.913219246967882
+        },
+        {
+          "generation": 1843,
+          "Elapse": 41912,
+          "fitness": -1.9132192474473735
+        },
+        {
+          "generation": 3204,
+          "Elapse": 72962,
+          "fitness": -1.91322165246922
+        },
+        {
+          "generation": 3250,
+          "Elapse": 73994,
+          "fitness": -1.9132218311039546
+        },
+        {
+          "generation": 3655,
+          "Elapse": 83114,
+          "fitness": -1.9132221160783933
+        },
+        {
+          "generation": 4241,
+          "Elapse": 96283,
+          "fitness": -1.9132221163205498
+        },
+        {
+          "generation": 4630,
+          "Elapse": 105011,
+          "fitness": -1.9132223031604179
+        },
+        {
+          "generation": 4888,
+          "Elapse": 110871,
+          "fitness": -1.9132226845058358
+        },
+        {
+          "generation": 4891,
+          "Elapse": 110935,
+          "fitness": -1.9132228856616997
+        },
+        {
+          "generation": 6006,
+          "Elapse": 136387,
+          "fitness": -1.9132228996482636
+        },
+        {
+          "generation": 6544,
+          "Elapse": 148488,
+          "fitness": -1.9132229087473713
+        },
+        {
+          "generation": 6547,
+          "Elapse": 148547,
+          "fitness": -1.9132229474883404
+        },
+        {
+          "generation": 6550,
+          "Elapse": 148596,
+          "fitness": -1.9132229655319617
+        },
+        {
+          "generation": 6555,
+          "Elapse": 148684,
+          "fitness": -1.9132229671877363
+        },
+        {
+          "generation": 6556,
+          "Elapse": 148703,
+          "fitness": -1.9132229901929079
+        },
+        {
+          "generation": 6558,
+          "Elapse": 148736,
+          "fitness": -1.9132229906478138
+        },
+        {
+          "generation": 6561,
+          "Elapse": 148788,
+          "fitness": -1.9132229911324554
+        },
+        {
+          "generation": 6562,
+          "Elapse": 148804,
+          "fitness": -1.9132229912452328
+        },
+        {
+          "generation": 6570,
+          "Elapse": 148945,
+          "fitness": -1.9132229918049406
+        },
+        {
+          "generation": 6572,
+          "Elapse": 148979,
+          "fitness": -1.9132229926940756
+        },
+        {
+          "generation": 6576,
+          "Elapse": 149047,
+          "fitness": -1.9132229929767526
+        },
+        {
+          "generation": 6579,
+          "Elapse": 149102,
+          "fitness": -1.9132229935342866
+        },
+        {
+          "generation": 6582,
+          "Elapse": 149161,
+          "fitness": -1.9132229941086796
+        },
+        {
+          "generation": 6585,
+          "Elapse": 149219,
+          "fitness": -1.9132229942506487
+        },
+        {
+          "generation": 6589,
+          "Elapse": 149293,
+          "fitness": -1.9132229943919663
+        },
+        {
+          "generation": 6590,
+          "Elapse": 149311,
+          "fitness": -1.9132229946599137
+        },
+        {
+          "generation": 6603,
+          "Elapse": 149540,
+          "fitness": -1.9132229952280069
+        },
+        {
+          "generation": 6629,
+          "Elapse": 149989,
+          "fitness": -1.9132229955017772
+        },
+        {
+          "generation": 6632,
+          "Elapse": 150038,
+          "fitness": -1.9132229960615073
+        },
+        {
+          "generation": 6655,
+          "Elapse": 150446,
+          "fitness": -1.9132229961307408
+        },
+        {
+          "generation": 6658,
+          "Elapse": 150507,
+          "fitness": -1.9132229961998108
+        },
+        {
+          "generation": 6660,
+          "Elapse": 150546,
+          "fitness": -1.9132229963370078
+        },
+        {
+          "generation": 6675,
+          "Elapse": 150798,
+          "fitness": -1.913222996406044
+        },
+        {
+          "generation": 6676,
+          "Elapse": 150817,
+          "fitness": -1.913222996474918
+        },
+        {
+          "generation": 6707,
+          "Elapse": 151356,
+          "fitness": -1.9132229965436283
+        },
+        {
+          "generation": 6730,
+          "Elapse": 151776,
+          "fitness": -1.9132230012075282
+        },
+        {
+          "generation": 6733,
+          "Elapse": 151828,
+          "fitness": -1.9132230088596218
+        },
+        {
+          "generation": 6734,
+          "Elapse": 151845,
+          "fitness": -1.9132230103292418
+        },
+        {
+          "generation": 6737,
+          "Elapse": 151894,
+          "fitness": -1.91322301107289
+        },
+        {
+          "generation": 6746,
+          "Elapse": 152044,
+          "fitness": -1.913223011136175
+        },
+        {
+          "generation": 6749,
+          "Elapse": 152098,
+          "fitness": -1.9132230111812114
+        },
+        {
+          "generation": 6752,
+          "Elapse": 152146,
+          "fitness": -1.9132230111888489
+        },
+        {
+          "generation": 7305,
+          "Elapse": 161851,
+          "fitness": -1.9132230265306376
+        },
+        {
+          "generation": 7308,
+          "Elapse": 161905,
+          "fitness": -1.9132230313753182
+        },
+        {
+          "generation": 7326,
+          "Elapse": 162205,
+          "fitness": -1.9132230336657372
+        },
+        {
+          "generation": 7335,
+          "Elapse": 162356,
+          "fitness": -1.9132230340676872
+        },
+        {
+          "generation": 7340,
+          "Elapse": 162449,
+          "fitness": -1.913223034459211
+        },
+        {
+          "generation": 7345,
+          "Elapse": 162538,
+          "fitness": -1.9132230352109771
+        },
+        {
+          "generation": 7347,
+          "Elapse": 162581,
+          "fitness": -1.9132230359382105
+        },
+        {
+          "generation": 7353,
+          "Elapse": 162687,
+          "fitness": -1.9132230360405362
+        },
+        {
+          "generation": 7357,
+          "Elapse": 162762,
+          "fitness": -1.91322303614221
+        },
+        {
+          "generation": 7359,
+          "Elapse": 162802,
+          "fitness": -1.9132230362432323
+        },
+        {
+          "generation": 7361,
+          "Elapse": 162840,
+          "fitness": -1.9132230363436027
+        },
+        {
+          "generation": 7362,
+          "Elapse": 162855,
+          "fitness": -1.9132230364433216
+        },
+        {
+          "generation": 7367,
+          "Elapse": 162938,
+          "fitness": -1.913223036542389
+        },
+        {
+          "generation": 7369,
+          "Elapse": 162972,
+          "fitness": -1.9132230366408045
+        },
+        {
+          "generation": 7396,
+          "Elapse": 163436,
+          "fitness": -1.913223036689768
+        },
+        {
+          "generation": 7435,
+          "Elapse": 164122,
+          "fitness": -1.9132230440888516
+        },
+        {
+          "generation": 7438,
+          "Elapse": 164171,
+          "fitness": -1.9132230441638
+        },
+        {
+          "generation": 7452,
+          "Elapse": 164414,
+          "fitness": -1.9132230441715339
+        },
+        {
+          "generation": 7456,
+          "Elapse": 164481,
+          "fitness": -1.9132230443330078
+        },
+        {
+          "generation": 7459,
+          "Elapse": 164533,
+          "fitness": -1.9132230443392548
+        },
+        {
+          "generation": 7463,
+          "Elapse": 164603,
+          "fitness": -1.9132230443402802
+        },
+        {
+          "generation": 7467,
+          "Elapse": 164670,
+          "fitness": -1.9132230443475473
+        },
+        {
+          "generation": 7473,
+          "Elapse": 164773,
+          "fitness": -1.9132230443822267
+        },
+        {
+          "generation": 7503,
+          "Elapse": 165308,
+          "fitness": -1.9132230443879328
+        }
+      ],
+      "quality": 0.9999597785961076
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc30562f3"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.4,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 3,
+        "MutationThreshold": 0.4
+      },
+      "TerminationName": "GenerationNumberTermination",
+      "Termination": {
+        "MaxGenerationsCount": 8000
+      },
+      "Population": 800,
+      "WinnerChromosome": {
+        "Fitness": -1.9132230443879328
+      },
+      "AmountOfGenerations": 8001,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.9132230443879328,
+      "TotalTimeMs": 149612,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 2,
+          "fitness": -1.8848890391684274
+        },
+        {
+          "generation": 2,
+          "Elapse": 15,
+          "fitness": -1.9096651862241902
+        },
+        {
+          "generation": 12,
+          "Elapse": 253,
+          "fitness": -1.912627113767008
+        },
+        {
+          "generation": 29,
+          "Elapse": 629,
+          "fitness": -1.913128142602571
+        },
+        {
+          "generation": 53,
+          "Elapse": 1153,
+          "fitness": -1.9131345752041362
+        },
+        {
+          "generation": 60,
+          "Elapse": 1303,
+          "fitness": -1.9131630251306717
+        },
+        {
+          "generation": 167,
+          "Elapse": 3653,
+          "fitness": -1.913184044760913
+        },
+        {
+          "generation": 533,
+          "Elapse": 11756,
+          "fitness": -1.9131843064316314
+        },
+        {
+          "generation": 735,
+          "Elapse": 16283,
+          "fitness": -1.9131898533744818
+        },
+        {
+          "generation": 775,
+          "Elapse": 17137,
+          "fitness": -1.9132209624282277
+        },
+        {
+          "generation": 824,
+          "Elapse": 18208,
+          "fitness": -1.9132209683562489
+        },
+        {
+          "generation": 877,
+          "Elapse": 19379,
+          "fitness": -1.9132227016948802
+        },
+        {
+          "generation": 1216,
+          "Elapse": 26771,
+          "fitness": -1.9132227945314932
+        },
+        {
+          "generation": 1391,
+          "Elapse": 30738,
+          "fitness": -1.913222796550155
+        },
+        {
+          "generation": 1675,
+          "Elapse": 37059,
+          "fitness": -1.9132229761186306
+        },
+        {
+          "generation": 2180,
+          "Elapse": 48490,
+          "fitness": -1.9132230051739612
+        },
+        {
+          "generation": 2182,
+          "Elapse": 48529,
+          "fitness": -1.9132230070703304
+        },
+        {
+          "generation": 2183,
+          "Elapse": 48547,
+          "fitness": -1.9132230100899537
+        },
+        {
+          "generation": 2187,
+          "Elapse": 48621,
+          "fitness": -1.9132230102448968
+        },
+        {
+          "generation": 2188,
+          "Elapse": 48640,
+          "fitness": -1.9132230104708894
+        },
+        {
+          "generation": 2190,
+          "Elapse": 48677,
+          "fitness": -1.913223010997429
+        },
+        {
+          "generation": 2194,
+          "Elapse": 48754,
+          "fitness": -1.9132230110638324
+        },
+        {
+          "generation": 2196,
+          "Elapse": 48793,
+          "fitness": -1.9132230110669561
+        },
+        {
+          "generation": 2198,
+          "Elapse": 48829,
+          "fitness": -1.9132230110942614
+        },
+        {
+          "generation": 2237,
+          "Elapse": 49591,
+          "fitness": -1.9132230110947788
+        },
+        {
+          "generation": 2240,
+          "Elapse": 49647,
+          "fitness": -1.9132230111895936
+        },
+        {
+          "generation": 2284,
+          "Elapse": 50465,
+          "fitness": -1.9132230111905937
+        },
+        {
+          "generation": 2291,
+          "Elapse": 50582,
+          "fitness": -1.9132230111909423
+        },
+        {
+          "generation": 2576,
+          "Elapse": 55479,
+          "fitness": -1.9132230404974404
+        },
+        {
+          "generation": 2579,
+          "Elapse": 55529,
+          "fitness": -1.913223041263966
+        },
+        {
+          "generation": 2580,
+          "Elapse": 55543,
+          "fitness": -1.9132230434880833
+        },
+        {
+          "generation": 2582,
+          "Elapse": 55581,
+          "fitness": -1.913223043748665
+        },
+        {
+          "generation": 2585,
+          "Elapse": 55630,
+          "fitness": -1.913223043802816
+        },
+        {
+          "generation": 2592,
+          "Elapse": 55752,
+          "fitness": -1.9132230438543845
+        },
+        {
+          "generation": 2594,
+          "Elapse": 55784,
+          "fitness": -1.9132230438998081
+        },
+        {
+          "generation": 2604,
+          "Elapse": 55955,
+          "fitness": -1.913223043942625
+        },
+        {
+          "generation": 2623,
+          "Elapse": 56286,
+          "fitness": -1.9132230439459446
+        },
+        {
+          "generation": 2627,
+          "Elapse": 56358,
+          "fitness": -1.913223043982835
+        },
+        {
+          "generation": 2655,
+          "Elapse": 56827,
+          "fitness": -1.9132230439924802
+        },
+        {
+          "generation": 2662,
+          "Elapse": 56942,
+          "fitness": -1.9132230439942317
+        },
+        {
+          "generation": 2669,
+          "Elapse": 57058,
+          "fitness": -1.913223044011282
+        },
+        {
+          "generation": 2673,
+          "Elapse": 57123,
+          "fitness": -1.9132230440114704
+        },
+        {
+          "generation": 2679,
+          "Elapse": 57226,
+          "fitness": -1.9132230440119296
+        },
+        {
+          "generation": 2715,
+          "Elapse": 57847,
+          "fitness": -1.9132230440124425
+        },
+        {
+          "generation": 2717,
+          "Elapse": 57882,
+          "fitness": -1.9132230440130034
+        },
+        {
+          "generation": 2722,
+          "Elapse": 57962,
+          "fitness": -1.9132230440217648
+        },
+        {
+          "generation": 2728,
+          "Elapse": 58063,
+          "fitness": -1.9132230440218212
+        },
+        {
+          "generation": 4289,
+          "Elapse": 85079,
+          "fitness": -1.9132230442373128
+        },
+        {
+          "generation": 4292,
+          "Elapse": 85128,
+          "fitness": -1.9132230442650031
+        },
+        {
+          "generation": 4296,
+          "Elapse": 85198,
+          "fitness": -1.9132230443402802
+        },
+        {
+          "generation": 4313,
+          "Elapse": 85486,
+          "fitness": -1.9132230443801728
+        },
+        {
+          "generation": 4387,
+          "Elapse": 86766,
+          "fitness": -1.9132230443812812
+        },
+        {
+          "generation": 4389,
+          "Elapse": 86803,
+          "fitness": -1.9132230443822267
+        },
+        {
+          "generation": 4423,
+          "Elapse": 87390,
+          "fitness": -1.9132230443831744
+        },
+        {
+          "generation": 4432,
+          "Elapse": 87542,
+          "fitness": -1.9132230443834706
+        },
+        {
+          "generation": 4436,
+          "Elapse": 87608,
+          "fitness": -1.9132230443860259
+        },
+        {
+          "generation": 4442,
+          "Elapse": 87706,
+          "fitness": -1.9132230443877
+        },
+        {
+          "generation": 4452,
+          "Elapse": 87870,
+          "fitness": -1.9132230443879328
+        }
+      ],
+      "quality": 0.9999597785961076
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc3056677"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.2,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 8,
+        "MutationThreshold": 0.5
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 2100
+      },
+      "Population": 300,
+      "WinnerChromosome": {
+        "Fitness": -1.9132230443879275
+      },
+      "AmountOfGenerations": 8154,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.9132230443879275,
+      "TotalTimeMs": 29044,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 1,
+          "fitness": -1.7257412715684746
+        },
+        {
+          "generation": 2,
+          "Elapse": 4,
+          "fitness": -1.8582484903231355
+        },
+        {
+          "generation": 3,
+          "Elapse": 8,
+          "fitness": -1.8718101417616437
+        },
+        {
+          "generation": 4,
+          "Elapse": 11,
+          "fitness": -1.9022779364826237
+        },
+        {
+          "generation": 7,
+          "Elapse": 22,
+          "fitness": -1.9059053482288308
+        },
+        {
+          "generation": 24,
+          "Elapse": 88,
+          "fitness": -1.9059729634276055
+        },
+        {
+          "generation": 28,
+          "Elapse": 105,
+          "fitness": -1.913219003471971
+        },
+        {
+          "generation": 56,
+          "Elapse": 215,
+          "fitness": -1.9132190294241633
+        },
+        {
+          "generation": 70,
+          "Elapse": 278,
+          "fitness": -1.9132190766764103
+        },
+        {
+          "generation": 160,
+          "Elapse": 659,
+          "fitness": -1.9132196033687738
+        },
+        {
+          "generation": 1128,
+          "Elapse": 4507,
+          "fitness": -1.9132196199764597
+        },
+        {
+          "generation": 1671,
+          "Elapse": 6704,
+          "fitness": -1.9132196734182179
+        },
+        {
+          "generation": 1735,
+          "Elapse": 6984,
+          "fitness": -1.9132196972713116
+        },
+        {
+          "generation": 1990,
+          "Elapse": 8053,
+          "fitness": -1.9132197030808875
+        },
+        {
+          "generation": 2804,
+          "Elapse": 11284,
+          "fitness": -1.913219703101535
+        },
+        {
+          "generation": 3610,
+          "Elapse": 14501,
+          "fitness": -1.9132226398538705
+        },
+        {
+          "generation": 3613,
+          "Elapse": 14511,
+          "fitness": -1.913222822533779
+        },
+        {
+          "generation": 3620,
+          "Elapse": 14532,
+          "fitness": -1.9132228667187965
+        },
+        {
+          "generation": 3622,
+          "Elapse": 14540,
+          "fitness": -1.9132229615405554
+        },
+        {
+          "generation": 3625,
+          "Elapse": 14550,
+          "fitness": -1.913222961658433
+        },
+        {
+          "generation": 3626,
+          "Elapse": 14554,
+          "fitness": -1.9132230315769663
+        },
+        {
+          "generation": 3632,
+          "Elapse": 14573,
+          "fitness": -1.9132230316071328
+        },
+        {
+          "generation": 3633,
+          "Elapse": 14576,
+          "fitness": -1.9132230319343573
+        },
+        {
+          "generation": 3634,
+          "Elapse": 14579,
+          "fitness": -1.913223032121115
+        },
+        {
+          "generation": 3635,
+          "Elapse": 14583,
+          "fitness": -1.9132230329036268
+        },
+        {
+          "generation": 3647,
+          "Elapse": 14624,
+          "fitness": -1.9132230333023972
+        },
+        {
+          "generation": 3654,
+          "Elapse": 14645,
+          "fitness": -1.9132230396509469
+        },
+        {
+          "generation": 3694,
+          "Elapse": 14772,
+          "fitness": -1.9132230399615624
+        },
+        {
+          "generation": 3707,
+          "Elapse": 14812,
+          "fitness": -1.9132230409421926
+        },
+        {
+          "generation": 3722,
+          "Elapse": 14894,
+          "fitness": -1.9132230409979432
+        },
+        {
+          "generation": 3724,
+          "Elapse": 14899,
+          "fitness": -1.9132230413380542
+        },
+        {
+          "generation": 3728,
+          "Elapse": 14911,
+          "fitness": -1.9132230415681883
+        },
+        {
+          "generation": 3859,
+          "Elapse": 15351,
+          "fitness": -1.9132230419423033
+        },
+        {
+          "generation": 3892,
+          "Elapse": 15455,
+          "fitness": -1.9132230419569538
+        },
+        {
+          "generation": 3959,
+          "Elapse": 15695,
+          "fitness": -1.9132230420065928
+        },
+        {
+          "generation": 4007,
+          "Elapse": 15844,
+          "fitness": -1.913223042017791
+        },
+        {
+          "generation": 4144,
+          "Elapse": 16269,
+          "fitness": -1.91322304201997
+        },
+        {
+          "generation": 4192,
+          "Elapse": 16421,
+          "fitness": -1.9132230420219862
+        },
+        {
+          "generation": 4317,
+          "Elapse": 16835,
+          "fitness": -1.9132230420255296
+        },
+        {
+          "generation": 4428,
+          "Elapse": 17174,
+          "fitness": -1.913223042050249
+        },
+        {
+          "generation": 4483,
+          "Elapse": 17352,
+          "fitness": -1.9132230420585983
+        },
+        {
+          "generation": 4580,
+          "Elapse": 17656,
+          "fitness": -1.9132230420665515
+        },
+        {
+          "generation": 4756,
+          "Elapse": 18226,
+          "fitness": -1.9132230420748053
+        },
+        {
+          "generation": 4854,
+          "Elapse": 18525,
+          "fitness": -1.9132230420804532
+        },
+        {
+          "generation": 5095,
+          "Elapse": 19323,
+          "fitness": -1.9132230420839282
+        },
+        {
+          "generation": 5163,
+          "Elapse": 19531,
+          "fitness": -1.9132230441373173
+        },
+        {
+          "generation": 5198,
+          "Elapse": 19647,
+          "fitness": -1.9132230441769469
+        },
+        {
+          "generation": 5265,
+          "Elapse": 19851,
+          "fitness": -1.9132230443856608
+        },
+        {
+          "generation": 5333,
+          "Elapse": 20059,
+          "fitness": -1.9132230443862785
+        },
+        {
+          "generation": 5567,
+          "Elapse": 20825,
+          "fitness": -1.9132230443874292
+        },
+        {
+          "generation": 5957,
+          "Elapse": 22054,
+          "fitness": -1.9132230443877596
+        },
+        {
+          "generation": 6054,
+          "Elapse": 22349,
+          "fitness": -1.9132230443879275
+        }
+      ],
+      "quality": 0.9999597785961049
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc30566db"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.1,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 1,
+        "MutationThreshold": 0.4
+      },
+      "TerminationName": "GenerationNumberTermination",
+      "Termination": {
+        "MaxGenerationsCount": 3000
+      },
+      "Population": 300,
+      "WinnerChromosome": {
+        "Fitness": -1.9132230443878706
+      },
+      "AmountOfGenerations": 3001,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.9132230443878706,
+      "TotalTimeMs": 11340,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 1,
+          "fitness": -1.8908697856015282
+        },
+        {
+          "generation": 2,
+          "Elapse": 3,
+          "fitness": -1.9053023438175307
+        },
+        {
+          "generation": 6,
+          "Elapse": 18,
+          "fitness": -1.9053108677641535
+        },
+        {
+          "generation": 10,
+          "Elapse": 32,
+          "fitness": -1.9098248829886515
+        },
+        {
+          "generation": 22,
+          "Elapse": 74,
+          "fitness": -1.911303655507432
+        },
+        {
+          "generation": 30,
+          "Elapse": 102,
+          "fitness": -1.911627267513901
+        },
+        {
+          "generation": 33,
+          "Elapse": 113,
+          "fitness": -1.9116310526553537
+        },
+        {
+          "generation": 35,
+          "Elapse": 120,
+          "fitness": -1.9116336622930166
+        },
+        {
+          "generation": 45,
+          "Elapse": 156,
+          "fitness": -1.911822050422809
+        },
+        {
+          "generation": 47,
+          "Elapse": 163,
+          "fitness": -1.9118242292040772
+        },
+        {
+          "generation": 58,
+          "Elapse": 204,
+          "fitness": -1.9128344986762138
+        },
+        {
+          "generation": 61,
+          "Elapse": 215,
+          "fitness": -1.9132230111119526
+        },
+        {
+          "generation": 80,
+          "Elapse": 282,
+          "fitness": -1.9132230415774703
+        },
+        {
+          "generation": 121,
+          "Elapse": 433,
+          "fitness": -1.9132230421820537
+        },
+        {
+          "generation": 164,
+          "Elapse": 628,
+          "fitness": -1.9132230424401016
+        },
+        {
+          "generation": 251,
+          "Elapse": 964,
+          "fitness": -1.9132230433996265
+        },
+        {
+          "generation": 265,
+          "Elapse": 1019,
+          "fitness": -1.9132230434201523
+        },
+        {
+          "generation": 596,
+          "Elapse": 2266,
+          "fitness": -1.913223043430171
+        },
+        {
+          "generation": 684,
+          "Elapse": 2590,
+          "fitness": -1.9132230434925566
+        },
+        {
+          "generation": 943,
+          "Elapse": 3575,
+          "fitness": -1.913223043688304
+        },
+        {
+          "generation": 968,
+          "Elapse": 3674,
+          "fitness": -1.913223043752878
+        },
+        {
+          "generation": 1067,
+          "Elapse": 4033,
+          "fitness": -1.9132230442981584
+        },
+        {
+          "generation": 1441,
+          "Elapse": 5443,
+          "fitness": -1.9132230442987348
+        },
+        {
+          "generation": 1451,
+          "Elapse": 5479,
+          "fitness": -1.9132230443878706
+        }
+      ],
+      "quality": 0.9999597785960752
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc30567f1"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.1,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 8,
+        "MutationThreshold": 0.5
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 2100
+      },
+      "Population": 300,
+      "WinnerChromosome": {
+        "Fitness": -1.9132230443876876
+      },
+      "AmountOfGenerations": 12023,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.9132230443876876,
+      "TotalTimeMs": 43369,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 1,
+          "fitness": -1.9034528813074747
+        },
+        {
+          "generation": 2,
+          "Elapse": 3,
+          "fitness": -1.9116108083747667
+        },
+        {
+          "generation": 38,
+          "Elapse": 136,
+          "fitness": -1.912212425246874
+        },
+        {
+          "generation": 53,
+          "Elapse": 192,
+          "fitness": -1.9122190277269242
+        },
+        {
+          "generation": 183,
+          "Elapse": 689,
+          "fitness": -1.912683677026079
+        },
+        {
+          "generation": 191,
+          "Elapse": 718,
+          "fitness": -1.9126850076940562
+        },
+        {
+          "generation": 355,
+          "Elapse": 1424,
+          "fitness": -1.9129293985190494
+        },
+        {
+          "generation": 370,
+          "Elapse": 1482,
+          "fitness": -1.9129297847419924
+        },
+        {
+          "generation": 393,
+          "Elapse": 1570,
+          "fitness": -1.9129314374133708
+        },
+        {
+          "generation": 412,
+          "Elapse": 1645,
+          "fitness": -1.9131485805623538
+        },
+        {
+          "generation": 426,
+          "Elapse": 1702,
+          "fitness": -1.9131669879778546
+        },
+        {
+          "generation": 428,
+          "Elapse": 1712,
+          "fitness": -1.9131670685357411
+        },
+        {
+          "generation": 496,
+          "Elapse": 1968,
+          "fitness": -1.9131802958857511
+        },
+        {
+          "generation": 507,
+          "Elapse": 2008,
+          "fitness": -1.9131805271404332
+        },
+        {
+          "generation": 538,
+          "Elapse": 2140,
+          "fitness": -1.913181018768558
+        },
+        {
+          "generation": 585,
+          "Elapse": 2335,
+          "fitness": -1.9131813479122366
+        },
+        {
+          "generation": 597,
+          "Elapse": 2381,
+          "fitness": -1.9132113312149208
+        },
+        {
+          "generation": 608,
+          "Elapse": 2426,
+          "fitness": -1.9132114585598359
+        },
+        {
+          "generation": 677,
+          "Elapse": 2688,
+          "fitness": -1.9132114882542375
+        },
+        {
+          "generation": 1004,
+          "Elapse": 3999,
+          "fitness": -1.9132118190006615
+        },
+        {
+          "generation": 1106,
+          "Elapse": 4383,
+          "fitness": -1.9132118486741447
+        },
+        {
+          "generation": 1170,
+          "Elapse": 4666,
+          "fitness": -1.9132189028836555
+        },
+        {
+          "generation": 1325,
+          "Elapse": 5297,
+          "fitness": -1.9132217760446046
+        },
+        {
+          "generation": 1406,
+          "Elapse": 5618,
+          "fitness": -1.9132218125873366
+        },
+        {
+          "generation": 1433,
+          "Elapse": 5739,
+          "fitness": -1.913221842317379
+        },
+        {
+          "generation": 2402,
+          "Elapse": 10079,
+          "fitness": -1.913222299029675
+        },
+        {
+          "generation": 2432,
+          "Elapse": 10192,
+          "fitness": -1.9132223287925445
+        },
+        {
+          "generation": 2528,
+          "Elapse": 10582,
+          "fitness": -1.9132223424177712
+        },
+        {
+          "generation": 4183,
+          "Elapse": 17151,
+          "fitness": -1.913222343675928
+        },
+        {
+          "generation": 4704,
+          "Elapse": 19226,
+          "fitness": -1.9132227499669607
+        },
+        {
+          "generation": 4709,
+          "Elapse": 19242,
+          "fitness": -1.913222758852616
+        },
+        {
+          "generation": 4716,
+          "Elapse": 19265,
+          "fitness": -1.913222914042799
+        },
+        {
+          "generation": 4717,
+          "Elapse": 19268,
+          "fitness": -1.9132229361844235
+        },
+        {
+          "generation": 4719,
+          "Elapse": 19274,
+          "fitness": -1.9132229437479467
+        },
+        {
+          "generation": 4726,
+          "Elapse": 19296,
+          "fitness": -1.9132230243978858
+        },
+        {
+          "generation": 4729,
+          "Elapse": 19304,
+          "fitness": -1.9132230325086752
+        },
+        {
+          "generation": 4732,
+          "Elapse": 19313,
+          "fitness": -1.9132230341194818
+        },
+        {
+          "generation": 4743,
+          "Elapse": 19381,
+          "fitness": -1.91322303475987
+        },
+        {
+          "generation": 4747,
+          "Elapse": 19410,
+          "fitness": -1.913223034770489
+        },
+        {
+          "generation": 4759,
+          "Elapse": 19448,
+          "fitness": -1.91322303483112
+        },
+        {
+          "generation": 4761,
+          "Elapse": 19455,
+          "fitness": -1.913223034840975
+        },
+        {
+          "generation": 4804,
+          "Elapse": 19596,
+          "fitness": -1.9132230349764896
+        },
+        {
+          "generation": 4839,
+          "Elapse": 19732,
+          "fitness": -1.9132230349929173
+        },
+        {
+          "generation": 4890,
+          "Elapse": 19892,
+          "fitness": -1.9132230360215252
+        },
+        {
+          "generation": 4903,
+          "Elapse": 19933,
+          "fitness": -1.9132230365594722
+        },
+        {
+          "generation": 4953,
+          "Elapse": 20087,
+          "fitness": -1.9132230367382843
+        },
+        {
+          "generation": 4955,
+          "Elapse": 20094,
+          "fitness": -1.9132230368267127
+        },
+        {
+          "generation": 4969,
+          "Elapse": 20137,
+          "fitness": -1.9132230368706824
+        },
+        {
+          "generation": 5306,
+          "Elapse": 21216,
+          "fitness": -1.9132230369038519
+        },
+        {
+          "generation": 5325,
+          "Elapse": 21277,
+          "fitness": -1.913223036909868
+        },
+        {
+          "generation": 5371,
+          "Elapse": 21427,
+          "fitness": -1.9132230369529593
+        },
+        {
+          "generation": 5693,
+          "Elapse": 22532,
+          "fitness": -1.9132230369565537
+        },
+        {
+          "generation": 5980,
+          "Elapse": 23514,
+          "fitness": -1.913223043241767
+        },
+        {
+          "generation": 5984,
+          "Elapse": 23527,
+          "fitness": -1.9132230440239342
+        },
+        {
+          "generation": 5989,
+          "Elapse": 23546,
+          "fitness": -1.9132230440759623
+        },
+        {
+          "generation": 6002,
+          "Elapse": 23586,
+          "fitness": -1.9132230440810747
+        },
+        {
+          "generation": 6004,
+          "Elapse": 23591,
+          "fitness": -1.9132230441079185
+        },
+        {
+          "generation": 6024,
+          "Elapse": 23654,
+          "fitness": -1.9132230441312341
+        },
+        {
+          "generation": 6049,
+          "Elapse": 23732,
+          "fitness": -1.9132230441559028
+        },
+        {
+          "generation": 6189,
+          "Elapse": 24168,
+          "fitness": -1.9132230441715339
+        },
+        {
+          "generation": 7268,
+          "Elapse": 27821,
+          "fitness": -1.9132230442251137
+        },
+        {
+          "generation": 7279,
+          "Elapse": 27858,
+          "fitness": -1.9132230442771578
+        },
+        {
+          "generation": 7296,
+          "Elapse": 27910,
+          "fitness": -1.9132230442817657
+        },
+        {
+          "generation": 7329,
+          "Elapse": 28018,
+          "fitness": -1.913223044315525
+        },
+        {
+          "generation": 7346,
+          "Elapse": 28070,
+          "fitness": -1.9132230443405525
+        },
+        {
+          "generation": 7499,
+          "Elapse": 28563,
+          "fitness": -1.9132230443410707
+        },
+        {
+          "generation": 7833,
+          "Elapse": 29638,
+          "fitness": -1.913223044342454
+        },
+        {
+          "generation": 7924,
+          "Elapse": 29925,
+          "fitness": -1.913223044343995
+        },
+        {
+          "generation": 7962,
+          "Elapse": 30062,
+          "fitness": -1.9132230443475473
+        },
+        {
+          "generation": 8162,
+          "Elapse": 30707,
+          "fitness": -1.9132230443822267
+        },
+        {
+          "generation": 9805,
+          "Elapse": 36206,
+          "fitness": -1.9132230443834706
+        },
+        {
+          "generation": 9923,
+          "Elapse": 36578,
+          "fitness": -1.9132230443876876
+        }
+      ],
+      "quality": 0.9999597785959795
+    },
+    {
+      "_id": {
+        "$oid": "60a986eca21dca3bc3056518"
+      },
+      "SelectionName": "RouletteSelection",
+      "Selection": {
+        "IsReversed": true,
+        "HasMinus": true
+      },
+      "CrossoverName": "UniformCrossover`2",
+      "Crossover": {
+        "Ratio": 0.3,
+        "RequiredNumberOfParents": 2
+      },
+      "MutationName": "SwapMutation`2",
+      "Mutation": {
+        "AmountOfSwaps": 8,
+        "MutationThreshold": 0.7
+      },
+      "TerminationName": "TheSameNeuronWinner",
+      "Termination": {
+        "MaxGenerationsCount": 800
+      },
+      "Population": 800,
+      "WinnerChromosome": {
+        "Fitness": -1.9132230443876566
+      },
+      "AmountOfGenerations": 4889,
+      "RealTheBestValue": -1.9133,
+      "TheBestFoundFitness": -1.9132230443876566,
+      "TotalTimeMs": 94252,
+      "Steps": [
+        {
+          "generation": 1,
+          "Elapse": 2,
+          "fitness": -1.8592120495722941
+        },
+        {
+          "generation": 2,
+          "Elapse": 16,
+          "fitness": -1.8895903136255177
+        },
+        {
+          "generation": 3,
+          "Elapse": 37,
+          "fitness": -1.907870495345326
+        },
+        {
+          "generation": 4,
+          "Elapse": 58,
+          "fitness": -1.911727013718322
+        },
+        {
+          "generation": 13,
+          "Elapse": 258,
+          "fitness": -1.9117869549115767
+        },
+        {
+          "generation": 19,
+          "Elapse": 401,
+          "fitness": -1.9119118109609947
+        },
+        {
+          "generation": 63,
+          "Elapse": 1373,
+          "fitness": -1.9126252902113006
+        },
+        {
+          "generation": 110,
+          "Elapse": 2432,
+          "fitness": -1.9129143415100085
+        },
+        {
+          "generation": 273,
+          "Elapse": 6087,
+          "fitness": -1.9131176546398216
+        },
+        {
+          "generation": 289,
+          "Elapse": 6455,
+          "fitness": -1.913220336087996
+        },
+        {
+          "generation": 515,
+          "Elapse": 11516,
+          "fitness": -1.9132206976423412
+        },
+        {
+          "generation": 997,
+          "Elapse": 22757,
+          "fitness": -1.9132215976111024
+        },
+        {
+          "generation": 1350,
+          "Elapse": 31116,
+          "fitness": -1.913222888240937
+        },
+        {
+          "generation": 1354,
+          "Elapse": 31192,
+          "fitness": -1.913222888453019
+        },
+        {
+          "generation": 1358,
+          "Elapse": 31264,
+          "fitness": -1.9132229089517168
+        },
+        {
+          "generation": 1363,
+          "Elapse": 31364,
+          "fitness": -1.9132229637192957
+        },
+        {
+          "generation": 1365,
+          "Elapse": 31398,
+          "fitness": -1.9132229766370719
+        },
+        {
+          "generation": 1372,
+          "Elapse": 31517,
+          "fitness": -1.9132229780146717
+        },
+        {
+          "generation": 1374,
+          "Elapse": 31552,
+          "fitness": -1.913222983712314
+        },
+        {
+          "generation": 1380,
+          "Elapse": 31659,
+          "fitness": -1.913223001517561
+        },
+        {
+          "generation": 1384,
+          "Elapse": 31725,
+          "fitness": -1.9132230015304956
+        },
+        {
+          "generation": 1385,
+          "Elapse": 31742,
+          "fitness": -1.9132230044039042
+        },
+        {
+          "generation": 1392,
+          "Elapse": 31861,
+          "fitness": -1.9132230086699855
+        },
+        {
+          "generation": 1395,
+          "Elapse": 31915,
+          "fitness": -1.9132230388124634
+        },
+        {
+          "generation": 1446,
+          "Elapse": 32820,
+          "fitness": -1.9132230388687033
+        },
+        {
+          "generation": 1468,
+          "Elapse": 33192,
+          "fitness": -1.9132230393830074
+        },
+        {
+          "generation": 1473,
+          "Elapse": 33276,
+          "fitness": -1.9132230394957848
+        },
+        {
+          "generation": 1539,
+          "Elapse": 34479,
+          "fitness": -1.9132230395193268
+        },
+        {
+          "generation": 1558,
+          "Elapse": 34820,
+          "fitness": -1.9132230397983312
+        },
+        {
+          "generation": 1569,
+          "Elapse": 35035,
+          "fitness": -1.9132230401719497
+        },
+        {
+          "generation": 1599,
+          "Elapse": 35566,
+          "fitness": -1.9132230405812343
+        },
+        {
+          "generation": 1607,
+          "Elapse": 35707,
+          "fitness": -1.9132230409631092
+        },
+        {
+          "generation": 1615,
+          "Elapse": 35843,
+          "fitness": -1.9132230416808316
+        },
+        {
+          "generation": 1621,
+          "Elapse": 35946,
+          "fitness": -1.9132230417419303
+        },
+        {
+          "generation": 1623,
+          "Elapse": 35983,
+          "fitness": -1.9132230419031968
+        },
+        {
+          "generation": 1626,
+          "Elapse": 36034,
+          "fitness": -1.9132230419295042
+        },
+        {
+          "generation": 1673,
+          "Elapse": 36871,
+          "fitness": -1.9132230419816305
+        },
+        {
+          "generation": 1693,
+          "Elapse": 37215,
+          "fitness": -1.9132230420331053
+        },
+        {
+          "generation": 1747,
+          "Elapse": 38172,
+          "fitness": -1.9132230420585983
+        },
+        {
+          "generation": 1749,
+          "Elapse": 38203,
+          "fitness": -1.9132230420839282
+        },
+        {
+          "generation": 2277,
+          "Elapse": 47573,
+          "fitness": -1.9132230433329918
+        },
+        {
+          "generation": 2294,
+          "Elapse": 47872,
+          "fitness": -1.9132230436459583
+        },
+        {
+          "generation": 2300,
+          "Elapse": 47974,
+          "fitness": -1.9132230437672515
+        },
+        {
+          "generation": 2326,
+          "Elapse": 48433,
+          "fitness": -1.9132230438385842
+        },
+        {
+          "generation": 2328,
+          "Elapse": 48468,
+          "fitness": -1.9132230438488271
+        },
+        {
+          "generation": 2336,
+          "Elapse": 48624,
+          "fitness": -1.9132230438688245
+        },
+        {
+          "generation": 2351,
+          "Elapse": 48883,
+          "fitness": -1.9132230439107567
+        },
+        {
+          "generation": 2376,
+          "Elapse": 49324,
+          "fitness": -1.9132230439215423
+        },
+        {
+          "generation": 2435,
+          "Elapse": 50357,
+          "fitness": -1.9132230439264153
+        },
+        {
+          "generation": 2441,
+          "Elapse": 50457,
+          "fitness": -1.913223043969218
+        },
+        {
+          "generation": 2453,
+          "Elapse": 50669,
+          "fitness": -1.9132230439699618
+        },
+        {
+          "generation": 2478,
+          "Elapse": 51118,
+          "fitness": -1.9132230440125628
+        },
+        {
+          "generation": 2494,
+          "Elapse": 51402,
+          "fitness": -1.9132230440128644
+        },
+        {
+          "generation": 2496,
+          "Elapse": 51440,
+          "fitness": -1.9132230440130034
+        },
+        {
+          "generation": 2511,
+          "Elapse": 51701,
+          "fitness": -1.9132230440217648
+        },
+        {
+          "generation": 2514,
+          "Elapse": 51751,
+          "fitness": -1.9132230440218212
+        },
+        {
+          "generation": 3067,
+          "Elapse": 61576,
+          "fitness": -1.9132230442751594
+        },
+        {
+          "generation": 3079,
+          "Elapse": 61785,
+          "fitness": -1.9132230443701004
+        },
+        {
+          "generation": 3094,
+          "Elapse": 62062,
+          "fitness": -1.9132230443801728
+        },
+        {
+          "generation": 3661,
+          "Elapse": 72122,
+          "fitness": -1.9132230443820997
+        },
+        {
+          "generation": 3693,
+          "Elapse": 72679,
+          "fitness": -1.9132230443832752
+        },
+        {
+          "generation": 3700,
+          "Elapse": 72802,
+          "fitness": -1.9132230443872196
+        },
+        {
+          "generation": 3727,
+          "Elapse": 73287,
+          "fitness": -1.9132230443875997
+        },
+        {
+          "generation": 4089,
+          "Elapse": 80100,
+          "fitness": -1.9132230443876566
+        }
+      ],
+      "quality": 0.9999597785959633
+    }
+  ]

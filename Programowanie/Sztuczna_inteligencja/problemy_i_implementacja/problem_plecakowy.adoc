@@ -86,14 +86,10 @@ public class KnapsackProblemFactory : IGenableChromosomeFactory<KnapsackProblemC
     }
 
     public KnapsackProblemChromosome FromGenes(IList<Insert> genes) <3>
-    {
-        return new KnapsackProblemChromosome(MaxWeight, genes);
-    }
+    => return new KnapsackProblemChromosome(MaxWeight, genes);
 
     public Insert GetGene(int geneNumber) <4>
-    {
-        throw new NotImplementedException();
-    }
+        => throw new NotImplementedException();
 }
 ----
 
@@ -161,4 +157,51 @@ public class KnapsackProblemChromosome : FitnessComparableChromosome, IGenableCh
 
 === Wyniki badań
 
-#TODO: Dodać wyniki pomiarów#
+Wybrano 20 wyników, które osiągnęły najlepsze możliwe dopasowanie, a następnie posortowano je według czasu trwania.
+Szczegółowa tabela jest dostępna poniżej.
+
+indexterm:[Krzyżowanie, Ordered]
+Wszystkie zwycięskie rozwiązania zostały oparte o standardową procedurę krzyżowania uporządkowania (OrderedCrossover), w której wykorzystano dwójkę rodziców.
+Co ciekawe praktycznie wszystkie rozwiązania dokonują dość małego krzyżowania (wymieniane jest pierwsze i ostatnie 10% genów, poza jednym wyjątkiem).
+
+indexterm:[Mutacja, Swap]
+Mutacja w zwycięskich chromosomach to mutacja zamiany genów (SwapMutation). 
+Ilość zamian waha się od 1 do 13 z przewagą wartości 13 i 8 – oznacza to, że gdy dochodziło do mutacji, zamieniane miejscami było 13 lub 8 genów.
+Dodatkowo prawdopodobieństwo dokonania mutacji waha się od 20% do aż 90% znowuż z przewagą tych większych wartości. 
+
+Sposób zakończenia działania algorytmu jest dość wyrównane, a ilość generacji wymaganych do zakończenia jest skrajnie różna (od 200 do 13 000). 
+Ilość osobników populacji również dość mocno się waha, to jest od 100 do 1300 osobników.
+
+Najszybciej rezultat otrzymano w 61 441 milisekund, to jest w trochę ponad minutę.
+
+.Tabela przedstawiająca 20 najlepszych rozwiązań problemu plecakowego
+[options="header"]
+|===
+| Crossover begining | Crossover end | Amount Of Swaps | Mutation Threshold | Termination Namefootnote:[TSNW – The Same Neuron Winer – zakończenie polegające na ograniczeniu ilości zwycięstw pojedynczego neuronu, GNT – Generation Number Termination – ograniczenie działania algorytmu poprzez całkowitą liczbę generacji.]            | Max Generations Count | Population | Amount Of Generations | Total Time (Ms)
+| 0,1                | 0,9           | 8             | 0,2               | TSNW   | 500                 | 500        | 1493                | 61441      
+| 0,1                | 0,9           | 13            | 0,4               | GNT    | 1000                | 800        | 1001                | 75971      
+| 0,1                | 0,9           | 5             | 0,9               | TSNW   | 200                 | 1300       | 722                 | 82686      
+| 0,1                | 0,9           | 13            | 0,9               | GNT    | 2000                | 500        | 2001                | 93213      
+| 0,2                | 0,8           | 1             | 0,8               | TSNW   | 500                 | 800        | 1529                | 104828     
+| 0,1                | 0,9           | 2             | 0,6               | GNT    | 13000               | 100        | 13001               | 109092     
+| 0,1                | 0,9           | 13            | 0,3               | TSNW   | 1300                | 500        | 2489                | 113451     
+| 0,1                | 0,9           | 13            | 0,7               | GNT    | 1000                | 1300       | 1001                | 125911     
+| 0,1                | 0,9           | 13            | 0,5               | GNT    | 3000                | 500        | 3001                | 136879     
+| 0,1                | 0,9           | 13            | 0,9               | TSNW   | 500                 | 1300       | 1330                | 165598     
+| 0,1                | 0,9           | 5             | 0,8               | TSNW   | 2100                | 500        | 4060                | 168955     
+| 0,1                | 0,9           | 8             | 0,7               | TSNW   | 1300                | 500        | 3833                | 175025     
+| 0,1                | 0,9           | 13            | 0,8               | TSNW   | 1300                | 800        | 2403                | 183534     
+| 0,1                | 0,9           | 5             | 0,4               | GNT    | 13000               | 200        | 13001               | 223651     
+| 0,1                | 0,9           | 5             | 0,8               | GNT    | 2000                | 1300       | 2001                | 224491     
+| 0,1                | 0,9           | 13            | 0,6               | GNT    | 3000                | 800        | 3001                | 227228     
+| 0,1                | 0,9           | 8             | 0,5               | TSNW   | 2100                | 500        | 5336                | 244617     
+| 0,1                | 0,9           | 8             | 0,6               | GNT    | 13000               | 200        | 13001               | 252825     
+| 0,1                | 0,9           | 13            | 0,8               | TSNW   | 1300                | 1300       | 2154                | 267282     
+| 0,1                | 0,9           | 13            | 0,7               | TSNW   | 2100                | 800        | 4219                | 321047     
+|===
+
+Poniżej widać najlepsze 25 wyników przedstawione w formie graficznej. 
+Widać na nim, że większość wyników mieści się w mniej niż 4000 tysiącach generacji.
+
+.Wykres najlepszych 25 wyników w szukaniu najlepszej wartości plecaka.
+image::knapsack_results.png[]
