@@ -212,6 +212,48 @@ public class SchwefelChromosomeFitness : IFitness<SimpleChromosome>
 Na początku poszczególnych sekcji umieszczono wykres reprezentujący 20 najlepszych rozwiązań.
 Na osi OX mamy do czynienia z kolejnymi generacjami, natomiast w pionie mamy do czynienia z wartością dopasowania.
 
+==== McCornick
+
+.Wyniki pracy algorytmu genetycznego dla funkcji McCornicka.
+image::mccornic_results.jpg[]
+
+indexterm:[Krzyżowanie, Uniform]
+W przypadku szukania minimum funkcji testowej McCornicka wszystkie 20 najlepszych wyników korzystało z krzyżowania jednorodnego (UniformCrossover), a proporcje dzielenia się genami są w zakresie od 0.1 do 0.5 (czyli w całym dostępnym zakresie). 
+
+indexterm:[Mutacja, Swap]
+Co ciekawe, tutaj, podobnie jak w przypadku problemu plecakowego, mutacją wykorzystywaną przez zwycięskie rozwiązania jest mutacja zamiany (SwapMutation). 
+Ilość mutacji to w większości wartość równa trzy, tylko cztery rozwiązania korzystają z ilości zamian równej 8. 
+
+Najczęściej stosowanym zakończeniem algorytmu jest limit zwycięstw pojedynczego neuronu (TheSameNeuronWinner), a maksymalna ilość generacji mieści się w zakresie od 800 do 8000, z przewagą tych większych, co stanowi górną część dostępnego zakresu.
+
+Rzeczą wartą zauważenia jest fakt, że wszystkie najlepsze rozwiązania korzystają z populacji stanowczo większej niż 100 (z tej korzystają tylko dwa rozwiązania), to jest równej 300 i 800 osobników, a najszybsze rozwiązanie zajęło 5818 milisekund.
+
+.Tabela przedstawiająca 20 najlepszych rozwiązań znajdowania minimum funkcji McCornicka.
+[options="header"]
+|===
+| Ratio | Amount Of Swaps | Mutation Threshold | Termination Name | Max Generations Count | Population | Amount Of Generations | TotalTimeMs
+| 0,2   | 3               | 0,2                | TSNW             | 2100                  | 100        | 8119                  | 5818       
+| 0,1   | 1               | 0,4                | GNT              | 3000                  | 300        | 3001                  | 11340      
+| 0,3   | 3               | 0,9                | TSNW             | 2100                  | 100        | 14457                 | 12490      
+| 0,5   | 3               | 0,4                | TSNW             | 2100                  | 300        | 5051                  | 16450      
+| 0,2   | 3               | 0,5                | GNT              | 8000                  | 300        | 8001                  | 25498      
+| 0,3   | 3               | 0,4                | GNT              | 8000                  | 300        | 8001                  | 26506      
+| 0,3   | 3               | 0,7                | TSNW             | 800                   | 300        | 7192                  | 27696      
+| 0,2   | 3               | 0,4                | GNT              | 8000                  | 300        | 8001                  | 27770      
+| 0,2   | 8               | 0,5                | TSNW             | 2100                  | 300        | 8154                  | 29044      
+| 0,1   | 1               | 0,7                | TSNW             | 2100                  | 300        | 8633                  | 32020      
+| 0,1   | 8               | 0,5                | TSNW             | 2100                  | 300        | 12023                 | 43369      
+| 0,3   | 8               | 0,7                | TSNW             | 800                   | 800        | 4889                  | 94252      
+| 0,2   | 3               | 0,2                | TSNW             | 2100                  | 800        | 7117                  | 131308     
+| 0,3   | 3               | 0,5                | GNT              | 8000                  | 800        | 8001                  | 144924     
+| 0,4   | 3               | 0,4                | GNT              | 8000                  | 800        | 8001                  | 149612     
+| 0,3   | 1               | 0,4                | GNT              | 8000                  | 800        | 8001                  | 155744     
+| 0,3   | 1               | 0,9                | GNT              | 8000                  | 800        | 8001                  | 174089     
+| 0,5   | 8               | 0,2                | TSNW             | 2100                  | 800        | 10643                 | 202244     
+| 0,2   | 1               | 0,2                | TSNW             | 2100                  | 800        | 11063                 | 215253     
+| 0,4   | 3               | 0,4                | TSNW             | 2100                  | 800        | 11187                 | 224876     
+|===
+
 ==== Schwefel
 
 .Wyniki pracy algorytmu genetycznego dla funkcji Schwefela.
@@ -220,7 +262,7 @@ image::szchwefel_results.jpg[]
 indexterm:[Krzyżowanie, Uniform]
 W przypadku szukania minimum funkcji testowej Schwefela wszystkie 20 najlepszych wyników korzystało z krzyżowania jednorodnego (UniformCrossover), a proporcje dzielenia się genami są w zakresie od 0.1 do 0.5 (czyli w całym dostępnym zakresie). 
 
-idnexterm:[Mutacja, Swap]
+indexterm:[Mutacja, Swap]
 Co ciekawe, tutaj, podobnie jak w przypadku problemu plecakowego, mutacją wykorzystywaną przez zwycięskie rozwiązania jest mutacja zamiany (SwapMutation). 
 Ilość mutacji to w większości wartości pojedyncze, tylko dwa rozwiązania korzystają z ilości zamian równej 8. 
 
