@@ -21,7 +21,7 @@ Dlaczego lubię tę bibliotekę?
 * [x] Jest dostępna w postaci jednoplikowego nagłówka, przez co łatwo ją dołączyć do projektu. 
 * [x] Bardzo obszerna i porządnie wykonana dokumentacja, która ułatwia zapoznanie się z dostępnymi funkcjonalnościami i tym, jak je zaimplementować u siebie.
 
-[souce,cpp]
+[source,cpp]
 .Przykład zastosowania Nlohmann::json
 ----
 struct MyDataType {
