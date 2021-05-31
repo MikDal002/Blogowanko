@@ -5,7 +5,61 @@ Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 .lead
 W tym miejscu chciałbym zaprezentować moje sposoby pracy z Docker'em, którego wykorzystuję w celu łatwej i przenośnej pracy bez potrzeby zaśmiecania komputera. 
 
+Podstawową komendą, która wystarczy nam do swobodnego rozpoczęcia korzystania z Docker'a jest:
+
+== Docker w konsoli
+=== Uruchamianie serwisów Dockerowych
+
+[soure,sh]
+----
+> docker run --name «some name» -d «some image»
+----
+
+[horizontal]
+«some name»:: 
+    Ustawia przyjazną nazwę, która później ułatwia orientowanie się w kontenerach obecnych na naszym komputerze.
+
+«some image»::
+    Określa jakiego obrazu chcemy użyć. 
+    Możemy je przeglądać tutaj: https://hub.docker.com/search?q=&type=image. 
+
+I tak, dla przykładu, gdybyśmy chcieli pobawić się platformą GHOST wpisujemy:
+[source,sh]
+----
+> docker run -d --name some-ghost -p 2368:2368 ghost
+----
+
+Pewno zastanawiaszs się, czym jest `-p 2368:2368` – jest to po prostu umożliwienie komunikacji z usługa Ghost poprzez port 2368. 
+Teraz w przeglądarce wystarczy wpisać https://localhost:2368 i powinniśmy zobaczyć naszą nową stronę internetową.
+
+=== Uruchamianie obrazów interaktywnych
+
+[souce, sh]
+----
+> docker run --name «some-name» -it «some image» bash
+----
+
+[horizontal]
+«some name»:: 
+    Ustawia przyjazną nazwę, która później ułatwia orientowanie się w kontenerach obecnych na naszym komputerze.
+
+«some image»::
+    Określa jakiego obrazu chcemy użyć. 
+    Możemy je przeglądać tutaj: https://hub.docker.com/search?q=&type=image. 
+
+I tak, dla przykładu, gdybyśmy chcieli pobawić się node.js wpisujemy:
+[source,sh]
+----
+> docker run --name some-nodejs -it node bash
+----
+
+W tym momencie konsola przeniesie nas do basha uruchomionego na platformie gdzie zainstalowany jest node.js. 
+Niestety taka konstrukcja nie pozwala nam na proste dzielenie się plikami między naszym komputerem a kontenerem. 
+Ten problem zostanie rozwiązany poniżej w inny, według mnie znacznie wygodniejszy, sposób. 
+
 == Docker i ((Visual Studio Code))
+
+#TODO: Opisać rozszerzenie Docker#
 
 Konfiguracja wymaga rozszerzenia "Remote - Containers". 
 Więcej na temat konfiguracji Visual Studio Code pod kontenery znajdziesz https://code.visualstudio.com/docs/remote/containers-tutorial[tutaj].
@@ -14,3 +68,7 @@ NOTE: Jeszcze więcej informacji na https://code.visualstudio.com/docs/remote/co
 
 Visual Studio Code może działać w środowisko skonteneryzowanym (uruchamiać projekt w Dokerze) poprzez dodanie katalogu `.devcontainer` a w nim pliku `devcontainer.json` służącego do konfiguracji samego środowiska VSC oraz `Dockerfile`, który przechowuje informacje na temat naszego obrazu w którym będziemy pracować.
 VSC może uzupełnić strukturę plików za ciebie poprzez polecenie `((Remote-Containers)): Add Development Container Configuration Files`.
+
+#TODO: Dodać przykład z node.js#
+
+Warto zauważyć, że gdy na przyklad uruchomimy aplikacje node.js w kontenerze w Visual Studio Code to automatycznie zostanie otwarty ten port i będzie możliwe otwarcie strony w naszej codziennej przeglądarce.

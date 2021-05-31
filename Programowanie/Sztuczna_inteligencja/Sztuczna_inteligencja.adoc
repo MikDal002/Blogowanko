@@ -58,12 +58,12 @@ Możemy zauważyć jednak następujące zależności:
 . W PSO zachodzi konsolidacja. Z każdą iteracją "różnorodność opinii" dotycząca kierunku poruszania się roju cząstek maleje, ponieważ każda cząstka uwzględnia wspólne parametry globalne.
 . Pojedyncze cząstki wpływają na siebie wzajemnie, co z upływem czasu czyni je coraz bardziej podobnymi sobie (ustalanie szukanego optimum).
  
-Porównując algorytm genetyczny z PSO można odnieść wrażanie, że algorytm PSO potrafi sobie szybciej poradzić z optymalizacją funkcji i znaleźć jej najdokłądniejszą wartość. 
-NIestety, w przypadku naszych testów algorytm kompletnie nie poradził sobie z funkcją Schwefa, gdzie wpadł w jedną z wielu pułapek – tutaj AG zdało egzamin.
+Porównując algorytm genetyczny z PSO można odnieść wrażanie, że algorytm PSO potrafi sobie szybciej poradzić z optymalizacją funkcji i znaleźć jej najdokładniejszą wartość. 
+Niestety, w przypadku naszych testów algorytm kompletnie nie poradził sobie z funkcją Schwefa, gdzie wpadł w jedną z wielu pułapek – tutaj AG zdało egzamin.
 
 Wnioski są następujące:
 Algorytm PSO potrafi być dużo szybszy i jest stanowczo łatwiejszy w konfiguracji.
-Algorytm genetyczny natomiast jest zdecydowanie bardziej odporny, a jego modyfikowalność pozwala na lepsze dopasowanie do rozwiązywanego problemu.
+Algorytm genetyczny natomiast jest zdecydowanie bardziej odporny, a łatwość modyfikacji pozwala na lepsze dopasowanie do rozwiązywanego problemu.
 W związku z tym można wysnuć wniosek, że algorytm PSO sprawdzi się lepiej w przypadku pewnych możliwie powtarzalnych problemów.
 
 Na koniec chcielibyśmy wspomnieć o bardzo ciekawym portalu internetowym, który pojawiał się wcześniej w pracy. 

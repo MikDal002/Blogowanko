@@ -62,6 +62,8 @@ Profilowanie może być wyzwalane automatycznie, na przykład, przy dużym obci�
 [.lead]
 O IoT Hub'ie.
 
+Przy pracy z urządzeniami na np. RaspberryPi warto posiłkować się repozytorium Microsoftu https://github.com/dotnet/iot/tree/main/src/devices, gdzie znajduje się wiele gotowych implementacji obsługi różnych czujników.
+
 .Typowe użycie IoT Hub'a. Ilustracja pochodzi z prezentacji Azure User Group Poland #36 footnote:BIA36JakubWaliszewski[].
 image::cosmosdb_iothub_infrastructure.png[]
 
