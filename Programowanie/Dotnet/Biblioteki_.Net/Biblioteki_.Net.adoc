@@ -1,0 +1,11 @@
+= Biblioteki .Net
+:imagesdir: ./img
+
+W niniejszym rozdziale przedstawię biblioteki .Net, nad którymi chciałbym posiedzieć i zgłębić ich tajniki. 
+Wypisuję je tutaj, aby o nich nie zapomnieć i dla możliwej dyskusji, na temat tego, którą powinienem zająć się w następnej kolejności. 
+
+:leveloffset: +1
+
+include::ConsoleTable.adoc[]
+
+:leveloffset: -1

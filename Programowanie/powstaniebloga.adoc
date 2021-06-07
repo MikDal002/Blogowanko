@@ -1,5 +1,7 @@
 = O powstawianiu bloga
 Mikołaj Dalecki <dalecki.mikolaj@gmail.com>
+:source-highlighter: pygments
+:imagesdir: ./img
 
 == Inspiracje
 W moim odczuciu blog mógłby w dużej mierze wyglądać (w kwestii przedstawienia treści) podobnie do strony https://refactoring.guru/pl[Refactoring Guru].
@@ -27,6 +29,9 @@ Wybór mógłby być podejmowany w nagłówku artykułu bądź na podstawie ilo�
 Dla przykładu po zakończeniu prac chciałbym napisać krótki artykuł o tym, co będzie nowego i fajnego w najbliższej aktualizacji treści.
 
 * [ ] Rozeznać się w Hugo https://gohugo.io/, footnote:rozw[Wydaje się to być najciekawszym rozwiązaniem]
++
+Prosta wielojęzyczna strona wykonana za pomocą Hugo (https://github.com/chaos-eng/chaos-eng.github.io/).
+
 * [ ] Rozeznać się w Wordpress,
 * [ ] Rozenznać się w ghost https://ghost.org/
 * [ ] Rozeznać się w Netlify https://www.netlifycms.org/, footnote:rozw[]
@@ -37,7 +42,45 @@ Dla przykładu po zakończeniu prac chciałbym napisać krótki artykuł o tym, 
 * [ ] Zapoznać się z możliwościami DocBook'a, gdzie AsciiDoctor mógłby odgrywać rolę frontendu (sposobu edycji) dla tego formatu, a ten następnie byłby konwertowany do innych, jak LaTeX czy HTML.
 Jego zaletą jest również to, że jest on bardzo dobrze ustrukturyzowany, co pozwoli mi łatwo wyciągnąć z niego informacje.
 
+== Proponowany przepływ pracy
+
+
+[plantuml,przeplyw-artykulow,png]
+.Przepływ treści
+....
+class "Dokument AsciiDoc" as DokumentZrodlowy
+class "DockBook pl-PL" as DockBookSource
+class "DockBook en-US" as DockBookEN
+class "DockBook de-DE" as DockBookDE
+class "Artykuł pl-PL" as ArticlePL
+class "Artykuł en-DE" as ArticleEN
+class "Artykuł de-DE" as ArticleDE
+
+DokumentZrodlowy --|> DockBookSource
+DockBookSource --|> DockBookEN
+DockBookSource --|> DockBookDE
+DockBookSource --|> ArticlePL
+DockBookEN --|> ArticleEN
+DockBookDE --|> ArticleDE
+....
+
+. Z dokumentu AsciiDoc w języku polskim generowany jest DockBook, gdzie każdy element ma swoją sumę kontrolną (np. CRC), co pozwala sprawdzać, czy doszło do zmian.
+. Na podstawie polskiego DockBook'a dokonuje się tłumaczenia na obce języki. 
+Każdy element zawiera sumę kontrolną elementu, z którego pochodzi w celu potwierdzenia źródła.
+. Z każdego DockBooka jest generowany jeden lub wiele artykułów w postaci HTML. 
+W przypadku użycia takiego przepływu należy rozważyć dodanie atrybutu "IsPublishReady" aby ominąć publikację niektórych elementów.
+
+[listing]
+----
+Polski
+https://abywnerwicsietylkoraz.pl/pl-PL/1E2E121E12/tytuł-artykułu
+Angielski
+https://abywnerwicsietylkoraz.pl/en-US/1E2E121E12/article-tytle
+https://togetnervousonlyonce.com/1E2E121E12/article-tytle
+----
+
 == Podsumowanie plaform
+* [ ] Zobaczyc czy jest coś użytecznego tutaj: https://linuxhint.com/open-source-static-site-generators/
 
 .Porównanie funkcjonalności platform
 |===
@@ -71,8 +114,13 @@ W LaTeX'u są one płynne.
 
 = Inne blogi i strony warte uwagi
 
-- https://programistanaswoim.pl/ #TODO: Dodać opis#.
-- https://cezarywalenciuk.pl/ #TODO: Dodać opis#.
-- https://crossweb.pl/podcasty/ #TOOD: Dodać opis#.
-- https://leveluppp.ghost.io/ #TODO: Dodać opis#
+- https://cezarywalenciuk.pl/ - aktywnie rozwijany blog o technologiach .Net oraz przemówieniach.
+Znajdziesz na nim rzeczy stricte o kodzie (nowe technologie, biblioteki, itp.) jak i bardziej abstrakcyjne jak architektura czy wzorce projektowe.
+- https://crossweb.pl/podcasty/ – lista podcastów o technologiach, IT i programowaniu.
+- https://leveluppp.ghost.io/ - blog o technologiach .Net (i nie tylko) na którym znalazłem ciekawe niskopoziomowe (o IL) wpisy.
 
+== Ciekawe blogi ale nie tak bardz
+
+- https://programistanaswoim.pl/ - blog który w swojej historii miał na celu przedstawienie jak przejść na własną działalność jako programista.
+Niestety nie jest on już za często aktualizowany.
+- https://www.meziantou.net/ - całkiem bogaty w treści blog prowadzony przez MVP Microsoftu. Blog traktuje o technologiach .Net itp.

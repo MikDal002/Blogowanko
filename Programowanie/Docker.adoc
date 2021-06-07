@@ -1,6 +1,7 @@
 = ((Docker)) w codzinnej pracy niekontenerowców
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:
+:source-highlighter: pygments
 
 .lead
 W tym miejscu chciałbym zaprezentować moje sposoby pracy z Docker'em, którego wykorzystuję w celu łatwej i przenośnej pracy bez potrzeby zaśmiecania komputera. 
@@ -10,7 +11,7 @@ Podstawową komendą, która wystarczy nam do swobodnego rozpoczęcia korzystani
 == Docker w konsoli
 === Uruchamianie serwisów Dockerowych
 
-[soure,sh]
+[source,console]
 ----
 > docker run --name «some name» -d «some image»
 ----
@@ -24,7 +25,7 @@ Podstawową komendą, która wystarczy nam do swobodnego rozpoczęcia korzystani
     Możemy je przeglądać tutaj: https://hub.docker.com/search?q=&type=image. 
 
 I tak, dla przykładu, gdybyśmy chcieli pobawić się platformą GHOST wpisujemy:
-[source,sh]
+[source,console]
 ----
 > docker run -d --name some-ghost -p 2368:2368 ghost
 ----
@@ -34,7 +35,7 @@ Teraz w przeglądarce wystarczy wpisać https://localhost:2368 i powinniśmy zob
 
 === Uruchamianie obrazów interaktywnych
 
-[souce, sh]
+[source,console]
 ----
 > docker run --name «some-name» -it «some image» bash
 ----
@@ -48,7 +49,7 @@ Teraz w przeglądarce wystarczy wpisać https://localhost:2368 i powinniśmy zob
     Możemy je przeglądać tutaj: https://hub.docker.com/search?q=&type=image. 
 
 I tak, dla przykładu, gdybyśmy chcieli pobawić się node.js wpisujemy:
-[source,sh]
+[source,console]
 ----
 > docker run --name some-nodejs -it node bash
 ----
@@ -72,3 +73,19 @@ VSC może uzupełnić strukturę plików za ciebie poprzez polecenie `((Remote-C
 #TODO: Dodać przykład z node.js#
 
 Warto zauważyć, że gdy na przyklad uruchomimy aplikacje node.js w kontenerze w Visual Studio Code to automatycznie zostanie otwarty ten port i będzie możliwe otwarcie strony w naszej codziennej przeglądarce.
+
+= Dockerfile
+== Problem interakcji
+#TODO: Uzupełnić#
+Więcej informacji znajdziesz w tym poście: https://linuxhint.com/debian_frontend_noninteractive/.
+
+[source,dockerfile]
+----
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install «twoje paczki» <1>
+
+RUN export DEBIAN_FRONTEND=noninteractive <2>
+RUN apt-get -y install «twoje paczki»
+----
+
+<1> W pierwszym przypadku wyłączamy tryb interaktywny tylko dla tej jednej linijki,
+<2> W drugim przypadku całkowicie wyłączamy tryb interaktywny dla budowania obrazu.

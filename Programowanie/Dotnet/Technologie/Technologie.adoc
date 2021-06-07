@@ -1,0 +1,6 @@
+= Technologie w .Net
+:leveloffset: +1
+
+include::graphql.adoc[]
+
+:leveloffset: -1
