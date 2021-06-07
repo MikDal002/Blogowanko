@@ -1,0 +1,58 @@
+= O .net i C#
+Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
+:toc:
+:source-highlighter: pygments
+:imagesdir: ./img
+:lang: PL
+:hyphens:
+:toc-title: Spis treści
+:caution-caption: Ostrożnie
+:important-caption: Ważne
+:note-caption: Uwaga
+:tip-caption: Podpowiedź
+:warning-caption: Ostrzeżenie
+:appendix-caption: Załącznik
+:example-caption: Przykład
+:figure-caption: Ilustracja
+:table-caption: Tabela
+:chapter-label: Rozdział
+
+== Optymalizacja
+
+* W artykule https://leveluppp.ghost.io/loop-optimizations-in-various-compilers/ ciekawie wytłumaczono działanie kompilatora .Net 5.0 w celu optymalizacji pętli.
+
+indexterm:[C#, wskaźniki]
+indexterm:[wskaźniki, C#]
+
+* W filmiku https://www.youtube.com/watch?v=Tb2Fx9qku_o przedstawiono niezwykle skuteczne optymalizacje funkcji, gdzie uproszczono operację modulo, usunięto rozgałęzienie (instrukcję if), rozwinięto pętle a nastepnie nawet wykorzystano wskaźniki.
+
+:leveloffset: +1
+
+include::Biblioteki_.Net/Biblioteki_.Net.adoc[]
+include::Technologie/Technologie.adoc[]
+
+:leveloffset: -1
+
+=== ((FsCheck)) for .Net
+
+#TODO: Uzupełnić.#
+
+https://aaronstannard.com/fscheck-property-testing-csharp-part1/
+
+Pod linkiem podanym wyżej możecie zapoznać się również z krótkim wprowadzeniem do tej funkcji.
+Na ogół służy ona do robienia „małpich testów”: podajemy typy wejściowe danych, a biblioteka już sama próbuje wszystkich możliwych kombinacji.
+Dodatkową zaletą na pewno jest fakt, że potrafi ona wyświetlić najmniejszy (w domyśle najprostszy) zestaw, który spowodował błąd.
+
+== ((SonnarLint))
+
+#TODO: Uzupełnić.#
+
+SonnarLint'a już zacząłem nawet używać gdzieniegdzie w projekcie, choć jeszcze bez wyraźnego celu. 
+Służy on do szukania wszelkiego typu naruszeń w naszym kodzie – przeprowadza statyczną analizę i zaznacza wszystkie znane mu podatności. 
+Ogólnie uważam tego typu programy za bardzo przydatne – i choć na początku mogą wydawać się wyjątkowo złośliwe, podkreślając do drugą linijkę w projekcie, to ostatecznie okazuje się, że potrafią wybronić nas przed wieloma głupimi błędami. 
+
+== MassTransit 
+#TODO: Uzupełnić.#
+
+== MQTTnet
+#TODO: Uzupełnić.#

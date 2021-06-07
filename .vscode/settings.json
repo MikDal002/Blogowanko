@@ -3,8 +3,9 @@
     "asciidoc.asciidoctorpdf_command": "asciidoctor-pdf -r asciidoctor-diagram",
     "languageTool.language": "pl",
     "asciidoc.use_asciidoctor_js": false,
-    "asciidoc.use_asciidoctorpdf": true,
     "languageToolLinter.languageTool.ignoredWordsInWorkspace": [
         "pso"
     ],
+    "asciidoc.trace": "verbose",
+    "asciidoc.use_asciidoctorpdf": true,
 }
