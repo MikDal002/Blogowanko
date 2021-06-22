@@ -4,6 +4,8 @@
     "languageTool.language": "pl",
     "asciidoc.use_asciidoctor_js": false,
     "languageToolLinter.languageTool.ignoredWordsInWorkspace": [
+        "dockera",
+        "dockerem",
         "pso"
     ],
     "asciidoc.trace": "verbose",
