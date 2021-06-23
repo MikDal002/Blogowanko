@@ -8,8 +8,56 @@ Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 [.lead]
 W niniejszym artykule przedstawiam mój sposób na pracę z Dockerem w taki sposób, aby zachować czystość komputera przy używaniu nowych technologii w celu nauki lub sporadycznym wykorzystaniu. 
 Założenia, które sobie stawiam to "jak najmniej Dockera", czyli skupiam się na tym, aby wiedza potrzebna do jego wykorzystania nie przysłoniła tej wiedzy, którą chcemy posiąść. 
+Jest to druga część artykułu na ten temat.
 
-== Docker i ((Visual Studio Code))
+= Po prostu Docker
+
+.Widok pluginu
+image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_PLuginDocker.png[]
+
+Rozszerzenie Docker autorstwa firmy Microsoft dostępne pod adresem https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker pozwala nam na łatwe zarządzanie obrazami i ich uruchamianiem.
+Ma jeszcze wiele innych funkcji, z które jednak wykraczają poza zakres niniejszego artykułu.
+
+Najważniejsze jego funkcje to:
+
+.Widok menu kontekstowego dającego dostęp do użytecznych funkcji
+image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_FunkcjePluginuDocker.png[]
+
+Następujące funkcje są najciekawsze w przypadku _uruchamiania nowego kontenera z obrazu_:
+
+Run::
+    Jest to odpowiednik uruchamiania serwisu z poprzedniej części artykułu. 
+    Uruchamia dany kontener i pozostawia go w tle.
+
+Run interactive::
+    Odpowiada uruchomieniu interaktywnego obrazu. 
+    Po użyciu tej komendy całe wyjście i możliwość interakcji z obrazem jest dostępna z poziomu terminala Visual Studio Code.
+
+Pull::
+    Pozwala nam zaktualizować obraz, jeśli pojawiła się jego nowsza wersja pod danym tagiem.
+
+Remove::
+    Usuwa obraz, zwalniając przestrzeń dyskową.
+
+W przypadku operacji na uruchomionym kontenerze najciekawsze funkcje to:
+
+Attach Shell::
+    Podłącza terminal Visual Studio Code pozwalając nam na działania w wybranym kontenerze. 
+
+Open in Browser::
+    Otwiera kontener w przeglądarce (jeśli ten udostępnił do tego port)
+
+Stop::
+    Zatrzymuje kontener.
+
+= Remote - Containers
+
+.Widok wtyczki Remote-Containers
+image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_RemoteContainers.png[]
+
+Jest to niewątpliwie najlepsza wtyczka do pracy z Dockerem. 
+
+#TODO: Tutaj skończyłeś#
 
 #TODO: Opisać rozszerzenie Docker#
 
