@@ -50,41 +50,44 @@ Open in Browser::
 Stop::
     Zatrzymuje kontener.
 
+Podsumowując – mamy do dyspozycji wszystkie podstawowe operacje co w konsoli tylko, że w dużo przyjemniejszym środowisku.
+
 = Remote - Containers
 
 .Widok wtyczki Remote-Containers
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_RemoteContainers.png[]
 
-Jest to niewątpliwie najlepsza wtyczka do pracy z Dockerem. 
+Jest to niewątpliwie najlepsza wtyczka do pracy z Dockerem, która dodatkowo w ciekawy sposób integruje się ze wtyczką powyżej, otóż: 
 
-#TODO: Tutaj skończyłeś#
+.Rozszerzenie pluginu Docker przez Remote - Containers.
+image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_FunkcjePluginuRemoteContainers.png[]
 
-#TODO: Opisać rozszerzenie Docker#
+Attach Visual Studio Code::
+    Funkcja ta powoduje, że nasze Visual Studio Code zostanie otwarte ponownie w kontekście kontenera!
+    Dzięki temu zyskujemy możliwość otwierania folderów, które tam się znajdują. 
+    Daje nam to świetną integrację, gdyż bez problemu możemy kopiować dane i pracować na plikach z poziomu Visual Studio Code. 
 
-Konfiguracja wymaga rozszerzenia "Remote - Containers". 
-Więcej na temat konfiguracji Visual Studio Code pod kontenery znajdziesz https://code.visualstudio.com/docs/remote/containers-tutorial[tutaj].
+.Widok Visual Studio Code wewnątrz kontenera. 
+image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_QisokVSCWKontenerze.png[]
 
-NOTE: Jeszcze więcej informacji na https://code.visualstudio.com/docs/remote/containers[oficjalnej stronie Microsoft].
+Jest jeszcze lepsza część tego rozszerzenia, otóż:
 
-Visual Studio Code może działać w środowisko skonteneryzowanym (uruchamiać projekt w Dokerze) poprzez dodanie katalogu `.devcontainer` a w nim pliku `devcontainer.json` służącego do konfiguracji samego środowiska VSC oraz `Dockerfile`, który przechowuje informacje na temat naszego obrazu w którym będziemy pracować.
-VSC może uzupełnić strukturę plików za ciebie poprzez polecenie `((Remote-Containers)): Add Development Container Configuration Files`.
+== .devcontainer
 
-#TODO: Dodać przykład z node.js#
+Visual Studio Code może działać w środowisko skonteneryzowanym (uruchamiać projekt w Dokerze) poprzez dodanie katalogu `.devcontainer` a w nim pliku `devcontainer.json` służącego do konfiguracji samego środowiska VSC oraz `Dockerfile`, który przechowuje informacje na temat naszego obrazu, w którym będziemy pracować.
+VSC może uzupełnić strukturę plików za ciebie poprzez polecenie `((Remote-Containers)): Add Development Container Configuration Files`, także nie musisz nic zapisywać ani zapamiętywać.
 
-Warto zauważyć, że gdy na przyklad uruchomimy aplikacje node.js w kontenerze w Visual Studio Code to automatycznie zostanie otwarty ten port i będzie możliwe otwarcie strony w naszej codziennej przeglądarce.
+Struktura katalogów i treść plików wygląda następująco:
 
-= Dockerfile
-== Problem interakcji
-#TODO: Uzupełnić#
-Więcej informacji znajdziesz w tym poście: https://linuxhint.com/debian_frontend_noninteractive/.
+.Struktura katalogów dla .devcontainer
+image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_WidokKonteneraDevContainer.png[]
 
-[source,dockerfile]
-----
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install «twoje paczki» <1>
+1:: Widok na strukturę katalogów,
+2:: Treść pliku Dockerfile dla środowiska w którym pisze wpisy na tego bloga,
+3:: Treść devcontainer.json, który automatycznie konfiguruje to środowisko przy pierwszym starcie.
+4:: Terminal oraz możliwość *otwierania portów w trakcie działania w kontenerze*!
 
-RUN export DEBIAN_FRONTEND=noninteractive <2>
-RUN apt-get -y install «twoje paczki»
-----
-
-<1> W pierwszym przypadku wyłączamy tryb interaktywny tylko dla tej jednej linijki,
-<2> W drugim przypadku całkowicie wyłączamy tryb interaktywny dla budowania obrazu.
+[sidebar]
+****
+Więcej na temat konfiguracji Visual Studio Code pod kontenery znajdziesz https://code.visualstudio.com/docs/remote/containers-tutorial[tutaj], a jeszcze więcej informacji na https://code.visualstudio.com/docs/remote/containers[oficjalnej stronie Microsoft].
+****
