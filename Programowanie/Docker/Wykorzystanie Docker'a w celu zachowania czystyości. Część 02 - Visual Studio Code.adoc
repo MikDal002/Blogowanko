@@ -4,6 +4,8 @@ Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :source-highlighter: pygments
 :note-caption: Uwaga
 :imagesdir: ./img
+:icons: font
+:experimental:
 
 [.lead]
 W niniejszym artykule przedstawiam mój sposób na pracę z Dockerem w taki sposób, aby zachować czystość komputera przy używaniu nowych technologii w celu nauki lub sporadycznym wykorzystaniu. 
@@ -91,3 +93,13 @@ image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_WidokKonteneraDevContainer.
 ****
 Więcej na temat konfiguracji Visual Studio Code pod kontenery znajdziesz https://code.visualstudio.com/docs/remote/containers-tutorial[tutaj], a jeszcze więcej informacji na https://code.visualstudio.com/docs/remote/containers[oficjalnej stronie Microsoft].
 ****
+
+== Przykład z node.js 
+
+[qanda]
+
+Na początek utwórz katalog do pracy::
+Może to być na przykład `D:/mojnodejsproject`.
+
+Następnie otwórz w nim Visual Studio Code::
+Aby to zrobić naciśnij prawym przyciskiem na puste miejsce w katalogu menu:PPM[Open With Code].
