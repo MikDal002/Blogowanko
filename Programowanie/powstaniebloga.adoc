@@ -1,7 +1,14 @@
+---
+title: "O powstawianiu bloga"
+date: 2021-06-28T20:38:11+02:00
+draft: true
+categories: 
+    - "za kurtyną"
+tags:
+    - "blogowanie"
+---
 = O powstawianiu bloga
-Mikołaj Dalecki <dalecki.mikolaj@gmail.com>
 :source-highlighter: pygments
-:imagesdir: ./img
 
 == Inspiracje
 W moim odczuciu blog mógłby w dużej mierze wyglądać (w kwestii przedstawienia treści) podobnie do strony https://refactoring.guru/pl[Refactoring Guru].
@@ -110,16 +117,16 @@ Problemy przy generowaniu PDF'a:
 - brak płynnej kontroli elementów: obrazy pojawiają się DOKŁADNIE tam, gdzie wprowadzisz je w kodzie.
 W LaTeX'u są one płynne.
 
-= Pomysły na artykuły i serie
+== Pomysły na artykuły i serie
 
-= Inne blogi i strony warte uwagi
+== Inne blogi i strony warte uwagi
 
 - https://cezarywalenciuk.pl/ - aktywnie rozwijany blog o technologiach .Net oraz przemówieniach.
 Znajdziesz na nim rzeczy stricte o kodzie (nowe technologie, biblioteki, itp.) jak i bardziej abstrakcyjne jak architektura czy wzorce projektowe.
 - https://crossweb.pl/podcasty/ – lista podcastów o technologiach, IT i programowaniu.
 - https://leveluppp.ghost.io/ - blog o technologiach .Net (i nie tylko) na którym znalazłem ciekawe niskopoziomowe (o IL) wpisy.
 
-== Ciekawe blogi ale nie tak bardz
+=== Ciekawe blogi ale nie tak bardz
 
 - https://programistanaswoim.pl/ - blog który w swojej historii miał na celu przedstawienie jak przejść na własną działalność jako programista.
 Niestety nie jest on już za często aktualizowany.

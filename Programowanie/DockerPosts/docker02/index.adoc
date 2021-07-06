@@ -1,9 +1,20 @@
+---
+title: "Wykorzystanie Docker'a w celu zachowania czystości. Część 02 - Visual Studio Code"
+date: 2021-06-28T20:38:11+02:00
+draft: true
+image: logo_dockera.jpg
+categories: 
+    - "Docker"
+tags:
+    - "docker"
+    - "node.js"
+---
+
 = Wykorzystanie Docker'a w celu zachowania czystości. Część 02 - Visual Studio Code
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:
 :source-highlighter: pygments
 :note-caption: Uwaga
-:imagesdir: ./img
 :icons: font
 :experimental:
 
@@ -12,7 +23,7 @@ W niniejszym artykule przedstawiam mój sposób na pracę z Dockerem w taki spos
 Założenia, które sobie stawiam to "jak najmniej Dockera", czyli skupiam się na tym, aby wiedza potrzebna do jego wykorzystania nie przysłoniła tej wiedzy, którą chcemy posiąść. 
 Jest to druga część artykułu na ten temat.
 
-= Po prostu Docker
+== Po prostu Docker
 
 .Widok pluginu
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_PLuginDocker.png[]
@@ -54,7 +65,7 @@ Stop::
 
 Podsumowując – mamy do dyspozycji wszystkie podstawowe operacje co w konsoli tylko, że w dużo przyjemniejszym środowisku.
 
-= Remote - Containers
+=== Remote - Containers
 
 .Widok wtyczki Remote-Containers
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_RemoteContainers.png[]
@@ -74,7 +85,7 @@ image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_QisokVSCWKontenerze.png[]
 
 Jest jeszcze lepsza część tego rozszerzenia, otóż:
 
-== .devcontainer
+=== .devcontainer
 
 Visual Studio Code może działać w środowisko skonteneryzowanym (uruchamiać projekt w Dokerze) poprzez dodanie katalogu `.devcontainer` a w nim pliku `devcontainer.json` służącego do konfiguracji samego środowiska VSC oraz `Dockerfile`, który przechowuje informacje na temat naszego obrazu, w którym będziemy pracować.
 VSC może uzupełnić strukturę plików za ciebie poprzez polecenie `((Remote-Containers)): Add Development Container Configuration Files`, także nie musisz nic zapisywać ani zapamiętywać.
@@ -84,17 +95,17 @@ Struktura katalogów i treść plików wygląda następująco:
 .Struktura katalogów dla .devcontainer
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_WidokKonteneraDevContainer.png[]
 
-<1> Widok na strukturę katalogów,
-<2> Treść pliku Dockerfile dla środowiska, w którym pisze wpisy na tego bloga,
-<3> Treść devcontainer.json, który automatycznie konfiguruje to środowisko przy pierwszym starcie.
-<4> Terminal oraz możliwość *otwierania portów w trakcie działania w kontenerze*!
+// <1> Widok na strukturę katalogów,
+// <2> Treść pliku Dockerfile dla środowiska, w którym pisze wpisy na tego bloga,
+// <3> Treść devcontainer.json, który automatycznie konfiguruje to środowisko przy pierwszym starcie.
+// <4> Terminal oraz możliwość *otwierania portów w trakcie działania w kontenerze*!
 
 [sidebar]
 ****
 Więcej na temat konfiguracji Visual Studio Code pod kontenery znajdziesz https://code.visualstudio.com/docs/remote/containers-tutorial[tutaj], a jeszcze więcej informacji na https://code.visualstudio.com/docs/remote/containers[oficjalnej stronie Microsoft].
 ****
 
-== Przykład z node.js 
+=== Przykład z node.js 
 
 [qanda]
 Na początek utwórz katalog do pracy::

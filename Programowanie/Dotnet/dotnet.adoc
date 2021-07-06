@@ -29,8 +29,8 @@ indexterm:[wskaźniki, C#]
 
 :leveloffset: +1
 
-include::Biblioteki_.Net/Biblioteki_.Net.adoc[]
-include::Technologie/Technologie.adoc[]
+// include::Biblioteki_.Net/Biblioteki_.Net.adoc[]
+// include::Technologie/Technologie.adoc[]
 
 :leveloffset: -1
 

@@ -1,13 +1,18 @@
+---
+title: "Podstawy AsciiDoc"
+date: 2021-06-28T21:38:11+02:00
+draft: true
+categories: 
+    - "AsciiDoc"
+tags:
+    - "blog"
+---
+
 = Podstawy AsciiDoc
-Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
-v0.1, 2021-05-08: Work in progress
 :toc:
-:imagesdir: ./img
 :sectnums:
-:iconsdir: ./icons
 :sectanchors:
 :source-highlighter: pygments
-:keywords: asciidoc, wstęp
 
 [.lead]
 Przedstawiam podstawowe komendy i użycia AsciiDoc'a, które są mi niezbędne w trakcie pracy nad blogiem.

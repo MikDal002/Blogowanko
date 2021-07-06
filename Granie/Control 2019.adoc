@@ -1,3 +1,17 @@
+---
+title: "Wrażenia z gry Control z 2019 roku studia Remedy Entertainment"
+date: 2021-06-28T20:38:11+02:00
+draft: true
+categories: 
+    - "Granie"
+tags:
+    - "xbox"
+    - "xboxone"
+    - "2019"
+    - "TPS"
+    - "Remedy Entertainment"
+    - "505 Games"
+---
 = Wrażenia z gry Control z 2019 roku studia Remedy Entertainment
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:

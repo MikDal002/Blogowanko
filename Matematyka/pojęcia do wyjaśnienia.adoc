@@ -1,11 +1,23 @@
+---
+title: "To co jest do opisu i czego nie rozumiem :-("
+date: 2021-06-28T20:38:11+02:00
+draft: true
+categories: 
+    - "matematyka"
+tags:
+    - "matematyka"
+    - "inne"
+    - "blog"
+---
+
 = To co jest do opisu i czego nie rozumiem :-(
 Mikołaj Dalecki
 :stem: 
 
 * Prawdopodobieństwo:
 ** Co znaczy słowo wariancja? 
-
-    To można by ująć w taki sposób, że z angielskiego `variance` oznacza niezgodność, rozbieżność, sprzeczność.  W sensie matematycznym jest to definiowane jako miara zmienności. Jak to przedstawić graficznie? Jak to rozumieć na prawdę?   
++
+To można by ująć w taki sposób, że z angielskiego `variance` oznacza niezgodność, rozbieżność, sprzeczność.  W sensie matematycznym jest to definiowane jako miara zmienności. Jak to przedstawić graficznie? Jak to rozumieć na prawdę?   
 
 ** "Rozkład prawdopodobieństwa pierwszego stopnia"
 *** Czym jest rozkład prawdopodobieństwa?

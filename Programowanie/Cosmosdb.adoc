@@ -4,12 +4,12 @@ Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :source-highlighter: pygments
 :imagesdir: ./img
 
-= CosmosDB
+== CosmosDB
 
 [.lead]
 W niniejszym artykule chciałbym przedstawić kilka trików i skrótów, które skutecznie ułatwiają pracę z CosmosDB.
 
-== ((Request Unit))s (RU) dla ostatniego zapytania
+=== ((Request Unit))s (RU) dla ostatniego zapytania
 Często w trakcie pracy przy optymalizacji zapytań do bazy danych nie wystarczy kierować się tylko czasem wykonywania polecenia oraz rozmiarem transferowanych danych do i z bazy. 
 Dla tych, co nie wiedzą: w przypadku CosmosDB rozliczenie następuje za pomocą jednostek żądań (z ang. _request units_, RU), dlatego zależy nam też, aby liczba tych jednostek przypadająca na jedno żądanie była możliwie najmniejsza. 
 
@@ -23,7 +23,7 @@ Przy wykorzystaniu ((mongo)) shell można sprawdzić ilość użytego RU za pomo
 Ilość wykorzystanych RU będzie znajdowała się przy pozycji `RequestCharge`.
 Więcej sposobów na znajdowanie wartości zużytych jednostek żądań znajdziesz pod adresem: https://docs.microsoft.com/en-us/azure/cosmos-db/find-request-unit-charge-mongodb[find request unit charge mongodb].
 
-=== Optymalizacje:
+== Optymalizacje:
 
 Następujące optymalizacje są zalecane footnote:BIA36JakubWaliszewski[https://www.youtube.com/watch?v=hNkDBSr54AE]:
 
@@ -39,7 +39,7 @@ Następujące optymalizacje są zalecane footnote:BIA36JakubWaliszewski[https://
 
 Autor prezentacji na BIA36 footnote:BIA36JakubWaliszewski[] mówi o tym, że otrzymali narzędzie do transportu 500GB danych produkcyjnych z jednej instancji bazy CosmosDB do drugiej.
 
-=== Więcej na temat RU
+== Więcej na temat RU
 Jeśli zainteresował Cię temat RU, to więcej informacji znajdziesz na stronie Microsoftu: https://docs.microsoft.com/en-us/azure/cosmos-db/request-units[Request Units]. 
 Pokrótce mogę powiedzieć, że ilość użytych jednostek na żądanie zależy od tego, ile użyjesz pamięci, procesora i operacji wejścia/wyjścia na sekundę (z ang. IOPS – _input/output operations per second_). 
 
@@ -47,7 +47,7 @@ Pokrótce mogę powiedzieć, że ilość użytych jednostek na żądanie zależy
 Zapytania rzadsze (częściej niż raz na godzinę) powinny mieścić się w przedziale 10-50 RU, maksymalnie do 100 RU.
 Tylko niektóre polecenia administracyjne, wykonywane od święta, mogą przekraczać barierę 100 RU i tutaj nie widzę górnego limitu, aczkolwiek pamiętajmy, że mogło zostać założone ograniczenie kosztów na bazie danych, przez co nie będziemy w stanie wykonać niektórych obliczeniożernych poleceń. 
 
-= Appinsights 
+== Appinsights 
 #TODO: TBA#
 
 [.lead]
@@ -56,7 +56,7 @@ O App Insightach
 * Appinsighty pozwalają na profilowanie aplikacji działającej w chmurze.
 Profilowanie może być wyzwalane automatycznie, na przykład, przy dużym obciążeniu CPU, dużej zajętości pamięci itp footnote:[https://www.youtube.com/watch?v=wVmEREpHZWI]
 
-= IoT Hub
+== IoT Hub
 #TODO: TBA#
 #TODO: Azure Security Center for IoT – służy do wykrywania zagrożeń, podatności i dziwnych zachowań# 
 [.lead]
@@ -72,7 +72,7 @@ image::cosmosdb_iothub_HA.png[]
 
 - Infrastruktura powinna być jak najbliżej źródła, czyli znajdować się na tym samym kontynencie.
 
-= Azure Event Hub
+== Azure Event Hub
 
 Optymalizacje kosztowe footnote:BIA36JakubWaliszewski[]:
 
@@ -80,7 +80,7 @@ Optymalizacje kosztowe footnote:BIA36JakubWaliszewski[]:
 * Auto-inflate with scale-up throughput,
 * Event Hub Cluster if you have more jobs
 
-= Azure Stream Analytics 
+== Azure Stream Analytics 
 
 image::cosmosdb_azurestreamanalytics_infrastructure.png[]
 
@@ -91,5 +91,5 @@ Optymalizacje kosztowe footnote:BIA36JakubWaliszewski[]:
 * Stream Analytics Cluster if you have more jobs
 
 
-= #TODO: Active directory jako uwierzytelnienie urządzeń#
-= #TODO: keyVault do sekretów#
+== #TODO: Active directory jako uwierzytelnienie urządzeń#
+== #TODO: keyVault do sekretów#

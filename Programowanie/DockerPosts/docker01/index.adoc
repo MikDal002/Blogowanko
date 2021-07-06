@@ -1,9 +1,20 @@
+---
+title: "Wykorzystanie Docker'a w celu zachowania czystości. Część 01 - Konsola"
+date: 2021-07-05T20:38:11+02:00
+draft: false
+image: logo_dockera.jpg
+categories: 
+    - "Docker"
+tags:
+    - "docker"
+    - "node.js"
+---
 = Wykorzystanie Docker'a w celu zachowania czystości. Część 01 - Konsola
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:
 :source-highlighter: pygments
 :note-caption: Uwaga
-:imagesdir: ./img
+:icons: font
 
 [.lead]
 W niniejszym artykule przedstawiam mój sposób na pracę z Dockerem w taki sposób, aby zachować czystość komputera przy używaniu nowych technologii w celu nauki lub sporadycznym wykorzystaniu. 
@@ -27,7 +38,7 @@ Jeśli nie masz jeszcze konta, to jego założenie jest darmowe, tak samo, jak k
 NOTE: Według mnie wersja ta jest wciąż niedojrzała i w ramach moich testów nie nadawał się do żadnej pracy. Przedstawiam ją tutaj ku potomności, bo mam nadzieję, że w końcu rozwiną tę usługę.
 
 .Widok na stronę Play with Docker z jednym kontenerem.
-image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_PlayWithDocker.png[]
+image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_PlayWithDocker.png[This is an alternative text]
 
 Po lewej stronie możemy sobie tworzyć nowe, kolejne okna z Dockerem, natomiast u góry ekranu widzimy takie dane jak: • wewnętrzny adres IP (do komunikacji między kontenerami), • przycisk do otwierania portu (aby dostać się do poszczególnych usług), oraz adres SSH, który umożliwia nam wgranie plików lub połączenie się z Visual Studio Code.
 
@@ -107,7 +118,7 @@ W ten sposób można działać, na przykład, ucząc się nowego języka program
 
 [source,console]
 ----
-> docker run --name some-nodejs -p 3000:3000 -v "$(PWD):/mylocaldata" -it node bash
+> docker run --name some-nodejs -p 3000:3000 -v (PWD):/mylocaldata -it node bash
 ----
 
 Wartości te zostały przedstawione powyżej, pokrótce je przypomnijmy:

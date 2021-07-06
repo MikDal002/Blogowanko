@@ -6,6 +6,6 @@ Wypisuję je tutaj, aby o nich nie zapomnieć i dla możliwej dyskusji, na temat
 
 :leveloffset: +1
 
-include::ConsoleTable.adoc[]
+// include::ConsoleTable.adoc[]
 
 :leveloffset: -1
