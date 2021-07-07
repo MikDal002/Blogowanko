@@ -1,7 +1,7 @@
 ---
 title: "Wykorzystanie Docker'a w celu zachowania czystości. Część 02 - Visual Studio Code"
 date: 2021-06-28T20:38:11+02:00
-draft: true
+draft: false
 image: logo_dockera.jpg
 categories: 
     - "Docker"
