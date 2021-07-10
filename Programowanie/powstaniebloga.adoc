@@ -40,7 +40,7 @@ Prosta wielojęzyczna strona wykonana za pomocą Hugo (https://github.com/chaos-
 
 * [ ] Ogarnąć AsciiDoctor Bibliography,
 * [ ] Zapoznać się z możliwościami DocBook'a, gdzie AsciiDoctor mógłby odgrywać rolę frontendu (sposobu edycji) dla tego formatu, a ten następnie byłby konwertowany do innych, jak LaTeX czy HTML.
-Jego zaletą jest również to, że jest on bardzo dobrze ustrukturyzowany, co pozwoli mi łatwo wyciągnąć z niego informacje.
+Jego zaletą jest również to, że jest on bardzo dobrze u strukturyzowany, co pozwoli mi łatwo wyciągnąć z niego informacje.
 
 == Proponowany przepływ pracy
 

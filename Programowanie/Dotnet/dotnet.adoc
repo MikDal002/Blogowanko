@@ -16,6 +16,7 @@ Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :figure-caption: Ilustracja
 :table-caption: Tabela
 :chapter-label: Rozdział
+:icons: font
 
 == Optymalizacja
 

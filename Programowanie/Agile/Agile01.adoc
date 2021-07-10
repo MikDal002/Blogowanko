@@ -1,0 +1,17 @@
+= Agile: Lean Software Development, Scurm czy Kanban? 
+// :kroki-http-method: post
+:kroki-default-format: adaptive
+// :kroki-fetch-diagram:
+
+[plantuml]
+....
+Start -> Stop22
+Stop -> Start2
+
+....
+
+.Anatomy of provider
+[excalidraw]
+....
+include::img/ProcesAgileLeanScrumKanban.excalidraw[]
+....
