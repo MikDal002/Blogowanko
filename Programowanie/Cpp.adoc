@@ -1,3 +1,6 @@
+---
+draft: true
+---
 = O C++
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:

@@ -1,3 +1,6 @@
+---
+draft: true
+---
 = Podstawy Visual Studio 2019
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 v0.1, 2021-05-13: Work in progress

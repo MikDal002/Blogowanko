@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 = O .net i C#
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:
@@ -26,13 +30,6 @@ indexterm:[C#, wskaźniki]
 indexterm:[wskaźniki, C#]
 
 * W filmiku https://www.youtube.com/watch?v=Tb2Fx9qku_o przedstawiono niezwykle skuteczne optymalizacje funkcji, gdzie uproszczono operację modulo, usunięto rozgałęzienie (instrukcję if), rozwinięto pętle a nastepnie nawet wykorzystano wskaźniki.
-
-:leveloffset: +1
-
-include::Biblioteki_.Net/Biblioteki_.Net.adoc[]
-include::Technologie/Technologie.adoc[]
-
-:leveloffset: -1
 
 === ((FsCheck)) for .Net
 

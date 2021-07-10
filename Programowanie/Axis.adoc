@@ -1,3 +1,6 @@
+---
+draft: true
+---
 = Praca z kamerami Axis
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:

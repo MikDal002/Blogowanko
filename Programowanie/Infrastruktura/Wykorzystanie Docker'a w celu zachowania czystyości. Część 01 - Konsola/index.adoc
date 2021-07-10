@@ -1,9 +1,19 @@
+---
+title: "Wykorzystanie Docker'a w celu zachowania czystości. Część 01 - Konsola"
+date: 2021-06-28T20:38:11+02:00
+draft: false
+image: logo_dockera.jpg
+categories: 
+    - "Docker"
+tags:
+    - "docker"
+    - "node.js"
+---
 = Wykorzystanie Docker'a w celu zachowania czystości. Część 01 - Konsola
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:
 :source-highlighter: pygments
 :note-caption: Uwaga
-:imagesdir: ./img
 
 [.lead]
 W niniejszym artykule przedstawiam mój sposób na pracę z Dockerem w taki sposób, aby zachować czystość komputera przy używaniu nowych technologii w celu nauki lub sporadycznym wykorzystaniu. 

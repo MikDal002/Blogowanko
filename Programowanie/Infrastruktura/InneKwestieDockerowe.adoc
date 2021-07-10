@@ -1,4 +1,6 @@
-
+---
+draft: true
+---
 = Dockerfile
 == Problem interakcji
 #TODO: Uzupełnić#

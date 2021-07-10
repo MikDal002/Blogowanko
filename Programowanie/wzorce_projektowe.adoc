@@ -1,3 +1,6 @@
+---
+draft: true
+---
 = O wzorcach projektowych
 
 == Wstęp

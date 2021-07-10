@@ -1,3 +1,7 @@
+---
+title: Własna implementacja wybranych operatorów algorytmu genetycznego, test rozwiązań problemu komiwojażera, plecakowego oraz znajdowania minimów wybranych funkcji testowych w porównaniu do PSO
+draft: false
+---
 = Własna implementacja wybranych operatorów algorytmu genetycznego: test rozwiązań problemu komiwojażera, plecakowego oraz znajdowania minimów wybranych funkcji testowych w porównaniu do PSO
 Mikołaj Dalecki <mikdal002@utp.edu.pl>; Mateusz Lewandowski <matlew13@utp.edu.pl>; Karol Appel <karapp002@utp.edu.pl>; Przemysław Nadobny <prznad005@utp.edu.pl>; Jacek Suty <jacsut000@utp.edu.pl>
 :toc2:
@@ -74,8 +78,8 @@ Znajdują się tam opisy wybranych przez nas funkcji testowych oraz wiele innych
 = Bibliografia
 
 * [[[Kumar2010]]] Kumar, Manoj, Mohamed Husain, Naveen Upreti, i Deepti Gupta. 2010. „Genetic Algorithm: Review and Application”. SSRN Electronic Journal. https://doi.org/10.2139/ssrn.3529843.
-* [[FalcoCioppa2002]] De Falco, I, A Della Cioppa, i E Tarantino. 2002. „Mutation-Based Genetic Algorithm: Performance Evaluation”. Applied Soft Computing 1 (4): 285–99. https://doi.org/10.1016/S1568-4946(02)00021-2.
-* [[wiatrak2015]] Wiatrak, Mateusz, i Ewa Figielska. 2015. „Zastosowanie algorytmu optymalizacji rojem cząstek do znajdowania ekstremów globalnych wybranych funkcji testowych”. Zeszyty Naukowe WWSI 9 (13): 7–19.
+* [[[FalcoCioppa2002]]] De Falco, I, A Della Cioppa, i E Tarantino. 2002. „Mutation-Based Genetic Algorithm: Performance Evaluation”. Applied Soft Computing 1 (4): 285–99. https://doi.org/10.1016/S1568-4946(02)00021-2.
+* [[[wiatrak2015]]] Wiatrak, Mateusz, i Ewa Figielska. 2015. „Zastosowanie algorytmu optymalizacji rojem cząstek do znajdowania ekstremów globalnych wybranych funkcji testowych”. Zeszyty Naukowe WWSI 9 (13): 7–19.
 
 [index]
 = Indeks

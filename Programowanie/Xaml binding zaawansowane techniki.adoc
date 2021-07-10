@@ -1,3 +1,6 @@
+---
+draft: true
+---
 = Jak w pełni wykorzystać potencjał Bindingów w ((XAML))
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:
@@ -54,7 +57,7 @@ Przy takiej sytuacji czeka nas kilka pułapek, ale wszystko to wyjaśnia poniżs
 ----
 <1> Element, który chcemy wyświetlić, kiedy nasza wartość będzie `null`. 
 Zwróć uwagę, że jest ona wewnątrz słownika `((ResourceDictionary))`, a co *najważniejsze* jest ona oznaczona jako `((x:Shared))="False"` – jest to niezbędne, bez tego, wykorzystując dany element wielokrotnie, mogą pojawić się takie błędy jak, to, że nasz `((SfBusyIndicator))` będzie wyświetlał się tylko w jednym miejscu. 
-<1> Właściwa definicja łączenia – zwróć uwagę, że wartość jest ustawiona standardowo, a `TargetNullValue` odwołuje się bezpośrednio do naszego słownika za pomocą konstrukcji `((StaticResource))`. 
+<2> Właściwa definicja łączenia – zwróć uwagę, że wartość jest ustawiona standardowo, a `TargetNullValue` odwołuje się bezpośrednio do naszego słownika za pomocą konstrukcji `((StaticResource))`. 
 
 Dzięki takiemu rozwiązaniu uzyskujemy niezależny wskaźnik ładowania w każdym miejscu, którego wartość jest `null`!
 Zwróć uwagę również, że przy wykorzystaniu tej techniki byłem zmuszony do zrobienia własnego szablonu kolumny dla `((GridView))` – w toku moich działań nie udało mi się uruchomić tego w prostszy sposób.

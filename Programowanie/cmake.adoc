@@ -1,3 +1,6 @@
+---
+draft: true
+---
 = Trochę o CMake
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:
