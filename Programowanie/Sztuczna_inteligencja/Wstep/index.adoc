@@ -1,4 +1,3 @@
-
 = Wstęp
 Niniejsze sprawozdanie jest rezultatem prac nad algorytmami genetycznymi i ich wykorzystaniem w znajdowaniu rozwiązania problemu komiwojażera/plecakowego i optymalizacji funkcji w porównaniu z algorytmem optymalizacji rojem cząstek (PSO). 
 Całość została wykonana przez dwa zespoły:

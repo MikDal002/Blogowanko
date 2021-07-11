@@ -1,16 +1,12 @@
 ---
 title: Własna implementacja wybranych operatorów algorytmu genetycznego, test rozwiązań problemu komiwojażera, plecakowego oraz znajdowania minimów wybranych funkcji testowych w porównaniu do PSO
+description: Praca nad implementacją algorytmu genetycznego jest niezwykle pouczająca. Pierwszą rzeczą, na którą zwróciliśmy uwagę, jest duży problem z testowaniem wielu elementów ze względu na wszechobecną losowość. Dodanie przekrojowych testów jednostkowych wymagałoby ogromnego nakładu pracy, z którego zrezygnowano.
 draft: false
+image: intro-image.jpg
 ---
 = Własna implementacja wybranych operatorów algorytmu genetycznego: test rozwiązań problemu komiwojażera, plecakowego oraz znajdowania minimów wybranych funkcji testowych w porównaniu do PSO
-Mikołaj Dalecki <mikdal002@utp.edu.pl>; Mateusz Lewandowski <matlew13@utp.edu.pl>; Karol Appel <karapp002@utp.edu.pl>; Przemysław Nadobny <prznad005@utp.edu.pl>; Jacek Suty <jacsut000@utp.edu.pl>
-:toc2:
-:imagesdir: ./img
-:sectnums:
-:iconsdir: ./icons
 :sectanchors:
 :source-highlighter: pygments
-:keywords: asciidoc, wstęp
 :doctype: book
 :toc-title: Spis treści
 :caution-caption: Ostrożnie
