@@ -2,8 +2,13 @@
 draft: false
 title: Przydatne biblioteki C++#01 nlohmann:json
 date: 2021-07-01
+image: intro-image.jpg
+categories:
+    - C++
+    - Narzędzia
+tags: 
+    - JSON
 ---
-
 = nlohmann::json
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:
