@@ -3,6 +3,7 @@ title: "Wykorzystanie Docker'a w celu zachowania czystości. Część 01 - Konso
 date: 2021-06-28T20:38:11+02:00
 draft: false
 image: logo_dockera.jpg
+description: W niniejszym artykule przedstawiam mój sposób na pracę z Dockerem w taki sposób, aby zachować czystość komputera przy używaniu nowych technologii w celu nauki lub sporadycznym wykorzystaniu. Założenia, które sobie stawiam to "jak najmniej Dockera", czyli skupiam się na tym, aby wiedza potrzebna do jego wykorzystania nie przysłoniła tej wiedzy, którą chcemy posiąść. Jest to pierwsza część z dwóch.
 categories: 
     - "Docker"
 tags:
@@ -18,11 +19,6 @@ Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:
 :source-highlighter: pygments
 :note-caption: Uwaga
-
-[.lead]
-W niniejszym artykule przedstawiam mój sposób na pracę z Dockerem w taki sposób, aby zachować czystość komputera przy używaniu nowych technologii w celu nauki lub sporadycznym wykorzystaniu. 
-Założenia, które sobie stawiam to "jak najmniej Dockera", czyli skupiam się na tym, aby wiedza potrzebna do jego wykorzystania nie przysłoniła tej wiedzy, którą chcemy posiąść.
-Jest to pierwsza część z dwóch.
 
 == Czym jest Docker (dla tych, którzy nie wiedzą)
 Docker to otwartoźródłowe darmowe oprogramowanie służące do pracy w kontenerach, a kontenery można porównać do bardzo lekkich maszyn wirtualnych.

@@ -3,6 +3,7 @@ title: "Wykorzystanie Docker'a w celu zachowania czystości. Część 02 - Visua
 date: 2021-07-05T20:38:11+02:00
 draft: false
 image: logo_dockera.jpg
+description: W niniejszym artykule przedstawiam mój sposób na pracę z Dockerem w taki sposób, aby zachować czystość komputera przy używaniu nowych technologii w celu nauki lub sporadycznym wykorzystaniu. Założenia, które sobie stawiam to "jak najmniej Dockera", czyli skupiam się na tym, aby wiedza potrzebna do jego wykorzystania nie przysłoniła tej wiedzy, którą chcemy posiąść. Jest to druga część artykułu na ten temat.
 categories: 
     - "Docker"
 tags:
@@ -18,11 +19,6 @@ Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :note-caption: Uwaga
 :icons: font
 :experimental:
-
-[.lead]
-W niniejszym artykule przedstawiam mój sposób na pracę z Dockerem w taki sposób, aby zachować czystość komputera przy używaniu nowych technologii w celu nauki lub sporadycznym wykorzystaniu. 
-Założenia, które sobie stawiam to "jak najmniej Dockera", czyli skupiam się na tym, aby wiedza potrzebna do jego wykorzystania nie przysłoniła tej wiedzy, którą chcemy posiąść. 
-Jest to druga część artykułu na ten temat.
 
 == Po prostu Docker
 
