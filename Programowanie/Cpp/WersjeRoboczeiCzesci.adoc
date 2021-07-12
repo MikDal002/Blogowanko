@@ -1,0 +1,24 @@
+---
+draft: true
+---
+= Miejsce na notatki i niepene artykuy do uzpeniania w przyszlosci
+
+== Narzędzia
+
+=== Śledzenie i wykrywanie wycieków pamięci w aplikacjach wbudowanych
+
+== Problemy z IDE
+
+=== QtCreator 4.14 i Command Aborted podczas próby debuggowania z GDB.
+
+#TODO: Dodać obrazek błędu "Command Aborted".#
+
+Co jakiś czas zdarza mi się otrzymać błąd "Command Aborted" przy starcie debugowania. 
+W przypadku który opisuję dzieje się to zaraz po uruchomieniu aplikacji, po zbudowaniu jej i ewentualnym wrzuceniu na urządzenie zdalne.
+Kiedy restarty IDE, a nawet całego komputera nie pomagają, warto przyjżeć się sekcji z postawionymi pułapkami 
+
+.Widok na okno z pułapkami (breakpoints)
+image:QtProblems_Command_Aborted.png[]
+
+Rozwiązaniem może okazać się usunięcie WSZYSTKICH zastawionych pułapek. 
+Można je zaznaczyć menu:PPM[Usuń zaznaczone pułapki] lub menu:PPM[Usuń wszystkie pułapki].
