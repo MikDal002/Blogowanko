@@ -1,3 +1,7 @@
+---
+draft: true
+title: Początek z NodeRedem
+---
 = Początek z ((NodeRed))'em
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:

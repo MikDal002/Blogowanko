@@ -1,0 +1,82 @@
+---
+title: Własna implementacja wybranych operatorów algorytmu genetycznego, test rozwiązań problemu komiwojażera, plecakowego oraz znajdowania minimów wybranych funkcji testowych w porównaniu do PSO
+description: Praca nad implementacją algorytmu genetycznego jest niezwykle pouczająca. Pierwszą rzeczą, na którą zwróciliśmy uwagę, jest duży problem z testowaniem wielu elementów ze względu na wszechobecną losowość. Dodanie przekrojowych testów jednostkowych wymagałoby ogromnego nakładu pracy, z którego zrezygnowano.
+draft: true
+image: intro-image.jpg
+date: 2021-07-12
+---
+= Własna implementacja wybranych operatorów algorytmu genetycznego: test rozwiązań problemu komiwojażera, plecakowego oraz znajdowania minimów wybranych funkcji testowych w porównaniu do PSO
+:sectanchors:
+:source-highlighter: pygments
+:doctype: book
+:toc-title: Spis treści
+:caution-caption: Ostrożnie
+:important-caption: Ważne
+:note-caption: Uwaga
+:tip-caption: Podpowiedź
+:warning-caption: Ostrzeżenie
+:appendix-caption: Załącznik
+:example-caption: Przykład
+:figure-caption: Ilustracja
+:table-caption: Tabela
+:chapter-label: Rozdział
+:lang: PL
+:hyphens:
+
+include::Wstep/index.adoc[]
+
+include::problemy_i_implementacja/index.adoc[]
+
+== Wnioski
+indexterm:[Unit tests]
+Praca nad implementacją algorytmu genetycznego jest niezwykle pouczająca. 
+Pierwszą rzeczą, na którą zwróciliśmy uwagę, jest duży problem z testowaniem wielu elementów ze względu na wszechobecną losowość. 
+Dodanie przekrojowych testów jednostkowych wymagałoby ogromnego nakładu pracy, z którego zrezygnowano.
+
+Największą wadą algorytmu genetycznego jest jego czas pracy.
+Dla problemu plecakowego najszybsze rozwiązanie uzyskano po całej minucie pracy, dla optymalizacji funkcji czasy te są około 0,5 sekundy. 
+Możliwe powinno być ograniczenie jeszcze czasu pracy algorytmu genetycznego, gdyż, jak można zauważyć w wynikach, rzadko, kiedy wykorzystywane są większe populacje, co może prowadzić do konkluzji, że ważniejsze jest krzyżowanie i mutacji niż rozmiar populacji.
+
+Podsumowując, kwestię algorytmów genetycznych należy zauważyć:
+
+* Zwiększenie rozmiaru populacji stanowczo wpływa na czas obliczeń w sposób negatywny i nie koniecznie przyczynia się do większej dokładności obliczeń. 
+* Należy rozważnie dobierać operatory, gdyż nie wszystkie nadają się do pracy przy każdym z możliwych problemów. 
+Dla przykładu zastosowanie krzyżowania jednorodnego (UniformCrossover) w przypadku problemów takich jak plecakowy może doprowadzić do uszkodzenia danych.
+* Należy uważać na zbyt niskie progi mutacji, które mogą spowodować, że algorytm genetyczny zamieni się w losowe sprawdzanie kolejnych wartości.
+* Możliwości modyfikacji składowych algorytmu genetycznego mogą przysporzyć dużo problemów początkującym, gdyż łatwo dobrać takie operatory, które nie zwrócą nam żadnych sensownych wyników.
+
+W przypadku PSO pojawiły się następujące wnioski:
+Funkcja McCornick'a w porównaniu do funkcji Schwefel'a wypada korzystniej dla całego spektrum badanych parametrów.
+Możemy zauważyć jednak następujące zależności:
+
+. W procesie optymalizacji duża prędkość zbieżności powoduje czasami szybką utratę różnorodności, co prowadzi do niepożądanej przedwczesnej konwergencji.
+. Im mniejszy współczynnik bezwładności tym obliczenia są precyzyjniejsze, ponieważ im większy jest ten współczynnik, tym większa skłonność cząstek do przeczesywania nowych obszarów.
+. Im większa liczba cząstek w roju tym należy zastosować mniejszy współczynnik bezwładności.
+. Im mniejszy współczynnik dążenia do najlepszego rozwiązania tym obliczenia się dokładniejsze, jednak wiąże się ten fakt ze zwiększeniem liczby wykonywanych iteracji.
+. Czas trwania epoki rośnie proporcjonalnie do wzrostu liczby cząstek w roju.
+. PSO ma stosunkowo niewielką liczbę parametrów i jest mało zależny od początkowego położenia cząstek.
+. Sprawdza się dobrze w układzie współrzędnych.
+. W PSO zachodzi konsolidacja. Z każdą iteracją "różnorodność opinii" dotycząca kierunku poruszania się roju cząstek maleje, ponieważ każda cząstka uwzględnia wspólne parametry globalne.
+. Pojedyncze cząstki wpływają na siebie wzajemnie, co z upływem czasu czyni je coraz bardziej podobnymi sobie (ustalanie szukanego optimum).
+ 
+Porównując algorytm genetyczny z PSO można odnieść wrażanie, że algorytm PSO potrafi sobie szybciej poradzić z optymalizacją funkcji i znaleźć jej najdokładniejszą wartość. 
+Niestety, w przypadku naszych testów algorytm kompletnie nie poradził sobie z funkcją Schwefa, gdzie wpadł w jedną z wielu pułapek – tutaj AG zdało egzamin.
+
+Wnioski są następujące:
+Algorytm PSO potrafi być dużo szybszy i jest stanowczo łatwiejszy w konfiguracji.
+Algorytm genetyczny natomiast jest zdecydowanie bardziej odporny, a łatwość modyfikacji pozwala na lepsze dopasowanie do rozwiązywanego problemu.
+W związku z tym można wysnuć wniosek, że algorytm PSO sprawdzi się lepiej w przypadku pewnych możliwie powtarzalnych problemów.
+
+Na koniec chcielibyśmy wspomnieć o bardzo ciekawym portalu internetowym, który pojawiał się wcześniej w pracy. 
+Chodzi o _Virtual Library of Simulation Experiment Test Functions and Datasets_, który dostępny jest pod adresem https://www.sfu.ca/~ssurjano/index.html. 
+Znajdują się tam opisy wybranych przez nas funkcji testowych oraz wiele innych, zebranych w jedno miejsce i opisanych.
+
+[bibliography]
+= Bibliografia
+
+* [[[Kumar2010]]] Kumar, Manoj, Mohamed Husain, Naveen Upreti, i Deepti Gupta. 2010. „Genetic Algorithm: Review and Application”. SSRN Electronic Journal. https://doi.org/10.2139/ssrn.3529843.
+* [[[FalcoCioppa2002]]] De Falco, I, A Della Cioppa, i E Tarantino. 2002. „Mutation-Based Genetic Algorithm: Performance Evaluation”. Applied Soft Computing 1 (4): 285–99. https://doi.org/10.1016/S1568-4946(02)00021-2.
+* [[[wiatrak2015]]] Wiatrak, Mateusz, i Ewa Figielska. 2015. „Zastosowanie algorytmu optymalizacji rojem cząstek do znajdowania ekstremów globalnych wybranych funkcji testowych”. Zeszyty Naukowe WWSI 9 (13): 7–19.
+
+[index]
+= Indeks

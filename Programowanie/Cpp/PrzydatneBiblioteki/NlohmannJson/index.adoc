@@ -1,0 +1,66 @@
+---
+draft: false
+title: Przydatne biblioteki C++#01 nlohmann:json
+date: 2021-07-01
+image: intro-image.jpg
+categories:
+    - C++
+    - Narzędzia
+tags: 
+    - JSON
+series: Przydatne biblioteki C++
+---
+= nlohmann::json
+Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
+:toc:
+:imagesdir: ./img
+:experimental:
+:source-highlighter: pygments
+
+== https://github.com/nlohmann/json
+
+indexterm:[Single Responsibility Principle]
+Bardzo przyjemna biblioteka do pracy z Json'em. 
+Daje nam ona obsługę na kilka sposobów, jednak chciałbym przedstawić jeden, z którego korzystam.
+Niestety sposób ten działa tylko dla naszych typów, które możemy edytować.
+W związku z tym mam wątpliwości co do zachowania zasady pojedynczej odpowiedzialności (z ang.  _Single Responsibility Principle_).
+Jednak nie zapominaj, że ta biblioteka posiada również rozwiązania dla (de-)serializacji typów trzecich, których modyfikować nie możemy.
+
+Dlaczego lubię tę bibliotekę? 
+
+* [x] Jest dostępna w postaci jednoplikowego nagłówka, przez co łatwo ją dołączyć do projektu. 
+* [x] Bardzo obszerna i porządnie wykonana dokumentacja, która ułatwia zapoznanie się z dostępnymi funkcjonalnościami i tym, jak je zaimplementować u siebie.
+
+[source,cpp]
+.Przykład zastosowania Nlohmann::json
+----
+struct MyDataType {
+    std::string someStrValue;
+    double someDoubleValue;
+    int someIntValue;
+
+    // Dodanie (de-) serializacji <1>
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(MyDataType, someStrValue, someDoubleValue, someIntValue)
+};
+
+///
+/// Funkcja reprezentująca jak zamienić JSON'a w nasz własny typ
+///
+MyDataType toMyDataType(const std::string& rawJson) {
+    auto j = nlohmann::json::parse(rawJson); <2>
+    auto myDataType = j.get<MyDataType>();
+    return myDataType;
+}
+
+///
+/// Funkcja reprezentująca jak zamienić nasz własny typ w JSON'a.
+///
+std::string toString(const MyDataType& data) {
+    nlohman::json jsonData = data; // W tym miejscu dochodzi do automatycznej konwersji <3> 
+    return jsonData.dump();
+}
+----
+
+<1> Najpierw musimy dodać makro, które zawiera w sobie funkcje serializujące i deserializujące. 
+<2> Potem możemy już dokonywać deserializacji JSON'a (w postaci ciągu znakowego) do  obiektu,
+<3> i serializacji z obiektu na JSON'a. 

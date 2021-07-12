@@ -1,0 +1,19 @@
+---
+draft: true
+title: "Docker: problem interakcji"
+---
+= Dockerfile
+== Problem interakcji
+#TODO: Uzupełnić#
+Więcej informacji znajdziesz w tym poście: https://linuxhint.com/debian_frontend_noninteractive/.
+
+[source,dockerfile]
+----
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install «twoje paczki» <1>
+
+RUN export DEBIAN_FRONTEND=noninteractive <2>
+RUN apt-get -y install «twoje paczki»
+----
+
+<1> W pierwszym przypadku wyłączamy tryb interaktywny tylko dla tej jednej linijki,
+<2> W drugim przypadku całkowicie wyłączamy tryb interaktywny dla budowania obrazu.
