@@ -1,5 +1,6 @@
 ---
 draft: true
+title: Wstęp do JavaScript
 ---
 = Wstęp do JavaScriptu
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>

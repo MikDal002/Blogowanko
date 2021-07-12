@@ -8,6 +8,10 @@ categories:
 tags:
     - "docker"
     - "node.js"
+    - ghost
+    - mongodb
+series:
+    - Docker w służbie czystości
 ---
 = Wykorzystanie Docker'a w celu zachowania czystości. Część 01 - Konsola
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>

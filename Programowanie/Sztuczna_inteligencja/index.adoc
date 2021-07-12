@@ -3,6 +3,7 @@ title: Własna implementacja wybranych operatorów algorytmu genetycznego, test 
 description: Praca nad implementacją algorytmu genetycznego jest niezwykle pouczająca. Pierwszą rzeczą, na którą zwróciliśmy uwagę, jest duży problem z testowaniem wielu elementów ze względu na wszechobecną losowość. Dodanie przekrojowych testów jednostkowych wymagałoby ogromnego nakładu pracy, z którego zrezygnowano.
 draft: true
 image: intro-image.jpg
+date: 2021-07-12
 ---
 = Własna implementacja wybranych operatorów algorytmu genetycznego: test rozwiązań problemu komiwojażera, plecakowego oraz znajdowania minimów wybranych funkcji testowych w porównaniu do PSO
 :sectanchors:

@@ -1,5 +1,6 @@
 ---
 draft: true
+title: Praca z kamerami Axis
 ---
 = Praca z kamerami Axis
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>

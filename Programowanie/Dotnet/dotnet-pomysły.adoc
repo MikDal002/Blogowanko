@@ -1,5 +1,6 @@
 ---
 draft: true
+title: Pomysły i zaczątki artykułów dla .Net i C#
 ---
 
 = O .net i C#
@@ -54,3 +55,17 @@ Ogólnie uważam tego typu programy za bardzo przydatne – i choć na początku
 
 == MQTTnet
 #TODO: Uzupełnić.#
+
+== Jak publikować aplikację w ((.Net Core 3.0))
+Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
+:toc:
+:source-highlighter: pygments
+
+[.lead]
+Po krótce o funkcji ((dotnet publish))
+
+[source,powershell]
+.Budowanie i publikowanie projektu .Net z dopiskiem do wersji `-Beta`, np. 1.4.4-Beta
+----
+dotnet publish --version-suffix beta
+----

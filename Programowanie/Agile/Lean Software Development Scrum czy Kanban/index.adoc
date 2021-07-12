@@ -1,5 +1,6 @@
 ---
 draft: true
+title: "Agile: Lean Software Development, Scurm czy Kanban?"
 ---
 = Agile: Lean Software Development, Scurm czy Kanban? 
 // :kroki-http-method: post

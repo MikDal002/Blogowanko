@@ -1,5 +1,6 @@
 ---
 draft: true
+title: O C++
 ---
 = O C++
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>

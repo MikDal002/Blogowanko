@@ -1,5 +1,6 @@
 ---
 draft: true
+title: Problemy z QtCreator
 ---
 = Miejsce na notatki i niepene artykuy do uzpeniania w przyszlosci
 

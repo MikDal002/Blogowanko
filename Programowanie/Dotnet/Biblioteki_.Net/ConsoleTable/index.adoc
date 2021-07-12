@@ -11,6 +11,7 @@ tags:
     - "Konsola"
     - "C-sharp"
     - "Open Source"
+series: Przydatne biblioteki C#
 ---
 = ConsoleTables
 :source-highlighter: pygments

@@ -8,6 +8,7 @@ categories:
     - Narzędzia
 tags: 
     - JSON
+series: Przydatne biblioteki C++
 ---
 = nlohmann::json
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
@@ -16,7 +17,7 @@ Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :experimental:
 :source-highlighter: pygments
 
-== https://github.com/nlohmann/json[nlohmann/json]
+== https://github.com/nlohmann/json
 
 indexterm:[Single Responsibility Principle]
 Bardzo przyjemna biblioteka do pracy z Json'em. 

@@ -1,5 +1,6 @@
 ---
 draft: true
+title: O blogu
 ---
 = O powstawianiu bloga
 Mikołaj Dalecki <dalecki.mikolaj@gmail.com>

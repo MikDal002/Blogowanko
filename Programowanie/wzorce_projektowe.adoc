@@ -1,5 +1,6 @@
 ---
 draft: true
+title: O wzorcach projektowych
 ---
 = O wzorcach projektowych
 

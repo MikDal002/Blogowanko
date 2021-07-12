@@ -1,5 +1,6 @@
 ---
 draft: true
+title: Podstawy Visual Studio 2019
 ---
 = Podstawy Visual Studio 2019
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>

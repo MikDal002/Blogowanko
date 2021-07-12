@@ -1,5 +1,6 @@
 ---
 draft: true
+title: Azure i praca z nim
 ---
 = Azure i praca z nim
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>

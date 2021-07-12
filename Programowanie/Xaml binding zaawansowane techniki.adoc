@@ -1,12 +1,18 @@
 ---
+title: Jak w pełni wykorzystać potencjał Bindingów w XAML
 draft: true
+categories:
+    - .Net
+    - WPF
+tags:
+    - XAML
 ---
 = Jak w pełni wykorzystać potencjał Bindingów w ((XAML))
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:
 :source-highlighter: pygments
 
-.lead
+[.lead]
 XAML posiada ogromne możliwości. 
 Niestety sam nie znam wielu z nich, a nieliczne, które poznaję, często wylatują mi z głowy ze względu na jednostkowe użycie. 
 W tym artykule chciałbym zachować na dłużej moją wiedzę na temat `{((Binding)) …}` ponieważ uważam ją za przydatną i stanowczo przyśpieszającą rozwój aplikacji. 

@@ -1,5 +1,6 @@
 ---
 draft: true
+title: Trochę o CMake
 ---
 = Trochę o CMake
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>

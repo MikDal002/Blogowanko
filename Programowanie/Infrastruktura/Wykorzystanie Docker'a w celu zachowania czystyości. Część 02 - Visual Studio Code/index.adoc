@@ -8,6 +8,8 @@ categories:
 tags:
     - "docker"
     - "node.js"
+series:
+    - Docker w służbie czystości
 ---
 = Wykorzystanie Docker'a w celu zachowania czystości. Część 02 - Visual Studio Code
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
