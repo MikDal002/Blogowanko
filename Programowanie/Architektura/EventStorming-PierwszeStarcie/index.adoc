@@ -1,8 +1,83 @@
 ---
-title: "EventStorming PierwszeStarcie"
+title: "Event Storming: Pierwsze Starcie"
 date: 2021-07-12T20:07:46Z
-draft: true
+draft: false
 image: cover-image.jpg
-description: W niniejszym artykule przedstawiam wstęp do Event Stormingu wystarczający do przeprowadzanie małych warsztatów wewnętrznych. 
+description: W niniejszym artykule przedstawiam wstęp do Event Stormingu wystarczający do przeprowadzania małych warsztatów wewnętrznych. 
+categories:
+    - Event Storming
+tags:
+    - Event Storming
+    - Karteczki samoprzylepne
+    - Warsztaty
 ---
+:toc:
+== Wstęp teoretyczny
 
+[quote, Alexey Zimarew, Domain-Driven Design dla .NET Core (DDDNetCore)]
+Podstawowa koncepcja techniki EventStorming polega na zapewnieniu prostej notacji modelującej, używanej do wizualizacji zachowań systemu w sposób zrozumiały dla każdego.
+ 
+indexterm:[Event Storming]
+Event storming polega na zebraniu faktów (zwanych także _zdarzeniami dziedzinowymi_), które się wydarzyły i są *nieodwracalne* w rozumieniu per se. 
+Mówiąc inaczej, gdy użytkownik kupił produkt, nie może już tego cofnąć (maszyna pakowania i nadawania numerów przesyłki już ruszyła), może on rozpocząć procedurę zwrotu zakupionego produktu. 
+Co ważne, fakty zapisujemy za pomocą formy przeszłej, czyli „użytkownik zapłacił za produkt”, „użytkownik zgłosił żądanie zwrotu zakupu”.
+Zwróć uwagę, że w przykładach znajduje się *kto* i *co*, zrobił, o czym nie można zapominać podczas własnych warsztatów <<DDDNetCore>>.
+
+Należy wyłapywać karteczki, których formy sugerują życzenia czy reprezentują całe funkcjonalności (np. „zaloguj użytkownika” lub „lista produktów”) a ich twórcom wyjaśnić, że interesuje nas przepływ zdarzeń, którego nie można cofnąć.
+
+W warsztatach Event Stormingu niezwykle ważne jest to, aby udział brali wszyscy uczestnicy, przez to prowadzący powinien ich obserwować i dawać wskazówki, a nie próbować kierować całością dyskusji.
+
+== Planowanie warsztatów
+
+indexterm:[Warsztaty]
+indexterm:[Karteczki samoprzylepne]
+W trakcie warsztatów niezwykle problematyczna może być ilość miejsca, której będziesz potrzebować do zaprezentowania wszystkich zdarzeń. 
+Dlatego zawczasu zadbaj o *bardzo dużo przestrzeni* i odpowiednią przyczepność karteczek do ściany. Jak podaje Zimarev warto kupić rolkę papieru do plotera, którą umocujesz jako podkład, w przypadku, gdy goła ściana nie jest w stanie zapewnić odpowiedniej przyczepności <<DDDNetCore>>.
+
+Pamiętaj, że pojedyncza sesja nie powinna przekraczać 2 godzin.
+
+=== Lista rzeczy do zrobienia
+
+.Zakupy
+* [ ] Sprawdź, czy karteczki trzymają się ściany,
+** [ ] jak nie, to zakup papier do plotera.
+* [ ] Przygotuj spory zapas karteczek samo przylepnych:
+** [ ] żółtych do zapisu zdarzeń (faktów),
+** [ ] jaskraworóżowych do oznaczania hotspotów, #TODO: Czym są hotspoty?#
+** [ ] łososiowe lub zwykłe różowe do oznaczania systemów zewnętrznych, #TODO: Czym jest system zewnętrzny?#
+* [ ] Pisaki niezmywalne do pisania po karteczkach.
+
+.Przed startem
+* [ ] Jeśli karteczki nie trzymają się ściany, przymocuj papier,
+* [ ] Umieść notację w widocznym miejscu, #TODO: Dodać o notacji#
+
+== Rozpoczęcie warsztatów
+
+Aby zachęcić ludzi do tego, aby sami zapisywali zdarzenia na ścianie, należy zacząć od siebie – zapis karteczkę jednym zdarzeniem, które znajduje się gdzieś *w środku systemu*, np. „użytkownik dodał przedmiot do koszyka”. 
+Jest to niezwykle ważne, aby nie próbować zaczynać od początku lub od końca, gdyż _zawsze_ będzie coś wcześniej i później. 
+Dzięki takiemu podejściu można próbować zachęcić uczestników, aby zapisali zdarzenia, które następują lub są przed twoim <<DDDNetCore>>. 
+
+== W trakcie warsztatów
+
+W trakcie warsztatów warto zwracać uwagę na dwa aspekty:
+
+* Ludzie mają tendencję do kreślenia drogi w przypadku gdy wszystko idzie po ich myśli, dlatego podczas trwania warsztatów zwracaj uwagę na przypadki poza właściwą ścieżką, takie jak „dokonano płatności na 150% kwoty”, bądź „login i hasło zostało odrzucone” <<DDDNetCore>>.
+
+* Gdy zobaczysz ożywioną dyskusję, zwłaszcza taką, która kręci się w kółko i nie generuje nowych karteczek najpewniej jest to punkt zapalny zwany z angielskiego _hot spot_, który według propozycji twórcy metody Event Stormingu Alberto Brandolini należy oznaczyć jaskrawym kolorem (np. jaskrawy róż) <<DDDNetCore>>.
+
+Jeśli natomiast widzisz, że dyskusja powoli się wypala, to możesz spróbować dwóch sposobów:
+
+. Poproś uczestników o prześledzenie zdarzeń wstecz (od początku do końca) – może nie umieszczono jakiegoś, z pozoru nieistotnego, zdarzenia? Może ktoś zapomniał, że przed dokonaniem zakupu należy wybrać metodę dostawy? 
+. Wyśledź pieniądze – poproś uczestników aby prześledzili te ścieżki, które bezpośrednio generują przychód <<DDDNetCore>>.
+
+== Po zakończeniu warsztatów
+
+Jak wskazuje Zimarev, najważniejsze jest to, aby programiści zadawali pytania.
+Jeśli na twoich warsztatach nie było dyskusji to możliwe, że problem był zbyt prosty lub zaproszeni byli nieodpowiedni ludzie <<DDDNetCore>>.
+
+[bibliography]
+== Bibliografia
+Artykuł na podstawie:
+
+* [[[DDDNetCore]]] 
+  Zimarev, Alexej. Domain-Driven Design dla .NET Core: Jak rozwiązywać złożone problemy podczas projektowania architektury aplikacji. Warszawa: Helion S.A., 2021.
