@@ -10,22 +10,53 @@ tags:
     - Event Storming
     - Karteczki samoprzylepne
     - Warsztaty
+    - "Event Storming: Big Picture"
+    - "Event Storming: Process Level"
 ---
 :toc:
 == Wstęp teoretyczny
 
 [quote, Alexey Zimarew, Domain-Driven Design dla .NET Core (DDDNetCore)]
 Podstawowa koncepcja techniki EventStorming polega na zapewnieniu prostej notacji modelującej, używanej do wizualizacji zachowań systemu w sposób zrozumiały dla każdego.
- 
+
 indexterm:[Event Storming]
-Event storming polega na zebraniu faktów (zwanych także _zdarzeniami dziedzinowymi_), które się wydarzyły i są *nieodwracalne* w rozumieniu per se. 
-Mówiąc inaczej, gdy użytkownik kupił produkt, nie może już tego cofnąć (maszyna pakowania i nadawania numerów przesyłki już ruszyła), może on rozpocząć procedurę zwrotu zakupionego produktu. 
+Metodę Event Stormingu opracował w 2013 roku Alberto Brandolini, polega ona na zebraniu faktów (zwanych także _zdarzeniami dziedzinowymi_), które się wydarzyły i są *nieodwracalne* w rozumieniu per se. 
+Warsztaty w postaci Event Stormingu służą do wymiany wiedzy między uczestnikami, dlatego ważne jest, aby zaprosić ludzi z różnych kręgów: zarówno programistów jak i ekspertów dziedzinowych. 
+W konsekwencji powoduje on otwarcie silosów wiedzowych, wymiany doświadczeń pomiędzy nimi, co prowadzi do zidentyfikowania możliwych problemów i usprawnień <<DDDNetCore>><<DevStyleStolarczyk>>.
+
+[quote, Tomasz Stolarczyk, NAJobszerniejsze wprowadzenie do Event Stormingu. Z przykładem! [DevStyleStolarczyk]]
+Jeśli chcemy pisać dobry kod, musimy rozumieć proces i model biznesowy, a tego nie dowiemy się lepiej od nikogo innego jak od biznesu i ekspertów domenowych.
+
+Mówiąc inaczej fakt jest nieodwracalny, gdy użytkownik kupił produkt, nie może już tego cofnąć (maszyna pakowania i nadawania numerów przesyłki już ruszyła), może on rozpocząć procedurę zwrotu zakupionego produktu. 
 Co ważne, fakty zapisujemy za pomocą formy przeszłej, czyli „użytkownik zapłacił za produkt”, „użytkownik zgłosił żądanie zwrotu zakupu”.
 Zwróć uwagę, że w przykładach znajduje się *kto* i *co*, zrobił, o czym nie można zapominać podczas własnych warsztatów <<DDDNetCore>>.
 
-Należy wyłapywać karteczki, których formy sugerują życzenia czy reprezentują całe funkcjonalności (np. „zaloguj użytkownika” lub „lista produktów”) a ich twórcom wyjaśnić, że interesuje nas przepływ zdarzeń, którego nie można cofnąć.
+Mimo iż cały mówi o tym, że fakt już się stał, to nie należy się bać dodawania zdarzeń, które reprezentują pomysły i funkcje zaplanowane do realizacji w przyszłości.
+Niezapomnij jednak ich odpowiednio oznaczyć, na przykład, poprzez inny kolor karteczki.
 
-W warsztatach Event Stormingu niezwykle ważne jest to, aby udział brali wszyscy uczestnicy, przez to prowadzący powinien ich obserwować i dawać wskazówki, a nie próbować kierować całością dyskusji.
+=== Jak wygląda główna część warsztatów
+
+indexterm:[Event Storming, Chaotic Exploration]
+Na początku uczestnicy umieszają żółte karteczki z zdarzeniami domenowymi na ścianie.
+Zależy nam tutaj, aby tej wiedzy pojawiło się jak najwięcej, dlatego nie przejmujemy się duplikacją lub chronologią. 
+Każdy z uczestników w tym momencie będzie najpewniej zajmował się fragmentem, który zna najlepiej. 
+Kiedy dojdzie do konfliktów związanych z tym, że nie wiadomo jak jakiś podsystem ma działać zaznaczamy to karteczką zwaną _hotspotem_ (z ang. _hot spot_ – gorące miejsce) lub karteczką _system zewnętrzny_ jeśli dotyczy to zewnętrznej integracji. 
+Co ważne, to, że *zapisujemy zdarzenia, które dotyczą naszego systemu*, nie te, które dzieją się w świecie rzeczywistym lub w systemie towarzyszącym. 
+Tę część nazywamy *chaotyczną eksploracją* <<DevStyleStolarczyk>>.
+
+Następnie na tablicy wprowadzamy oś czasu: układamy karteczki zgodnie z chronologią i wstępnie grupujemy w podsystemy. 
+Przy okazji można usunąć duplikaty i ujednolicić język niektórych karteczek. 
+
+indexterm:[Event Storming, Big Picture]
+indexterm:[Event Storming, Process Level]
+Te dwa elementy dają nam część zwaną *Big picture*. Po czym przechodzimy do *Process Level*.
+
+Następnym etapem jest dodanie karteczek z aktorami – osobami i systemami wywołującymi lub odbierającymi dane zdarzenie. 
+Dopiero mając tak usystematyzowany system zdarzeń przechodzimy do szczegółowego wyszukiwania możliwości i problemów, które również oznaczamy jako gorące miejsca. 
+Na koniec wybieramy gorące miejsce, którym będziemy chcieli się zająć – po krótkiej przerwie lub na osobnym spotkaniu <<DevStyleStolarczyk>>. 
+
+Na koniec przechodzimy do etapu *Desing Level* na którym tworzymy model, który można przeniesć bezpośrednio do kodu.
+#TODO: Uzupełnić#. 
 
 == Planowanie warsztatów
 
@@ -38,13 +69,18 @@ Pamiętaj, że pojedyncza sesja nie powinna przekraczać 2 godzin.
 
 === Lista rzeczy do zrobienia
 
+.Koncepcja
+* [ ] Określ cel warsztatów (znalezienie problemów lub miejsc zapalnych)
+* [ ] Jeśli nie wszyscy mają pojęcie o domenie, roześlij jej krótki opis oraz zestaw widoków dla uczestników
+
 .Zakupy
 * [ ] Sprawdź, czy karteczki trzymają się ściany,
 ** [ ] jak nie, to zakup papier do plotera.
 * [ ] Przygotuj spory zapas karteczek samo przylepnych:
 ** [ ] żółtych do zapisu zdarzeń (faktów),
-** [ ] jaskraworóżowych do oznaczania hotspotów, #TODO: Czym są hotspoty?#
-** [ ] łososiowe lub zwykłe różowe do oznaczania systemów zewnętrznych, #TODO: Czym jest system zewnętrzny?#
+** [ ] jaskraworóżowych do oznaczania hotspotów,
+** [ ] łososiowe lub zwykłe różowe do oznaczania systemów zewnętrznych,
+** [ ] zielone dla nowych pomysłów,
 * [ ] Pisaki niezmywalne do pisania po karteczkach.
 
 .Przed startem
@@ -53,27 +89,51 @@ Pamiętaj, że pojedyncza sesja nie powinna przekraczać 2 godzin.
 
 == Rozpoczęcie warsztatów
 
+.Przy rozpoczynaniu warsztatów:
+* [ ] Przedstawienie celu, 
+* [ ] uczestników 
+* [ ] i wykorzystanej metody, 
+
 Aby zachęcić ludzi do tego, aby sami zapisywali zdarzenia na ścianie, należy zacząć od siebie – zapis karteczkę jednym zdarzeniem, które znajduje się gdzieś *w środku systemu*, np. „użytkownik dodał przedmiot do koszyka”. 
 Jest to niezwykle ważne, aby nie próbować zaczynać od początku lub od końca, gdyż _zawsze_ będzie coś wcześniej i później. 
 Dzięki takiemu podejściu można próbować zachęcić uczestników, aby zapisali zdarzenia, które następują lub są przed twoim <<DDDNetCore>>. 
 
 == W trakcie warsztatów
 
-W trakcie warsztatów warto zwracać uwagę na dwa aspekty:
+Jak zostało to powiedziane we wstępie, warsztaty dzielą się na trzy zasadnicze części: _Big Picture_, _Process Level_ i _Desing Level_. 
+Nie muszą one występować jednego dnia, gdyż może to być zwyczajnie niemożliwe w przypadku dużych systemów. 
 
-* Ludzie mają tendencję do kreślenia drogi w przypadku gdy wszystko idzie po ich myśli, dlatego podczas trwania warsztatów zwracaj uwagę na przypadki poza właściwą ścieżką, takie jak „dokonano płatności na 150% kwoty”, bądź „login i hasło zostało odrzucone” <<DDDNetCore>>.
+W warsztatach Event Stormingu niezwykle ważne jest to, aby udział brali wszyscy uczestnicy, przez to prowadzący powinien ich obserwować i dawać wskazówki, a nie próbować kierować całością dyskusji.
+
+W trakcie warsztatów, niezależnie od etapu, zwróć szczególną uwagę na:
+
+* Ludzie mają tendencję do kreślenia drogi w przypadku gdy wszystko idzie po ich myśli, dlatego zachęć ich aby prześledzili przypadki poza właściwą ścieżką, takie jak „dokonano płatności na dwukrotność kwoty”, bądź „login i hasło zostało odrzucone” <<DDDNetCore>>.
+Szczególnie przydatna może być tutaj metoda „fantastycznej czwórki” Matuesza Gila, zwana również 0, 50, 100 i 150, która polega na szukaniu możliwości zdarzenia w wersji na 0% (gdy zdarzenie nie zaszło), 50% (zdarzenie zaszło w wersji częściowej) lub 150% (zdarzenie zaszło w wersji przesadzonej), np. co się stanie, gdy użytkownik zapłaci za mało, lub za dużo, bądź wcale <<DevStyleStolarczyk>>?  
 
 * Gdy zobaczysz ożywioną dyskusję, zwłaszcza taką, która kręci się w kółko i nie generuje nowych karteczek najpewniej jest to punkt zapalny zwany z angielskiego _hot spot_, który według propozycji twórcy metody Event Stormingu Alberto Brandolini należy oznaczyć jaskrawym kolorem (np. jaskrawy róż) <<DDDNetCore>>.
+
+* Należy wyłapywać karteczki, których formy sugerują życzenia czy reprezentują całe funkcjonalności (np. „zaloguj użytkownika” lub „lista produktów”) a ich twórcom wyjaśnić, że interesuje nas przepływ zdarzeń, którego nie można cofnąć.
 
 Jeśli natomiast widzisz, że dyskusja powoli się wypala, to możesz spróbować dwóch sposobów:
 
 . Poproś uczestników o prześledzenie zdarzeń wstecz (od początku do końca) – może nie umieszczono jakiegoś, z pozoru nieistotnego, zdarzenia? Może ktoś zapomniał, że przed dokonaniem zakupu należy wybrać metodę dostawy? 
 . Wyśledź pieniądze – poproś uczestników aby prześledzili te ścieżki, które bezpośrednio generują przychód <<DDDNetCore>>.
 
+Podczas porządkowania tablicy po pierwszym etapie burzy mózgów może pojawic się wątpliwość, czy dane zdarzenie należy do naszego systemu, czy też nie.
+Wcześniej już wspomniany Mateusz Gil zaprezentował podział na 4 poziomy (więcej na https://www.youtube.com/watch?v=31PNdWaUrTY[YouTube]) <<DevStyleStolarczyk>>:
+
+1. Zdarzenia środowiskowe, które występują poza systemem (samochód wjechał na parking), 
+2. Zdarzenia interfejsowe, które nie wpływają na stan systemu (użytkownik wybrał opcję w formularzu),
+3. Zdarzenia infrastrukturalne, które również nie mają wpływu na system i reprezentują typowe technikalia (plik został załadowany na dysk),
+4. Zdarzenia domenowe – te, które nas interesują – reprezentują domenę i zmieniają stan systemu.
+
 == Po zakończeniu warsztatów
 
 Jak wskazuje Zimarev, najważniejsze jest to, aby programiści zadawali pytania.
 Jeśli na twoich warsztatach nie było dyskusji to możliwe, że problem był zbyt prosty lub zaproszeni byli nieodpowiedni ludzie <<DDDNetCore>>.
+
+Niebój się również rozszerzać całości warsztatów. 
+Na przykład, gdy domena mocno operuje na bazach danych można spróbować zaprezentować je w trakcie warsztatów za pomocą osbnych karteczek, gdzie każda z operacji, jak SELECT czy UPDATE, ma swój własny kolor <<DevStyleStolarczyk>>. 
 
 [bibliography]
 == Bibliografia
@@ -81,3 +141,8 @@ Artykuł na podstawie:
 
 * [[[DDDNetCore]]] 
   Zimarev, Alexej. Domain-Driven Design dla .NET Core: Jak rozwiązywać złożone problemy podczas projektowania architektury aplikacji. Warszawa: Helion S.A., 2021.
+* [[[DevStyleStolarczyk]]]
+  Stolarczyk, Tomasz. „NAJobszerniejsze wprowadzenie do Event Stormingu. Z przykładem!” devstyle.pl, 12 październik 2020. https://devstyle.pl/2020/10/12/najobszerniejsze-wprowadzenie-do-event-stormingu-z-przykladem/.
+
+[index]
+== Index
