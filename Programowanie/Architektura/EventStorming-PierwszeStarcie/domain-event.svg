@@ -1,0 +1,16 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 195 263" width="195" height="263">
+  <!-- svg-source:excalidraw -->
+  
+  <defs>
+    <style>
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://excalidraw.com/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://excalidraw.com/Cascadia.woff2");
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="195" height="263" fill="#ffffff"></rect><g stroke-linecap="round" transform="translate(10 70) rotate(0 86.5 91.5)"><path d="M-2.5 -1.62 L170.85 -2.09 L172.86 181.2 L-2.16 181.25" stroke="none" stroke-width="0" fill="#ff8300"></path><path d="M-2.57 2.4 C62.04 -4.12, 118.07 -0.26, 169.49 -1.29 M-1.96 -0.9 C54.58 1.43, 107.68 0.35, 172.29 -0.48 M175 2.02 C173.16 52.83, 172.05 103.27, 175.67 184.23 M171.24 1.9 C170.28 60.65, 168.67 120.26, 172.04 182.48 M171.41 184 C125.61 181.68, 72.21 182.12, 3.79 182.51 M173.21 183.4 C129.94 184.93, 87.58 188, 0.05 184.54 M1.49 183.64 C-1.44 131.42, -2.03 84.12, 2.28 -3.28 M-1.99 184.1 C4.25 138.99, 2.58 98, 0.83 0.99" stroke="#cc6800" stroke-width="2" fill="none"></path></g><g transform="translate(10 10) rotate(0 87.5 17.5)"><text x="87.5" y="25" font-family="Virgil, Segoe UI Emoji" font-size="28px" fill="#000000" text-anchor="middle" style="white-space: pre;" direction="ltr">ZDARZENIE</text></g><g transform="translate(63 41.5) rotate(0 33 12.5)"><text x="33" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="middle" style="white-space: pre;" direction="ltr">EVENT</text></g><g transform="translate(36.83333333333394 126.83333333333337) rotate(6.650200316659098 63 35)"><text x="63" y="25" font-family="Virgil, Segoe UI Emoji" font-size="28px" fill="#000000" text-anchor="middle" style="white-space: pre;" direction="ltr">Kto i co </text><text x="63" y="60" font-family="Virgil, Segoe UI Emoji" font-size="28px" fill="#000000" text-anchor="middle" style="white-space: pre;" direction="ltr">zrobił?</text></g></svg>
