@@ -67,6 +67,8 @@ Z racji, że Event Storming ma za zadanie zapewnić prostą notację, to przedst
 W trakcie przeglądu spotkałem się z dwoma podejściami do notacji. 
 Oba w gruncie rzeczy reprezentują to samo:
 
+#TODO: Dodać drugi obrazek#
+
 .Obrazek, który wjaśnia wszystko – Alberto Brandolini – „Introducting Event Storming”
 image::notacja_01.svg[]
 
@@ -93,6 +95,13 @@ Mimo iż w przykładach znajduje się *kto* i *co*, zrobił, co zwiększa czytel
 
 Mimo iż piszę o tym, że fakt już się stał, to nie należy się bać dodawania zdarzeń, które reprezentują pomysły i funkcje zaplanowane do realizacji w przyszłości.
 Dobrze jest je odpowiednio oznaczyć, na przykład, poprzez inny kolor karteczki.
+
+Gorące miejsce::
++
+.Gorące miejsce
+image::hotspot.svg[align="center"]
++ 
+Jest to zazwyczaj fioletowa lub jaskraworóżowa karteczka (ważne, aby miała wyróżniający się kolor), która służy do oznaczania miejsc spornych, gdzie znalezienie odpowiedzi w trakcie warsztatów nie jest możliwe <<bourgauDetailedAgendaDDD2018>>.
 
 #TODO: Opisać każdą z karteczek#
 
