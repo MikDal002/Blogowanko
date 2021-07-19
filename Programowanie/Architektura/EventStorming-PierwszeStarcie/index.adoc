@@ -35,10 +35,12 @@ W dalszej perspektywie Event storming pozwala na zamodelowanie architektury apli
 indexterm:[Event Storming, Chaotic Exploration]
 Na początku uczestnicy umieszają *pomarańczowe karteczki* z zdarzeniami domenowymi na ścianie.
 Zależy nam tutaj, aby tej wiedzy pojawiło się jak najwięcej, dlatego nie przejmujemy się duplikacją lub chronologią. 
+Aczkolwiek nie naciskajmy, aby pojawiły się tutaj koniecznie wszystkie możliwe zdarzenia – będą one dodawane również sukcesywnie w trakcie kolejnych etapów.
 Każdy z uczestników w tym momencie będzie najpewniej zajmował się fragmentem, który zna najlepiej. 
 Kiedy dojdzie do konfliktów związanych z tym, że nie wiadomo jak jakiś podsystem ma działać zaznaczamy to karteczką zwaną _hotspotem_ (z ang. _hot spot_ – gorące miejsce) lub karteczką _system zewnętrzny_ jeśli dotyczy to zewnętrznej integracji. 
 Ważne jest to, abyśmy skupili się na *zdarzeniach, które dotyczą naszego systemu*, nie na tych, które dzieją się w świecie rzeczywistym lub w systemie towarzyszącym – choć i te warto umieścić na tablicy aby uzyskać lepszy kontekst. 
-Tę część nazywamy *chaotyczną eksploracją* <<DevStyleStolarczyk>>.
+Tę część nazywamy *chaotyczną eksploracją* <<DevStyleStolarczyk>>. 
+Czasem można ją potraktować jako właściwą rozgrzewkę przed następnymi etapami mającą na celu zapoznanie się uczestników z ze sobą nawzajem <<kolinskaEventStormingGuide>>.
 
 Następnie na tablicy wprowadzamy oś czasu: układamy karteczki zgodnie z chronologią i wstępnie grupujemy w podsystemy. 
 Przy okazji można usunąć duplikaty i ujednolicić język niektórych karteczek. 
@@ -61,6 +63,21 @@ Na koniec przechodzimy do etapu *Desing Level* na którym tworzymy model, który
 NOTE: Ze względu na objętość tego artykułu oraz wiedzę z zakresu DDD potrzebną do wykorzystania tego etapu warsztatów pominąłem tę część warsztatów. 
 Nie mniej, element *Big picture* można z powodzeniem wykorzystać do zamodelowania już istniejacego systemu w celu jego diagnozy i wymiany wiedzy. 
 
+=== Jak może wyglądać rezultat warsztatów
+
+W tym artykule pokaże mocno uproszczony i wymyślony przykład w celu zachowania pewnej spójności. 
+Ilustrację bardziej rozbudowanej sesji Event Stormingu planuję pokazać w przyszłości w osobnej serii artykułów.
+
+#NOTE: Usunać te systemy z backendu, podkreślić, że w pierwszej fazie robimy tylko systemy zewnętrzne#
+
+.Przykładowy element systemu po chaotycznej eksploracji
+image:chaotic-exploration-example.svg[]
+
+.Przykładowy element systemu po uporządkowaniu
+====
+#TODO: Dodać przykład#
+====
+
 == Notacja 
 Z racji, że Event Storming ma za zadanie zapewnić prostą notację, to przedstawmy ją poniżej: 
 
@@ -81,11 +98,11 @@ _Aktor_ po wykonaniu jakiejś akcji otrzymuje odświeżony _widok_, przez co mo�
 
 Osobno istnieją _gorące miejsce_ oraz _rysunki poglądowe_, które możemy umieszczać odpowiednio w miejscach zapalnych, co do których, trzeba podjąć pewne decyzje lub nikt nie wie co tam się dzieje, oraz przy widokach, aby podkreślić co na nich musi się znaleźć.
 
-Zdarzenie domenowe::
-+
-.Zdarzenie domenowe
+=== Zdarzenie domenowe
+
+.Przedstawienie zzdarzenia domenowego
 image::domain-event.svg[align="center"]
-+
+
 Jak już napisałem we wstępie, zdarzenie domenowe reprezentuje fakt nieodwracalny.
 Mówiąc że fakt jest nieodwracalny znaczy to że, gdy użytkownik kupił produkt – nie może już tego cofnąć (maszyna pakowania i nadawania numerów przesyłki już ruszyła), może on rozpocząć procedurę przeciwną, to znaczy zwrotu zakupionego produktu. 
 Co niezwykle ważne, fakty zapisujemy za pomocą *formy przeszłej*, czyli „użytkownik zapłacił za produkt”, „użytkownik zgłosił żądanie zwrotu zakupu”.
@@ -96,14 +113,107 @@ Mimo iż w przykładach znajduje się *kto* i *co*, zrobił, co zwiększa czytel
 Mimo iż piszę o tym, że fakt już się stał, to nie należy się bać dodawania zdarzeń, które reprezentują pomysły i funkcje zaplanowane do realizacji w przyszłości.
 Dobrze jest je odpowiednio oznaczyć, na przykład, poprzez inny kolor karteczki.
 
-Gorące miejsce::
-+
-.Gorące miejsce
+.Przykłady zdarzeń
+====
+image:events-example.svg[align="center"]
+
+W przykładzie mamy już uszeregowany ciąg zdarzeń, tak, że każde ze zdarzeń następuje po sobie. 
+Karteczki są zapisane w formie przeszłej i do tego są krótkie i zwięzłe.
+====
+
+=== Gorące miejsce
+
+.Przedstawienie gorącego miejsca
 image::hotspot.svg[align="center"]
-+ 
+
 Jest to zazwyczaj fioletowa lub jaskraworóżowa karteczka (ważne, aby miała wyróżniający się kolor), która służy do oznaczania miejsc spornych, gdzie znalezienie odpowiedzi w trakcie warsztatów nie jest możliwe <<bourgauDetailedAgendaDDD2018>>.
 
-#TODO: Opisać każdą z karteczek#
+.Przykłady gorących miejsc
+====
+image:hotspot-example.svg[ scaledwidth="50%"]
+
+Takie gorące miejsce zostało użyte w przykładzie. 
+Pojawiło się pytanie, na które odpowiedź Event Storming nie koniecznie przyniesie (bo jest pytaniem mocno technicznym), jednak to, jak dużo transferu używamy może być już kwestią domenową, na przykład wtedy, gdy chcemy konstruuować system wyróżniający się oszczędnością.
+====
+
+=== System
+
+.Przedstawienie systemu
+image::system.svg[align="center"]
+
+Początkowo, podczas *chaotycznej eksploracji*, karteczka ta służy do określania systemów zewnętrznych, które generują zdarzenia dla naszego systemu. 
+Następnie, w trakcie porządkowania, będziemy na niej zapisywać nasze systemy, takie jak „wyszukiwarka”, „użytkownicy”, „zamówienia”. 
+Uzupełnienie tej karteczki pozwoli nam jasno zobaczyć, które zdarzenia i operacje są wykonywane w tym samym miejscu, a które są w jakiś sposób niezależne. 
+Doprowadzi nas to do wyodrębnienia subdomen, które mogą później posłużyć jako punkt zaczepienia dla luźniejszej architektury aplikacji.
+
+.Przykłady systemów
+====
+image:systems-example.svg[align="center"]
+
+Powyżej widać przykłady systemów. 
+W tym przypadku pierwszy system to po prostu czujnik, który stanowi samodzielny moduł, backend – który stanowi aplikację internetową oraz Termostat, który również jest samodzielnym urządzeniem. 
+
+NOTE: Czasem można spotkać się z propozycją, aby zewnętrzne systemy oznaczać innym kolorem karteczek.
+Jednak ile kolorów można znaleźć w sklepie? 
+
+====
+
+=== Słowo domenowe
+
+.Przedstawienie słowa domenowego
+image::domain-word.svg[align="center"]
+
+Z umieszczeniem słowa domenowego spotkałem się raz (<<bourgauDetailedAgendaDDD2018>>) i traktuje je jako rozszerzenie podstawowej notacji Event Stormingu.
+Nimniej, uważam je za ciekawy, acz nieobowiązkowy element, gdyż w przypadku niektórych projektów może pojawić się problem z słownictwem szczegółowym.
+
+.Przykład problemu z słownictwem domenowym
+====
+image::domain-word-example.svg[]
+W niektórych miejscach spotykałem się z problemem rozróżnienia słów _badanie_ i _pomiar_, które przez niektórych były stosowane zamiennie, mimo iż ostatecznie jedno było składową drugiego.
+====
+
+=== Aktor
+
+.Przedstawienie aktora
+image::aktor.svg[align="center"]
+
+Aktor, mimo iż brzmi po ludzki, to nie musi być to człowiek – jest to karteczka, która reprezentuje, *kto* może wyzwolić daną akcję.
+Także może to być zarówno człowiek (na przykład poprzez interakcję z aplikacją) jak i na przykład czujka zalania mieszkania może wyzwolić alarm bądź powiadomienie. 
+
+.Przykłady aktorów
+====
+#TODO: Dodać przykład aktorów#
+====
+
+=== Polecenie
+image::command.svg[align="center"]
+
+Polecenie służy do pokazania zamiaru. 
+Umieszczenie ich na tablicy powoduje, że łatwiej zobaczyć jakie zdarzenia mogą zostać wykonane w przypadku, kiedy zamiar się nie powiedzie, lub powiedzie się częściowo.
+Doklejanie karteczek z poleceniem może wydawać się czysto mechaniczne, jednak nie musi takie być, dzięki metodzie 0, 50, 100 i 150 (więcej o niej w sekcji <<w-trakcie-warsztatow,W trakcie warsztatów>>).
+Dlatego zaczynamy od zdarzeń, a nie od poleceń, ponieważ taka kolejność może prowadzić do zbytniego skupienia się nad nowymi funkcjami <<kolinskaEventStormingGuide>>. 
+
+#TODO: Dodać przykład polecenia#
+
+=== Reakcja
+image::policy.svg[align="center"]
+
+#TODO: Dodać opis i przykład reakcji#
+
+=== Widok
+image::view.svg[align="center"]
+
+#TODO: Dodać opis i przykład widoku#
+
+=== Rysunek poglądowy
+image::mockup.svg[align="center"]
+
+#TODO: Dodać opis i przykład rysunku poglądowego#
+
+=== Świat zewnętrzny
+image::external-world.svg[align="center"]
+
+#TODO: Dodać opis i przykład świata zewnętrznego#
 
 == Planowanie warsztatów
 
@@ -168,14 +278,13 @@ Aby to osiągnąć należy zacząć od siebie – zapisz karteczkę jednym zdarz
 Jest to niezwykle ważne, aby nie próbować zaczynać od początku lub od końca, gdyż _zawsze_ będzie coś wcześniej i później. 
 Dzięki takiemu podejściu można próbować zachęcić uczestników, aby zapisali zdarzenia, które następują lub są przed twoim <<DDDNetCore>><<bourgauHowPrepareDDD2018>>. 
 
+[#w-trakcie-warsztatow]
 == W trakcie warsztatów
 
-Jak zostało to powiedziane we wstępie, warsztaty dzielą się na trzy zasadnicze części: _Big Picture_, _Process Level_ i _Desing Level_. 
-Nie muszą one występować jednego dnia, gdyż może to być zwyczajnie niemożliwe w przypadku dużych systemów. 
+Jak zostało to powiedziane we wstępie, zajmiemy dwoma zasadniczymi częściami warsztatów Event Stormign: _Big Picture_ i _Process Level_.
+W warsztatach niezwykle ważne jest to, aby udział brali wszyscy uczestnicy, przez to prowadzący powinien ich obserwować i dawać wskazówki, a nie próbować kierować całością dyskusji.
 
-W warsztatach Event Stormingu niezwykle ważne jest to, aby udział brali wszyscy uczestnicy, przez to prowadzący powinien ich obserwować i dawać wskazówki, a nie próbować kierować całością dyskusji.
-
-W trakcie warsztatów, niezależnie od etapu, zwróć szczególną uwagę na:
+W trakcie warsztatów, niezależnie od etapu, zwróć szczególną uwagę na to, że:
 
 * Ludzie mają tendencję do kreślenia drogi w przypadku gdy wszystko idzie po ich myśli, dlatego zachęć ich aby prześledzili przypadki poza właściwą ścieżką, takie jak „dokonano płatności na dwukrotność kwoty”, bądź „login i hasło zostało odrzucone” <<DDDNetCore>>.
 Szczególnie przydatna może być tutaj metoda „fantastycznej czwórki” Matuesza Gila, zwaną również 0, 50, 100 i 150, która polega na szukaniu możliwości zdarzenia w wersji na 0% (gdy zdarzenie nie zaszło), 50% (zdarzenie zaszło w wersji częściowej) lub 150% (zdarzenie zaszło w wersji przesadzonej), np. co się stanie, gdy użytkownik zapłaci za mało, lub za dużo, bądź wcale <<DevStyleStolarczyk>>?  
@@ -196,6 +305,10 @@ Wcześniej już wspomniany Mateusz Gil zaprezentował podział na 4 poziomy (wi�
 2. Zdarzenia interfejsowe, które nie wpływają na stan systemu (użytkownik wybrał opcję w formularzu),
 3. Zdarzenia infrastrukturalne, które również nie mają wpływu na system i reprezentują typowe technikalia (plik został załadowany na dysk),
 4. Zdarzenia domenowe – te, które nas interesują – reprezentują domenę i zmieniają stan systemu.
+
+== Na zakończenie warsztatów
+
+Podobno ludzki mózg uwielbia historię, dlatego w celu utrwalenia treści, które pojawiły się w trakcie warsztatów, warto poprosić któregoś z uczestników (lub wspólnie całą grupą), aby opowiedział historię, która dzieje się od początku do końca, od lewej do prawej <<bourgauDetailedAgendaDDD2019c>>.
 
 == Po zakończeniu warsztatów
 
@@ -221,6 +334,13 @@ Artykuł na podstawie:
   Bourgau, Philippe. „How to Prepare the Room for a DDD Big Picture Event Storming”. Philippe Bourgau’s XP Coaching Blog, 13 grudzień 2018. http://philippe.bourgau.net/how-to-prepare-the-room-for-a-ddd-big-picture-event-storming/.
 * [[[bourgauDetailedAgendaDDD2018]]]
   Bourgau, Philippe. „Detailed Agenda of a DDD Big Picture Event Storming - Part 1”. Philippe Bourgau’s XP Coaching Blog, 20 grudzień 2018. http://philippe.bourgau.net/detailed-agenda-of-a-ddd-big-picture-event-storming-part-1/.
+* [[[bourgauDetailedAgendaDDD2019b]]]
+  Bourgau, Philippe. „Detailed Agenda of a DDD Big Picture Event Storming - Part 2”. Philippe Bourgau’s XP Coaching Blog, 3 styczeń 2019. http://philippe.bourgau.net/detailed-agenda-of-a-ddd-big-picture-event-storming-part-2/.
+* [[[bourgauDetailedAgendaDDD2019c]]]
+  Bourgau, Philippe. „Detailed Agenda of a DDD Big Picture Event Storming - Part 3”. Philippe Bourgau’s XP Coaching Blog, 10 styczeń 2019. http://philippe.bourgau.net/detailed-agenda-of-a-ddd-big-picture-event-storming-part-3/.
+* [[[kolinskaEventStormingGuide]]]
+  Kolińska, Natalia. „Event Storming Guide”. Udostępniono 20 lipiec 2021. https://www.boldare.com/blog/event-storming-guide.
+
 
 
 
