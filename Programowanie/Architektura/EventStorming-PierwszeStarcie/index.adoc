@@ -68,18 +68,29 @@ Nie mniej, element *Big picture* można z powodzeniem wykorzystać do zamodelowa
 W tym artykule pokaże mocno uproszczony i wymyślony przykład w celu zachowania pewnej spójności. 
 Ilustrację bardziej rozbudowanej sesji Event Stormingu planuję pokazać w przyszłości w osobnej serii artykułów.
 
-#NOTE: Usunać te systemy z backendu, podkreślić, że w pierwszej fazie robimy tylko systemy zewnętrzne#
-
 .Przykładowy element systemu po chaotycznej eksploracji
 image:chaotic-exploration-example.svg[]
 
-.Przykładowy element systemu po uporządkowaniu
-====
-#TODO: Dodać przykład#
-====
+Jak widać na początku napisaliśmy możliwie dużo zdażeń. 
+Pojawiły się przy tym dwie wątpliwości oraz uściśliliśmy słownictwo, które mogło być problematyczne w trakcie warsztatów. 
+Jedyny system, który nam się pojawił to _Facebook_ jako dostawca logowania – został tutaj umieszczony ponieważ jest systemem zewnętrznym, od którego zależy nasz przepływ.
 
-== Notacja 
-Z racji, że Event Storming ma za zadanie zapewnić prostą notację, to przedstawmy ją poniżej: 
+Następnie postępujemy zgodnie z tym, co zostało napsiane wcześniej: dodajemy pozostałe karteczki.
+Dobrze jest dadać je wszystkie od razu, ponieważ dodawanie ich pojedynczo może stanowczo przedłużyć warsztat i doprowadzić do lekkiej irytacji uczesników ciągłym przekładaniem karteczek.
+
+.Przykładowy element systemu po uporządkowaniu (obrazek należy otworzyć w osobnym oknie aby zobaczyć coś więcej)
+image:process-level-example.svg[]
+
+Rozbudowaliśmy logowanie o rejestrację oraz przypadek w którym próbował zalogować się użytkownik, który jeszcze nie jest w naszej bazie. 
+Każdą swoją akcję mógł podjąć na podstawie pewnego widoku, z którego wykonywał polecenie na pewnym systemie, co generowało zdażenia.
+Każde ze zdażeń może wygenerować kolejny widok lub politykę/reakcję, gdzie ta może kontynuować ciąg przyczynowo skutkowy. 
+
+Opis każdego typu karteczki znajduje się w dalszej części artykułu.
+
+[#notacja-w-chaotycznej-eksploracji]
+== Notacja w chaotycznej eksploracji
+Z racji, że Event Storming ma za zadanie zapewnić prostą notację, to przedstawiam ją poniżej.
+W tej sekcji znajduje się opis karteczek, które są używane w trakcie chaotycznej eksploracji oraz podczas części Process Level.
 
 W trakcie przeglądu spotkałem się z dwoma podejściami do notacji. 
 Oba w gruncie rzeczy reprezentują to samo:
@@ -148,7 +159,7 @@ Doprowadzi nas to do wyodrębnienia subdomen, które mogą później posłużyć
 
 .Przykłady systemów
 ====
-image:systems-example.svg[align="center"]
+image::systems-example.svg[align="center"]
 
 Powyżej widać przykłady systemów. 
 W tym przypadku pierwszy system to po prostu czujnik, który stanowi samodzielny moduł, backend – który stanowi aplikację internetową oraz Termostat, który również jest samodzielnym urządzeniem. 
@@ -172,6 +183,11 @@ image::domain-word-example.svg[]
 W niektórych miejscach spotykałem się z problemem rozróżnienia słów _badanie_ i _pomiar_, które przez niektórych były stosowane zamiennie, mimo iż ostatecznie jedno było składową drugiego.
 ====
 
+== Notacja w Process Level
+
+W tej sekcji znajdziesz elementy notacji wykorzystywane głownie podczas części Process Level, co nie znaczy, że przedstawione <<notacja-w-chaotycznej-eksploracji,chwilę wczesniej>> karteczki już nie obowiązują. 
+Podziału dokonałem głównie ze względu na objętość materiału.
+
 === Aktor
 
 .Przedstawienie aktora
@@ -182,7 +198,10 @@ Także może to być zarówno człowiek (na przykład poprzez interakcję z apli
 
 .Przykłady aktorów
 ====
-#TODO: Dodać przykład aktorów#
+image::actors-example.svg[align="center"]
+
+Aktorem może być zarówno użytkownik jak i pewne zdażenie jak na przykład czasomierz (z ang. _timer_). 
+Aktor jest karteczką, która pojawia się na samym początku łańcucha przyczynowo-skutkowego co pokazuje, kto jest twórcą danej akcji.
 ====
 
 === Polecenie
@@ -193,22 +212,46 @@ Umieszczenie ich na tablicy powoduje, że łatwiej zobaczyć jakie zdarzenia mog
 Doklejanie karteczek z poleceniem może wydawać się czysto mechaniczne, jednak nie musi takie być, dzięki metodzie 0, 50, 100 i 150 (więcej o niej w sekcji <<w-trakcie-warsztatow,W trakcie warsztatów>>).
 Dlatego zaczynamy od zdarzeń, a nie od poleceń, ponieważ taka kolejność może prowadzić do zbytniego skupienia się nad nowymi funkcjami <<kolinskaEventStormingGuide>>. 
 
-#TODO: Dodać przykład polecenia#
+.Przykłady poleceń
+====
+image::commands-example.svg[align="center"]
+
+Polecenia są pisane w formie rozkazujacej (czasem z ang. imperatywnej) i mają za zadanie ukazać zamiar wykonania czegość. 
+A z zamiarem bywa tak, że czasem się nie udaje. 
+====
+
 
 === Reakcja
 image::policy.svg[align="center"]
 
-#TODO: Dodać opis i przykład reakcji#
+#TODO: Dodać opis polityki#
+
+.Przykłądy polityk
+====
+image::policy-example.svg[align="center"]
+
+#Dodać opis przykładu#
+====
 
 === Widok
 image::view.svg[align="center"]
 
 #TODO: Dodać opis i przykład widoku#
 
+.Przykłady widoków
+====
+image::views-example.svg[align="center"]
+====
+
 === Rysunek poglądowy
 image::mockup.svg[align="center"]
 
 #TODO: Dodać opis i przykład rysunku poglądowego#
+
+.Przykład rysunku poglądowego
+====
+image::mockup-example.svg[align="center"]
+====
 
 === Świat zewnętrzny
 image::external-world.svg[align="center"]
@@ -216,6 +259,8 @@ image::external-world.svg[align="center"]
 #TODO: Dodać opis i przykład świata zewnętrznego#
 
 == Planowanie warsztatów
+
+NOTE: Pamiętaj, że pojedyncza sesja nie powinna przekraczać 2 godzin.
 
 indexterm:[Warsztaty]
 indexterm:[Karteczki samoprzylepne]
@@ -226,7 +271,16 @@ Dlaczego to takie ważne?
 Ponieważ jak się okazuje, gdy ludziom zacznie brakować miejsca, to zaczną się ograniczać z swoją kreatywnością.
 Może się to skońćzyć tym, że część systemu w ogóle nie zostanie zamodelowana, gdyż zostanie uznana za nieważną, a z racji ograniczonego miejsca, pominięta.
 
-NOTE: Pamiętaj, że pojedyncza sesja nie powinna przekraczać 2 godzin.
+Dlatego sala wybrana do warsztatów Event Storming powinna być jak największa. 
+W skrajnym przypadku można do tego wykorzystać korytarz, jednak upewnij się, że w trakcie, gdy będziesz go wykorzystywać nie będzie przechodzić tamtędy duża ilość osób, co może rozpraszać uczestników.
+
+Innym pomysłem może być działanie hybrydowe – uczestnicy siadają w jednej sali z własnymi komputerami na których będą pracować. 
+Dobrze, aby znajdował się w niej też jeden duży wyświetlacz dla prowadzącego. 
+Następnie wszyscy równocześnie działają na jednej tablicy, na przykład przy pomocy oprogramowania https://miro.com/. 
+Dlaczego mówię o siedzeniu w jednej sali?
+W trakcie warsztatów jest niesamowita ilość dyskusji, która wydaje się być niemożliwa przy użyciu tradycyjnych form pracy i komunikacji zdalnej, gdzie jedna osoba mówi a reszta musi słuchać. 
+
+
 
 === Lista rzeczy do zrobienia
 
@@ -250,6 +304,7 @@ NOTE: Pamiętaj, że pojedyncza sesja nie powinna przekraczać 2 godzin.
 *** [ ] Karteczki do zapisu zdarzeń środowiskowych, 
 *** [ ] Karteczki do zapisu wspólnego języka domenowego. 
 * [ ] Pisaki do pisania po karteczkach.
+* [ ] Taśma malarska do pisania etykiet wszelakich
 * [ ] Coś słodkiego do jedzenia.
 
 == Rozpoczęcie warsztatów
@@ -260,7 +315,7 @@ Rzeczy, które trzeba zrobić to:
 .Przed startem
 * [ ] Jeśli karteczki nie trzymają się ściany, przymocuj papier,
 * [ ] Umieść notację w widocznym miejscu,
-* [ ] Usuń krzesła #TODO: Napisać dlaczego usunąć krzesła#,
+* [ ] Usuń krzesła jeśli chcesz pracować przy pomocy karteczek, w przypadku gdy je zostawisz to zobaczysz, że niektórzy odłączą się od grupy i zaczną sobie po cichu robić własne rzeczy,
 * [ ] Rozmieść pisaki, karteczki i coś do zjedzenia.
 
 Kiedy wszyscy już się zbiorą i warsztaty się zaczną niezapomnij o:
@@ -271,12 +326,20 @@ Kiedy wszyscy już się zbiorą i warsztaty się zaczną niezapomnij o:
   Najmniej wymagająca zabawa, według mnie, to „Poszedłem na plaże i wziałem…" footnote:[źródło zabawy: https://www.funretrospectives.com/went-to-the-beach-and/[], w skrócie polega ona na tym, że prowadzący mówi: „Poszedłem na plaże i wziąłem ze sobą…"  i następnie wymienia jedną rzecz. 
   Osoba stojąca obok prowadzącego powtarza to co powiedział prowadzący dodająć swoją rzecz. 
   Zabawa trwa aży wszyscy się wypowiedzą.],
-* [ ] Przedstawienie metody Event Stormingu i wymaganej części notacji wraz z zasadami ich użycia, to jest: _zdarzenia domenowego_, _gorącego miejsca_ oraz _zewnętrznego systemu_.
+* [ ] Przedstawienie metody Event Stormingu i wymaganej *całości* notacji wraz z zasadami ich użycia. 
+Na początek skup się na: _zdarzenia domenowego_, _gorącego miejsca_ oraz _zewnętrznego systemu_.
 
-Z racji, że Event Storming to warsztat grupowy, gdzie wszyscy powinni brać udział należy zachęcić ludzi do tego, aby sami zapisywali zdarzenia na ścianie.
+Zauważyłem, że niezwykle ważnym jest aby przedstawić całość notacji uczestnikom warsztatów. 
+Nie próbuj „chować” przed nimi tego, co będą robić w późniejszych etapach – pozwoli im to od razu układać karteczki w większych odstępach oraz załapać kontekst tego co będą robić. 
+Jedną z formą przedstawienia notacji z którą się spotkałem jest poproszenie jednego z uczestników o to, aby przedstawił co widzi na rysunku w trakcie czego może zadawać pytania prowadzącemu.
+
+Z racji, że Event Storming to warsztat grupowy, gdzie wszyscy powinni brać udział, należy zachęcić ludzi do tego, aby sami zapisywali zdarzenia na ścianie.
 Aby to osiągnąć należy zacząć od siebie – zapisz karteczkę jednym zdarzeniem, które znajduje się gdzieś *w środku systemu*, np. „użytkownik dodał przedmiot do koszyka”. 
 Jest to niezwykle ważne, aby nie próbować zaczynać od początku lub od końca, gdyż _zawsze_ będzie coś wcześniej i później. 
 Dzięki takiemu podejściu można próbować zachęcić uczestników, aby zapisali zdarzenia, które następują lub są przed twoim <<DDDNetCore>><<bourgauHowPrepareDDD2018>>. 
+
+NOTE: Uważaj na pomysł z cichą burzą mózgów gdy masz do czynienia z grupą niedoświadczoną w Event Stormingu.
+Może się to skończyć duża ilością karteczek, które nijak nie wpasowują się w notację.
 
 [#w-trakcie-warsztatow]
 == W trakcie warsztatów
@@ -309,13 +372,14 @@ Wcześniej już wspomniany Mateusz Gil zaprezentował podział na 4 poziomy (wi�
 == Na zakończenie warsztatów
 
 Podobno ludzki mózg uwielbia historię, dlatego w celu utrwalenia treści, które pojawiły się w trakcie warsztatów, warto poprosić któregoś z uczestników (lub wspólnie całą grupą), aby opowiedział historię, która dzieje się od początku do końca, od lewej do prawej <<bourgauDetailedAgendaDDD2019c>>.
+W przypadku gdy idzie to dość niemrawo warto zaproponować zmianę opowiadającego.
 
 == Po zakończeniu warsztatów
 
 Jak wskazuje Zimarev, najważniejsze jest to, aby programiści zadawali pytania.
 Jeśli na twoich warsztatach nie było dyskusji to możliwe, że problem był zbyt prosty lub zaproszeni byli nieodpowiedni ludzie <<DDDNetCore>>.
 
-Niebój się również rozszerzać całości warsztatów. 
+Niebój się również rozszerzać notacji warsztatów. 
 Na przykład, gdy domena mocno operuje na bazach danych można spróbować zaprezentować je w trakcie warsztatów za pomocą osbnych karteczek, gdzie każda z operacji, jak SELECT czy UPDATE, ma swój własny kolor <<DevStyleStolarczyk>>. 
 
 [bibliography]
