@@ -1,6 +1,6 @@
 ---
-title: "Event Storming: Pierwsze Starcie z big picture"
-date: 2021-07-12T20:07:46Z
+title: "Event Storming: Pierwsze Starcie z big picture i process level"
+date: 2021-07-23
 draft: false
 image: cover-image.jpg
 description: "W niniejszym artykule przedstawiam wstęp do Event Stormingu wystarczający do przeprowadzania małych warsztatów wewnętrznych.
@@ -47,7 +47,7 @@ Przy okazji można usunąć duplikaty i ujednolicić język niektórych kartecze
 
 indexterm:[Event Storming, Big Picture]
 indexterm:[Event Storming, Process Level]
-Te dwa elementy dają nam część zwaną *Big picture*. Po czym przechodzimy do *Process Level*. 
+Te dwa elementy dają nam część zwaną *Big picture*. Po czym przechodzimy do *Process Level*.
 W tym momencie będziemy wchodzić w szczegóły związane z każdym z zdarzeń poprzez dodanie karteczek z:
 
 * aktorami – osobami i systemami wywołującymi lub odbierającymi dane zdarzenie, 
@@ -58,14 +58,16 @@ W tym momencie będziemy wchodzić w szczegóły związane z każdym z zdarzeń 
 Dopiero mając tak usystematyzowany system zdarzeń przechodzimy do szczegółowego wyszukiwania możliwości i problemów, które również oznaczamy jako gorące miejsca. 
 Na koniec wybieramy zagadnienie, którym będziemy chcieli się zająć – po krótkiej przerwie lub na osobnym spotkaniu <<DevStyleStolarczyk>>. 
 
+NOTE: Jeżeli zdecydowałeś się zamodelować cały system dojście do tego momentu może zająć Ci nawet kilka dni, dlatego warto rozważyć aby część Process Level przeprowadzać etapami, nad kolejnymi elementami systemu.
+
 Na koniec przechodzimy do etapu *Desing Level* na którym tworzymy model, który można przeniesć bezpośrednio do kodu.
 
-NOTE: Ze względu na objętość tego artykułu oraz wiedzę z zakresu DDD potrzebną do wykorzystania tego etapu warsztatów pominąłem tę część warsztatów. 
+NOTE: Ze względu na objętość tego artykułu oraz wiedzę z zakresu DDD potrzebną do pełnego wykorzystania tego etapu warsztatów pominąłem tę część warsztatów. 
 Nie mniej, element *Big picture* można z powodzeniem wykorzystać do zamodelowania już istniejacego systemu w celu jego diagnozy i wymiany wiedzy. 
 
 === Jak może wyglądać rezultat warsztatów
 
-W tym artykule pokaże mocno uproszczony i wymyślony przykład w celu zachowania pewnej spójności. 
+W tej sekcji pokażę mocno uproszczony i wymyślony przykład w celu zachowania pewnej spójności. 
 Ilustrację bardziej rozbudowanej sesji Event Stormingu planuję pokazać w przyszłości w osobnej serii artykułów.
 
 .Przykładowy element systemu po chaotycznej eksploracji
@@ -91,11 +93,6 @@ Opis każdego typu karteczki znajduje się w dalszej części artykułu.
 == Notacja w chaotycznej eksploracji
 Z racji, że Event Storming ma za zadanie zapewnić prostą notację, to przedstawiam ją poniżej.
 W tej sekcji znajduje się opis karteczek, które są używane w trakcie chaotycznej eksploracji oraz podczas części Process Level.
-
-W trakcie przeglądu spotkałem się z dwoma podejściami do notacji. 
-Oba w gruncie rzeczy reprezentują to samo:
-
-#TODO: Dodać drugi obrazek#
 
 .Obrazek, który wjaśnia wszystko – Alberto Brandolini – „Introducting Event Storming”
 image::notacja_01.svg[]
@@ -157,7 +154,7 @@ Następnie, w trakcie porządkowania, będziemy na niej zapisywać nasze systemy
 Uzupełnienie tej karteczki pozwoli nam jasno zobaczyć, które zdarzenia i operacje są wykonywane w tym samym miejscu, a które są w jakiś sposób niezależne. 
 Doprowadzi nas to do wyodrębnienia subdomen, które mogą później posłużyć jako punkt zaczepienia dla luźniejszej architektury aplikacji.
 
-.Przykłady systemów
+.Przykłady systemów podczas chaotycznej eksploracji
 ====
 image::systems-example.svg[align="center"]
 
@@ -166,7 +163,14 @@ W tym przypadku pierwszy system to po prostu czujnik, który stanowi samodzielny
 
 NOTE: Czasem można spotkać się z propozycją, aby zewnętrzne systemy oznaczać innym kolorem karteczek.
 Jednak ile kolorów można znaleźć w sklepie? 
+====
 
+.Przykłady systemów po *Process Level*
+====
+image::system-processlevelexample.svg[]
+
+Tutaj mamy już dużo więcej systemów, które wyraźnie pokazują ich zakres odpowiedzialności. 
+Użycie nazw jak _Backend_ czy _Frontend_ nie jest może najszczęśliwsze, ale w przypadku najprostrzych systemów wystarczające.
 ====
 
 === Słowo domenowe
@@ -220,45 +224,67 @@ Polecenia są pisane w formie rozkazujacej (czasem z ang. imperatywnej) i mają 
 A z zamiarem bywa tak, że czasem się nie udaje. 
 ====
 
-
 === Reakcja
 image::policy.svg[align="center"]
 
-#TODO: Dodać opis polityki#
+Reakcja (czasem zwana również polityką) pozwala nam zaprezentować to, jak system reaguje automatycznie na pewne zdarzenia. 
+Łatwo rozpoznać reakcję po tym, że zaczynamy używać składki "kiedy, …, to…". 
+Ważne jest to, aby karteczka ta trafiała pomiędzy zdarzeniem, którego jest adresatem, oraz poleceniem, które ma wykonać <<EventStormingDomaindriven2019>>. 
 
-.Przykłądy polityk
+.Przykłady polityk
 ====
 image::policy-example.svg[align="center"]
 
-#Dodać opis przykładu#
+W przykładowym systemie mamy tylko dwie polityki, które mówią nam jasno, że:
+
+* użytkownik, który jest niezalogowany powinien zostać przekierowany do strony zakładania konta. 
+Tutaj można by się pokusić, że jest to część typowo oparta na kontrolkach (nie zmieniająca nic w systemie), jednak jeśli biznesowi zależy na takiej funkcji, to czemu nie?
+* mamy wysyłać powiadomienie kiedy wartość temperatury przekroczy tę zadaną. 
 ====
 
 === Widok
 image::view.svg[align="center"]
 
-#TODO: Dodać opis i przykład widoku#
+W widokach, we wszelkiej literaturze, znalazłem najmniej. 
+Jednak uważam je za tyle ciekawe, że pozwalają nam powiedzieć, czy dany widok istnieje w naszej aplikacji oraz czy pewne rzeczy są uruchamiane ręcznie czy automatycznie (przed widokiem stoi człowiek a za nim polecenie). 
 
 .Przykłady widoków
 ====
 image::views-example.svg[align="center"]
+
+Na karteczkach przykładowych mamy cztery widoki, które jasno pokazują, co użytkownik widzie.
+Po za ostatnim, który jest *widokiem sprzętowym* dla zdarzenia czasowego.
+Alternatywnie możnaby zamodelować to za pomocą polityki, jednak o tyle podoba mi się takie podejście, że wyraźnie wskazuje nam, że musimy mieć tutaj połączenie z światem zewnętrznym (w końcu po to są widoki – aby łączyć się z zewnątrz, co nie?).
 ====
 
 === Rysunek poglądowy
 image::mockup.svg[align="center"]
 
-#TODO: Dodać opis i przykład rysunku poglądowego#
+Widokowi może towarzyszyć rysunek poglądowy. 
+Dodajemy je wtedy, gdy osoby od doświadczeń użytkownika (z ang. _user experience_, zapisywane skrótem UX) uznają jakiś element za szalenie istotny. 
+Taki obrazek pozwala na lepszą komunikację pomiędzy UXowcami a osobami odpowiedzialnymi za wygląd aplikacji, gdyż tym drugim pokazano, co jest najważniejsze. 
 
 .Przykład rysunku poglądowego
 ====
 image::mockup-example.svg[align="center"]
+
+MImo iż powyższy rysunek nie wystąpił w przykładach to postanowiłem opisać go dla porządku.
+Widzimy na nim wyraźnie, że jest trochę tekst, jest rysunek, który symbolizuje góną partię człowieka oraz przycisk OK. 
+Można z tego wysnuć wniosek, że obrazek musi być dość duży, jednak nie to jest najważniejsze – największa wartość stanowi dyskusja, która urodziła się podczas tworzenia takiej makiety.
 ====
 
 === Świat zewnętrzny
 image::external-world.svg[align="center"]
 
-#TODO: Dodać opis i przykład świata zewnętrznego#
+Świat zewnętrzny, podobnie jak rysunek poglądowy znalazł się tylko na notacji. 
+Niemniej uważam, że może być on ważny, zwłaszcza w przypadkach, gdy nasz system silnie operuje na tym, co dzieje się w świecie rzeczywistym. 
+Karteczki, które mogłby trafić pod ten szyld powinny reprezentować swojego rodzaju zdażenia (być sformułowane w przeszłej formie), gdyż to właśnie czasowniki napędzają nasz świat i go zmieniają, rzeczowniki natomiast stoją w miejscu.
 
-== Planowanie warsztatów
+== Warsztaty
+
+W tej sekcji omówię wszystko to, co uważam za ważne zarówno przed, w trakcie jak i po warsztatach
+
+=== Planowanie warsztatów
 
 NOTE: Pamiętaj, że pojedyncza sesja nie powinna przekraczać 2 godzin.
 
@@ -269,7 +295,7 @@ Dlatego zawczasu zadbaj o *bardzo dużo przestrzeni* i odpowiednią przyczepnoś
 
 Dlaczego to takie ważne?
 Ponieważ jak się okazuje, gdy ludziom zacznie brakować miejsca, to zaczną się ograniczać z swoją kreatywnością.
-Może się to skońćzyć tym, że część systemu w ogóle nie zostanie zamodelowana, gdyż zostanie uznana za nieważną, a z racji ograniczonego miejsca, pominięta.
+Może się to skończyć tym, że część systemu w ogóle nie zostanie zamodelowana, gdyż zostanie uznana za nieważną, a z racji ograniczonego miejsca, pominięta.
 
 Dlatego sala wybrana do warsztatów Event Storming powinna być jak największa. 
 W skrajnym przypadku można do tego wykorzystać korytarz, jednak upewnij się, że w trakcie, gdy będziesz go wykorzystywać nie będzie przechodzić tamtędy duża ilość osób, co może rozpraszać uczestników.
@@ -280,9 +306,7 @@ Następnie wszyscy równocześnie działają na jednej tablicy, na przykład prz
 Dlaczego mówię o siedzeniu w jednej sali?
 W trakcie warsztatów jest niesamowita ilość dyskusji, która wydaje się być niemożliwa przy użyciu tradycyjnych form pracy i komunikacji zdalnej, gdzie jedna osoba mówi a reszta musi słuchać. 
 
-
-
-=== Lista rzeczy do zrobienia
+==== Lista rzeczy do zrobienia
 
 .Koncepcja
 * [ ] Określ cel warsztatów (znalezienie problemów lub miejsc zapalnych) i nie zapomnij umieścić go w agendzie! 
@@ -307,7 +331,9 @@ W trakcie warsztatów jest niesamowita ilość dyskusji, która wydaje się być
 * [ ] Taśma malarska do pisania etykiet wszelakich
 * [ ] Coś słodkiego do jedzenia.
 
-== Rozpoczęcie warsztatów
+=== Rozpoczęcie warsztatów
+
+image::workshop.jpg[]
 
 W celu uprzedniego przygotowania sali warto przyjść do niej nawet 30 minut przed planowanym startem. 
 Rzeczy, które trzeba zrobić to:
@@ -342,7 +368,7 @@ NOTE: Uważaj na pomysł z cichą burzą mózgów gdy masz do czynienia z grupą
 Może się to skończyć duża ilością karteczek, które nijak nie wpasowują się w notację.
 
 [#w-trakcie-warsztatow]
-== W trakcie warsztatów
+=== W trakcie warsztatów
 
 Jak zostało to powiedziane we wstępie, zajmiemy dwoma zasadniczymi częściami warsztatów Event Stormign: _Big Picture_ i _Process Level_.
 W warsztatach niezwykle ważne jest to, aby udział brali wszyscy uczestnicy, przez to prowadzący powinien ich obserwować i dawać wskazówki, a nie próbować kierować całością dyskusji.
@@ -360,6 +386,7 @@ Jeśli natomiast widzisz, że dyskusja powoli się wypala, to możesz spróbowa�
 
 . Poproś uczestników o prześledzenie zdarzeń wstecz (od początku do końca) – może nie umieszczono jakiegoś, z pozoru nieistotnego, zdarzenia? Może ktoś zapomniał, że przed dokonaniem zakupu należy wybrać metodę dostawy? 
 . Wyśledź pieniądze – poproś uczestników aby prześledzili te ścieżki, które bezpośrednio generują przychód <<DDDNetCore>>.
+. Zwróc uwagę na polecenia, przy których jest tylko jedno zdarzenie: czy na pewno jest tylko jedna ścieżka wykonania polecenia (pamiętaj o „fantastycznej czwórce”)?
 
 Podczas porządkowania tablicy po pierwszym etapie burzy mózgów może pojawic się wątpliwość, czy dane zdarzenie należy do naszego systemu, czy też nie.
 Wcześniej już wspomniany Mateusz Gil zaprezentował podział na 4 poziomy (więcej na https://www.youtube.com/watch?v=31PNdWaUrTY[YouTube]) <<DevStyleStolarczyk>>:
@@ -369,12 +396,14 @@ Wcześniej już wspomniany Mateusz Gil zaprezentował podział na 4 poziomy (wi�
 3. Zdarzenia infrastrukturalne, które również nie mają wpływu na system i reprezentują typowe technikalia (plik został załadowany na dysk),
 4. Zdarzenia domenowe – te, które nas interesują – reprezentują domenę i zmieniają stan systemu.
 
-== Na zakończenie warsztatów
+=== Na zakończenie warsztatów
+
+image::finishing.jpg[]
 
 Podobno ludzki mózg uwielbia historię, dlatego w celu utrwalenia treści, które pojawiły się w trakcie warsztatów, warto poprosić któregoś z uczestników (lub wspólnie całą grupą), aby opowiedział historię, która dzieje się od początku do końca, od lewej do prawej <<bourgauDetailedAgendaDDD2019c>>.
 W przypadku gdy idzie to dość niemrawo warto zaproponować zmianę opowiadającego.
 
-== Po zakończeniu warsztatów
+=== Po zakończeniu warsztatów
 
 Jak wskazuje Zimarev, najważniejsze jest to, aby programiści zadawali pytania.
 Jeśli na twoich warsztatach nie było dyskusji to możliwe, że problem był zbyt prosty lub zaproszeni byli nieodpowiedni ludzie <<DDDNetCore>>.
@@ -404,10 +433,5 @@ Artykuł na podstawie:
   Bourgau, Philippe. „Detailed Agenda of a DDD Big Picture Event Storming - Part 3”. Philippe Bourgau’s XP Coaching Blog, 10 styczeń 2019. http://philippe.bourgau.net/detailed-agenda-of-a-ddd-big-picture-event-storming-part-3/.
 * [[[kolinskaEventStormingGuide]]]
   Kolińska, Natalia. „Event Storming Guide”. Udostępniono 20 lipiec 2021. https://www.boldare.com/blog/event-storming-guide.
-
-
-
-
-
-[index]
-== Index
+* [[[EventStormingDomaindriven2019]]]
+  IBM Developer. „Event Storming & Domain-Driven Design: Reactive in Practice - Event Storming the Stock Trader Domain”, 12 luty 2019. https://developer.ibm.com/tutorials/reactive-in-practice-1/.
