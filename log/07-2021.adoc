@@ -22,11 +22,11 @@ Udało mi się przenieść tutaj artykuły, które pisałem gdzieś indziej:
 * link:{{< ref "/Programowanie/Infrastruktura/Wykorzystanie Docker'a w celu zachowania czystości. Część 02 - Visual Studio Code.adoc" >}}[Zachowanie czystości komputera dzięki Dockerowi #02],
 
 W lipcu również popełniłem też duży artykuł, będący wstępem, i moim własnym przygotowaniem, do Event Stormingu dostępny: link:{{< ref "/Programowanie/Architektura/EventStorming-PierwszeStarcie.adoc" >}}[pod tym adresem].
-Po tym materiale wiem, że wolę jednak krótszą formę, mieszczącą się na kilku stronach A4 a nie kilkunastu.
+Po tym materiale wiem, że wolę jednak krótszą formę, mieszczącą się na kilku stronach A4, a nie kilkunastu.
 
-W zanadrzu mam materiały na temat Agile oraz Algorytmów genetycznych , planuję dalszą pracę nad Domain Driven Development oraz zrobienie researchu na temat gotowych szablonów projektów w .Net, które będą zawierać w sobie wiele powtarzalnego kodu i Architektury Cebulastej (Onion Architecture).
+W zanadrzu mam materiały na temat Agile oraz Algorytmów genetycznych, planuję dalszą pracę nad Domain Driven Development oraz zrobienie przeglądu gotowych szablonów projektów w .Net, które będą zawierać w sobie wiele powtarzalnego kodu i Architektury Cebulastej (Onion Architecture).
 
-Jest coś co chciałbyś, aby zmieniło się na blogu? Może masz temat o którym chciałbyś się więcej dowiedzieć? Pisz śmiało! 
+Jest coś, co chciałbyś, aby zmieniło się na blogu? Może masz temat, o którym chciałbyś się więcej dowiedzieć? Pisz śmiało! 
 
 [.small]
 Tak, gdy piszę te słowa, to system komentarzy jeszcze nie działa.

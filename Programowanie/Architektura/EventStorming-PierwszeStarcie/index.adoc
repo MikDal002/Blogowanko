@@ -24,21 +24,21 @@ Podstawowa koncepcja techniki EventStorming polega na zapewnieniu prostej notacj
 Jeśli chcemy pisać dobry kod, musimy rozumieć proces i model biznesowy, a tego nie dowiemy się lepiej od nikogo innego jak od biznesu i ekspertów domenowych.
 
 indexterm:[Event Storming]
-Metodę Event Stormingu opracował w 2013 roku Alberto Brandolini, polega ona na zebraniu faktów (zwanych także _zdarzeniami dziedzinowymi_), które się wydarzyły i są *nieodwracalne* w rozumieniu per se. 
+Metodę Event Stormingu opracował w 2013 roku Alberto Brandolini, polega ona na zebraniu faktów (zwanych także _zdarzeniami dziedzinowymi_), które się wydarzyły i są *nieodwracalne* w rozumieniu per se.
 
-Warsztaty w postaci Event Stormingu służą do wymiany wiedzy między uczestnikami, dlatego ważne jest, aby zaprosić ludzi z różnych kręgów: zarówno programistów jak i ekspertów dziedzinowych. 
+Warsztaty w postaci Event Stormingu służą do wymiany wiedzy między uczestnikami, dlatego ważne jest, aby zaprosić ludzi z różnych kręgów: zarówno programistów, jak i ekspertów dziedzinowych. 
 W konsekwencji powodują one otwarcie silosów wiedzowych, wymiany doświadczeń pomiędzy nimi, co prowadzi dalej do zidentyfikowania możliwych problemów i usprawnień <<DDDNetCore>><<DevStyleStolarczyk>>.
-W dalszej perspektywie Event storming pozwala na zamodelowanie architektury aplikacji, która zostanie przeniesiona do kodu – ta część nazywa się Event Storming: Desing Level i nie będzie tutaj omawiana. 
+W dalszej perspektywie Event Storming pozwala na zamodelowanie architektury aplikacji, która zostanie przeniesiona do kodu – ta część nazywa się Event Storming: Desing Level i nie będzie tutaj omawiana. 
 
 === Jak wygląda główna część warsztatów – po krótce
 
 indexterm:[Event Storming, Chaotic Exploration]
-Na początku uczestnicy umieszają *pomarańczowe karteczki* z zdarzeniami domenowymi na ścianie.
+Na początku uczestnicy umieszczają *pomarańczowe karteczki* ze zdarzeniami domenowymi na ścianie.
 Zależy nam tutaj, aby tej wiedzy pojawiło się jak najwięcej, dlatego nie przejmujemy się duplikacją lub chronologią. 
 Aczkolwiek nie naciskajmy, aby pojawiły się tutaj koniecznie wszystkie możliwe zdarzenia – będą one dodawane również sukcesywnie w trakcie kolejnych etapów.
 Każdy z uczestników w tym momencie będzie najpewniej zajmował się fragmentem, który zna najlepiej. 
-Kiedy dojdzie do konfliktów związanych z tym, że nie wiadomo jak jakiś podsystem ma działać zaznaczamy to karteczką zwaną _hotspotem_ (z ang. _hot spot_ – gorące miejsce) lub karteczką _system zewnętrzny_ jeśli dotyczy to zewnętrznej integracji. 
-Ważne jest to, abyśmy skupili się na *zdarzeniach, które dotyczą naszego systemu*, nie na tych, które dzieją się w świecie rzeczywistym lub w systemie towarzyszącym – choć i te warto umieścić na tablicy aby uzyskać lepszy kontekst. 
+Kiedy dojdzie do konfliktów związanych z tym, że nie wiadomo jak jakiś podsystem ma działać, zaznaczamy to karteczką zwaną _hotspotem_ (z ang. _hot spot_ – gorące miejsce) lub karteczką _system zewnętrzny_ jeśli dotyczy to zewnętrznej integracji. 
+Ważne jest to, abyśmy skupili się na *zdarzeniach, które dotyczą naszego systemu*, nie na tych, które dzieją się w świecie rzeczywistym lub w systemie towarzyszącym – choć i te warto umieścić na tablicy, aby uzyskać lepszy kontekst. 
 Tę część nazywamy *chaotyczną eksploracją* <<DevStyleStolarczyk>>. 
 Czasem można ją potraktować jako właściwą rozgrzewkę przed następnymi etapami mającą na celu zapoznanie się uczestników z ze sobą nawzajem <<kolinskaEventStormingGuide>>.
 
@@ -48,22 +48,22 @@ Przy okazji można usunąć duplikaty i ujednolicić język niektórych kartecze
 indexterm:[Event Storming, Big Picture]
 indexterm:[Event Storming, Process Level]
 Te dwa elementy dają nam część zwaną *Big picture*. Po czym przechodzimy do *Process Level*.
-W tym momencie będziemy wchodzić w szczegóły związane z każdym z zdarzeń poprzez dodanie karteczek z:
+W tym momencie będziemy wchodzić w szczegóły związane z każdym ze zdarzeń poprzez dodanie karteczek z:
 
 * aktorami – osobami i systemami wywołującymi lub odbierającymi dane zdarzenie, 
 * systemami – identyfikując zakresy odpowiedzialności, 
 * reakcjami naszego systemu na poszczególne zdarzenia domenowe,
 * widokami – na podstawie których użytkownik podejmuje decyzje. 
 
-Dopiero mając tak usystematyzowany system zdarzeń przechodzimy do szczegółowego wyszukiwania możliwości i problemów, które również oznaczamy jako gorące miejsca. 
+Dopiero mając tak usystematyzowany system zdarzeń, przechodzimy do szczegółowego wyszukiwania możliwości i problemów, które również oznaczamy jako gorące miejsca. 
 Na koniec wybieramy zagadnienie, którym będziemy chcieli się zająć – po krótkiej przerwie lub na osobnym spotkaniu <<DevStyleStolarczyk>>. 
 
-NOTE: Jeżeli zdecydowałeś się zamodelować cały system dojście do tego momentu może zająć Ci nawet kilka dni, dlatego warto rozważyć aby część Process Level przeprowadzać etapami, nad kolejnymi elementami systemu.
+NOTE: Jeżeli zdecydowałeś się zamodelować cały system dojście do tego momentu może zająć Ci nawet kilka dni, dlatego warto rozważyć, czy aby część Process Level nie przeprowadzać etapami, nad kolejnymi elementami systemu.
 
-Na koniec przechodzimy do etapu *Desing Level* na którym tworzymy model, który można przeniesć bezpośrednio do kodu.
+Na koniec przechodzimy do etapu *Desing Level* na którym tworzymy model, który można przenieść bezpośrednio do kodu.
 
 NOTE: Ze względu na objętość tego artykułu oraz wiedzę z zakresu DDD potrzebną do pełnego wykorzystania tego etapu warsztatów pominąłem tę część warsztatów. 
-Nie mniej, element *Big picture* można z powodzeniem wykorzystać do zamodelowania już istniejacego systemu w celu jego diagnozy i wymiany wiedzy. 
+Nie mniej, element *Big picture* można z powodzeniem wykorzystać do zamodelowania już istniejącego systemu w celu jego diagnozy i wymiany wiedzy. 
 
 === Jak może wyglądać rezultat warsztatów
 
@@ -73,19 +73,19 @@ Ilustrację bardziej rozbudowanej sesji Event Stormingu planuję pokazać w przy
 .Przykładowy element systemu po chaotycznej eksploracji
 image:chaotic-exploration-example.svg[]
 
-Jak widać na początku napisaliśmy możliwie dużo zdażeń. 
+Jak widać na początku napisaliśmy możliwie dużo zdarzeń. 
 Pojawiły się przy tym dwie wątpliwości oraz uściśliliśmy słownictwo, które mogło być problematyczne w trakcie warsztatów. 
-Jedyny system, który nam się pojawił to _Facebook_ jako dostawca logowania – został tutaj umieszczony ponieważ jest systemem zewnętrznym, od którego zależy nasz przepływ.
+Jedyny system, który nam się pojawił to _Facebook_ jako dostawca logowania – został tutaj umieszczony, ponieważ jest systemem zewnętrznym, od którego zależy nasz przepływ.
 
-Następnie postępujemy zgodnie z tym, co zostało napsiane wcześniej: dodajemy pozostałe karteczki.
+Następnie postępujemy zgodnie z tym, co zostało napisane wcześniej: dodajemy pozostałe karteczki.
 Dobrze jest dadać je wszystkie od razu, ponieważ dodawanie ich pojedynczo może stanowczo przedłużyć warsztat i doprowadzić do lekkiej irytacji uczesników ciągłym przekładaniem karteczek.
 
 .Przykładowy element systemu po uporządkowaniu (obrazek należy otworzyć w osobnym oknie aby zobaczyć coś więcej)
 image:process-level-example.svg[]
 
-Rozbudowaliśmy logowanie o rejestrację oraz przypadek w którym próbował zalogować się użytkownik, który jeszcze nie jest w naszej bazie. 
-Każdą swoją akcję mógł podjąć na podstawie pewnego widoku, z którego wykonywał polecenie na pewnym systemie, co generowało zdażenia.
-Każde ze zdażeń może wygenerować kolejny widok lub politykę/reakcję, gdzie ta może kontynuować ciąg przyczynowo skutkowy. 
+Rozbudowaliśmy logowanie o rejestrację oraz przypadek, w którym próbował zalogować się użytkownik, który jeszcze nie jest w naszej bazie. 
+Każdą swoją akcję mógł podjąć na podstawie pewnego widoku, z którego wykonywał polecenie na pewnym systemie, co generowało zdarzenia.
+Każde z nich może wygenerować kolejny widok lub politykę/reakcję, gdzie ta znów może kontynuować ciąg przyczynowo skutkowy. 
 
 Opis każdego typu karteczki znajduje się w dalszej części artykułu.
 
@@ -97,14 +97,14 @@ W tej sekcji znajduje się opis karteczek, które są używane w trakcie chaotyc
 .Obrazek, który wjaśnia wszystko – Alberto Brandolini – „Introducting Event Storming”
 image::notacja_01.svg[]
 
-Cóż tu może się stać? Na początku mamy świat zwewnętrzny, który wpływa na naszego _aktora_.
-Ten mając na uwadze, to co się dzieje w okół niego oraz patrząc na _widok_ podejmuje decyzję o wykonaniu pewnego _polecenia_. 
+Cóż tu może się stać? Na początku mamy świat zewnętrzny, który wpływa na naszego _aktora_.
+Ten mając na uwadze, to co się dzieje wokół niego oraz patrząc na _widok_ podejmuje decyzję o wykonaniu pewnego _polecenia_. 
 To _polecenie_ jest wykonywane na którymś z _systemów_, czy to naszym, czy zewnętrznym. 
 _System_ generuje _zdarzenie domenowe_, które jest tłumaczone na _widok_ oraz może wyzwolić jakąś _reakcję_ naszego _systemu_.  
 I tak koło się zamyka. 
-_Aktor_ po wykonaniu jakiejś akcji otrzymuje odświeżony _widok_, przez co może chcieć podjąć nową nową akcję poprzez zlecenie _polecenia_ <<stolarczykProcessLevelEvent2021>>.
+_Aktor_ po wykonaniu jakiejś akcji otrzymuje odświeżony _widok_, przez co może chcieć podjąć nową akcję poprzez zlecenie _polecenia_ <<stolarczykProcessLevelEvent2021>>.
 
-Osobno istnieją _gorące miejsce_ oraz _rysunki poglądowe_, które możemy umieszczać odpowiednio w miejscach zapalnych, co do których, trzeba podjąć pewne decyzje lub nikt nie wie co tam się dzieje, oraz przy widokach, aby podkreślić co na nich musi się znaleźć.
+Osobno istnieją _gorące miejsce_ oraz _rysunki poglądowe_, które możemy umieszczać odpowiednio w miejscach zapalnych, co do których, trzeba podjąć pewne decyzje lub na ten moment nie wiadomo co tam się dzieje, oraz przy widokach, aby podkreślić, co na nich musi się znaleźć.
 
 === Zdarzenie domenowe
 
@@ -112,10 +112,10 @@ Osobno istnieją _gorące miejsce_ oraz _rysunki poglądowe_, które możemy umi
 image::domain-event.svg[align="center"]
 
 Jak już napisałem we wstępie, zdarzenie domenowe reprezentuje fakt nieodwracalny.
-Mówiąc że fakt jest nieodwracalny znaczy to że, gdy użytkownik kupił produkt – nie może już tego cofnąć (maszyna pakowania i nadawania numerów przesyłki już ruszyła), może on rozpocząć procedurę przeciwną, to znaczy zwrotu zakupionego produktu. 
+Mówiąc, że fakt jest nieodwracalny, znaczy to, że gdy użytkownik kupił produkt – nie może już tego cofnąć (maszyna pakowania i nadawania numerów przesyłki już ruszyła), może on rozpocząć procedurę przeciwną, to znaczy zwrotu zakupionego produktu. 
 Co niezwykle ważne, fakty zapisujemy za pomocą *formy przeszłej*, czyli „użytkownik zapłacił za produkt”, „użytkownik zgłosił żądanie zwrotu zakupu”.
-Pozwala to uciać dywagację na temat tego, co jeśli zdarzenie się nie udało, lub zaszło częściowo – w takim przypadku mamy do czynienia z innym zdarzeniem (na przykłąd: „użytkownik zapłaci połowę kwoty”).
-Zdarzenie domenowe musi być *zrozumiałe przez ludzi nietechnicznych* więc w konsekwencji nie może ono odnosić się do szczegółow implementacyjnych. 
+Pozwala to uciąć dywagację na temat tego, co jeśli zdarzenie się nie udało, lub zaszło częściowo – w takim przypadku mamy do czynienia z innym zdarzeniem (na przykład: „użytkownik zapłaci połowę kwoty”).
+Zdarzenie domenowe musi być *zrozumiałe przez ludzi nietechnicznych* więc w konsekwencji nie może ono odnosić się do szczegółów implementacyjnych. 
 Mimo iż w przykładach znajduje się *kto* i *co*, zrobił, co zwiększa czytelność, jednak nie zapominajmy, że twórca danego zdarzenia zostanie jasno określony w dalszym etapie za pomocą karteczki _aktora_ <<DDDNetCore>>.
 
 Mimo iż piszę o tym, że fakt już się stał, to nie należy się bać dodawania zdarzeń, które reprezentują pomysły i funkcje zaplanowane do realizacji w przyszłości.
@@ -141,7 +141,7 @@ Jest to zazwyczaj fioletowa lub jaskraworóżowa karteczka (ważne, aby miała w
 image:hotspot-example.svg[ scaledwidth="50%"]
 
 Takie gorące miejsce zostało użyte w przykładzie. 
-Pojawiło się pytanie, na które odpowiedź Event Storming nie koniecznie przyniesie (bo jest pytaniem mocno technicznym), jednak to, jak dużo transferu używamy może być już kwestią domenową, na przykład wtedy, gdy chcemy konstruuować system wyróżniający się oszczędnością.
+Pojawiło się pytanie, na które odpowiedź Event Storming nie koniecznie przyniesie (bo jest pytaniem mocno technicznym), jednak to, jak dużo transferu używamy, może być już kwestią domenową, na przykład wtedy, gdy chcemy konstruować system wyróżniający się oszczędnością.
 ====
 
 === System
@@ -170,7 +170,7 @@ Jednak ile kolorów można znaleźć w sklepie?
 image::system-processlevelexample.svg[]
 
 Tutaj mamy już dużo więcej systemów, które wyraźnie pokazują ich zakres odpowiedzialności. 
-Użycie nazw jak _Backend_ czy _Frontend_ nie jest może najszczęśliwsze, ale w przypadku najprostrzych systemów wystarczające.
+Użycie nazw jak _Backend_ czy _Frontend_ nie jest może najszczęśliwsze, ale w przypadku najprostszych systemów wystarczające.
 ====
 
 === Słowo domenowe
@@ -179,7 +179,7 @@ Użycie nazw jak _Backend_ czy _Frontend_ nie jest może najszczęśliwsze, ale 
 image::domain-word.svg[align="center"]
 
 Z umieszczeniem słowa domenowego spotkałem się raz (<<bourgauDetailedAgendaDDD2018>>) i traktuje je jako rozszerzenie podstawowej notacji Event Stormingu.
-Nimniej, uważam je za ciekawy, acz nieobowiązkowy element, gdyż w przypadku niektórych projektów może pojawić się problem z słownictwem szczegółowym.
+Niemniej, uważam je za ciekawy, acz nieobowiązkowy element, gdyż w przypadku niektórych projektów może pojawić się problem ze słownictwem szczegółowym.
 
 .Przykład problemu z słownictwem domenowym
 ====
@@ -189,7 +189,7 @@ W niektórych miejscach spotykałem się z problemem rozróżnienia słów _bada
 
 == Notacja w Process Level
 
-W tej sekcji znajdziesz elementy notacji wykorzystywane głownie podczas części Process Level, co nie znaczy, że przedstawione <<notacja-w-chaotycznej-eksploracji,chwilę wczesniej>> karteczki już nie obowiązują. 
+W tej sekcji znajdziesz elementy notacji wykorzystywane głównie podczas części Process Level, co nie znaczy, że przedstawione <<notacja-w-chaotycznej-eksploracji,chwilę wczesniej>> karteczki już nie obowiązują. 
 Podziału dokonałem głównie ze względu na objętość materiału.
 
 === Aktor
@@ -198,13 +198,13 @@ Podziału dokonałem głównie ze względu na objętość materiału.
 image::aktor.svg[align="center"]
 
 Aktor, mimo iż brzmi po ludzki, to nie musi być to człowiek – jest to karteczka, która reprezentuje, *kto* może wyzwolić daną akcję.
-Także może to być zarówno człowiek (na przykład poprzez interakcję z aplikacją) jak i na przykład czujka zalania mieszkania może wyzwolić alarm bądź powiadomienie. 
+Także może to być zarówno człowiek (na przykład poprzez interakcję z aplikacją), jak i na przykład czujka zalania mieszkania może wyzwolić alarm bądź powiadomienie. 
 
 .Przykłady aktorów
 ====
 image::actors-example.svg[align="center"]
 
-Aktorem może być zarówno użytkownik jak i pewne zdażenie jak na przykład czasomierz (z ang. _timer_). 
+Aktorem może być zarówno użytkownik, jak i pewne zdarzenie jak na przykład czasomierz (z ang. _timer_). 
 Aktor jest karteczką, która pojawia się na samym początku łańcucha przyczynowo-skutkowego co pokazuje, kto jest twórcą danej akcji.
 ====
 
@@ -220,7 +220,7 @@ Dlatego zaczynamy od zdarzeń, a nie od poleceń, ponieważ taka kolejność mo�
 ====
 image::commands-example.svg[align="center"]
 
-Polecenia są pisane w formie rozkazujacej (czasem z ang. imperatywnej) i mają za zadanie ukazać zamiar wykonania czegość. 
+Polecenia są pisane w formie rozkazującej (czasem z ang. imperatywnej) i mają za zadanie ukazać zamiar wykonania czegość. 
 A z zamiarem bywa tak, że czasem się nie udaje. 
 ====
 
@@ -237,24 +237,24 @@ image::policy-example.svg[align="center"]
 
 W przykładowym systemie mamy tylko dwie polityki, które mówią nam jasno, że:
 
-* użytkownik, który jest niezalogowany powinien zostać przekierowany do strony zakładania konta. 
-Tutaj można by się pokusić, że jest to część typowo oparta na kontrolkach (nie zmieniająca nic w systemie), jednak jeśli biznesowi zależy na takiej funkcji, to czemu nie?
-* mamy wysyłać powiadomienie kiedy wartość temperatury przekroczy tę zadaną. 
+* użytkownik, który jest niezalogowany, powinien zostać przekierowany do strony zakładania konta. 
+Tutaj można by się pokusić, że jest to część typowo oparta na kontrolkach (niezmieniająca nic w systemie), jednak jeśli biznesowi zależy na takiej funkcji, to czemu nie?
+* mamy wysyłać powiadomienie, kiedy wartość temperatury przekroczy tę zadaną. 
 ====
 
 === Widok
 image::view.svg[align="center"]
 
 W widokach, we wszelkiej literaturze, znalazłem najmniej. 
-Jednak uważam je za tyle ciekawe, że pozwalają nam powiedzieć, czy dany widok istnieje w naszej aplikacji oraz czy pewne rzeczy są uruchamiane ręcznie czy automatycznie (przed widokiem stoi człowiek a za nim polecenie). 
+Jednak uważam je za tyle ciekawe, że pozwalają nam powiedzieć, czy dany widok istnieje w naszej aplikacji oraz, czy pewne rzeczy są uruchamiane ręcznie, czy też automatycznie (przed widokiem stoi człowiek a za nim polecenie). 
 
 .Przykłady widoków
 ====
 image::views-example.svg[align="center"]
 
 Na karteczkach przykładowych mamy cztery widoki, które jasno pokazują, co użytkownik widzie.
-Po za ostatnim, który jest *widokiem sprzętowym* dla zdarzenia czasowego.
-Alternatywnie możnaby zamodelować to za pomocą polityki, jednak o tyle podoba mi się takie podejście, że wyraźnie wskazuje nam, że musimy mieć tutaj połączenie z światem zewnętrznym (w końcu po to są widoki – aby łączyć się z zewnątrz, co nie?).
+Poza ostatnim, który jest *widokiem sprzętowym* dla zdarzenia czasowego.
+Alternatywnie można by za modelować to za pomocą polityki, jednak o tyle podoba mi się takie podejście, że wyraźnie wskazuje nam, że musimy mieć tutaj połączenie ze światem zewnętrznym (w końcu po to są widoki – aby łączyć się z zewnątrz, co nie?).
 ====
 
 === Rysunek poglądowy
@@ -268,8 +268,8 @@ Taki obrazek pozwala na lepszą komunikację pomiędzy UXowcami a osobami odpowi
 ====
 image::mockup-example.svg[align="center"]
 
-MImo iż powyższy rysunek nie wystąpił w przykładach to postanowiłem opisać go dla porządku.
-Widzimy na nim wyraźnie, że jest trochę tekst, jest rysunek, który symbolizuje góną partię człowieka oraz przycisk OK. 
+Mimo iż powyższy rysunek nie wystąpił w przykładach, to postanowiłem opisać go dla porządku.
+Widzimy na nim wyraźnie, że jest trochę tekst, jest rysunek, który symbolizuje górną partię ciała człowieka oraz przycisk OK. 
 Można z tego wysnuć wniosek, że obrazek musi być dość duży, jednak nie to jest najważniejsze – największa wartość stanowi dyskusja, która urodziła się podczas tworzenia takiej makiety.
 ====
 
@@ -278,11 +278,11 @@ image::external-world.svg[align="center"]
 
 Świat zewnętrzny, podobnie jak rysunek poglądowy znalazł się tylko na notacji. 
 Niemniej uważam, że może być on ważny, zwłaszcza w przypadkach, gdy nasz system silnie operuje na tym, co dzieje się w świecie rzeczywistym. 
-Karteczki, które mogłby trafić pod ten szyld powinny reprezentować swojego rodzaju zdażenia (być sformułowane w przeszłej formie), gdyż to właśnie czasowniki napędzają nasz świat i go zmieniają, rzeczowniki natomiast stoją w miejscu.
+Karteczki, które mogłyby trafić pod ten szyld, powinny reprezentować swojego rodzaju zdarzenia (być sformułowane w przeszłej formie), gdyż to właśnie czasowniki napędzają nasz świat i go zmieniają, rzeczowniki natomiast stoją w miejscu.
 
 == Warsztaty
 
-W tej sekcji omówię wszystko to, co uważam za ważne zarówno przed, w trakcie jak i po warsztatach
+W tej sekcji omówię wszystko to, co uważam za ważne zarówno przed, w trakcie, jak i po warsztatach
 
 === Planowanie warsztatów
 
@@ -294,17 +294,17 @@ W trakcie warsztatów niezwykle problematyczna może być ilość miejsca, któr
 Dlatego zawczasu zadbaj o *bardzo dużo przestrzeni* i odpowiednią przyczepność karteczek do ściany. Jak podaje Zimarev warto kupić rolkę papieru do plotera, którą umocujesz jako podkład, w przypadku, gdy goła ściana nie jest w stanie zapewnić odpowiedniej przyczepności <<DDDNetCore>>.
 
 Dlaczego to takie ważne?
-Ponieważ jak się okazuje, gdy ludziom zacznie brakować miejsca, to zaczną się ograniczać z swoją kreatywnością.
-Może się to skończyć tym, że część systemu w ogóle nie zostanie zamodelowana, gdyż zostanie uznana za nieważną, a z racji ograniczonego miejsca, pominięta.
+Ponieważ jak się okazuje, gdy ludziom zacznie brakować miejsca, to zaczną się ograniczać ze swoją kreatywnością.
+Może się to skończyć tym, że część systemu w ogóle nie zostanie za modelowana, gdyż zostanie uznana za nieważną, a z racji ograniczonego miejsca, pominięta.
 
 Dlatego sala wybrana do warsztatów Event Storming powinna być jak największa. 
-W skrajnym przypadku można do tego wykorzystać korytarz, jednak upewnij się, że w trakcie, gdy będziesz go wykorzystywać nie będzie przechodzić tamtędy duża ilość osób, co może rozpraszać uczestników.
+W skrajnym przypadku można do tego wykorzystać korytarz, jednak upewnij się, że w trakcie, gdy będziesz go wykorzystywać, nie będzie przechodzić tamtędy duża ilość osób, co może rozpraszać uczestników.
 
-Innym pomysłem może być działanie hybrydowe – uczestnicy siadają w jednej sali z własnymi komputerami na których będą pracować. 
+Innym pomysłem może być działanie hybrydowe – uczestnicy siadają w jednej sali z własnymi komputerami, na których będą pracować. 
 Dobrze, aby znajdował się w niej też jeden duży wyświetlacz dla prowadzącego. 
 Następnie wszyscy równocześnie działają na jednej tablicy, na przykład przy pomocy oprogramowania https://miro.com/. 
 Dlaczego mówię o siedzeniu w jednej sali?
-W trakcie warsztatów jest niesamowita ilość dyskusji, która wydaje się być niemożliwa przy użyciu tradycyjnych form pracy i komunikacji zdalnej, gdzie jedna osoba mówi a reszta musi słuchać. 
+W trakcie warsztatów jest niesamowita ilość dyskusji, która wydaje się niemożliwa przy użyciu tradycyjnych form pracy i komunikacji zdalnej, gdzie jedna osoba mówi, a reszta musi słuchać. 
 
 ==== Lista rzeczy do zrobienia
 
@@ -341,31 +341,32 @@ Rzeczy, które trzeba zrobić to:
 .Przed startem
 * [ ] Jeśli karteczki nie trzymają się ściany, przymocuj papier,
 * [ ] Umieść notację w widocznym miejscu,
-* [ ] Usuń krzesła jeśli chcesz pracować przy pomocy karteczek, w przypadku gdy je zostawisz to zobaczysz, że niektórzy odłączą się od grupy i zaczną sobie po cichu robić własne rzeczy,
+* [ ] Usuń krzesła, jeśli chcesz pracować przy pomocy karteczek, w przypadku gdy je zostawisz, to zobaczysz, że niektórzy odłączą się od grupy i zaczną sobie po cichu robić własne rzeczy,
 * [ ] Rozmieść pisaki, karteczki i coś do zjedzenia.
 
-Kiedy wszyscy już się zbiorą i warsztaty się zaczną niezapomnij o:
+Kiedy wszyscy już się zbiorą i warsztaty się zaczną nie zapomnij o:
 
 .Przy rozpoczynaniu warsztatów:
 * [ ] Przedstawienie celu, uczestników 
-* [ ] Krótkiej zabawy aby pobudzić ludzi (możesz znaleźć je na stronie https://www.funretrospectives.com/category/energizer/[funretrospectives.com]) <<bourgauDetailedAgendaDDD2018>>,
-  Najmniej wymagająca zabawa, według mnie, to „Poszedłem na plaże i wziałem…" footnote:[źródło zabawy: https://www.funretrospectives.com/went-to-the-beach-and/[], w skrócie polega ona na tym, że prowadzący mówi: „Poszedłem na plaże i wziąłem ze sobą…"  i następnie wymienia jedną rzecz. 
-  Osoba stojąca obok prowadzącego powtarza to co powiedział prowadzący dodająć swoją rzecz. 
-  Zabawa trwa aży wszyscy się wypowiedzą.],
+* [ ] Krótkiej zabawy, aby pobudzić ludzi (możesz znaleźć je na stronie https://www.funretrospectives.com/category/energizer/[funretrospectives.com]) <<bourgauDetailedAgendaDDD2018>>,
+  Najmniej wymagająca zabawa, według mnie, to „Poszedłem na plaże i wziąłem…" footnote:[źródło zabawy: https://www.funretrospectives.com/went-to-the-beach-and/[], w skrócie polega ona na tym, że prowadzący mówi: „Poszedłem na plaże i wziąłem ze sobą…" i następnie wymienia jedną rzecz. 
+  Osoba stojąca obok prowadzącego powtarza to, co powiedział prowadzący, dodając swoją rzecz. 
+  Zabawa trwa aż wszyscy się wypowiedzą.],
 * [ ] Przedstawienie metody Event Stormingu i wymaganej *całości* notacji wraz z zasadami ich użycia. 
 Na początek skup się na: _zdarzenia domenowego_, _gorącego miejsca_ oraz _zewnętrznego systemu_.
 
-Zauważyłem, że niezwykle ważnym jest aby przedstawić całość notacji uczestnikom warsztatów. 
-Nie próbuj „chować” przed nimi tego, co będą robić w późniejszych etapach – pozwoli im to od razu układać karteczki w większych odstępach oraz załapać kontekst tego co będą robić. 
-Jedną z formą przedstawienia notacji z którą się spotkałem jest poproszenie jednego z uczestników o to, aby przedstawił co widzi na rysunku w trakcie czego może zadawać pytania prowadzącemu.
+Zauważyłem, że niezwykle ważne jest, aby przedstawić całość notacji uczestnikom warsztatów. 
+Nie próbuj „chować” przed nimi tego, co będą robić w późniejszych etapach – pozwoli im to od razu układać karteczki w większych odstępach oraz załapać kontekst tego, co będą robić. 
+Jedną z formą przedstawienia notacji, z którą się spotkałem, jest poproszenie jednego z uczestników o to, aby przedstawił, co widzi na rysunku. 
+Jeśli czegoś nie rozumie, może zadawać pytania prowadzącemu.
 
 Z racji, że Event Storming to warsztat grupowy, gdzie wszyscy powinni brać udział, należy zachęcić ludzi do tego, aby sami zapisywali zdarzenia na ścianie.
-Aby to osiągnąć należy zacząć od siebie – zapisz karteczkę jednym zdarzeniem, które znajduje się gdzieś *w środku systemu*, np. „użytkownik dodał przedmiot do koszyka”. 
+Aby to osiągnąć, należy zacząć od siebie – zapisz karteczkę jednym zdarzeniem, które znajduje się gdzieś *w środku systemu*, np. „użytkownik dodał przedmiot do koszyka”. 
 Jest to niezwykle ważne, aby nie próbować zaczynać od początku lub od końca, gdyż _zawsze_ będzie coś wcześniej i później. 
 Dzięki takiemu podejściu można próbować zachęcić uczestników, aby zapisali zdarzenia, które następują lub są przed twoim <<DDDNetCore>><<bourgauHowPrepareDDD2018>>. 
 
-NOTE: Uważaj na pomysł z cichą burzą mózgów gdy masz do czynienia z grupą niedoświadczoną w Event Stormingu.
-Może się to skończyć duża ilością karteczek, które nijak nie wpasowują się w notację.
+NOTE: Uważaj na pomysł z cichą burzą mózgów, gdy masz do czynienia z grupą niedoświadczoną w Event Stormingu.
+Może się to skończyć dużą ilością karteczek, które nijak nie wpasowują się w notację.
 
 [#w-trakcie-warsztatow]
 === W trakcie warsztatów
@@ -375,18 +376,18 @@ W warsztatach niezwykle ważne jest to, aby udział brali wszyscy uczestnicy, pr
 
 W trakcie warsztatów, niezależnie od etapu, zwróć szczególną uwagę na to, że:
 
-* Ludzie mają tendencję do kreślenia drogi w przypadku gdy wszystko idzie po ich myśli, dlatego zachęć ich aby prześledzili przypadki poza właściwą ścieżką, takie jak „dokonano płatności na dwukrotność kwoty”, bądź „login i hasło zostało odrzucone” <<DDDNetCore>>.
-Szczególnie przydatna może być tutaj metoda „fantastycznej czwórki” Matuesza Gila, zwaną również 0, 50, 100 i 150, która polega na szukaniu możliwości zdarzenia w wersji na 0% (gdy zdarzenie nie zaszło), 50% (zdarzenie zaszło w wersji częściowej) lub 150% (zdarzenie zaszło w wersji przesadzonej), np. co się stanie, gdy użytkownik zapłaci za mało, lub za dużo, bądź wcale <<DevStyleStolarczyk>>?  
+* Ludzie mają tendencję do kreślenia drogi w przypadku gdy wszystko idzie po ich myśli, dlatego zachęć ich aby prześledzili przypadki poza właściwą ścieżką, takie jak „dokonano płatności na dwu krotność kwoty”, bądź „login i hasło zostało odrzucone” <<DDDNetCore>>.
+Szczególnie przydatna może być tutaj metoda „fantastycznej czwórki” Mateusza Gila, zwaną również 0, 50, 100 i 150, która polega na szukaniu możliwości zdarzenia w wersji na 0% (gdy zdarzenie nie zaszło), 50% (zdarzenie zaszło w wersji częściowej) lub 150% (zdarzenie zaszło w wersji przesadzonej), np. co się stanie, gdy użytkownik zapłaci za mało, lub za dużo, bądź wcale <<DevStyleStolarczyk>>?  
 
-* Gdy zobaczysz ożywioną dyskusję, zwłaszcza taką, która kręci się w kółko i nie generuje nowych karteczek najpewniej jest to punkt zapalny zwany z angielskiego _hot spot_, który według propozycji twórcy metody Event Stormingu Alberto Brandolini należy oznaczyć jaskrawym kolorem (np. jaskrawy róż) <<DDDNetCore>>.
+* Gdy zobaczysz ożywioną dyskusję, zwłaszcza taką, która kręci się w kółko i nie generuje nowych karteczek, najpewniej jest to punkt zapalny zwany z angielskiego _hot spot_, który według propozycji twórcy metody Event Stormingu Alberto Brandolini należy oznaczyć jaskrawym kolorem (np. jaskrawy róż) <<DDDNetCore>>.
 
 * Należy wyłapywać karteczki, których formy sugerują życzenia czy reprezentują całe funkcjonalności (np. „zaloguj użytkownika” lub „lista produktów”) a ich twórcom wyjaśnić, że interesuje nas przepływ zdarzeń, którego nie można cofnąć.
 
 Jeśli natomiast widzisz, że dyskusja powoli się wypala, to możesz spróbować dwóch sposobów:
 
 . Poproś uczestników o prześledzenie zdarzeń wstecz (od początku do końca) – może nie umieszczono jakiegoś, z pozoru nieistotnego, zdarzenia? Może ktoś zapomniał, że przed dokonaniem zakupu należy wybrać metodę dostawy? 
-. Wyśledź pieniądze – poproś uczestników aby prześledzili te ścieżki, które bezpośrednio generują przychód <<DDDNetCore>>.
-. Zwróc uwagę na polecenia, przy których jest tylko jedno zdarzenie: czy na pewno jest tylko jedna ścieżka wykonania polecenia (pamiętaj o „fantastycznej czwórce”)?
+. Wyśledź pieniądze – poproś uczestników, aby prześledzili te ścieżki, które bezpośrednio generują przychód <<DDDNetCore>>.
+. Zwróć uwagę na polecenia, przy których jest tylko jedno zdarzenie: czy na pewno jest tylko jedna ścieżka wykonania polecenia (pamiętaj o „fantastycznej czwórce”)?
 
 Podczas porządkowania tablicy po pierwszym etapie burzy mózgów może pojawic się wątpliwość, czy dane zdarzenie należy do naszego systemu, czy też nie.
 Wcześniej już wspomniany Mateusz Gil zaprezentował podział na 4 poziomy (więcej na https://www.youtube.com/watch?v=31PNdWaUrTY[YouTube]) <<DevStyleStolarczyk>>:
@@ -401,15 +402,15 @@ Wcześniej już wspomniany Mateusz Gil zaprezentował podział na 4 poziomy (wi�
 image::finishing.jpg[]
 
 Podobno ludzki mózg uwielbia historię, dlatego w celu utrwalenia treści, które pojawiły się w trakcie warsztatów, warto poprosić któregoś z uczestników (lub wspólnie całą grupą), aby opowiedział historię, która dzieje się od początku do końca, od lewej do prawej <<bourgauDetailedAgendaDDD2019c>>.
-W przypadku gdy idzie to dość niemrawo warto zaproponować zmianę opowiadającego.
+W przypadku gdy idzie to dość niemrawo, warto zaproponować zmianę opowiadającego.
 
 === Po zakończeniu warsztatów
 
 Jak wskazuje Zimarev, najważniejsze jest to, aby programiści zadawali pytania.
 Jeśli na twoich warsztatach nie było dyskusji to możliwe, że problem był zbyt prosty lub zaproszeni byli nieodpowiedni ludzie <<DDDNetCore>>.
 
-Niebój się również rozszerzać notacji warsztatów. 
-Na przykład, gdy domena mocno operuje na bazach danych można spróbować zaprezentować je w trakcie warsztatów za pomocą osbnych karteczek, gdzie każda z operacji, jak SELECT czy UPDATE, ma swój własny kolor <<DevStyleStolarczyk>>. 
+Nie obawiaj się również rozszerzać notacji warsztatów. 
+Na przykład, gdy domena mocno operuje na bazach danych można spróbować zaprezentować je w trakcie warsztatów za pomocą osobnych karteczek, gdzie każda z operacji, jak _SELECT_ czy _UPDATE_, ma swój własny kolor <<DevStyleStolarczyk>>. 
 
 [bibliography]
 == Bibliografia
