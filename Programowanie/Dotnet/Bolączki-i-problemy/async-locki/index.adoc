@@ -25,7 +25,7 @@ Nie wymagam jednak tutaj jakiejś szczególnej wiedzy, więc nawet początkując
 
 Gwoli ścisłości, wszystkie poniższe przykłady są uruchamiane za pomocą takiego kawałka kodu:
 
-[source, csharp]
+[source,csharp]
 ----
 include::src/Executor.cs[]
 ----
@@ -33,7 +33,9 @@ include::src/Executor.cs[]
 gdzie `noOfTasks` mówi o tym, ile zadań ma być uruchomione równolegle, natomiast `test` jest funkcją do testowania.
 Dla każdego testu obiekt jest tworzony od nowa.
 
-== lock()
+== Jak to zrobić źle
+
+=== lock()
 
 Zacznijmy od początku. 
 Normalnie kompilator nie pozwoli nam na wywołanie kodu asynchronicznego (wymagającego słówka `await`) wewnątrz struktury `lock(…) {…}` – zwróci nam lakoniczne `error CS1996: Cannot await in the body of a lock statement`.
@@ -52,7 +54,7 @@ async Task NotWorkingLock()
 }
 ----
 
-== Monitor
+=== Monitor
 
 WARNING: Kod zawarty w tej sekcji jest niepoprawny i może powodować trudne do wykrycia błędy, mimo iż tak nie wygląda!
 
@@ -65,9 +67,9 @@ Możliwe, że w takim momencie strzeli nam do głowy, aby napisać coś takiego:
 include::src/MonitorExample.cs[]
 ----
 
-<1> Odkomentowanie tej linijki daje jeszcze bardziej kosmiczne wyniki, jak na przykład wielokrotne wchodzenie do sekcji krytycznej...
+<1> Odkomentowanie tej linijki daje jeszcze bardziej kosmiczne wyniki jak na przykład wielokrotne wchodzenie do sekcji krytycznej...
 
-W momencie, gdy go uruchomimy zobaczymy taki wynik jak poniżej.
+W momencie, gdy go uruchomimy, zobaczymy taki wynik jak poniżej.
 Wygląda on dobrze... 
 
 [source]
@@ -85,7 +87,7 @@ Otóż pojawiają się poważny problem, gdyż w trakcie działania programu otr
 `System.Threading.SynchronizationLockException : Object synchronization method was called from an unsynchronized block of code.`
 
 Co gorsza, nie pojawia się on zawsze, co niektóre uruchomienia powyższego kodu kończą się na moim komputerze poprawnie. 
-W bardziej skomplikowanych przykładach może zdażyć się nawet wielokrotne wejście do sekcji krytycznej – aby to zaobserwować odkomentuj linijkę, na której końcu znajduje się cyfra (1).
+W bardziej skomplikowanych przykładach może zdążyć się nawet wielokrotne wejście do sekcji krytycznej – aby to zaobserwować odkomentuj linijkę, na której końcu znajduje się cyfra (1).
 Wynik, jaki możesz zaobserwować to, na przykład: 
 
 [source]
@@ -184,11 +186,21 @@ Jednak gdyby chciał osiągnąć taki sam efekt jak w przypadku `Monitor.TryEnte
 Na minus muszę zwrócić Ci uwagę, że to rozwiązanie również może powodować problemy – w szczególności podczas pracy z wyjątkowo starym kodem (jeszcze sprzed .Net Framework 4).
 Po więcej informacji zajrzyj powyżej do ramki z napisem "Problem z ThreadAbortException".
 
-=== AsyncEx 
-
-== Ostrożnie ze wzorcem if - lock - if
+== Ostrożnie ze wzorcem if-lock-if
 
 Na koniec chciałbym jeszcze wspomnieć o dość popularnym wzorcu blokady z podwójnym zatwierdzeniem. 
 Już sama https://pl.wikipedia.org/wiki/Blokada_z_podw%C3%B3jnym_zatwierdzeniem_(wzorzec_projektowy)[wikipedia] mówi nam, że w niektórych przypadkach (między innymi w języku Java i C++), gdzie może dojść do trudnych do wykrycia problemów z wyścigiem wątków. 
 Jeszcze więcej na ten temat można przeczytać http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html[tutaj (po angielsku]. 
 Także lepiej omijać ten sposób z daleka.
+
+== Podsumowanie
+
+Programowanie współbieżne nie jest łatwe, a do tego pułapki czekają wszędzie. 
+Nie zdziwię się, jeśli nawet i w tym artykule znajdzie się jakiś błąd, który wyjdzie w jakimś szczególnym przypadku. 
+Jeśli coś takiego zauważyłeś, to proszę, daj znać w komentarzach! 
+
+Wybór odpowiedniej metody synchronizacji zależy od tego, na jakim etapie prac jesteśmy. 
+Jeśli dwie przytoczone powyżej, to za mało warto może jeszcze rozejrzeć się za bibliotekami pokroju https://github.com/StephenCleary/AsyncEx[AsyncEx], która rozwija możliwości pracy asynchronicznej (z tej przytoczonej tutaj jeszcze nie korzystałem, także nie wypowiem się, czy jest dobra).
+
+Warto jednak zawsze mieć w głowie jedną z zasad Roberta C. Martina z książki https://helion.pl/ksiazki/czysty-kod-podrecznik-dobrego-programisty-robert-c-martin,czykov.htm["Czysty kod. Podręcznik dobrego programisty"], że zarządzenie dostępem do sekcji krytycznej jest jedną odpowiedzialnością a sama sekcja krytyczna osobną. 
+Taki podział zadań pozwoli nam na skupienie się na jakości każdego z elementów. 
