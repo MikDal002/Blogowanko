@@ -1,0 +1,166 @@
+---
+title: "Async, locki i monitory – gdzie leży problem?"
+date: 2021-08-24T15:52:17Z
+draft: true
+image: cover.jpg
+description: "W niniejszym artykule przedstawiam ciekawą pułapkę, która czeka na programistę .net w przypadku gdy potrzebuje on zabezpieczyć dostęp do kodu, a ten chciałby wykonać asynchronicznie..."
+categories: 
+    - ".Net"
+    - "Pułapki na programistę"
+    - "Wielowątkwość"
+tags:
+    - "C-sharp"
+    - "async"
+    - "await"
+---
+
+= Async, locki i monitory – gdzie leży problem?
+:source-highlighter: pygments
+:icons: font
+:toc:
+
+W niniejszym artykule nie będę przedstawiał podstaw dotyczących pisania kodu wielowątkowego.
+Jest on adresowany do osób, które mają pojęcie już jak rozpoczynać zadania w osobnych procesach. 
+Nie wymagam jednak tutaj jakiejś szczególnej wiedzy, więc nawet początkujący powinni znaleźć coś dla siebie.
+
+Gwoli ścisłości, wszystkie poniższe przykłady są uruchamiane za pomocą takiego kawałka kodu:
+
+[source, csharp]
+----
+include::src/Executor.cs[]
+----
+
+gdzie `noOfTasks` mówi o tym, ile zadań ma być uruchomione równolegle, natomiast `test` jest funkcją do testowania.
+Dla każdego testu obiekt jest tworzony od nowa.
+
+== lock()
+
+Zacznijmy od początku. 
+Normalnie kompilator nie pozwoli nam na wywołanie kodu asynchronicznego (wymagającego słówka `await`) wewnątrz struktury `lock(…) {…}` – zwróci nam lakoniczne `error CS1996: Cannot await in the body of a lock statement`.
+Taki niedziałający kod widać poniżej:
+
+
+[source,csharp]
+.Kompilator nie pozwoli nam zbudować kodu, gdzie wewnątrz lock'a mamy słowo kluczowe await.
+----
+private object _locker = new object();
+async Task NotWorkingLock() 
+{
+    lock(_locker) {
+        await Task.Delay(TimeSpan.FromSeconds(5));
+    }
+}
+----
+
+== Monitor
+
+WARNING: Kod zawarty w tej sekcji jest niepoprawny i może powodować trudne do wykrycia błędy, mimo iż tak nie wygląda!
+
+Niestety, programowanie współbieżne w C# jest wirusowe, to znaczy, że raz dodany `async` i `await` rozprzestrzeniają się dalej na nasze oprogramowanie, co może doprowadzić nas do sytuacji, gdzie koniecznie chcemy kontrolować wykonywanie pewnej metody asynchronicznej. 
+Możliwe, że w takim momencie strzeli nam do głowy, aby napisać coś takiego:
+
+[source,csharp]
+.Pozorna kontrola wywołania funkcji asynchronicznej
+----
+include::src/MonitorExample.cs[]
+----
+
+<1> Odkomentowanie tej linijki daje jeszcze bardziej kosmiczne wyniki, jak na przykład wielokrotne wchodzenie do sekcji krytycznej...
+
+W momencie, gdy go uruchomimy zobaczymy taki wynik jak poniżej.
+Wygląda on dobrze... 
+
+[source]
+.Wynik pracy dwóch zadań
+----
+With lock (1-5)!
+Without lock (2-4)!
+Exiting... (2-4)
+Exiting... (1-5)
+----
+
+Co się jednak stanie, gdy ilość wątków z 2 zmienimy na większą niż mamy wątków fizycznych procesora? 
+Otóż pojawiają się poważny problem, gdyż w trakcie działania programu otrzymujemy wyjątek:
+
+`System.Threading.SynchronizationLockException : Object synchronization method was called from an unsynchronized block of code.`
+
+Co gorsza, nie pojawia się on zawsze, co niektóre uruchomienia powyższego kodu kończą się na moim komputerze poprawnie. 
+W bardziej skomplikowanych przykładach może zdażyć się nawet wielokrotne wejście do sekcji krytycznej – aby to zaobserwować odkomentuj linijkę, na której końcu znajduje się cyfra (1).
+Wynik, jaki możesz zaobserwować to, na przykład: 
+
+[source]
+.Wynik pracy dziesięciu zadań
+----
+Without lock (4-6)!
+Without lock (2-5)!
+Without lock (3-11)!
+Without lock (7-10)!
+Without lock (8-4)!
+Without lock (1-7)!
+With lock (5-9)! <1>
+Without lock (6-8)!
+Without lock (10-4)!
+With lock (9-9)! <2>
+Exiting... (6-8)
+Exiting... (7-10)
+Exiting... (2-5)
+Exiting... (3-11)
+Exiting... (8-4)
+Exiting... (4-6)
+Exiting... (10-4)
+Exiting... (1-7)
+----
+
+Zwróć uwagę, że (1) i (2) pokazują, że program wszedł do sekcji krytycznej dwa razy!
+Co gorsza, taki scenariusz może pozostać niewykryty, dopóki ilość zadań uruchamianych asynchronicznie nie przekracza pewnej magicznej liczby w systemie, co może powodować trudne do wykrycia błędy!
+
+=== Trochę wyjaśnienia
+
+Wyjątki są powodowane tym problemem, że obiekt `locker` jest zwalniany przez inny wątek niż ten, który go zablokował.
+Dzieje się tak, gdyż mechanika `async-await` nie gwarantuje kontynuowania na tym samym wątku. 
+Pisze o tym również Eric Lippert (który podaje w swoim profilu na SO, że pracował nad kompilatorem C#), co można przeczytać pod tym adresem: https://stackoverflow.com/a/7612714/6208972.
+
+Dodatkowo jako ciekawostkę chciałbym wskazać, że na poprzednim wyniku programu, miejsca wskazane przez (1) i (2) mają ten sam identyfikator wątku, ale inny zadania! 
+Może to sugerować, że mechanizm monitora oparty jest właśnie na identyfikatorze tego pierwszego. 
+
+== Jak to zrobić dobrze
+
+Całe szczęście rozwiązanie problemu asynchroniczności i ochrony sekcji krytycznej nie jest skazane na porażkę, mamy na to kilka sposobów.
+
+=== Nie wywołuj kodu asynchronicznego w sekcji krytycznej
+
+Może wydawać się to dziwne, że takie rozwiązanie polecam jako pierwsze, ale przez cały czas mojej edukacji kładziono mi do głowy, że sekcja krytyczne powinna być możliwe najkrótsza i najprostsza. 
+Wiąże się to z tym, że im mniej synchronizacji wątków wymagamy, tym szybszy jest nasz kod! 
+Także, zanim sięgniesz po kolejne rozwiązania, rozważ, czy aby na pewno nie przesadzasz z zadaniami wykonywanymi w sekcji krytycznej.
+
+=== Sekcja krytyczna tylko dla flagi
+
+Sposób ten może nie jest najpiękniejszy, ale na pewno jest łatwo dostępny, gdyż nie wymaga ani nowej wersji .Neta ani zewnętrznych bibliotek, tak więc:
+
+[source,csharp]
+.Brzydka, acz w miarę bezpieczna kontrola wywołania asynchronicznej sekcji krytycznej
+----
+include::src/CriticalSectionForFlag.cs[]
+----
+
+<1> Nawet z takim paskudztwem implementacja działa tak, jak powinna.
+
+Wady tej implementacji to na pewno złożoność: przekopiowywanie jej wewnątrz projektu może prowadzić do mnóstwa zdublowanych linijek kodu (czego nie lubimy), a ilość kodu niezbędna do działania powoduje, że łatwo w tym wszystkim zrobić błąd. 
+W związku z tym przejdźmy do czegoś, co znajduje się już w nowszych frameworkach (w sumie dostępna już od 2013 roku, jak nie wcześniej :D):
+
+[sidebar]
+****
+Jeśli zastanawiasz się, dlaczego powyżej napisałem "w miarę bezpieczna" to śpieszę z wyjaśnieniem.
+Otóż jest taki problem, że w dowolnym momencie wykonania powyższej funkcji może dojść do wywołania wyjątku `ThreadAbortException`, który może przerwać jej wykonywanie i zostawić w dziwnym stanie co w konsekwencji może doprowadzić nas do deadlocka.
+Całe szczęście jest to coraz mniej prawdopodobne, gdyż używanie `Thread.Abort` zostało uznane za złą praktykę, a w jego miejsce wprowadzono `CancellationToken`. 
+Jeśli chcesz poczytać szczegółowe rozważania, jak zabezpieczyć się w takim przypadku zapraszam do odpowiedzi na pytanie na stacku: https://stackoverflow.com/a/61806749/6208972.
+****
+
+=== SemaphoreSlim.WaitAsync
+
+== Ostrożnie ze wzorcem if - lock - if
+
+Na koniec chciałbym jeszcze wspomnieć o dość popularnym wzorcu blokady z podwójnym zatwierdzeniem. 
+Już sama https://pl.wikipedia.org/wiki/Blokada_z_podw%C3%B3jnym_zatwierdzeniem_(wzorzec_projektowy)[wikipedia] mówi nam, że w niektórych przypadkach (między innymi w języku Java i C++), gdzie może dojść do trudnych do wykrycia problemów z wyścigiem wątków. 
+Jeszcze więcej na ten temat można przeczytać http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html[tutaj (po angielsku]. 
+Także lepiej omijać ten sposób z daleka.
