@@ -16,8 +16,11 @@ namespace asynclocks
             // var critical2 = new CriticalSectionForFlag();
             // Start("Critical section with flag", 2, critical2.SectionWithFlag);
 
-            var critical10 = new CriticalSectionForFlag();
-            Start("Critical section with flag", 20, critical10.SectionWithFlag);
+            // var critical10 = new CriticalSectionForFlag();
+            // Start("Critical section with flag", 20, critical10.SectionWithFlag);
+
+            var sem2 = new AsyncSemaphore();
+            Start("Critical section with flag", 2, sem2.SemaphoreAsync);
         }
 
         // private object _locker = new object();

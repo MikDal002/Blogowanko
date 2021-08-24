@@ -1,7 +1,7 @@
 ---
 title: "Async, locki i monitory – gdzie leży problem?"
 date: 2021-08-24T15:52:17Z
-draft: true
+draft: false
 image: cover.jpg
 description: "W niniejszym artykule przedstawiam ciekawą pułapkę, która czeka na programistę .net w przypadku gdy potrzebuje on zabezpieczyć dostęp do kodu, a ten chciałby wykonać asynchronicznie..."
 categories: 
@@ -149,6 +149,7 @@ Wady tej implementacji to na pewno złożoność: przekopiowywanie jej wewnątrz
 W związku z tym przejdźmy do czegoś, co znajduje się już w nowszych frameworkach (w sumie dostępna już od 2013 roku, jak nie wcześniej :D):
 
 [sidebar]
+.Problem z ThreadAbortException
 ****
 Jeśli zastanawiasz się, dlaczego powyżej napisałem "w miarę bezpieczna" to śpieszę z wyjaśnieniem.
 Otóż jest taki problem, że w dowolnym momencie wykonania powyższej funkcji może dojść do wywołania wyjątku `ThreadAbortException`, który może przerwać jej wykonywanie i zostawić w dziwnym stanie co w konsekwencji może doprowadzić nas do deadlocka.
@@ -157,6 +158,33 @@ Jeśli chcesz poczytać szczegółowe rozważania, jak zabezpieczyć się w taki
 ****
 
 === SemaphoreSlim.WaitAsync
+
+Całe szczęście pewnego dnia, ktoś, kto odpowiada za .Neta w końcu poszedł po rozum do głowy i stanowczo uprościł kwestię asynchroniczności i sekcji krytycznej
+
+[source,csharp]
+----
+include::src/AsyncSemaphore.cs[]
+----
+
+Przykład ten jest dużo prostszy, gdyż sam w sobie na to pozwala.
+W przypadku uruchomienia tego programu otrzymujemy jasny i klarowny wynik:
+
+[source]
+----
+Before trying lock (2-5)!
+Before trying lock (1-4)!
+With lock (2-5)!
+Exiting... (2-5)
+With lock (1-4)!
+Exiting... (1-4)
+----
+
+Na plus na pewno jest zwięzłość takiego przykładu w najprostszej formie. 
+Jednak gdyby chciał osiągnąć taki sam efekt jak w przypadku `Monitor.TryEnter()`, to całość rozrosłaby się podobnie jak w poprzednim przypadku.
+Na minus muszę zwrócić Ci uwagę, że to rozwiązanie również może powodować problemy – w szczególności podczas pracy z wyjątkowo starym kodem (jeszcze sprzed .Net Framework 4).
+Po więcej informacji zajrzyj powyżej do ramki z napisem "Problem z ThreadAbortException".
+
+=== AsyncEx 
 
 == Ostrożnie ze wzorcem if - lock - if
 
