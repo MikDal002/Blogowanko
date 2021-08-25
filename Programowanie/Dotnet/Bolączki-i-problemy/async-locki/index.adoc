@@ -22,6 +22,7 @@ tags:
 W niniejszym artykule nie będę przedstawiał podstaw dotyczących pisania kodu wielowątkowego.
 Jest on adresowany do osób, które mają pojęcie już jak rozpoczynać zadania w osobnych procesach. 
 Nie wymagam jednak tutaj jakiejś szczególnej wiedzy, więc nawet początkujący powinni znaleźć coś dla siebie.
+Jeśli natomiast szukasz czegoś, co dałoby Ci użyteczne podstawy to zapraszam: https://markheath.net/post/constraining-concurrent-threads-csharp[tutaj], https://markheath.net/post/async-antipatterns[tutaj] oraz blog https://blog.stephencleary.com/[Stephen'a Cleary].
 
 Gwoli ścisłości, wszystkie poniższe przykłady są uruchamiane za pomocą takiego kawałka kodu:
 
