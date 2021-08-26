@@ -1,0 +1,16 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 474.35278058876764 304.0499090156072" width="474.35278058876764" height="304.0499090156072">
+  <!-- svg-source:excalidraw -->
+  
+  <defs>
+    <style>
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://excalidraw.com/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://excalidraw.com/Cascadia.woff2");
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="474.35278058876764" height="304.0499090156072" fill="#ffffff"></rect><g stroke-linecap="round" transform="translate(25.210703187365823 68.32432341325075) rotate(342.9971473612426 211.96568710701797 83.70063109455288)"><path d="M0.69 1.71 L420.64 -0.22 L425.59 170.66 L1.31 166.95" stroke="none" stroke-width="0" fill="#e6c310"></path><path d="M0.34 1.18 C128.11 3.46, 258.03 4.74, 424.1 0.6 M-0.94 -0.16 C116.25 -0.49, 231.34 -2.08, 423.75 -0.22 M423.34 -1.79 C425.12 64.78, 428.69 126.51, 425.36 163.53 M424.05 1.14 C426.88 61.15, 426.16 119.88, 424.15 166.74 M422.94 168.36 C266.92 168.9, 114.26 168.94, -1.09 167.23 M424.69 168.06 C275.44 171.02, 128.16 170.25, 0.2 166.74 M2.03 166.09 C3.28 131.07, 1.79 94.58, 0.9 -3.27 M-1 168.16 C-0.55 120.48, -3.18 69.53, -1.61 0.04" stroke="#99820a" stroke-width="2" fill="none"></path></g><g transform="translate(57.565279183272594 88.96939895224803) rotate(341.01434330681053 139 22.5)"><text x="139" y="32" font-family="Virgil, Segoe UI Emoji" font-size="36px" fill="#000000" text-anchor="middle" style="white-space: pre;" direction="ltr">Słowo domenowe</text></g><g transform="translate(43.136144542535874 135.05820597473218) rotate(341.065305896788 187 25)"><text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">Definicja słowa, które ma szczególne </text><text x="0" y="43" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">znaczenie w przypadku naszej domeny</text></g></svg>

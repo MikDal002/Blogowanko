@@ -1,0 +1,16 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 261.5808892608543 262.42037675024255" width="261.5808892608543" height="262.42037675024255">
+  <!-- svg-source:excalidraw -->
+  
+  <defs>
+    <style>
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://excalidraw.com/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://excalidraw.com/Cascadia.woff2");
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="261.5808892608543" height="262.42037675024255" fill="#ffffff"></rect><g stroke-linecap="round" transform="translate(46.43994431779356 50) rotate(0 92.33333333333337 91.5)"><path d="M-3.99 2.2 L187.34 -3.33 L183.99 182.39 L1.65 184.97" stroke="none" stroke-width="0" fill="#fcd1eb"></path><path d="M-1.65 1.22 C46.04 2.47, 97.75 2.89, 186.12 0.62 M-1.79 -0.04 C43.68 -4.49, 86.43 -2.62, 185.98 -0.47 M185.9 3.61 C182.11 35.55, 182.05 72.82, 182.35 186.38 M186.16 0.59 C188.29 65.37, 187.13 128.63, 182.97 184.07 M186.14 180.55 C146.37 181.79, 105.36 183.48, -2.76 180.18 M185.23 183.54 C137.4 188.17, 88.33 185.17, -1.85 184.76 M-2.23 181.43 C3.19 126.31, 2.35 68.07, -1.57 3.35 M-1.45 181.27 C-1.33 122.44, -2.22 58.23, -1.59 -1.15" stroke="#af91a3" stroke-width="2" fill="none"></path></g><g transform="translate(78.43994431779356 10) rotate(0 55.5 17.5)"><text x="55.5" y="25" font-family="Virgil, Segoe UI Emoji" font-size="28px" fill="#000000" text-anchor="middle" style="white-space: pre;" direction="ltr">SYSTEM</text></g><g transform="translate(21.290444630427146 97.91766253375067) rotate(31.522177246758634 109.5 52.5)"><text x="109.5" y="25" font-family="Virgil, Segoe UI Emoji" font-size="28px" fill="#000000" text-anchor="middle" style="white-space: pre;" direction="ltr">Gdzie polecenie </text><text x="109.5" y="60" font-family="Virgil, Segoe UI Emoji" font-size="28px" fill="#000000" text-anchor="middle" style="white-space: pre;" direction="ltr">ma zostać </text><text x="109.5" y="95" font-family="Virgil, Segoe UI Emoji" font-size="28px" fill="#000000" text-anchor="middle" style="white-space: pre;" direction="ltr">wykonane?</text></g></svg>

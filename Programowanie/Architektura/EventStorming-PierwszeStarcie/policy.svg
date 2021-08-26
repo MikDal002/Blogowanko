@@ -1,0 +1,16 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 429 263" width="429" height="263">
+  <!-- svg-source:excalidraw -->
+  
+  <defs>
+    <style>
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://excalidraw.com/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://excalidraw.com/Cascadia.woff2");
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="429" height="263" fill="#ffffff"></rect><g stroke-linecap="round" transform="translate(10 70) rotate(0 204.5 91.5)"><path d="M2.71 -1.69 L412 0 L409.05 181.85 L2.96 186.56" stroke="none" stroke-width="0" fill="#e7b8ff"></path><path d="M-0.52 -2.16 C108.52 -1.15, 219.71 -0.97, 408.5 -0.78 M0.93 0.55 C113.34 3.24, 226.39 2.94, 409.98 0.74 M411.14 -3.52 C413.81 61.3, 411.48 118.63, 409.84 181.09 M407.59 -0.8 C409.3 51.95, 409.36 100.89, 409.78 184.9 M410.94 183.23 C291.79 178, 172.47 177.95, 2.16 183.05 M409.92 183.41 C255 180.43, 99.85 180.27, -0.41 183.63 M-2.3 179.01 C4.71 145.79, -0.82 102.56, -0.61 1.65 M-1.08 181.95 C2.22 118.17, 1.21 54.26, 1.12 1.7" stroke="#b893cc" stroke-width="2" fill="none"></path></g><g transform="translate(146.5 10) rotate(0 64 17.5)"><text x="64" y="25" font-family="Virgil, Segoe UI Emoji" font-size="28px" fill="#000000" text-anchor="middle" style="white-space: pre;" direction="ltr">REAKCJA</text></g><g transform="translate(113.5 41.5) rotate(0 95.5 12.5)"><text x="95.5" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="middle" style="white-space: pre;" direction="ltr">POLICY/REACTION</text></g><g transform="translate(309.6666666666672 86.83333333333331) rotate(0 46.5 17.5)"><text x="46.5" y="25" font-family="Virgil, Segoe UI Emoji" font-size="28px" fill="#000000" text-anchor="middle" style="white-space: pre;" direction="ltr">gdy &lt;–</text></g><g transform="translate(37.50000000000023 198.5) rotate(0 41 17.5)"><text x="41" y="25" font-family="Virgil, Segoe UI Emoji" font-size="28px" fill="#000000" text-anchor="middle" style="white-space: pre;" direction="ltr">&lt;– to</text></g></svg>
