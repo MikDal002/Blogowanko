@@ -5,12 +5,8 @@ using System.Threading.Tasks;
 class AsyncSemaphore
 {
     SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1);
-    public async Task SemaphoreAsync()
+    public async Task SemaphoreAsync(string name)
     {
-        var thread = Thread.CurrentThread.ManagedThreadId;
-        var task = Task.CurrentId;
-        var name = $"({task}-{thread})";
-
         Console.WriteLine($"Before trying lock {name}!");
         await semaphoreSlim.WaitAsync();
         try

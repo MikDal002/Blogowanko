@@ -6,12 +6,8 @@ class CriticalSectionForFlag
 {
     private object _locker = new object();
     private bool isThereAnotherThread = false;
-    public async Task SectionWithFlag()
+    public async Task SectionWithFlag(string name)
     {
-        var thread = Thread.CurrentThread.ManagedThreadId;
-        var task = Task.CurrentId;
-        var name = $"({task}-{thread})";
-
         var doIhaveLock = false;
         try
         {

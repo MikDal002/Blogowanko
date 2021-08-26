@@ -20,7 +20,7 @@ tags:
 :toc:
 
 W niniejszym artykule nie będę przedstawiał podstaw dotyczących pisania kodu wielowątkowego.
-Jest on adresowany do osób, które mają pojęcie już jak rozpoczynać zadania w osobnych procesach. 
+Jest on adresowany do osób, które mają pojęcie jak rozpoczynać zadania w osobnych procesach. 
 Nie wymagam jednak tutaj jakiejś szczególnej wiedzy, więc nawet początkujący powinni znaleźć coś dla siebie.
 Jeśli natomiast szukasz czegoś, co dałoby Ci użyteczne podstawy to zapraszam: https://markheath.net/post/constraining-concurrent-threads-csharp[tutaj], https://markheath.net/post/async-antipatterns[tutaj] oraz blog https://blog.stephencleary.com/[Stephen'a Cleary].
 
@@ -115,7 +115,7 @@ Exiting... (1-7)
 ----
 
 Zwróć uwagę, że (1) i (2) pokazują, że program wszedł do sekcji krytycznej dwa razy!
-Co gorsza, taki scenariusz może pozostać niewykryty, dopóki ilość zadań uruchamianych asynchronicznie nie przekracza pewnej magicznej liczby w systemie, co może powodować trudne do wykrycia błędy!
+Dodatkowo, taki scenariusz może pozostać niewykryty, dopóki ilość zadań uruchamianych asynchronicznie nie przekracza pewnej magicznej liczby w systemie, co może powodować trudne do wykrycia błędy!
 
 === Trochę wyjaśnienia
 
@@ -123,7 +123,7 @@ Wyjątki są powodowane tym problemem, że obiekt `locker` jest zwalniany przez 
 Dzieje się tak, gdyż mechanika `async-await` nie gwarantuje kontynuowania na tym samym wątku. 
 Pisze o tym również Eric Lippert (który podaje w swoim profilu na SO, że pracował nad kompilatorem C#), co można przeczytać pod tym adresem: https://stackoverflow.com/a/7612714/6208972.
 
-Dodatkowo jako ciekawostkę chciałbym wskazać, że na poprzednim wyniku programu, miejsca wskazane przez (1) i (2) mają ten sam identyfikator wątku, ale inny zadania! 
+Jako ciekawostkę chciałbym wskazać, że na poprzednim wyniku programu, miejsca wskazane przez (1) i (2) mają ten sam identyfikator wątku, ale inny zadania! 
 Może to sugerować, że mechanizm monitora oparty jest właśnie na identyfikatorze tego pierwszego. 
 
 == Jak to zrobić dobrze
@@ -132,8 +132,8 @@ Całe szczęście rozwiązanie problemu asynchroniczności i ochrony sekcji kryt
 
 === Nie wywołuj kodu asynchronicznego w sekcji krytycznej
 
-Może wydawać się to dziwne, że takie rozwiązanie polecam jako pierwsze, ale przez cały czas mojej edukacji kładziono mi do głowy, że sekcja krytyczne powinna być możliwe najkrótsza i najprostsza. 
-Wiąże się to z tym, że im mniej synchronizacji wątków wymagamy, tym szybszy jest nasz kod! 
+Może wydawać się to dziwne, że takie rozwiązanie polecam jako pierwsze, ale przez cały czas mojej edukacji kładziono mi do głowy, że sekcja krytyczna powinna być możliwe najkrótsza i najprostsza. 
+Wiąże się to z tym, że im mniej synchronizacji wątków wymagamy, tym szybszy będzie nasz kod! 
 Także, zanim sięgniesz po kolejne rozwiązania, rozważ, czy aby na pewno nie przesadzasz z zadaniami wykonywanymi w sekcji krytycznej.
 
 === Sekcja krytyczna tylko dla flagi
@@ -162,7 +162,7 @@ Jeśli chcesz poczytać szczegółowe rozważania, jak zabezpieczyć się w taki
 
 === SemaphoreSlim.WaitAsync
 
-Całe szczęście pewnego dnia, ktoś, kto odpowiada za .Neta w końcu poszedł po rozum do głowy i stanowczo uprościł kwestię asynchroniczności i sekcji krytycznej
+Pewnego dnia, ktoś, kto odpowiada za .Neta w końcu poszedł po rozum do głowy i stanowczo uprościł kwestię asynchroniczności i sekcji krytycznej
 
 [source,csharp]
 ----
