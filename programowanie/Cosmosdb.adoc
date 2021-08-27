@@ -1,0 +1,100 @@
+---
+draft: true
+title: Azure i praca z nim
+date: 1995-03-01
+---
+= Azure i praca z nim
+Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
+:toc:
+:source-highlighter: pygments
+:imagesdir: ./img
+
+== CosmosDB
+
+[.lead]
+W niniejszym artykule chciałbym przedstawić kilka trików i skrótów, które skutecznie ułatwiają pracę z CosmosDB.
+
+=== ((Request Unit))s (RU) dla ostatniego zapytania
+Często w trakcie pracy przy optymalizacji zapytań do bazy danych nie wystarczy kierować się tylko czasem wykonywania polecenia oraz rozmiarem transferowanych danych do i z bazy. 
+Dla tych, co nie wiedzą: w przypadku CosmosDB rozliczenie następuje za pomocą jednostek żądań (z ang. _request units_, RU), dlatego zależy nam też, aby liczba tych jednostek przypadająca na jedno żądanie była możliwie najmniejsza. 
+
+Przy wykorzystaniu ((mongo)) shell można sprawdzić ilość użytego RU za pomocą komendy:
+
+[source,javascript]
+.Komenda pobierająca statystyki dotyczące ostatniego wykonania
+----
+> db.nazwa_kolekcji.((runCommand))({ getLastRequestStatistics: 1 });
+----
+Ilość wykorzystanych RU będzie znajdowała się przy pozycji `RequestCharge`.
+Więcej sposobów na znajdowanie wartości zużytych jednostek żądań znajdziesz pod adresem: https://docs.microsoft.com/en-us/azure/cosmos-db/find-request-unit-charge-mongodb[find request unit charge mongodb].
+
+==== Optymalizacje:
+
+Następujące optymalizacje są zalecane footnote:BIA36JakubWaliszewski[https://www.youtube.com/watch?v=hNkDBSr54AE]:
+
+* Replicate data globally (if you have single, don't try have double Read Regions),
+* Optimize by changing,
+* Reserved Capacity (discount to 65% in three years),
+* Autoscale Throughput per Database,
+* CosmosDB Serverless version (not fit to all cases),
+* Optimize cost with indexing,
+* Optimze your query by change feed and time to live,
+* Don't keep all data (Cold/Hot) in CosmosDB,
+* Partitioning strategy
+
+Autor prezentacji na BIA36 footnote:BIA36JakubWaliszewski[] mówi o tym, że otrzymali narzędzie do transportu 500GB danych produkcyjnych z jednej instancji bazy CosmosDB do drugiej.
+
+==== Więcej na temat RU
+Jeśli zainteresował Cię temat RU, to więcej informacji znajdziesz na stronie Microsoftu: https://docs.microsoft.com/en-us/azure/cosmos-db/request-units[Request Units]. 
+Pokrótce mogę powiedzieć, że ilość użytych jednostek na żądanie zależy od tego, ile użyjesz pamięci, procesora i operacji wejścia/wyjścia na sekundę (z ang. IOPS – _input/output operations per second_). 
+
+Żądania używane często i gęsto (częściej niż raz na minutę) powinny ograniczać się gdzieś do 10 RU na raz. 
+Zapytania rzadsze (częściej niż raz na godzinę) powinny mieścić się w przedziale 10-50 RU, maksymalnie do 100 RU.
+Tylko niektóre polecenia administracyjne, wykonywane od święta, mogą przekraczać barierę 100 RU i tutaj nie widzę górnego limitu, aczkolwiek pamiętajmy, że mogło zostać założone ograniczenie kosztów na bazie danych, przez co nie będziemy w stanie wykonać niektórych obliczeniożernych poleceń. 
+
+== Appinsights 
+#TODO: TBA#
+
+[.lead]
+O App Insightach 
+
+* Appinsighty pozwalają na profilowanie aplikacji działającej w chmurze.
+Profilowanie może być wyzwalane automatycznie, na przykład, przy dużym obciążeniu CPU, dużej zajętości pamięci itp footnote:[https://www.youtube.com/watch?v=wVmEREpHZWI]
+
+== IoT Hub
+#TODO: TBA#
+#TODO: Azure Security Center for IoT – służy do wykrywania zagrożeń, podatności i dziwnych zachowań# 
+[.lead]
+O IoT Hub'ie.
+
+Przy pracy z urządzeniami na np. RaspberryPi warto posiłkować się repozytorium Microsoftu https://github.com/dotnet/iot/tree/main/src/devices, gdzie znajduje się wiele gotowych implementacji obsługi różnych czujników.
+
+.Typowe użycie IoT Hub'a. Ilustracja pochodzi z prezentacji Azure User Group Poland #36 footnote:BIA36JakubWaliszewski[].
+image::cosmosdb_iothub_infrastructure.png[]
+
+.Infrastruktura Hight Availability dla środowiska IoT footnote:BIA36JakubWaliszewski[]
+image::cosmosdb_iothub_HA.png[]
+
+- Infrastruktura powinna być jak najbliżej źródła, czyli znajdować się na tym samym kontynencie.
+
+== Azure Event Hub
+
+Optymalizacje kosztowe footnote:BIA36JakubWaliszewski[]:
+
+* Control throughput Units,
+* Auto-inflate with scale-up throughput,
+* Event Hub Cluster if you have more jobs
+
+== Azure Stream Analytics 
+
+image::cosmosdb_azurestreamanalytics_infrastructure.png[]
+
+Optymalizacje kosztowe footnote:BIA36JakubWaliszewski[]:
+
+* Control streaming units,
+* create automation to Start/Stop ASA if is not production,
+* Stream Analytics Cluster if you have more jobs
+
+
+== #TODO: Active directory jako uwierzytelnienie urządzeń#
+== #TODO: keyVault do sekretów#

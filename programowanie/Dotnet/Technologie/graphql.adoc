@@ -1,0 +1,20 @@
+---
+draft: true
+title: GraphQL
+date: 1995-03-01
+---
+= GraphQL
+
+== Wstęp
+
+O GraphQL: https://graphql.org/learn/
+Biblioteka .Net: https://github.com/graphql-dotnet/graphql-dotnet
+Dokumentacja biblioteki .Net: https://graphql-dotnet.github.io/
+
+#TODO: Poprawić, bo z translatora#
+[quote, https://graphql.org/learn/]
+____
+GraphQL jest językiem zapytań dla Twojego API oraz runtime po stronie serwera do wykonywania zapytań przy użyciu systemu typów, który definiujesz dla swoich danych. GraphQL nie jest związany z żadną konkretną bazą danych lub silnikiem przechowywania danych, a zamiast tego jest wspierany przez istniejący kod i dane.
+
+Usługa GraphQL jest tworzona poprzez zdefiniowanie typów i pól na tych typach, a następnie dostarczenie funkcji dla każdego pola na każdym typie.
+____
