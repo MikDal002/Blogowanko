@@ -1,5 +1,6 @@
 ---
-title: "Przydatne biblioteki .Net - ConsoleTables"
+title: "Przydatne biblioteki .Net #01 - ConsoleTables"
+slug: "Przydatne biblioteki .Net 01 - ConsoleTables"
 date: 2021-06-13T20:38:11+02:00
 draft: false
 image: ilustracja.png
