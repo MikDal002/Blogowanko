@@ -1,0 +1,20 @@
+---
+title: O stronie
+description: Blog z pasją na temat programowania bez powtórzeń! Na razie wersji beta!
+date: '2021-07-31'
+aliases:
+  - about-us
+  - about-hugo
+  - contact
+lastmod: '2021-07-05'
+menu:
+    main: 
+        weight: -90
+        pre: user
+---
+
+== Cześć! 
+
+Miło mi powitać Cię na blogu, mam na imię Mikołaj a programowaniem interesuję się już od wielu lat.
+Blog ten jest miejscem, w którym chciałbym podzielić się swoimi doświadczeniami oraz wymienić je z innymi, dlatego gorąco zapraszam Cię do komentowania.
+Mam nadzieję, że rozwój tej strony spowoduje, że nie tylko ja będę pisał lepszy kod, a tworzone aplikacje będą nadawały się do szybszego rozwoju pozbawionego błędów. 
