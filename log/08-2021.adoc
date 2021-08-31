@@ -2,25 +2,28 @@
 title: "Podsumowanie sierpnia 2021 (2021-08)"
 date: 2021-08-31
 image: cover-diary.jpg
-draft: true
+draft: false
 description: "Krótko o tym, co działo się w sierpniu 2021 roku"
 categories:
     - Blog Log
 ---
 
-W tym miesiącu udało się kupić domenę zaprogramujtoraz.pl, co pozwoliło mi również włączyć system komentarzy – według mnie jest to duży krok, który od teraz nie stopuje mnie przed dzieleniem się blogiem z innymi. 
-Teraz powoli czas na poprawę stylu na stronie oraz uzupełnienie zakładki "O stronie". 
+W tym miesiącu udało się kupić domenę zaprogramujtoraz.pl, oraz włączyć system komentarzy – jest to duży krok, który pozwala mi dzielić się blogiem z innymi bez ogródek. 
+Teraz powoli czas na poprawę stylu strony, tam, gdzie on niedomaga. 
 
 Artykuły, które powstały w tym miesiącu to:
 
 .artykuł o bolączkach programowania asynchronicznego i sekcji krytycznej w .Net
-* xref:/programowanie/dotnet/bolączki-i-problemy/async-locki/index.adoc[Async, locki i monitory – gdzie leży problem?],
+* link:{{% ref "/programowanie/dotnet/bolączki-i-problemy/async-locki/index.adoc" %}}[Async, locki i monitory – gdzie leży problem?],
 
-#TODO: uzupełnić ewentualne artykuły#
 
-Tak, wiem, że w tym miesiącu strasznie mało, jest to związane z moim urlopem oraz innymi niezwykle ważnymi wydarzeniami, które zawładnęły moim życie w tym miesiącu – pozytywnie oczywiście!
+.uzupełniona zakładka w lewym menu
+* link:{{% ref "/page/about" %}}[O stronie]
+
+Tak, wiem, że w tym miesiącu strasznie mało. 
+Jest to związane z moim urlopem oraz innymi, niezwykle ważnymi wydarzeniami, które zawładnęły moim życiem w tym miesiącu – pozytywnie oczywiście!
 
 Jest coś, co chciałbyś, aby zmieniło się na blogu? Może masz temat, o którym chciałbyś się więcej dowiedzieć? Pisz śmiało! 
 
 [.small]
-Tak, gdy piszę te słowa, to system komentarzy jeszcze nie działa.
+Tak, gdy piszę te słowa, to system komentarzy w końcu działa!
