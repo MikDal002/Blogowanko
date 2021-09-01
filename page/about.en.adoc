@@ -1,0 +1,35 @@
+---
+title: About
+description: A passionate blog about programming without repetition! In beta version for now!
+date: '2021-07-31'
+aliases:
+  - about-us
+  - about-hugo
+  - contact
+lastmod: '2021-07-05'
+menu:
+    main: 
+        weight: -90
+        pre: user
+---
+
+== Hello! 
+
+I am very pleased to welcome you to the blog!
+I hope it will be a place where we can share our experiences together, and thus work together to make our code better every day. 
+
+As the name of the blog suggests (programitonce.com), I want to focus on what is important to our customers - the value that comes from providing unique code that solves specific user problems. 
+That's why I would like to talk about topics that broaden our (your and my) horizons regarding ready-made solutions that will scale nicely — from a garage application to our own place in the cloud, and give us the pleasure of writing high quality code — bug-tolerant and easy to further develop.
+
+Please, consider that English is not my native language, so you can encounter many misspells. If you see any, feel free to write it in the comments — I will be very grateful.
+While working on translations I use the translator www.deepl.com.
+
+.The blog is currently in beta!
+****
+I'm developing it in my spare time, so you may notice a lot of imperfections here that I'm still working on. 
+I'm planning an official launch for the very beginning of 2022, unless it goes sooner.
+What I need to finish before the launch:
+
+* Fix CSS bugs related to using AsciiDoctor,
+* Translate existing articles into English.
+****

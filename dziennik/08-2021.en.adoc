@@ -1,0 +1,29 @@
+---
+title: "Summary August 2021 (2021-08)"
+date: 2021-08-31
+image: cover-diary.jpg
+draft: false
+description: "A brief look at what was happening in August 2021"
+categories:
+    - Blog Log
+---
+
+This month I was able to purchase the domain programitonce.com, and enable the comment system - a big step that allows me to share the blog bluntly with others. 
+Now it's slowly time to improve the style of the site, where it fails. 
+
+The articles produced this month are:
+
+.An article about the ills of asynchronous programming and the critical section in .Net
+* link:{{% ref "/programowanie/dotnet/bolączki-i-problemy/async-locki/index.adoc" %}}[Async, locks and monitors – where is the problem?],
+
+
+.completed tab on the left menu
+* link:{{% ref "/page/about" %}}[About]
+
+Yes, I know I've written terribly little this month. 
+This is due to my vacation and other extremely important events that have taken over my life this month - positively, of course!
+
+Is there anything you'd like to see changed on the blog? Maybe you have a topic you'd like to learn more about? Go ahead, write in comments! 
+
+[.small]
+Yes, as I write these words, the comment system finally works!

@@ -1,9 +1,9 @@
 ---
-title: "Async, locki i monitory – gdzie leży problem?"
+title: "Async, locks and monitors – where is the problem?"
 date: 2021-08-24T15:52:17Z
-draft: false
+draft: true
 image: cover.jpg
-description: "W niniejszym artykule przedstawiam ciekawą pułapkę, która czeka na programistę .net w przypadku gdy potrzebuje on zabezpieczyć dostęp do kodu, a ten chciałby wykonać asynchronicznie..."
+description: "In this article, I present an interesting pitfall that awaits the .Net programmer in the case where they need to secure access to code, and that code would like to execute asynchronously..."
 categories: 
     - ".Net"
     - "Pułapki na programistę"
@@ -14,37 +14,36 @@ tags:
     - "await"
 ---
 
-= Async, locki i monitory – gdzie leży problem?
+= Async, locks and monitors – where is the problem?
 :source-highlighter: pygments
 :icons: font
 :toc:
 
-W niniejszym artykule nie będę przedstawiał podstaw dotyczących pisania kodu wielowątkowego.
-Jest on adresowany do osób, które mają pojęcie jak rozpoczynać zadania w osobnych procesach. 
-Nie wymagam jednak tutaj jakiejś szczególnej wiedzy, więc nawet początkujący powinni znaleźć coś dla siebie.
-Jeśli natomiast szukasz czegoś, co dałoby Ci użyteczne podstawy, to zapraszam: https://markheath.net/post/constraining-concurrent-threads-csharp[tutaj], https://markheath.net/post/async-antipatterns[tutaj] oraz blog https://blog.stephencleary.com/[Stephen'a Cleary].
+In this article, I will not cover the basics on how to write multithreaded code.
+It is addressed to people who have an idea how to start tasks in separate processes. 
+However, I don't require any special knowledge here, so even beginners should find something for themselves.
+If, on the other hand, you're looking for something that would give you useful basics, I encourage you to visit: https://markheath.net/post/constraining-concurrent-threads-csharp[here], https://markheath.net/post/async-antipatterns[here] and the blog https://blog.stephencleary.com/[Stephen Cleary].
 
-Gwoli ścisłości, wszystkie poniższe przykłady są uruchamiane za pomocą takiego kawałka kodu:
+For the record, all the following examples are run with a piece of code like this:
 
 [source,csharp]
 ----
 include::src/Executor.cs[]
 ----
 
-gdzie `noOfTasks` mówi o tym, ile zadań ma być uruchomione równolegle, natomiast `test` jest funkcją do testowania.
-Dla każdego testu obiekt jest tworzony od nowa.
+where `noOfTasks` tells you how many tasks to run in parallel, while `test` is a function for testing.
+For each test, the object is created from scratch.
 
-== Jak to zrobić źle
+== How to do it wrong
 
 === lock()
 
-Zacznijmy od początku. 
-Normalnie kompilator nie pozwoli nam na wywołanie kodu asynchronicznego (wymagającego słówka `await`) wewnątrz struktury `lock(…) {…}` – zwróci nam lakoniczne `error CS1996: Cannot await in the body of a lock statement`.
-Taki niedziałający kod widać poniżej:
-
+Let's start from the beginning. 
+Normally the compiler won't allow us to call asynchronous code (requiring `await`) inside a `lock(...) {...}` structure - it will return a laconic `error CS1996: Cannot await in the body of a lock statement`.
+Such non-functioning code can be seen below:
 
 [source,csharp]
-.Kompilator nie pozwoli nam zbudować kodu, gdzie wewnątrz lock'a mamy słowo kluczowe await.
+.The compiler will not allow us to build code where we have the await keyword inside the lock.
 ----
 private object _locker = new object();
 async Task NotWorkingLock() 
@@ -57,10 +56,12 @@ async Task NotWorkingLock()
 
 === Monitor
 
-WARNING: Kod zawarty w tej sekcji jest niepoprawny i może powodować trudne do wykrycia błędy, mimo iż tak nie wygląda!
+WARNING: The code in this section is incorrect and can cause hard-to-find errors, even if it doesn't look like it!
 
-Niestety, programowanie współbieżne w C# jest wirusowe, to znaczy, że raz dodany `async` i `await` rozprzestrzeniają się dalej na nasze oprogramowanie, co może doprowadzić nas do sytuacji, gdzie koniecznie chcemy kontrolować wykonywanie pewnej metody asynchronicznej. 
-Możliwe, że w takim momencie strzeli nam do głowy, aby napisać coś takiego:
+Unfortunately, concurrent programming in C# is viral, meaning that once `async` and `await` are added they spread further into our software, which can lead us to a situation where we necessarily want to control the execution of a certain asynchronous method. 
+It's possible that at such a point it will occur to us to write something like this:
+
+Translated with www.DeepL.com/Translator (free version)
 
 [source,csharp]
 .Pozorna kontrola wywołania funkcji asynchronicznej
