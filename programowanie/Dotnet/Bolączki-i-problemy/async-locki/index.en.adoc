@@ -61,10 +61,70 @@ WARNING: The code in this section is incorrect and can cause hard-to-find errors
 Unfortunately, concurrent programming in C# is viral, meaning that once `async` and `await` are added they spread further into our software, which can lead us to a situation where we necessarily want to control the execution of a certain asynchronous method. 
 It's possible that at such a point it will occur to us to write something like this:
 
-
 [source,csharp]
-.Pozorna kontrola wywołania funkcji asynchronicznej
+.Apparent control of an asynchronous function call
 ----
 include::src/MonitorExample.cs[]
 ----
-#TODO: Translate the rest!#
+
+<1> Uncommenting this line gives even more cosmic results like entering the critical section multiple times...
+
+When we run it, we will see a result like below.
+It looks quite good... 
+
+[source]
+.The result of two concurrent tasks
+----
+With lock (1-5)!
+Without lock (2-4)!
+Exiting... (2-4)
+Exiting... (1-5)
+----
+
+But what happens when we change the number of threads from 2 to more than we have physical threads of the processor? 
+Well, a serious problem arises, because we get an exception while the program is running:
+
+`System.Threading.SynchronizationLockException : Object synchronization method was called from an unsynchronized block of code.`
+
+What's worse, it doesn't always appear, which some runs of the above code end up correctly on my machine. 
+In more complicated examples, it may even happen to enter the critical section multiple times - to observe this, uncomment the line at the end of which there is a number (1).
+The result you may observe is, for example: 
+
+[source]
+.Result of ten concurrent tasks
+----
+Without lock (4-6)!
+Without lock (2-5)!
+Without lock (3-11)!
+Without lock (7-10)!
+Without lock (8-4)!
+Without lock (1-7)!
+With lock (5-9)! <1>
+Without lock (6-8)!
+Without lock (10-4)!
+With lock (9-9)! <2>
+Exiting... (6-8)
+Exiting... (7-10)
+Exiting... (2-5)
+Exiting... (3-11)
+Exiting... (8-4)
+Exiting... (4-6)
+Exiting... (10-4)
+Exiting... (1-7)
+----
+
+Note that (1) and (2) show that the program entered the critical section twice!
+Moreover, such a scenario can go undetected until the number of tasks running asynchronously exceeds some magic number in the system, which can cause hard-to-detect mistakes!
+
+=== A little explanation
+
+Exceptions are caused by the problem that the `locker` object is released by a different thread than the one that locked it.
+This is because the `async-await` mechanic does not guarantee continuation on the same thread. 
+Eric Lippert (who states in his SO profile that he worked on the C# compiler) also writes about this, as you can read at this link: https://stackoverflow.com/a/7612714/6208972.
+
+As a note of interest, I would like to point out that on the previous program result, the lines indicated by (1) and (2) have the same thread ID, but a different task! 
+This may suggest that the monitor mechanism is based precisely on the identifier of the former. 
+
+== How to do it right
+
+#TODO: Translate the rest#

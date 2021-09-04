@@ -115,7 +115,7 @@ Exiting... (1-7)
 ----
 
 Zwróć uwagę, że (1) i (2) pokazują, że program wszedł do sekcji krytycznej dwa razy!
-Dodatkowo, taki scenariusz może pozostać niewykryty, dopóki ilość zadań uruchamianych asynchronicznie nie przekracza pewnej magicznej liczby w systemie, co może powodować trudne do wykrycia błędy!
+Co więcej, taki scenariusz może pozostać niewykryty, dopóki ilość zadań uruchamianych asynchronicznie nie przekracza pewnej magicznej liczby w systemie, co może powodować trudne do wykrycia błędy!
 
 === Trochę wyjaśnienia
 
