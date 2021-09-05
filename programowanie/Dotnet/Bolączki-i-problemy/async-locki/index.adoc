@@ -138,7 +138,9 @@ Także, zanim sięgniesz po kolejne rozwiązania, rozważ, czy aby na pewno nie 
 
 === Sekcja krytyczna tylko dla flagi
 
-Sposób ten może nie jest najpiękniejszy, ale na pewno jest łatwo dostępny, gdyż nie wymaga ani nowej wersji .Neta ani zewnętrznych bibliotek, tak więc:
+Sposób ten może nie jest najpiękniejszy, ale na pewno jest łatwo dostępny, gdyż nie wymaga ani nowej wersji .Neta ani zewnętrznych bibliotek.
+Do tego jest realizacją zasady, o której mówiłem powyżej.
+Przy okazji swojej złożoności pozwala nam na jasne określenie, czy możemy wejść do sekcji krytycznej, czy też nie, co daje nam dodatkowe możliwości kontroli wykonania programu.
 
 [source,csharp]
 .Brzydka, acz w miarę bezpieczna kontrola wywołania asynchronicznej sekcji krytycznej
@@ -149,15 +151,15 @@ include::src/CriticalSectionForFlag.cs[]
 <1> Nawet z takim paskudztwem implementacja działa tak, jak powinna.
 
 Wady tej implementacji to na pewno złożoność: przekopiowywanie jej wewnątrz projektu może prowadzić do mnóstwa zdublowanych linijek kodu (czego nie lubimy), a ilość kodu niezbędna do działania powoduje, że łatwo w tym wszystkim zrobić błąd. 
-W związku z tym przejdźmy do czegoś, co znajduje się już w nowszych frameworkach (w sumie dostępna już od 2013 roku, jak nie wcześniej :D):
+Raz napisany kawałek może posłużyć przez wiele długich lat w postaci biblioteki.
 
 [sidebar]
 .Problem z ThreadAbortException
 ****
 Jeśli zastanawiasz się, dlaczego powyżej napisałem "w miarę bezpieczna" to śpieszę z wyjaśnieniem.
 Otóż jest taki problem, że w dowolnym momencie wykonania powyższej funkcji może dojść do wywołania wyjątku `ThreadAbortException`, który może przerwać jej wykonywanie i zostawić w dziwnym stanie co w konsekwencji może doprowadzić nas do deadlocka.
-Całe szczęście jest to coraz mniej prawdopodobne, gdyż używanie `Thread.Abort` zostało uznane za złą praktykę, a w jego miejsce wprowadzono `CancellationToken`. 
-Jeśli chcesz poczytać szczegółowe rozważania, jak zabezpieczyć się w takim przypadku zapraszam do odpowiedzi na pytanie na stacku: https://stackoverflow.com/a/61806749/6208972.
+Całe szczęście jest to coraz mniej prawdopodobne, gdyż używanie metody `Thread.Abort` zostało uznane za złą praktykę, a w jego miejsce wprowadzono `CancellationToken`. 
+Jeśli chcesz poczytać szczegółowe rozważania, jak zabezpieczyć się w takim przypadku zapraszam do odpowiedzi na pytanie na Stacku: https://stackoverflow.com/a/61806749/6208972.
 ****
 
 === SemaphoreSlim.WaitAsync
@@ -169,8 +171,7 @@ Pewnego dnia, ktoś, kto odpowiada za .Neta w końcu poszedł po rozum do głowy
 include::src/AsyncSemaphore.cs[]
 ----
 
-Przykład ten jest dużo prostszy, gdyż sam w sobie na to pozwala.
-W przypadku uruchomienia tego programu otrzymujemy jasny i klarowny wynik:
+Przykład ten jest dużo prostszy, a po jego uruchomienia otrzymujemy jasny i klarowny wynik:
 
 [source]
 ----
@@ -183,13 +184,13 @@ Exiting... (1-4)
 ----
 
 Na plus na pewno jest zwięzłość takiego przykładu w najprostszej formie. 
-Jednak gdyby chciał osiągnąć taki sam efekt jak w przypadku `Monitor.TryEnter()`, to całość rozrosłaby się podobnie jak w poprzednim przypadku.
+Jednak gdybyś chciał osiągnąć taki sam efekt jak w przypadku `Monitor.TryEnter()`, to całość rozrosłaby się podobnie jak w poprzednim przypadku.
 Na minus muszę zwrócić Ci uwagę, że to rozwiązanie również może powodować problemy – w szczególności podczas pracy z wyjątkowo starym kodem (jeszcze sprzed .Net Framework 4).
-Po więcej informacji zajrzyj powyżej do ramki z napisem "Problem z ThreadAbortException".
+Po więcej informacji zajrzyj powyżej do ramki zatytułowanej "Problem z ThreadAbortException".
 
 == Ostrożnie ze wzorcem if-lock-if
 
-Na koniec chciałbym jeszcze wspomnieć o dość popularnym wzorcu blokady z podwójnym zatwierdzeniem. 
+Na koniec chciałbym wspomnieć o dość popularnym wzorcu blokady z podwójnym zatwierdzeniem. 
 Już sama https://pl.wikipedia.org/wiki/Blokada_z_podw%C3%B3jnym_zatwierdzeniem_(wzorzec_projektowy)[wikipedia] mówi nam, że w niektórych przypadkach (między innymi w języku Java i C++), gdzie może dojść do trudnych do wykrycia problemów z wyścigiem wątków. 
 Jeszcze więcej na ten temat można przeczytać http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html[tutaj (po angielsku]. 
 Także lepiej omijać ten sposób z daleka.
@@ -201,6 +202,7 @@ Nie zdziwię się, jeśli nawet i w tym artykule znajdzie się jakiś błąd, kt
 Jeśli coś takiego zauważyłeś, to proszę, daj znać w komentarzach! 
 
 Wybór odpowiedniej metody synchronizacji zależy od tego, na jakim etapie prac jesteśmy. 
+Jeśli zaczynamy projekt – warto rozejrzeć się za gotową biblioteką lub przygotować coś własnego, w innym przypadku prostota może nas uratować. 
 Jeśli dwie przytoczone powyżej, to za mało warto może jeszcze rozejrzeć się za bibliotekami pokroju https://github.com/StephenCleary/AsyncEx[AsyncEx], która rozwija możliwości pracy asynchronicznej (z tej przytoczonej tutaj jeszcze nie korzystałem, także nie wypowiem się, czy jest dobra).
 
 Warto jednak zawsze mieć w głowie jedną z zasad Roberta C. Martina z książki https://helion.pl/ksiazki/czysty-kod-podrecznik-dobrego-programisty-robert-c-martin,czykov.htm["Czysty kod. Podręcznik dobrego programisty"], że zarządzenie dostępem do sekcji krytycznej jest jedną odpowiedzialnością a sama sekcja krytyczna osobną. 

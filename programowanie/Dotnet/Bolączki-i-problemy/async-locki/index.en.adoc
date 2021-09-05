@@ -127,4 +127,82 @@ This may suggest that the monitor mechanism is based precisely on the identifier
 
 == How to do it right
 
-#TODO: Translate the rest#
+Fortunately, solving the problem of asynchronicity and protecting the critical section is not doomed, we have several ways to do it.
+
+=== Do not call asynchronous code in a critical section
+
+It may seem strange that this is the first solution I recommend, but throughout my education it was put into my head that the critical section should be as short and simple as possible. 
+The implication of this is that the less thread synchronization we require, the faster our code will be! 
+So, before you dig for more solutions, consider whether you are not overwhelming the critical section.
+
+=== Critical section for the flag only
+
+This way may not be the most beautiful one, but it is certainly easily accessible, as it requires neither a new version of .Net nor external libraries.
+Additionally, it is an implementation of the principle I mentioned above.
+By the way its complexity allows us to clearly define whether we can enter the critical section or not, which gives us additional possibilities to control the execution of the program.
+
+[source,csharp]
+.Ugly but reasonably safe call control for asynchronous critical section
+----
+include::src/CriticalSectionForFlag.cs[]
+----
+
+<1> Even with this nasty line of code, the implementation works as it should.
+
+The disadvantages of this implementation are certainly the complexity: copying it inside a project can lead to lots of duplicate lines of code (which we don't like), and the amount of code needed to get it working makes it easy to make a mistake. 
+But once written, a piece can serve for many long years as a library.
+
+[sidebar]
+.Problem with ThreadAbortException
+****
+If you're wondering why I wrote "reasonably safe" above, I hasten to explain.
+Well, the problem is that at any time during the execution of the above function, a `ThreadAbortException` can be raised, which can abort its execution and leave it in an undefined state, which can consequently lead us to a deadlock.
+Fortunately, this is becoming less and less likely, as the use of `Thread.Abort` method has been considered as bad practice, and `CancellationToken` has been introduced in its place. 
+If you'd like to read a detailed discussion of how to protect yourself in such a case, I invite you to reply to a question on the Stack: https://stackoverflow.com/a/61806749/6208972.
+****
+
+=== SemaphoreSlim.WaitAsync
+
+One day, someone in charge of .Net finally came to their senses and greatly simplified the matter of asynchronicity and the critical section
+
+[source,csharp]
+----
+include::src/AsyncSemaphore.cs[]
+----
+
+This example is much simpler, and after running it we get a clear and transparent result:
+
+[source]
+----
+Before trying lock (2-5)!
+Before trying lock (1-4)!
+With lock (2-5)!
+Exiting... (2-5)
+With lock (1-4)!
+Exiting... (1-4)
+----
+
+On the plus side, there is certainly the brevity of such an example in its simplest form. 
+However, if you wanted to achieve the same effect as in the case of `Monitor.TryEnter()`, the whole thing would grow as in the previous case.
+On the downside, I must point out to you that this solution can also cause problems - especially when working with ancient code (even before .Net Framework 4).
+For more information, see the box above titled "Problem with ThreadAbortException".
+
+=== Be careful with the if-lock-if pattern
+
+Finally, I would like to mention the rather popular double-validation locking pattern. 
+Just https://en.wikipedia.org/wiki/Double-checked_locking[wikipedia] tells us that in some cases (Java and C++, among others), where difficult to detect thread race problems can occur. 
+You can read even more on this topic http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html[here]. 
+Also, it's better to avoid this way from far.
+
+== Summary
+
+Concurrent programming is not easy, and on top of that, traps are waiting everywhere. 
+I won't be surprised if even in this article there is a bug that comes out in some particular case. 
+If you notice something like that, please let me know in the comments! 
+
+Choosing the right synchronization method depends on what stage of the work we are at. 
+If we are starting a project - it is worth to look around for a ready-made library or prepare something of our own, otherwise simplicity may save us. 
+If the two mentioned above are not enough, it may be worth to look around for libraries like https://github.com/StephenCleary/AsyncEx[AsyncEx], which develops asynchronous work capabilities (I haven't used the one mentioned here yet, so I can't say if it's good).
+
+However, it's always worth keeping in mind one of Robert C. Martin from the book https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882["Clean Code: A Handbook of Agile Software Craftsmanship"], that managing access to a critical section is one responsibility and the critical section itself is a separate one. 
+This division of tasks will allow us to focus on the quality of each component. 
