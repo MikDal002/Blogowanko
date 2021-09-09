@@ -1,0 +1,9 @@
+---
+draft: true
+title: O wzorcach projektowych
+date: 1995-03-01
+---
+= O wzorcach projektowych
+
+== Wstęp
+Świetny materiał na temat wzorców projektowych już istnieje w polskim internecie, oto https://refactoring.guru/pl/design-patterns[ON]. 

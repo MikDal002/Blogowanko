@@ -1,0 +1,59 @@
+---
+title: "Przydatne biblioteki .Net #01 - ConsoleTables"
+slug: "Przydatne biblioteki .Net 01 - ConsoleTables"
+date: 2021-06-13T20:38:11+02:00
+draft: false
+image: ilustracja.png
+categories: 
+    - ".Net"
+    - "Narzędzia"
+tags:
+    - "nuget"
+    - "Konsola"
+    - "C-sharp"
+    - "Open Source"
+series: Przydatne biblioteki C#
+---
+= ConsoleTables
+:source-highlighter: pygments
+:icons: font
+
+[sidebar]
+****
+Biblioteka ta ma kilka wersji, które starają się rozszerzyć jej możliwości, bądź zrobić ją całkowicie na nowo z kompletnie nową funkcjonalnością. 
+Także, jeśli szukasz bardziej zaawansowanych możliwości kontroli nad tabelą w konsoli, może zainteresują Cię biblioteki https://github.com/douglasg14b/BetterConsoleTables[BetterConsoleTable] lub https://github.com/yakivyusin/YetAnotherConsoleTables[YetAnotherConsoleTables]. 
+Osobiście z nich nie korzystałem, piszę o tym, abyś nie musiał przekopywać całego internetu.
+****
+
+Jak nazwa wskazuje, biblioteka ta służy do generowania tekstowych tabel w wersji: klasycznej, minimalistycznej i Markdown. 
+Biblioteka dostępna pod adresem https://github.com/khalidabuhakmeh/ConsoleTables jest mała i bardzo prosta w użyciu. 
+Właściwie składa się z jednego pliku, który odpowiada za formatowanie wyjścia. 
+Poniżej kawałek kodu z dokumentacji wraz z moim komentarzem:
+
+.Przykład użycia ConsoleTables z dokumentacji wraz z moim komentarzem
+[source,csharp]
+----
+var table = new ConsoleTable("one", "two", "three");
+table.AddRow(1, 2, 3)
+        .AddRow("this line should be longer", "yes it is", "oh");
+
+table.Write(); <1>
+// lub
+Console.WriteLine(table.ToMinimalString()); <2>
+
+var rows = Enumerable.Repeat(new Something(), 10);
+
+ConsoleTable
+    .From<Something>(rows)
+    .Configure(o => o.NumberAlignment = Alignment.Right)
+    .Write(Format.Alternative); <1>
+----
+WARNING: Przy podawaniu wierszy, zwróć uwagę, aby, przekazywać do metody poszczególne elementy lub całe tablice. 
+*Dodawanie list może zakończyć się błędem!* 
+Dlatego na końcu wyrażeń LINQ staraj się dodawać `.ToArray()`.
+
+<1> Użycie metody `Write` dokona wypisania całej tabeli do konsoli. 
+Co w przypadku wielu aplikacji może być kompletnie bezsensu. 
+Dlatego polecam korzystać z 
+<2> `table.toMinimalString()` bądź podobnych.
+Zwracają one tabele w postaci stringa i można już wysłać ją gdziekolwiek chcemy.

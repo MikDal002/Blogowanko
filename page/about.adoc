@@ -1,0 +1,32 @@
+---
+title: O stronie
+description: Blog z pasją na temat programowania bez powtórzeń! Na razie w wersji beta!
+date: '2021-07-31'
+aliases:
+  - about-us
+  - about-hugo
+  - contact
+lastmod: '2021-07-05'
+menu:
+    main: 
+        weight: -90
+        pre: user
+---
+
+== Cześć! 
+
+Bardzo mi miło powitać Cię na blogu!
+Mam nadzieję, że będzie to miejsce, w którym będziemy mogli wspólnie wymienić się swoimi doświadczeniami, a co za tym idzie razem pracować nad tym, aby nasz kod był każdego dnia lepszy. 
+
+Tak jak nazwa bloga wskazuje (zaprogramujtoraz.pl – tak dla przypomnienia), zależy mi, aby skupić się na tym, co ważne dla naszych klientów – wartości, która wywodzi się z dowożenia kodu unikalnego, rozwiązującego konkretne problemy użytkowników. 
+Dlatego chciałbym poruszać tutaj tematy poszerzające nasze (twoje i moje) horyzonty dotyczące gotowych rozwiązań, które będą się ładnie skalować – od aplikacji garażowej aż po własne miejsce w chmurze, a do tego dawały nam przyjemność z pisania wysokiej jakości kodu – odpornego na błędy i łatwego w dalszym rozwoju.
+
+.Blog jest aktualnie w wersji beta!
+****
+Rozwijam go w wolnym czasie, dlatego też możesz zauważyć tutaj dużo niedoróbek, nad którymi ciągle pracuje. 
+Oficjalny start planuję na sam początek 2022 roku, chyba że uda się szybciej.
+To, co muszę dokończyć przed startem:
+
+* Naprawić błędy CSS związane z używaniem AsciiDoctor'a,
+* Przetłumaczyć istniejące artykuły na język angielski.
+****

@@ -1,0 +1,22 @@
+---
+draft: true
+title: "Agile: Lean Software Development, Scurm czy Kanban?"
+date: 1995-03-01
+---
+= Agile: Lean Software Development, Scurm czy Kanban? 
+// :kroki-http-method: post
+:kroki-default-format: adaptive
+// :kroki-fetch-diagram:
+
+[plantuml]
+....
+Start -> Stop22
+Stop -> Start2
+
+....
+
+// .Anatomy of provider
+// [excalidraw]
+// ....
+// include::img/ProcesAgileLeanScrumKanban.excalidraw[]
+// ....

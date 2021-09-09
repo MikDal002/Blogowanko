@@ -1,0 +1,34 @@
+---
+draft: true
+title: Podstawy Visual Studio 2019
+date: 1995-03-01
+---
+= Podstawy Visual Studio 2019
+Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
+v0.1, 2021-05-13: Work in progress
+:toc:
+:imagesdir: ./img
+:sectnums:
+:iconsdir: ./icons
+:sectanchors:
+:source-highlighter: pygments
+:keywords: visual studio 2019
+:doctype: book
+
+[.lead]
+Krótka prezentacja mojego workflow z Visual Studio
+
+== Rozszerzenie
+
+=== VSColorOutput
+.Logo projektu
+image::VisualStudio.VSColorOutput.png[]
+
+indexterm:[Window, Output] indexterm:[Okno, Wyjście]
+Świetny dodatek, który dodaje kolorki do okna wyjścia (Output).
+Jest to o tyle przydatne, że znajdowanie linijki w której wystąpił błąd jest zdecydowanie łatwiejsze.
+W szczególności przydatne jeśli chodzi o pracę z ((CMake)).
+
+
+[index]
+= Indeks

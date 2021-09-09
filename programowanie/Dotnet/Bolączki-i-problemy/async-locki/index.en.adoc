@@ -1,0 +1,208 @@
+---
+title: "Async, locks and monitors – where is the problem?"
+date: 2021-08-24T15:52:17Z
+draft: false
+image: cover.jpg
+description: "In this article, I present an interesting pitfall that awaits the .Net programmer in the case where they need to secure access to code, and that code would like to execute asynchronously..."
+categories: 
+    - ".Net"
+    - "Pułapki na programistę"
+    - "Wielowątkwość"
+tags:
+    - "C-sharp"
+    - "async"
+    - "await"
+---
+
+= Async, locks and monitors – where is the problem?
+:source-highlighter: pygments
+:icons: font
+:toc:
+
+In this article, I will not cover the basics on how to write multithreaded code.
+It is addressed to people who have an idea how to start tasks in separate processes. 
+However, I don't require any special knowledge here, so even beginners should find something for themselves.
+If, on the other hand, you're looking for something that would give you useful basics, I encourage you to visit: https://markheath.net/post/constraining-concurrent-threads-csharp[here], https://markheath.net/post/async-antipatterns[here] and the blog https://blog.stephencleary.com/[Stephen Cleary].
+
+For the record, all the following examples are run with a piece of code like this:
+
+[source,csharp]
+----
+include::src/Executor.cs[]
+----
+
+where `noOfTasks` tells you how many tasks to run in parallel, while `test` is a function for testing.
+For each test, the object is created from scratch.
+
+== How to do it wrong
+
+=== lock()
+
+Let's start from the beginning. 
+Normally the compiler won't allow us to call asynchronous code (requiring `await`) inside a `lock(...) {...}` structure - it will return a laconic `error CS1996: Cannot await in the body of a lock statement`.
+Such non-functioning code can be seen below:
+
+[source,csharp]
+.The compiler will not allow us to build code where we have the await keyword inside the lock.
+----
+private object _locker = new object();
+async Task NotWorkingLock() 
+{
+    lock(_locker) {
+        await Task.Delay(TimeSpan.FromSeconds(5));
+    }
+}
+----
+
+=== Monitor
+
+WARNING: The code in this section is incorrect and can cause hard-to-find errors, even if it doesn't look like it!
+
+Unfortunately, concurrent programming in C# is viral, meaning that once `async` and `await` are added they spread further into our software, which can lead us to a situation where we necessarily want to control the execution of a certain asynchronous method. 
+It's possible that at such a point it will occur to us to write something like this:
+
+[source,csharp]
+.Apparent control of an asynchronous function call
+----
+include::src/MonitorExample.cs[]
+----
+
+<1> Uncommenting this line gives even more cosmic results like entering the critical section multiple times...
+
+When we run it, we will see a result like below.
+It looks quite good... 
+
+[source]
+.The result of two concurrent tasks
+----
+With lock (1-5)!
+Without lock (2-4)!
+Exiting... (2-4)
+Exiting... (1-5)
+----
+
+But what happens when we change the number of threads from 2 to more than we have physical threads of the processor? 
+Well, a serious problem arises, because we get an exception while the program is running:
+
+`System.Threading.SynchronizationLockException : Object synchronization method was called from an unsynchronized block of code.`
+
+What's worse, it doesn't always appear, which some runs of the above code end up correctly on my machine. 
+In more complicated examples, it may even happen to enter the critical section multiple times - to observe this, uncomment the line at the end of which there is a number (1).
+The result you may observe is, for example: 
+
+[source]
+.Result of ten concurrent tasks
+----
+Without lock (4-6)!
+Without lock (2-5)!
+Without lock (3-11)!
+Without lock (7-10)!
+Without lock (8-4)!
+Without lock (1-7)!
+With lock (5-9)! <1>
+Without lock (6-8)!
+Without lock (10-4)!
+With lock (9-9)! <2>
+Exiting... (6-8)
+Exiting... (7-10)
+Exiting... (2-5)
+Exiting... (3-11)
+Exiting... (8-4)
+Exiting... (4-6)
+Exiting... (10-4)
+Exiting... (1-7)
+----
+
+Note that (1) and (2) show that the program entered the critical section twice!
+Moreover, such a scenario can go undetected until the number of tasks running asynchronously exceeds some magic number in the system, which can cause hard-to-detect mistakes!
+
+=== A little explanation
+
+Exceptions are caused by the problem that the `locker` object is released by a different thread than the one that locked it.
+This is because the `async-await` mechanic does not guarantee continuation on the same thread. 
+Eric Lippert (who states in his SO profile that he worked on the C# compiler) also writes about this, as you can read at this link: https://stackoverflow.com/a/7612714/6208972.
+
+As a note of interest, I would like to point out that on the previous program result, the lines indicated by (1) and (2) have the same thread ID, but a different task! 
+This may suggest that the monitor mechanism is based precisely on the identifier of the former. 
+
+== How to do it right
+
+Fortunately, solving the problem of asynchronicity and protecting the critical section is not doomed, we have several ways to do it.
+
+=== Do not call asynchronous code in a critical section
+
+It may seem strange that this is the first solution I recommend, but throughout my education it was put into my head that the critical section should be as short and simple as possible. 
+The implication of this is that the less thread synchronization we require, the faster our code will be! 
+So, before you dig for more solutions, consider whether you are not overwhelming the critical section.
+
+=== Critical section for the flag only
+
+This way may not be the most beautiful one, but it is certainly easily accessible, as it requires neither a new version of .Net nor external libraries.
+Additionally, it is an implementation of the principle I mentioned above.
+By the way its complexity allows us to clearly define whether we can enter the critical section or not, which gives us additional possibilities to control the execution of the program.
+
+[source,csharp]
+.Ugly but reasonably safe call control for asynchronous critical section
+----
+include::src/CriticalSectionForFlag.cs[]
+----
+
+<1> Even with this nasty line of code, the implementation works as it should.
+
+The disadvantages of this implementation are certainly the complexity: copying it inside a project can lead to lots of duplicate lines of code (which we don't like), and the amount of code needed to get it working makes it easy to make a mistake. 
+But once written, a piece can serve for many long years as a library.
+
+[sidebar]
+.Problem with ThreadAbortException
+****
+If you're wondering why I wrote "reasonably safe" above, I hasten to explain.
+Well, the problem is that at any time during the execution of the above function, a `ThreadAbortException` can be raised, which can abort its execution and leave it in an undefined state, which can consequently lead us to a deadlock.
+Fortunately, this is becoming less and less likely, as the use of `Thread.Abort` method has been considered as bad practice, and `CancellationToken` has been introduced in its place. 
+If you'd like to read a detailed discussion of how to protect yourself in such a case, I invite you to reply to a question on the Stack: https://stackoverflow.com/a/61806749/6208972.
+****
+
+=== SemaphoreSlim.WaitAsync
+
+One day, someone in charge of .Net finally came to their senses and greatly simplified the matter of asynchronicity and the critical section
+
+[source,csharp]
+----
+include::src/AsyncSemaphore.cs[]
+----
+
+This example is much simpler, and after running it we get a clear and transparent result:
+
+[source]
+----
+Before trying lock (2-5)!
+Before trying lock (1-4)!
+With lock (2-5)!
+Exiting... (2-5)
+With lock (1-4)!
+Exiting... (1-4)
+----
+
+On the plus side, there is certainly the brevity of such an example in its simplest form. 
+However, if you wanted to achieve the same effect as in the case of `Monitor.TryEnter()`, the whole thing would grow as in the previous case.
+On the downside, I must point out to you that this solution can also cause problems - especially when working with ancient code (even before .Net Framework 4).
+For more information, see the box above titled "Problem with ThreadAbortException".
+
+=== Be careful with the if-lock-if pattern
+
+Finally, I would like to mention the rather popular double-validation locking pattern. 
+Just https://en.wikipedia.org/wiki/Double-checked_locking[wikipedia] tells us that in some cases (Java and C++, among others), where difficult to detect thread race problems can occur. 
+You can read even more on this topic http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html[here]. 
+Also, it's better to avoid this way from far.
+
+== Summary
+
+Concurrent programming is not easy, and on top of that, traps are waiting everywhere. 
+I won't be surprised if even in this article there is a bug that comes out in some particular case. 
+If you notice something like that, please let me know in the comments! 
+
+Choosing the right synchronization method depends on what stage of the work we are at. 
+If we are starting a project - it is worth to look around for a ready-made library or prepare something of our own, otherwise simplicity may save us. 
+If the two mentioned above are not enough, it may be worth to look around for libraries like https://github.com/StephenCleary/AsyncEx[AsyncEx], which develops asynchronous work capabilities (I haven't used the one mentioned here yet, so I can't say if it's good).
+
+However, it's always worth keeping in mind one of Robert C. Martin from the book https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882["Clean Code: A Handbook of Agile Software Craftsmanship"], that managing access to a critical section is one responsibility and the critical section itself is a separate one. 
+This division of tasks will allow us to focus on the quality of each component. 
