@@ -1,0 +1,46 @@
+---
+title: "Własny szablon projektu"
+date: 2021-09-09
+draft: false
+image: cover.jpg
+description: "TODO"
+categories: 
+    - ".Net"
+tags:
+    - "C-sharp"
+    - "csproj"
+    - "templates"
+---
+
+= Własny szablon projektu
+
+linki: 
+
+* podstawowy link który po krótce wyjaśnia wszystko: https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates,
+* seria artykułów od MS:
+** https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-item-template
+
+== Dwa sposoby tworzenia szablonów 
+
+=== Prosty 
+w katalogu simplest.
+* Tworzy szablon z dowolnych plików (np. z już istniejacego pliku projektu), 
+* może zostać zainstalowany przez dotnet new -i "ścieżka do katalogu"
+* wymaga pliku template.json w katalogu .template.config
+
+WARNING: Szablonem jest wszystko co znajdzie się w katalogu! A przeniesienie katalogu powoduje, że szablon przestanie działać. 
+Dobry pomysł na początek początków. 
+
+=== Bardziej przydatny
+
+W katalogu more_functional
+* wymaga własnego pliku csproj, który jest typem szablonu,
+* w poszczególnych katalogach pozwala na zdefiniowanie wielu szablonów,
+* każdy szablon wymaga aby aby posiadał plik template.json w katalogu .template.config
+* budujemy to za pomocą dotnet pack wykonywanym na głównym pliku projektu (tym z typem szablonowym), 
+* zbudowanego nugeta instalujemy za pomocą dotnet new -i «ścieżka do nugeta»,
+
+
+== Odinstalowywanie szablonów
+
+* dotnet new -u bez dodatkowych parametrów wyświelit wszystkie zainstalowane szablony wraz z poleceniami do ich odinstalowywania. 
