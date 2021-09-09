@@ -7,6 +7,6 @@
     "shortName": "ztr-tests",
     "tags": {
       "language": "C#",
-      "type": "item"
+      "type": "project"
     }
   }

@@ -17,8 +17,10 @@ tags:
 linki: 
 
 * podstawowy link który po krótce wyjaśnia wszystko: https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates,
-* seria artykułów od MS:
-** https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-item-template
+* seria artykułów od MS: (to samo co wyżej, tylko bardziej rozbite) https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-item-template
+* Github zawierający repo silnika szablonów: https://github.com/dotnet/templating - bardzo dużo szczegółowych informacji
+* Github z przykłądami https://github.com/dotnet/dotnet-template-samples - dobre miejsce do startu
+
 
 == Dwa sposoby tworzenia szablonów 
 
