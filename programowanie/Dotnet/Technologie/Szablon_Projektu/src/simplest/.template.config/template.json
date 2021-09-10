@@ -4,5 +4,6 @@
     "classifications": [ "Common", "Console" ],
     "identity": "ZTR.CoreTemplate.CSharp",
     "name": "Program It Once core template",
-    "shortName": "ztr-core"
+    "shortName": "ztr-core",
+    "sourceName": "PersonComponent"
   }

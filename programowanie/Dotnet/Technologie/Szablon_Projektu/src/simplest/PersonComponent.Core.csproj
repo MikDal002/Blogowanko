@@ -1,31 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <!-- You need to add those things to project file -->
-    <!-- <PackageType>Template</PackageType>
-    <PackageVersion>1.0</PackageVersion>
-    <PackageId>ZTR.Utilities.Templates</PackageId>
-    <Title>Zaprogramuj to raz! Core template</Title>
-    <Authors>Zaprogramuj to raz!</Authors>
-    <Description>Template for creating core projects</Description>
-    <PackageTags>dotnet-new;ztr;templates</PackageTags>
-    
-    <IncludeContentInPack>true</IncludeContentInPack>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
-    <ContentTargetFolders>content</ContentTargetFolders> -->
-
-    <!-- This comes from your most favoritue project -->
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <WarningsAsErrors />
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="10.3.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
   </ItemGroup>
-
 </Project>

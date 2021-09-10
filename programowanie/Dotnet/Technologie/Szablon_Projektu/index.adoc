@@ -1,11 +1,13 @@
 ---
-title: "Własny szablon projektu"
-date: 2021-09-09
+title: "Własny szablon projektu .Net"
+date: 2021-09-10
 draft: false
 image: cover.jpg
-description: "TODO"
+description: "Dziś o tym, co powtarzałem dotychczas najczęściej, czyli jak utworzyć projekt i mieć od razu zainstalowane wszystkie biblioteki, które lubimy używać. 
+Czyli inaczej mówiąc: o tym, jak zrobić własny szablon projektu, który możemy wykorzystać wraz z komendą dotnet new lub w Visual Studio"
 categories: 
     - ".Net"
+    - "Narzędzia"
 tags:
     - "C-sharp"
     - "csproj"
@@ -13,29 +15,145 @@ tags:
 ---
 
 = Własny szablon projektu
+:toc: 
 
-linki: 
-
-* podstawowy link który po krótce wyjaśnia wszystko: https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates,
-* seria artykułów od MS: (to samo co wyżej, tylko bardziej rozbite) https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-item-template
-* Github zawierający repo silnika szablonów: https://github.com/dotnet/templating - bardzo dużo szczegółowych informacji
-* Github z przykłądami https://github.com/dotnet/dotnet-template-samples - dobre miejsce do startu
-
+Jeśli szukasz konkretnych przykładów lub bardziej zaawansowanych rozwiązań to zapraszam do tego repozytorium od Microsoft: https://github.com/dotnet/dotnet-template-samples.
 
 == Dwa sposoby tworzenia szablonów 
+Wyróżniam dwa sposoby na tworzenie szablonów:
+
+* *prosty* - gdzie wrzucamy do katalogu pliki, których chcemy używać, a polecenie dotnet new po prostu przekopiuje pliki w nowe miejsce i ewentualnie zmieni ich zawartosć,
+* *rozwojowy* - gdzie możemy utworzyć własną paczkę z szablonami i swobodnie ja dystrybuować w postaci nuget'a. Do tego oferuje ona możliwość załadowania wielu szablonów w jedną paczkę. 
 
 === Prosty 
-w katalogu simplest.
-* Tworzy szablon z dowolnych plików (np. z już istniejacego pliku projektu), 
-* może zostać zainstalowany przez dotnet new -i "ścieżka do katalogu"
-* wymaga pliku template.json w katalogu .template.config
 
-WARNING: Szablonem jest wszystko co znajdzie się w katalogu! A przeniesienie katalogu powoduje, że szablon przestanie działać. 
-Dobry pomysł na początek początków. 
+Aby utworzyć prosty szablon należy: 
 
-=== Bardziej przydatny
+. Wybrać katalog, w którym znajdują się rzeczy, które mają do niego trafić – nazwijmy go `simplest` – jest to nasz bieżący katalog roboczy. 
+
+. Wewnątrz katalogu roboczego utwórz następny o nazwie `.template.config`, a wewnątrz katalogu `.template.config` utwórz plik o nazwie `template.json` 
++
+[example]
+****
+Po wykonaniu tych dwóch kroków na pulpicie powinniśmy otrzymać taką strukturę katalogów
+[source]
+----
+- Desktop
+-- simplest
+--- .template.config
+---- template.json
+----
+
+****
++
+
+. Do pliku `template.json` wklej zawartość: 
++
+****
+[source,json]
+.Plik konfigurujący nasz szablon
+----
+include::src/simplest/.template.config/template.json[]
+----
+**** 
+
+. Do katalogu roboczego dodaj dowolny plik, na przykład plik projektu  `PersonComponent.Core.csproj` oraz plik klasy C# o nazwie `Installer.cs` o treści:
++
+****
+[source,xml]
+.Przykładowy plik projektu PersonComponent.Core.csproj
+----
+include::src/simplest/PersonComponent.Core.csproj[]
+----
+
+[source,csharp]
+.Przykładowy plik klasy C# Installer.cs
+----
+include::src/simplest/Installer.cs[]
+----
+****
+
+. Teraz przejdź w konsoli do katalogu nadrzędnego dla katalogu roboczego i wywołaj tam polecenie `dotnet new -i .\simplest\`. Powinieneś na końcu zobaczyć wypis:
++
+****
+[source,console]
+----
+Nazwa szablonu                 Skrócona nazwa  Język  Tagi
+-----------------------------  --------------  -----  --------------
+Program It Once core template  ztr-core               Common/Console
+----
+
+Zwróć uwagę jak z tym, co wyświetla się na ekranie, koreluje wartość `shortName`, `name` oraz `classifications`. 
+Szczegółowo rozpiszę się o tym później.
+****
+
+. Teraz największa magia.
+Utwórz gdzieś indziej nowy katalog o nazwie `MójProjekt` i przejdź do niego w konsoli, gdzie wywołaj komendę `dotnet new ztr-core`.
++
+****
+Zobaczysz, że do katalogu została skopiowana zawartość szablonu, ale ze zmienionymi nazwami! 
+
+[source]
+----
+- Desktop
+-- MójProjekt
+--- Installer.cs
+--- MójProjekt.Core.csproj
+----
+
+Dodatkowo zawartość pliku Installer.cs też została zmieniona! 
+Jak to się stało? 
+Otóż odpowiada za to linijka `"sourceName": "PersonComponent"` z pliku konfiguracyjnego, która wskazuje jaki ciąg znaków ma zostać zamieniony na nazwę _projektu_, którą podajemy podczas używania szablonu w komendzie `dotnet new ztr-core -n "MójProjekt"`. 
+Ale my nie podaliśmy końcówki `-n MójProjekt` – ta została domyślnie wzięta z nazwy katalogu
+
+Silnik szablonów samodzielnie przeszuka wszystkie pliki, które zawiera i zamieni ciąg znaków `PersonComponent` na nazwę projektu. 
+Nawet jeśli występuje ona w nazwie pliku. 
+Możliwe jest jeszcze więcej modyfikacji, ale one wykraczają poza ten artykuł, a przykłady ich użycia znajdziesz w repozytorium podanym na samym początku. 
+
+****
+
+. Wadą tego rozwiązania jest to, że silnie polega ono na katalogu źródłowym szablonu, dodaj do katalogu `simplest` nowy plik `dumb.txt` nawet bez zawartości, a zobaczysz, że przy ponownym wywołaniu metody `dotnet new ztr-core` plik ten zostanie ponownie przekopiowany. 
+
+. Teraz usuń lub zmień nazwę katalogowi źródłowemu (czyli `simplest`) i spróbuj ponownie utworzyc nowy projekt (`dotnet new ztr-core`)
++
+****
+[source,console]
+----
+PS> dotnet new ztr-core
+Nie można zlokalizować określonej zawartości szablonu, ponieważ pamięć podręczna szablonu może być uszkodzona. Spróbuj uruchomić polecenie "dotnet Microsoft.TemplateEngine.Cli.CommandParsing.BaseCommandInput--debug:reinit", aby rozwiązać problem.
+----
+
+I wszystko przestaje działać.
+Dlatego takie podejście jest dobre na początek, gdy poznajemy silniki oraz ewentualnie dla jakiś mocno lokalnych szablonów. 
+
+
+WARNING: Jeszcze raz podkreślę, co zostało napisane powyżej. Szablonem prostym jest wszystko, co znajdzie się w katalogu! A przeniesienie katalogu źródłowego powoduje, że przestanie on działać.
+
+****
+
+. Aby odinstalować szablon użyj polecenia `dotnet new -u «pełna ścieżka do szablonu»`
++
+****
+A co jeśli nie pamiętasz gdzie jest twój szablon? 
+Użyj polecenia `dotnet new -u` bez żadnych dodatkowych elementów, wyświetli Ci się lista szablonów, które mozesz odinstalować wraz z odpowiednim poleceniem: 
+
+[source,console]
+----
+PS> dotnet new -u
+    C:\Users\md\Desktop\simplest
+      Szablony:
+         Program It Once core template (ztr-core)
+      Polecenie odinstalowania:
+   dotnet new --uninstall C:\Users\md\Desktop\simplest
+----
+
+Po czym wystarczy skopiować ostatnią linijkę wpisu dotyczącą szablonu, który chcemy usunąć i voilà – z powrotem mamy czysto.
+****
+
+=== Rozwojowy
 
 W katalogu more_functional
+
 * wymaga własnego pliku csproj, który jest typem szablonu,
 * w poszczególnych katalogach pozwala na zdefiniowanie wielu szablonów,
 * każdy szablon wymaga aby aby posiadał plik template.json w katalogu .template.config
@@ -46,3 +164,13 @@ W katalogu more_functional
 == Odinstalowywanie szablonów
 
 * dotnet new -u bez dodatkowych parametrów wyświelit wszystkie zainstalowane szablony wraz z poleceniami do ich odinstalowywania. 
+
+== Podsumowanie
+Jak można wynieść z artykułu cały ten silnik może nam generować dowolną treść kompletnie niezwiązaną z .Netem, co może nam zaoszczędzić dużo powtarzalnej pracy również w innych przypadkach. 
+
+== Odnośniki 
+
+* Github z przykładami https://github.com/dotnet/dotnet-template-samples - dobre miejsce do startu
+* Podstawowy link, który pokrótce wyjaśnia wszystko: https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates, nie jest on najczytelniejszy, ale przy drugim/trzecim podejściu można zrozumieć wszystko,
+* seria artykułów od MS. Zawiera tę samą treść co powyżej tylko bardziej uszczegółowioną: https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-item-template
+* Github zawierający repo silnika szablonów: https://github.com/dotnet/templating - miejsce, gdzie możesz znaleźć dużo szczegółowych informacji.
