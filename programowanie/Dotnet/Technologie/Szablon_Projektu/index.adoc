@@ -23,7 +23,7 @@ Jeśli szukasz konkretnych przykładów lub bardziej zaawansowanych rozwiązań 
 Wyróżniam dwa sposoby na tworzenie szablonów:
 
 * *prosty* - gdzie wrzucamy do katalogu pliki, których chcemy używać, a polecenie dotnet new po prostu przekopiuje pliki w nowe miejsce i ewentualnie zmieni ich zawartosć,
-* *rozwojowy* - gdzie możemy utworzyć własną paczkę z szablonami i swobodnie ja dystrybuować w postaci nuget'a. Do tego oferuje ona możliwość załadowania wielu szablonów w jedną paczkę. 
+* *Nugetowy* - gdzie możemy utworzyć własną paczkę z szablonami i swobodnie ja dystrybuować w postaci nuget'a. Do tego oferuje ona możliwość załadowania wielu szablonów w jedną paczkę. 
 
 === Prosty 
 
@@ -37,11 +37,12 @@ Aby utworzyć prosty szablon należy:
 ****
 Po wykonaniu tych dwóch kroków na pulpicie powinniśmy otrzymać taką strukturę katalogów
 [source]
+.Szablonowa struktura plików
 ----
-- Desktop
--- simplest
---- .template.config
----- template.json
+Desktop/
+└── MójProjekt/
+    ├── Installer.cs
+    └── MójProjekt.Core.csproj
 ----
 
 ****
@@ -94,11 +95,12 @@ Utwórz gdzieś indziej nowy katalog o nazwie `MójProjekt` i przejdź do niego 
 Zobaczysz, że do katalogu została skopiowana zawartość szablonu, ale ze zmienionymi nazwami! 
 
 [source]
+.Wynikowa struktura plików
 ----
-- Desktop
--- MójProjekt
---- Installer.cs
---- MójProjekt.Core.csproj
+Desktop/
+└── MójProjekt/
+    ├── Installer.cs
+    └── MójProjekt.Core.csproj
 ----
 
 Dodatkowo zawartość pliku Installer.cs też została zmieniona! 
@@ -134,10 +136,11 @@ WARNING: Jeszcze raz podkreślę, co zostało napisane powyżej. Szablonem prost
 . Aby odinstalować szablon użyj polecenia `dotnet new -u «pełna ścieżka do szablonu»`
 +
 ****
-A co jeśli nie pamiętasz gdzie jest twój szablon? 
+A co jeśli nie pamiętasz, gdzie jest twój szablon? 
 Użyj polecenia `dotnet new -u` bez żadnych dodatkowych elementów, wyświetli Ci się lista szablonów, które mozesz odinstalować wraz z odpowiednim poleceniem: 
 
 [source,console]
+.Widok pomocy jak odinstalować szablony
 ----
 PS> dotnet new -u
     C:\Users\md\Desktop\simplest
@@ -150,23 +153,128 @@ PS> dotnet new -u
 Po czym wystarczy skopiować ostatnią linijkę wpisu dotyczącą szablonu, który chcemy usunąć i voilà – z powrotem mamy czysto.
 ****
 
-=== Rozwojowy
+=== Nugetowy
 
-W katalogu more_functional
+Nugetowy szablon ma dwie zasadnicze zalety:
 
-* wymaga własnego pliku csproj, który jest typem szablonu,
-* w poszczególnych katalogach pozwala na zdefiniowanie wielu szablonów,
-* każdy szablon wymaga aby aby posiadał plik template.json w katalogu .template.config
-* budujemy to za pomocą dotnet pack wykonywanym na głównym pliku projektu (tym z typem szablonowym), 
-* zbudowanego nugeta instalujemy za pomocą dotnet new -i «ścieżka do nugeta»,
+* [*] Może być spakowany do postaci nuget'a,
+* [*] Może byc paczką szablonów, czyli zawierać w sobie wiele pojedynczych, całkowicie róznych szablonów dostarczanych w jednym pliku.
 
+. Aby utworzyć taką paczkę utwórz drzewo katalogów z plikami jak poniżej:
++
+****
+[source]
+.Struktura katalogów szablonów do spakowania w formie nugetowej
+----
+MojaPaczkaSzablonów/
+├── ZtrDotnetTemplates.csproj <1>
+└── templates/
+    ├── ConsoleTemplate/
+    │   └── .template.config/
+    │       └── template.json <2>
+    └── CoreTemplate/
+        └── .template.config/
+        │   └── template.json <2>
+        ├── Installer.cs <3>
+        └── PersonComponent.Core.csproj <3>
 
-== Odinstalowywanie szablonów
+----
+<1> to plik projektu, który jest naszą paczką szablonów,
+<2> to pliki opisujące dane szablon. Na każdy szablon musi przypadać jeden taki plik,
+<3> pliki, które będą dołączone do naszych szablonów.
 
-* dotnet new -u bez dodatkowych parametrów wyświelit wszystkie zainstalowane szablony wraz z poleceniami do ich odinstalowywania. 
+Katalog `ConsoleTemplate` zostawiam pusty (poza plikiem konfiguracyjnym) w celu ograniczenia rozmiaru tego przykładu.
+****
+
+. Uzupełnij plik projektu `ZtrDotnetTemplates.csproj`:
++
+****
+[source,xml]
+.Zawartość pliku ZtrDotnetTemplates.csproj
+----
+include::src/more_functional/ZtrDotnetTemplates.csproj[]
+----
+<1> Zwróć uwagę na specyficzny typ projektu `Template`. Jest on niezbędny do poprawnego utworzenia paczki.
+<2> W tym miejscu zaczynają się standardowe pola do opisu pakietu Nuget.
+<3> `TargetFramework` w tym przypadku określa wersję .Net używaną do budowania paczki nugetowej.
+<4> Zwróć uwagę, że załączone będą wszystkie szablony znajdujące się w katalogu `templates` z wyjątkiem plików znajdujących się w katalogach `bin` i `obj`.
+
+****
+
+. Uzupełnij plik konfiguracyjny szablonu konsolowego `templates/console/.template.config/template.json`
++
+****
+.Zawartość pliku console/.template.config/template.json
+[source,json]
+----
+include::src/more_functional/templates/console/.template.config/template.json[]
+----
+
+Nie rózni się on zbytnio od tego, co widzieliśmy w poprzednim przykładzie, z tym że tutaj dodałem informację na temat języka wykorzystywanego w szablonie. 
+
+****
+
+. Uzupełnij pliki `templates/core/.template.config/template.json`, `templates/core/Installer.cs` oraz `templates/core/PersonComponent.Core.csproj`
++
+****
+Pliki te są identyczne z tymi samymi, które zostały wypisane powyzej, dlatego tylko je tu wkleję bez dalszego omówienia.
+
+[source,json]
+.Plik templates/core/.template.config/template.json
+----
+include::src/more_functional/templates/core/.template.config/template.json[]
+----
+
+[source,xml]
+.Plik templates/core/PersonComponent.Core.csproj
+----
+include::src/more_functional/templates/core/PersonComponent.Core.csproj[]
+----
+
+[source,csharp]
+.Plik templates/core/Installer.cs
+----
+include::src/more_functional/templates/core/Installer.cs[]
+----
+****
+
+. Zbuduj i zainstaluj nugeta!
++
+****
+W katalogu `MojaPaczkaSzablonów` uruchom polecenie `dotnet pack`.
+Przejdź następnie do folderu `./bin/debug/`, a tam zobaczysz plik o nazwie `ZTR.Utilities.Templates.1.0.0.nupkg`. 
+Aby zainstalować tę paczkę skorzystaj z polecenia `dotnet new -i ZTR.Utilities.Templates.1.0.0.nupkg`.
+
+[source,console]
+.Proces budowania i instalacji paczki
+----
+~\MojaPaczkaSzalonów> dotnet pack
+...
+Pomyślnie utworzono pakiet "~\MojaPaczkaSzalonów\bin\Debug\ZTR.Utilities.Templates.1.0.0.nupkg".
+~\MojaPaczkaSzalonów> cd .\bin\Debug\
+~\MojaPaczkaSzalonów> dotnet new -i .\ZTR.Utilities.Templates.1.0.0.nupkg
+Sukces: ZTR.Utilities.Templates::1.0.0 zainstalował następujące szablony:
+Nazwa szablonu                    Skrócona nazwa  Język  Tagi
+--------------------------------- --------------- -----  ----------------------
+Program It Once Console template  ztr-console     [C#]   Common/Console
+Program It Once core template     ztr-core        [C#]   Common/Console/Library
+----
+
+****
+
+. Używaj!
++
+****
+Zainstalowanych pakietów używa się tak samo (np. poleceniem `dotnet new ztr-console`), z tym, że teraz zmiana katalogu źródłowego nie psuje nam naszego szablonu!
+Jeśli chcemy odinstalować nasz szablon, robimy to poleceniem `dotnet new -u .\ZTR.Utilities.Templates.1.0.0.nupkg`. 
+****
 
 == Podsumowanie
-Jak można wynieść z artykułu cały ten silnik może nam generować dowolną treść kompletnie niezwiązaną z .Netem, co może nam zaoszczędzić dużo powtarzalnej pracy również w innych przypadkach. 
+
+* Myślę, że własny szablon projektu może być bardzo przydatnym narzędziem, nie tylko w przypadku projektów .Netowych, ale także w innych rozwiązaniach niezwiązanych z żadnym językiem programowania. 
+* Pamiętaj, że ten artykuł to dopiero zalążek, a cały silnik szablonów ma jeszcze wiele możliwości, które możesz odkryć w linkach poniżej – znajdują się tam, między innymi, adresy repozytoriów związane z tym projektem. 
+* Zwróć uwagę, że całość będzie jeszcze przyjemniejsza, gdy własne szablony połączysz CI/CD (np. na Githubie) co da Ci dostęp do twoich ulubionych wzorców niemalże wszędzie!
+
 
 == Odnośniki 
 

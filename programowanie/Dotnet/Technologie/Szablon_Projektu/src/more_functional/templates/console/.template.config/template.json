@@ -1,12 +1,12 @@
 {
     "$schema": "http://json.schemastore.org/template",
     "author": "Zaprogramuj To Raz!",
-    "classifications": [ "Common", "Console" ],
+    "classifications": [ "Common", "Console" ], 
     "identity": "ZTR.ConsoleTemplate.CSharp",
-    "name": "Program It Once Console template",
-    "shortName": "ztr-console",
+    "name": "Program It Once Console template", 
+    "shortName": "ztr-console", 
     "tags": {
-      "language": "C#",
+      "language": "C#", 
       "type": "project"
     }
   }
