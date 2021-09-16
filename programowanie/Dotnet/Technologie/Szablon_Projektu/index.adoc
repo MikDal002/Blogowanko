@@ -17,7 +17,7 @@ tags:
 = Własny szablon projektu
 :toc: 
 
-Jeśli szukasz konkretnych przykładów lub bardziej zaawansowanych rozwiązań to zapraszam do tego repozytorium od Microsoft: https://github.com/dotnet/dotnet-template-samples.
+Jeśli szukasz konkretnych przykładów lub bardziej zaawansowanych rozwiązań to zapraszam do tego repozytorium Microsoftu: https://github.com/dotnet/dotnet-template-samples.
 
 == Dwa sposoby tworzenia szablonów 
 Wyróżniam dwa sposoby na tworzenie szablonów:
@@ -29,7 +29,7 @@ Wyróżniam dwa sposoby na tworzenie szablonów:
 
 Aby utworzyć prosty szablon należy: 
 
-. Wybrać katalog, w którym znajdują się rzeczy, które mają do niego trafić – nazwijmy go `simplest` – jest to nasz bieżący katalog roboczy. 
+. Utworzyć katalog, w którym znajdą się rzeczy, które trafią do szablonu – nazwijmy go `simplest` – będzie to nasz bieżący katalog roboczy. 
 
 . Wewnątrz katalogu roboczego utwórz następny o nazwie `.template.config`, a wewnątrz katalogu `.template.config` utwórz plik o nazwie `template.json` 
 +
@@ -39,10 +39,10 @@ Po wykonaniu tych dwóch kroków na pulpicie powinniśmy otrzymać taką struktu
 [source]
 .Szablonowa struktura plików
 ----
-Desktop/
-└── MójProjekt/
+Pulpit/
+└── simplest/
     ├── Installer.cs
-    └── MójProjekt.Core.csproj
+    └── PersonComponent.Core.csproj
 ----
 
 ****
@@ -84,7 +84,7 @@ Nazwa szablonu                 Skrócona nazwa  Język  Tagi
 Program It Once core template  ztr-core               Common/Console
 ----
 
-Zwróć uwagę jak z tym, co wyświetla się na ekranie, koreluje wartość `shortName`, `name` oraz `classifications`. 
+Zwróć uwagę jak z tym, co wyświetla się na ekranie, korelują wartości `shortName`, `name` oraz `classifications` z pliku template.json. 
 Szczegółowo rozpiszę się o tym później.
 ****
 
@@ -97,7 +97,7 @@ Zobaczysz, że do katalogu została skopiowana zawartość szablonu, ale ze zmie
 [source]
 .Wynikowa struktura plików
 ----
-Desktop/
+Pulpit/
 └── MójProjekt/
     ├── Installer.cs
     └── MójProjekt.Core.csproj
@@ -106,7 +106,7 @@ Desktop/
 Dodatkowo zawartość pliku Installer.cs też została zmieniona! 
 Jak to się stało? 
 Otóż odpowiada za to linijka `"sourceName": "PersonComponent"` z pliku konfiguracyjnego, która wskazuje jaki ciąg znaków ma zostać zamieniony na nazwę _projektu_, którą podajemy podczas używania szablonu w komendzie `dotnet new ztr-core -n "MójProjekt"`. 
-Ale my nie podaliśmy końcówki `-n MójProjekt` – ta została domyślnie wzięta z nazwy katalogu
+Ale my nie podaliśmy końcówki `-n MójProjekt` – ta została domyślnie wzięta z nazwy katalogu.
 
 Silnik szablonów samodzielnie przeszuka wszystkie pliki, które zawiera i zamieni ciąg znaków `PersonComponent` na nazwę projektu. 
 Nawet jeśli występuje ona w nazwie pliku. 
@@ -114,9 +114,10 @@ Możliwe jest jeszcze więcej modyfikacji, ale one wykraczają poza ten artykuł
 
 ****
 
-. Wadą tego rozwiązania jest to, że silnie polega ono na katalogu źródłowym szablonu, dodaj do katalogu `simplest` nowy plik `dumb.txt` nawet bez zawartości, a zobaczysz, że przy ponownym wywołaniu metody `dotnet new ztr-core` plik ten zostanie ponownie przekopiowany. 
+. Wadą tego rozwiązania jest to, że silnie polega ono na katalogu źródłowym szablonu. 
+Dodaj do katalogu `simplest` nowy plik `dumb.txt` nawet bez zawartości, a zobaczysz, że przy ponownym wywołaniu metody `dotnet new ztr-core` ten również zostanie przekopiowany. 
 
-. Teraz usuń lub zmień nazwę katalogowi źródłowemu (czyli `simplest`) i spróbuj ponownie utworzyc nowy projekt (`dotnet new ztr-core`)
+. Teraz usuń lub zmień nazwę katalogu źródłowego (czyli `simplest`) i spróbuj ponownie utworzyć nowy projekt (`dotnet new ztr-core`)
 +
 ****
 [source,console]
@@ -126,18 +127,19 @@ Nie można zlokalizować określonej zawartości szablonu, ponieważ pamięć po
 ----
 
 I wszystko przestaje działać.
-Dlatego takie podejście jest dobre na początek, gdy poznajemy silniki oraz ewentualnie dla jakiś mocno lokalnych szablonów. 
+Dlatego takie podejście jest dobre na początek, gdy poznajemy silniki oraz ewentualnie dla jakiś specyficznych lokalnych szablonów. 
 
 
-WARNING: Jeszcze raz podkreślę, co zostało napisane powyżej. Szablonem prostym jest wszystko, co znajdzie się w katalogu! A przeniesienie katalogu źródłowego powoduje, że przestanie on działać.
+WARNING: Jeszcze raz podkreślę, co zostało napisane powyżej. Szablonem prostym jest wszystko, co znajdzie się w katalogu źródłowym! A przeniesienie katalogu źródłowego powoduje, że przestanie on działać.
 
 ****
 
 . Aby odinstalować szablon użyj polecenia `dotnet new -u «pełna ścieżka do szablonu»`
 +
 ****
-A co jeśli nie pamiętasz, gdzie jest twój szablon? 
-Użyj polecenia `dotnet new -u` bez żadnych dodatkowych elementów, wyświetli Ci się lista szablonów, które mozesz odinstalować wraz z odpowiednim poleceniem: 
+Co jeśli nie pamiętasz, gdzie jest twój szablon? 
+Użyj polecenia `dotnet new -u` bez żadnych dodatkowych elementów. 
+Wyświetli Ci się lista szablonów, które możesz odinstalować wraz z odpowiednim poleceniem: 
 
 [source,console]
 .Widok pomocy jak odinstalować szablony
