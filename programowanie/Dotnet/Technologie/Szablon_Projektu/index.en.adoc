@@ -1,0 +1,285 @@
+---
+title: "Custom .Net project template"
+date: 2021-09-10
+draft: false
+image: cover.jpg
+description: "Today about what I repeated most often, that is how to create a project and have all the libraries we like to use installed right away. 
+In other words: how to make your own project template, which you can use with dotnet new command or in Visual Studio"
+categories: 
+    - ".Net"
+    - "Tools"
+tags:
+    - "C-sharp"
+    - "csproj"
+    - "templates"
+---
+
+= Custom .Net project template
+:toc: 
+
+If you are looking for specific examples or more advanced solutions, then I encourage you to check out this Microsoft's repository: https://github.com/dotnet/dotnet-template-samples.
+
+== Two ways of creating templates
+I distinguish two ways of creating templates:
+
+* *Simple* - where you put the files you want to use into a directory, and the dotnet new command simply copies the files to the new location and changes their content if necessary,
+* *Nuget* - where you can create your own template package and freely distribute it as a nuget. It also offers the possibility to put many templates into one package. 
+
+=== Simple 
+
+To create a simple template you need to: 
+
+. Create a directory for the stuff that will go into the template - let's call it `simplest` - this will be our current working directory. 
+
+. Inside the working directory, create another one called `.template.config`, and inside the `.template.config` directory, create a file called `template.json` 
++
+[example]
+****
+After completing these two steps, you should get this directory structure on your desktop
+[source]
+.Template file structure
+----
+Desktop/
+└── simplest/
+    ├── Installer.cs
+    └── PersonComponent.Core.csproj
+----
+
+****
++
+
+. To the `template.json` file, paste the contents: 
++
+****
+[source,json]
+.The file that configures our template
+----
+include::src/simplest/.template.config/template.json[]
+----
+**** 
+
+. Add any file to the working directory, for example, a project file `PersonComponent.Core.csproj` and a C# class file named `Installer.cs` with the contents:
++
+****
+[source,xml]
+.Example of PersonComponent.Core.csproj project file
+----
+include::src/simplest/PersonComponent.Core.csproj[]
+----
+
+[source,csharp]
+.Example of C# class Installer.cs file
+----
+include::src/simplest/Installer.cs[]
+----
+****
+
+. Now go in the console to the parent directory for the working directory and invoke the `dotnet new -i .\simplest' command there. You should see an output at the end:
++
+****
+[source,console]
+----
+Template name                  Short Name      Language   Tags
+-----------------------------  --------------  ---------  --------------
+Program It Once core template  ztr-core                   Common/Console
+----
+
+Note how the `shortName`, `name` and `classifications` values from the template.json file correlate with what is displayed on the screen. 
+I'll go into more detail about this later.
+****
+
+. Now the best part
+Create a new directory named `MyProject` somewhere else and navigate to it in the console, where call the `dotnet new ztr-core` command.
++
+****
+You will see that the contents of the template have been copied into the directory, but with the names changed! 
+
+[source]
+.Wynikowa struktura plików
+----
+Desktop/
+└── MyProject/
+    ├── Installer.cs
+    └── MyProject.Core.csproj
+----
+
+Additionally, the content of the Installer.cs file has been changed too! 
+How did this happen? 
+Well, the line `"sourceName": "PersonComponent"` from the configuration file, which indicates which string to replace with the _project_ name that we provide when using the template in the `dotnet new ztr-core -n "MyProject"` command. 
+But we didn't specify the `-n MyProject` ending - it was taken from the directory name by default.
+
+The template engine will automatically search all files it contains and replace the string `PersonComponent` with the project name. 
+Even if it occurs in the file name. 
+More modifications are possible, but they go beyond this article, and you can find examples of their use in the repository given at the beginning. 
+
+****
+
+. The disadvantage of this solution is that it relies heavily on the template source directory. 
+Add a new `dumb.txt` file to the `simplest` directory even without the contents, and you will see that when you call the `dotnet new ztr-core` method again, this one will also be copied. 
+
+. Now delete or rename the source directory (i.e. `simplest`) and try to create a new project again (`dotnet new ztr-core`)
++
+****
+[source,console]
+----
+PS> dotnet new ztr-core
+The specified template content cannot be located because the template cache may be corrupted. Try running the command "dotnet Microsoft.TemplateEngine.Cli.CommandParsing.BaseCommandInput--debug:reinit" to resolve the problem.
+----
+
+And everything stops working.
+That's why this approach is good for the beginning, when we learn the engines and possibly for some specific local templates. 
+
+
+WARNING: Let me emphasize again what was written above. A simple template are any files and folders in the source directory! Moving the source directory will cause it to stop working.
+
+****
+
+. To uninstall a template use the command `dotnet new -u "full path to template"`.
++
+****
+What if you can't remember where your template is? 
+Use the `dotnet new -u` command without anything extra. You will see a list of templates that you can uninstall with the appropriate command: 
+
+[source,console]
+.Help view how to uninstall templates
+----
+PS> dotnet new -u
+    C:\Users\md\Desktop\simplest
+      Templates:
+         Program It Once core template (ztr-core)
+      Uninstall command:
+   dotnet new --uninstall C:\Users\md\Desktop\simplest
+----
+
+Then just copy the last line of the entry for the template you want to remove and voilà - you have order back.
+****
+
+=== Nuget
+
+Nugetowy szablon ma dwie zasadnicze zalety:
+
+* [*] Może być spakowany do postaci nuget'a,
+* [*] Może byc paczką szablonów, czyli zawierać w sobie wiele pojedynczych, całkowicie róznych szablonów dostarczanych w jednym pliku.
+
+. Aby utworzyć taką paczkę utwórz drzewo katalogów z plikami jak poniżej:
++
+****
+[source]
+.Struktura katalogów szablonów do spakowania w formie nugetowej
+----
+MojaPaczkaSzablonów/
+├── ZtrDotnetTemplates.csproj <1>
+└── templates/
+    ├── ConsoleTemplate/
+    │   └── .template.config/
+    │       └── template.json <2>
+    └── CoreTemplate/
+        └── .template.config/
+        │   └── template.json <2>
+        ├── Installer.cs <3>
+        └── PersonComponent.Core.csproj <3>
+
+----
+<1> to plik projektu, który jest naszą paczką szablonów,
+<2> to pliki opisujące dane szablon. Na każdy szablon musi przypadać jeden taki plik,
+<3> pliki, które będą dołączone do naszych szablonów.
+
+Katalog `ConsoleTemplate` zostawiam pusty (poza plikiem konfiguracyjnym) w celu ograniczenia rozmiaru tego przykładu.
+****
+
+. Uzupełnij plik projektu `ZtrDotnetTemplates.csproj`:
++
+****
+[source,xml]
+.Zawartość pliku ZtrDotnetTemplates.csproj
+----
+include::src/more_functional/ZtrDotnetTemplates.csproj[]
+----
+<1> Zwróć uwagę na specyficzny typ projektu `Template`. Jest on niezbędny do poprawnego utworzenia paczki.
+<2> W tym miejscu zaczynają się standardowe pola do opisu pakietu Nuget.
+<3> `TargetFramework` w tym przypadku określa wersję .Net używaną do budowania paczki nugetowej.
+<4> Zwróć uwagę, że załączone będą wszystkie szablony znajdujące się w katalogu `templates` z wyjątkiem plików znajdujących się w katalogach `bin` i `obj`.
+
+****
+
+. Uzupełnij plik konfiguracyjny szablonu konsolowego `templates/console/.template.config/template.json`
++
+****
+.Zawartość pliku console/.template.config/template.json
+[source,json]
+----
+include::src/more_functional/templates/console/.template.config/template.json[]
+----
+
+Nie rózni się on zbytnio od tego, co widzieliśmy w poprzednim przykładzie, z tym że tutaj dodałem informację na temat języka wykorzystywanego w szablonie. 
+
+****
+
+. Uzupełnij pliki `templates/core/.template.config/template.json`, `templates/core/Installer.cs` oraz `templates/core/PersonComponent.Core.csproj`
++
+****
+Pliki te są identyczne z tymi samymi, które zostały wypisane powyzej, dlatego tylko je tu wkleję bez dalszego omówienia.
+
+[source,json]
+.Plik templates/core/.template.config/template.json
+----
+include::src/more_functional/templates/core/.template.config/template.json[]
+----
+
+[source,xml]
+.Plik templates/core/PersonComponent.Core.csproj
+----
+include::src/more_functional/templates/core/PersonComponent.Core.csproj[]
+----
+
+[source,csharp]
+.Plik templates/core/Installer.cs
+----
+include::src/more_functional/templates/core/Installer.cs[]
+----
+****
+
+. Zbuduj i zainstaluj nugeta!
++
+****
+W katalogu `MojaPaczkaSzablonów` uruchom polecenie `dotnet pack`.
+Przejdź następnie do folderu `./bin/debug/`, a tam zobaczysz plik o nazwie `ZTR.Utilities.Templates.1.0.0.nupkg`. 
+Aby zainstalować tę paczkę skorzystaj z polecenia `dotnet new -i ZTR.Utilities.Templates.1.0.0.nupkg`.
+
+[source,console]
+.Proces budowania i instalacji paczki
+----
+~\MojaPaczkaSzalonów> dotnet pack
+...
+Pomyślnie utworzono pakiet "~\MojaPaczkaSzalonów\bin\Debug\ZTR.Utilities.Templates.1.0.0.nupkg".
+~\MojaPaczkaSzalonów> cd .\bin\Debug\
+~\MojaPaczkaSzalonów> dotnet new -i .\ZTR.Utilities.Templates.1.0.0.nupkg
+Sukces: ZTR.Utilities.Templates::1.0.0 zainstalował następujące szablony:
+Nazwa szablonu                    Skrócona nazwa  Język  Tagi
+--------------------------------- --------------- -----  ----------------------
+Program It Once Console template  ztr-console     [C#]   Common/Console
+Program It Once core template     ztr-core        [C#]   Common/Console/Library
+----
+
+****
+
+. Używaj!
++
+****
+Zainstalowanych pakietów używa się tak samo (np. poleceniem `dotnet new ztr-console`), z tym, że teraz zmiana katalogu źródłowego nie psuje nam naszego szablonu!
+Jeśli chcemy odinstalować nasz szablon, robimy to poleceniem `dotnet new -u .\ZTR.Utilities.Templates.1.0.0.nupkg`. 
+****
+
+== Podsumowanie
+
+* Myślę, że własny szablon projektu może być bardzo przydatnym narzędziem, nie tylko w przypadku projektów .Netowych, ale także w innych rozwiązaniach niezwiązanych z żadnym językiem programowania. 
+* Pamiętaj, że ten artykuł to dopiero zalążek, a cały silnik szablonów ma jeszcze wiele możliwości, które możesz odkryć w linkach poniżej – znajdują się tam, między innymi, adresy repozytoriów związane z tym projektem. 
+* Zwróć uwagę, że całość będzie jeszcze przyjemniejsza, gdy własne szablony połączysz CI/CD (np. na Githubie) co da Ci dostęp do twoich ulubionych wzorców niemalże wszędzie!
+
+
+== Odnośniki 
+
+* Github z przykładami https://github.com/dotnet/dotnet-template-samples - dobre miejsce do startu
+* Podstawowy link, który pokrótce wyjaśnia wszystko: https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates, nie jest on najczytelniejszy, ale przy drugim/trzecim podejściu można zrozumieć wszystko,
+* seria artykułów od MS. Zawiera tę samą treść co powyżej tylko bardziej uszczegółowioną: https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-item-template
+* Github zawierający repo silnika szablonów: https://github.com/dotnet/templating - miejsce, gdzie możesz znaleźć dużo szczegółowych informacji.
