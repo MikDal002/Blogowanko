@@ -1,0 +1,30 @@
+---
+title: "Podsumowanie września 2021 (2021-09)"
+date: 2021-09-31
+image: cover-diary.jpg
+draft: true
+description: "Krótko o tym, co działo się we wrześniu 2021 roku"
+categories:
+    - Blog Log
+---
+
+Ten miesiąc upłyną pod symoblem jezyka angielskiego. 
+Uruchomiłem drugą wersję strony, gdzie znajdują się już #ABY NA PEWNO?# przetłumaczone wszystkie artykuły! 
+#TODO Link do angielskiej wersji#. 
+
+Artykuły, które powstały w tym miesiącu to:
+
+.artykuł o tworzeniu własnych szablonów dotnet!
+* link:{{% ref "/programowanie/dotnet/Technologie/Szablon_Projektu/index.adoc" %}}[Własny szablon projektu .Net],
+
+Ten miesiąc był dla mnie bardzo pracowity. 
+Tłumaczenie bloga zajeło mi całkiem sporo czasu – choć i tak nie tak dużo, gdyby nie narzędzie, jakim jest Deepl.com. 
+Do tego w międzyczasie ciągnę inny projekt Xamarinowy a do tego niezwykle pochłania mnie temat idealnej architektury aplikacji. 
+Niestety nie mam pomysłu jak podzielić się z już zdobytą wiedzą, bo nie czuję, aby ona była kompletna.
+Na temat architektury siedzi we mnie coraz więcej i widzę, że coraz bardziej dojrzewam do niektórych rozwiązań.
+Może Ty masz jakąś architekturę, poradnik, przewodnik, szablon, który używasz i uważasz za najlepszy? Jeśli tak, to fajnie jakbyś napisał o tym w komentarzu!
+
+[.small]
+****
+Jest coś, co chciałbyś, aby zmieniło się na blogu? Może masz temat, o którym chciałbyś się więcej dowiedzieć? Pisz śmiało! 
+****
