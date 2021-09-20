@@ -1,6 +1,6 @@
 ---
 draft: false
-title: Przydatne biblioteki C++#01 nlohmann:json
+title: "Przydatne biblioteki C++ #01 nlohmann:json"
 slug: Przydatne biblioteki C++ 01 nlohmann:json
 date: 2021-07-01
 image: intro-image.jpg
@@ -22,7 +22,7 @@ Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 
 indexterm:[Single Responsibility Principle]
 Bardzo przyjemna biblioteka do pracy z Json'em. 
-Daje nam ona obsługę na kilka sposobów, jednak chciałbym przedstawić jeden, z którego korzystam.
+Daje nam ona obsługę tegoż formatu na kilka sposobów, jednak chciałbym przedstawić jeden, z którego korzystam.
 Niestety sposób ten działa tylko dla naszych typów, które możemy edytować.
 W związku z tym mam wątpliwości co do zachowania zasady pojedynczej odpowiedzialności (z ang.  _Single Responsibility Principle_).
 Jednak nie zapominaj, że ta biblioteka posiada również rozwiązania dla (de-)serializacji typów trzecich, których modyfikować nie możemy.
@@ -30,7 +30,7 @@ Jednak nie zapominaj, że ta biblioteka posiada również rozwiązania dla (de-)
 Dlaczego lubię tę bibliotekę? 
 
 * [x] Jest dostępna w postaci jednoplikowego nagłówka, przez co łatwo ją dołączyć do projektu. 
-* [x] Bardzo obszerna i porządnie wykonana dokumentacja, która ułatwia zapoznanie się z dostępnymi funkcjonalnościami i tym, jak je zaimplementować u siebie.
+* [x] Bardzo obszerna i porządnie wykonana dokumentacja, która ułatwia zapoznanie się z dostępnymi funkcjonalnościami i tym, jak używać ich u siebie.
 
 [source,cpp]
 .Przykład zastosowania Nlohmann::json

@@ -1,15 +1,15 @@
 ---
-draft: true
-title: Przydatne biblioteki C++#01 nlohmann:json
-slug: Przydatne biblioteki C++ 01 nlohmann:json
+draft: false
+title: "Useful C++ libraries #01 nlohmann:json"
+slug: "Useful C++ libraries 01 nlohmann:json"
 date: 2021-07-01
 image: intro-image.jpg
 categories:
     - C++
-    - Narzędzia
+    - Tools
 tags: 
     - JSON
-series: Przydatne biblioteki C++
+series: Useful C++ libraries
 ---
 = nlohmann::json
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
@@ -21,31 +21,31 @@ Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 == https://github.com/nlohmann/json
 
 indexterm:[Single Responsibility Principle]
-Bardzo przyjemna biblioteka do pracy z Json'em. 
-Daje nam ona obsługę na kilka sposobów, jednak chciałbym przedstawić jeden, z którego korzystam.
-Niestety sposób ten działa tylko dla naszych typów, które możemy edytować.
-W związku z tym mam wątpliwości co do zachowania zasady pojedynczej odpowiedzialności (z ang.  _Single Responsibility Principle_).
-Jednak nie zapominaj, że ta biblioteka posiada również rozwiązania dla (de-)serializacji typów trzecich, których modyfikować nie możemy.
+A very nice library for working with Json. 
+It gives us support for this format in several ways, but I would like to present one that I use.
+Unfortunately, this way works only for our types, which we can edit.
+As a result, I have doubts about maintaining the _Single Responsibility Principle_.
+But don't forget that this library also has solutions for (de-)serialization of third party types that we cannot modify.
 
-Dlaczego lubię tę bibliotekę? 
+Why I like this library. 
 
-* [x] Jest dostępna w postaci jednoplikowego nagłówka, przez co łatwo ją dołączyć do projektu. 
-* [x] Bardzo obszerna i porządnie wykonana dokumentacja, która ułatwia zapoznanie się z dostępnymi funkcjonalnościami i tym, jak je zaimplementować u siebie.
+* [x] It is available as a single-file header, which makes it easy to include in a project. 
+* [x] Very comprehensive and decent documentation that makes it easy to learn about the available functionality and how to use it yourself.
 
 [source,cpp]
-.Przykład zastosowania Nlohmann::json
+.Example of using Nlohmann::json
 ----
 struct MyDataType {
     std::string someStrValue;
     double someDoubleValue;
     int someIntValue;
 
-    // Dodanie (de-) serializacji <1>
+    // Adding (de-) serialization <1>
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(MyDataType, someStrValue, someDoubleValue, someIntValue)
 };
 
 ///
-/// Funkcja reprezentująca jak zamienić JSON'a w nasz własny typ
+/// Function representing how to turn JSON into our own type
 ///
 MyDataType toMyDataType(const std::string& rawJson) {
     auto j = nlohmann::json::parse(rawJson); <2>
@@ -54,14 +54,14 @@ MyDataType toMyDataType(const std::string& rawJson) {
 }
 
 ///
-/// Funkcja reprezentująca jak zamienić nasz własny typ w JSON'a.
+/// Function representing how to turn our own type into JSON.
 ///
 std::string toString(const MyDataType& data) {
-    nlohman::json jsonData = data; // W tym miejscu dochodzi do automatycznej konwersji <3> 
+    nlohman::json jsonData = data; // This is where the automatic conversion takes place <3>
     return jsonData.dump();
 }
 ----
 
-<1> Najpierw musimy dodać makro, które zawiera w sobie funkcje serializujące i deserializujące. 
-<2> Potem możemy już dokonywać deserializacji JSON'a (w postaci ciągu znakowego) do  obiektu,
-<3> i serializacji z obiektu na JSON'a. 
+<1> First, we need to add a macro that includes serializing and deserializing functions. 
+<2> Then we can already perform JSON deserialization (as a string) to an object,
+<3> and serialization from the object to JSON. 
