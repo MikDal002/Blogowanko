@@ -1,0 +1,60 @@
+---
+title: "Useful .Net Libraries #01 - ConsoleTables"
+slug: "Useful .Net Libraries 01 - ConsoleTables"
+date: 2021-06-13
+draft: false
+image: ilustracja.png
+categories: 
+    - ".Net"
+    - "Tools"
+tags:
+    - "nuget"
+    - "Console"
+    - "C-sharp"
+    - "Open Source"
+series: Useful C# libraries
+---
+= ConsoleTables
+:source-highlighter: pygments
+:icons: font
+
+[sidebar]
+****
+This library has several versions that try to extend its capabilities, or make it completely new with completely rebuilt functionality. 
+Also, if you are looking for more advanced table control capabilities in the console, you might be interested in the libraries https://github.com/douglasg14b/BetterConsoleTables[BetterConsoleTable] or https://github.com/yakivyusin/YetAnotherConsoleTables[YetAnotherConsoleTables]. 
+I personally haven't used them, I'm writing about it so you don't have to dig through the whole internet.
+****
+
+As the name suggests, this library is used to generate textual tables in Classic, Minimalist and Markdown versions. 
+The library available at https://github.com/khalidabuhakmeh/ConsoleTables is small and very easy to use. 
+Actually, it consists of one file that is responsible for formatting the output. 
+Below is a piece of code from the documentation with my comments:
+
+.An example of using ConsoleTables from the documentation along with my comment
+[source,csharp]
+----
+var table = new ConsoleTable("one", "two", "three");
+table.AddRow(1, 2, 3)
+        .AddRow("this line should be longer", "yes it is", "oh");
+
+table.Write(); <1>
+// or
+Console.WriteLine(table.ToMinimalString()); <2>
+
+var rows = Enumerable.Repeat(new Something(), 10);
+
+ConsoleTable
+    .From<Something>(rows)
+    .Configure(o => o.NumberAlignment = Alignment.Right)
+    .Write(Format.Alternative); <1>
+----
+
+WARNING: When passing rows, be careful to, pass individual elements or entire arrays to the method. 
+*Adding lists may result in an error! 
+Therefore, try to add `.ToArray()` at the end of LINQ expressions.
+
+<1> Using the `Write` method will print the entire table to the console. 
+Which for many applications can be completely pointless. 
+Therefore, I recommend using 
+<2> `table.toMinimalString()` or similar.
+They return the table as a string and you can send it anywhere you want.

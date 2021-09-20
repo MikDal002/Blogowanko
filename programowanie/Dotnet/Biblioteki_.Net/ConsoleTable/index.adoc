@@ -1,7 +1,7 @@
 ---
 title: "Przydatne biblioteki .Net #01 - ConsoleTables"
 slug: "Przydatne biblioteki .Net 01 - ConsoleTables"
-date: 2021-06-13T20:38:11+02:00
+date: 2021-06-13
 draft: false
 image: ilustracja.png
 categories: 
@@ -20,7 +20,7 @@ series: Przydatne biblioteki C#
 
 [sidebar]
 ****
-Biblioteka ta ma kilka wersji, które starają się rozszerzyć jej możliwości, bądź zrobić ją całkowicie na nowo z kompletnie nową funkcjonalnością. 
+Biblioteka ta ma kilka wersji, które starają się rozszerzyć jej możliwości, bądź zrobić ją całkowicie na nowo z całkowicie przebudowaną funkcjonalnością. 
 Także, jeśli szukasz bardziej zaawansowanych możliwości kontroli nad tabelą w konsoli, może zainteresują Cię biblioteki https://github.com/douglasg14b/BetterConsoleTables[BetterConsoleTable] lub https://github.com/yakivyusin/YetAnotherConsoleTables[YetAnotherConsoleTables]. 
 Osobiście z nich nie korzystałem, piszę o tym, abyś nie musiał przekopywać całego internetu.
 ****
@@ -48,6 +48,7 @@ ConsoleTable
     .Configure(o => o.NumberAlignment = Alignment.Right)
     .Write(Format.Alternative); <1>
 ----
+
 WARNING: Przy podawaniu wierszy, zwróć uwagę, aby, przekazywać do metody poszczególne elementy lub całe tablice. 
 *Dodawanie list może zakończyć się błędem!* 
 Dlatego na końcu wyrażeń LINQ staraj się dodawać `.ToArray()`.
