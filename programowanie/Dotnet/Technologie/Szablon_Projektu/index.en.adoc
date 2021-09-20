@@ -95,7 +95,7 @@ Create a new directory named `MyProject` somewhere else and navigate to it in th
 You will see that the contents of the template have been copied into the directory, but with the names changed! 
 
 [source]
-.Wynikowa struktura plików
+.Final file structure
 ----
 Desktop/
 └── MyProject/
@@ -114,10 +114,10 @@ More modifications are possible, but they go beyond this article, and you can fi
 
 ****
 
-. The disadvantage of this solution is that it relies heavily on the template source directory. 
+. The disadvantage of this solution is that it relies on the template source directory all the time. 
 Add a new `dumb.txt` file to the `simplest` directory even without the contents, and you will see that when you call the `dotnet new ztr-core` method again, this one will also be copied. 
 
-. Now delete or rename the source directory (i.e. `simplest`) and try to create a new project again (`dotnet new ztr-core`)
+. Now delete or rename the source directory (`simplest`) and try to create a new project again (`dotnet new ztr-core`)
 +
 ****
 [source,console]
@@ -156,18 +156,18 @@ Then just copy the last line of the entry for the template you want to remove an
 
 === Nuget
 
-Nugetowy szablon ma dwie zasadnicze zalety:
+The Nuget template has two major advantages:
 
-* [*] Może być spakowany do postaci nuget'a,
-* [*] Może byc paczką szablonów, czyli zawierać w sobie wiele pojedynczych, całkowicie róznych szablonów dostarczanych w jednym pliku.
+* [*] May be packaged as a nuget,
+* [*] May be a template bundle, that is, it may contain many single, completely different templates provided in one file.
 
-. Aby utworzyć taką paczkę utwórz drzewo katalogów z plikami jak poniżej:
+. To create such a package, create a directory tree with files as below:
 +
 ****
 [source]
-.Struktura katalogów szablonów do spakowania w formie nugetowej
+.Structure of template directories to be packaged as nuget
 ----
-MojaPaczkaSzablonów/
+MyPackageTemplates/
 ├── ZtrDotnetTemplates.csproj <1>
 └── templates/
     ├── ConsoleTemplate/
@@ -180,106 +180,112 @@ MojaPaczkaSzablonów/
         └── PersonComponent.Core.csproj <3>
 
 ----
-<1> to plik projektu, który jest naszą paczką szablonów,
-<2> to pliki opisujące dane szablon. Na każdy szablon musi przypadać jeden taki plik,
-<3> pliki, które będą dołączone do naszych szablonów.
+<1> is the project file that is our template package,
+<2> are files describing a given template. There must be one such file for each template,
+<3> files that will be attached to our templates.
 
-Katalog `ConsoleTemplate` zostawiam pusty (poza plikiem konfiguracyjnym) w celu ograniczenia rozmiaru tego przykładu.
+I leave the `ConsoleTemplate` directory empty (except for the configuration file) to limit the size of this example.
 ****
 
-. Uzupełnij plik projektu `ZtrDotnetTemplates.csproj`:
+. Complete the project `ZtrDotnetTemplates.csproj` file :
 +
 ****
 [source,xml]
-.Zawartość pliku ZtrDotnetTemplates.csproj
+.Contents of the ZtrDotnetTemplates.csproj file 
 ----
 include::src/more_functional/ZtrDotnetTemplates.csproj[]
 ----
-<1> Zwróć uwagę na specyficzny typ projektu `Template`. Jest on niezbędny do poprawnego utworzenia paczki.
-<2> W tym miejscu zaczynają się standardowe pola do opisu pakietu Nuget.
-<3> `TargetFramework` w tym przypadku określa wersję .Net używaną do budowania paczki nugetowej.
-<4> Zwróć uwagę, że załączone będą wszystkie szablony znajdujące się w katalogu `templates` z wyjątkiem plików znajdujących się w katalogach `bin` i `obj`.
+<1> Note the specific project type `Template`. It is necessary for the creation of the package.
+<2> This is where the standard fields for describing a Nuget package begin.
+<3> `TargetFramework` in this case specifies the .Net version used to build the nuget package with the templates.
+<4> Note that all templates located in the `templates` directory will be included, except for the files located in the `bin` and `obj` directories.
 
 ****
 
-. Uzupełnij plik konfiguracyjny szablonu konsolowego `templates/console/.template.config/template.json`
+. Complete the console template configuration file `templates/console/.template.config/template.json`
 +
 ****
-.Zawartość pliku console/.template.config/template.json
+.Contents of file console/.template.config/template.json
 [source,json]
 ----
 include::src/more_functional/templates/console/.template.config/template.json[]
 ----
 
-Nie rózni się on zbytnio od tego, co widzieliśmy w poprzednim przykładzie, z tym że tutaj dodałem informację na temat języka wykorzystywanego w szablonie. 
+It is not different from what we saw in the previous example, except that here I added information about the language used in the template. 
 
 ****
 
-. Uzupełnij pliki `templates/core/.template.config/template.json`, `templates/core/Installer.cs` oraz `templates/core/PersonComponent.Core.csproj`
+. Complete the `templates/core/.template.config/template.json`, `templates/core/Installer.cs` and `templates/core/PersonComponent.Core.csproj` files.
 +
 ****
-Pliki te są identyczne z tymi samymi, które zostały wypisane powyzej, dlatego tylko je tu wkleję bez dalszego omówienia.
+These files are identical to the same ones listed above, so I will just paste them here without further discussion.
 
 [source,json]
-.Plik templates/core/.template.config/template.json
+.File templates/core/.template.config/template.json
 ----
 include::src/more_functional/templates/core/.template.config/template.json[]
 ----
 
 [source,xml]
-.Plik templates/core/PersonComponent.Core.csproj
+.File templates/core/PersonComponent.Core.csproj
 ----
 include::src/more_functional/templates/core/PersonComponent.Core.csproj[]
 ----
 
 [source,csharp]
-.Plik templates/core/Installer.cs
+.File templates/core/Installer.cs
 ----
 include::src/more_functional/templates/core/Installer.cs[]
 ----
 ****
 
-. Zbuduj i zainstaluj nugeta!
+. Build and install nuget!
 +
 ****
-W katalogu `MojaPaczkaSzablonów` uruchom polecenie `dotnet pack`.
-Przejdź następnie do folderu `./bin/debug/`, a tam zobaczysz plik o nazwie `ZTR.Utilities.Templates.1.0.0.nupkg`. 
-Aby zainstalować tę paczkę skorzystaj z polecenia `dotnet new -i ZTR.Utilities.Templates.1.0.0.nupkg`.
+In the `MyPackageTemplates` directory, run the `dotnet pack` command.
+Then go to the `./bin/debug/` folder, and there you will see a file named `ZTR.Utilities.Templates.1.0.0.nupkg`. 
+To install this package use the `dotnet new -i ZTR.Utilities.Templates.1.0.0.nupkg` command.
 
 [source,console]
-.Proces budowania i instalacji paczki
+.Package building and installation process
 ----
-~\MojaPaczkaSzalonów> dotnet pack
+~\MyPackageTemplates> dotnet pack
 ...
-Pomyślnie utworzono pakiet "~\MojaPaczkaSzalonów\bin\Debug\ZTR.Utilities.Templates.1.0.0.nupkg".
-~\MojaPaczkaSzalonów> cd .\bin\Debug\
-~\MojaPaczkaSzalonów> dotnet new -i .\ZTR.Utilities.Templates.1.0.0.nupkg
-Sukces: ZTR.Utilities.Templates::1.0.0 zainstalował następujące szablony:
-Nazwa szablonu                    Skrócona nazwa  Język  Tagi
---------------------------------- --------------- -----  ----------------------
-Program It Once Console template  ztr-console     [C#]   Common/Console
-Program It Once core template     ztr-core        [C#]   Common/Console/Library
+Pomyślnie utworzono pakiet "~\MyPackageTemplates\bin\Debug\ZTR.Utilities.Templates.1.0.0.nupkg".
+~\MyPackageTemplates> cd .\bin\Debug\
+~\MyPackageTemplates> dotnet new -i .\ZTR.Utilities.Templates.1.0.0.nupkg
+Success: ZTR.Utilities.Templates::1.0.0 installed the following templates:
+Template name                     Short name      Lanugage  Tags
+--------------------------------- --------------- --------  ----------------------
+Program It Once Console template  ztr-console     [C#]      Common/Console
+Program It Once core template     ztr-core        [C#]      Common/Console/Library
 ----
 
 ****
 
-. Używaj!
+. Use it!
 +
 ****
-Zainstalowanych pakietów używa się tak samo (np. poleceniem `dotnet new ztr-console`), z tym, że teraz zmiana katalogu źródłowego nie psuje nam naszego szablonu!
-Jeśli chcemy odinstalować nasz szablon, robimy to poleceniem `dotnet new -u .\ZTR.Utilities.Templates.1.0.0.nupkg`. 
+Installed packages are used the same way (e.g. with `dotnet new ztr-console` command), except that now changing the source directory doesn't break our template!
+If we want to uninstall a package, we do it with `dotnet new -u .\ZTR.Utilities.Templates.1.0.0.nupkg` command. 
 ****
 
-== Podsumowanie
+== Summary
 
-* Myślę, że własny szablon projektu może być bardzo przydatnym narzędziem, nie tylko w przypadku projektów .Netowych, ale także w innych rozwiązaniach niezwiązanych z żadnym językiem programowania. 
-* Pamiętaj, że ten artykuł to dopiero zalążek, a cały silnik szablonów ma jeszcze wiele możliwości, które możesz odkryć w linkach poniżej – znajdują się tam, między innymi, adresy repozytoriów związane z tym projektem. 
-* Zwróć uwagę, że całość będzie jeszcze przyjemniejsza, gdy własne szablony połączysz CI/CD (np. na Githubie) co da Ci dostęp do twoich ulubionych wzorców niemalże wszędzie!
+* I think that a custom project template can be a very useful tool, not only for .Net projects, but also for other solutions, not related to any programming language. 
+* Remember, that this article is just a seed, and the whole template engine has still many possibilities, which you can discover in the links below - there are, among others, repository addresses related to this project. 
+* Note that the whole thing will be even more fun if you link your own templates to CI/CD (e.g. on Github) which will give you access to your favorite patterns almost everywhere!
 
+== References 
 
-== Odnośniki 
+* Github with examples https://github.com/dotnet/dotnet-template-samples — a good place to start
+* A basic link that briefly explains everything: https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates, it's not the most readable, but on a second/third try you can understand everything,
+* A series of articles from MS. It contains the same content as above just more detailed: https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-item-template
+* Github containing the template engine repo: https://github.com/dotnet/templating — a place where you can find a lot of detailed information.
 
-* Github z przykładami https://github.com/dotnet/dotnet-template-samples - dobre miejsce do startu
-* Podstawowy link, który pokrótce wyjaśnia wszystko: https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates, nie jest on najczytelniejszy, ale przy drugim/trzecim podejściu można zrozumieć wszystko,
-* seria artykułów od MS. Zawiera tę samą treść co powyżej tylko bardziej uszczegółowioną: https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-item-template
-* Github zawierający repo silnika szablonów: https://github.com/dotnet/templating - miejsce, gdzie możesz znaleźć dużo szczegółowych informacji.
+Translated with www.DeepL.com/Translator (free version)References 
+
+* Github with examples https://github.com/dotnet/dotnet-template-samples — a good place to start
+* A basic link that briefly explains everything: https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates, it's not the most readable, but on a second/third try you can understand everything,
+* A series of articles from MS. It contains the same content as above just more detailed: https://docs.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-item-template
+* Github containing the template engine repo: https://github.com/dotnet/templating — a place where you can find a lot of detailed information.
