@@ -1,7 +1,7 @@
 ---
 title: "Using Docker to stay clean. Part 01 - Console"
 date: 2021-06-28
-draft: true
+draft: false
 image: logo_dockera.jpg
 description: In this article, I present my way of working with Docker in a way that keeps the computer clean when using new technology for learning or occasional use. My assumptions are "as little Docker as possible", that is, I focus on not letting the knowledge needed to use it overshadow the knowledge we want to possess. This is the first part of two.
 categories: 

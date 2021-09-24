@@ -3,7 +3,7 @@ title: "Wykorzystanie Docker'a w celu zachowania czystości. Część 02 - Visua
 date: 2021-07-05T20:38:11+02:00
 draft: false
 image: logo_dockera.jpg
-description: W niniejszym artykule przedstawiam mój sposób na pracę z Dockerem w taki sposób, aby zachować czystość komputera przy używaniu nowych technologii w celu nauki lub sporadycznym wykorzystaniu. Założenia, które sobie stawiam to "jak najmniej Dockera", czyli skupiam się na tym, aby wiedza potrzebna do jego wykorzystania nie przysłoniła tej wiedzy, którą chcemy posiąść. Jest to druga część artykułu na ten temat.
+description: W niniejszym artykule przedstawiam mój sposób na pracę z Dockerem w taki sposób, aby zachować czystość komputera przy używaniu nowych technologii w celu nauki lub sporadycznym wykorzystaniu. Założenia tutaj stawiane to "jak najmniej Dockera", czyli skupiam się na tym, aby wiedza potrzebna do jego wykorzystania nie przysłoniła tej wiedzy, którą chcemy posiąść. Jest to druga część artykułu na ten temat.
 categories: 
     - "Docker"
 tags:
@@ -26,7 +26,7 @@ Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_PLuginDocker.png[]
 
 Rozszerzenie Docker autorstwa firmy Microsoft dostępne pod adresem https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker pozwala nam na łatwe zarządzanie obrazami i ich uruchamianiem.
-Ma jeszcze wiele innych funkcji, z które jednak wykraczają poza zakres niniejszego artykułu.
+Ma jeszcze wiele innych funkcji, które wykraczają poza zakres niniejszego artykułu.
 
 Najważniejsze jego funkcje to:
 
@@ -67,7 +67,7 @@ Podsumowując – mamy do dyspozycji wszystkie podstawowe operacje co w konsoli 
 .Widok wtyczki Remote-Containers
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_RemoteContainers.png[]
 
-Jest to niewątpliwie najlepsza wtyczka do pracy z Dockerem, która dodatkowo w ciekawy sposób integruje się ze wtyczką powyżej, otóż: 
+Jest to niewątpliwie najlepsza wtyczka do pracy z Dockerem, która dodatkowo integruje się ze wtyczką powyżej, otóż: 
 
 .Rozszerzenie pluginu Docker przez Remote - Containers.
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_FunkcjePluginuRemoteContainers.png[]
@@ -84,7 +84,7 @@ Jest jeszcze lepsza część tego rozszerzenia, otóż:
 
 === .devcontainer
 
-Visual Studio Code może działać w środowisko skonteneryzowanym (uruchamiać projekt w Dokerze) poprzez dodanie katalogu `.devcontainer` a w nim pliku `devcontainer.json` służącego do konfiguracji samego środowiska VSC oraz `Dockerfile`, który przechowuje informacje na temat naszego obrazu, w którym będziemy pracować.
+Visual Studio Code może działać w środowisko skonteneryzowanym (uruchamiać projekt w Dokerze) poprzez dodanie katalogu `.devcontainer` a w nim pliku `devcontainer.json` służącego do konfiguracji środowiska VSC oraz `Dockerfile`, który przechowuje informacje na temat naszego obrazu, w którym będziemy pracować.
 VSC może uzupełnić strukturę plików za ciebie poprzez polecenie `((Remote-Containers)): Add Development Container Configuration Files`, także nie musisz nic zapisywać ani zapamiętywać.
 
 Struktura katalogów i treść plików wygląda następująco:

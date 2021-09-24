@@ -1,105 +1,104 @@
 ---
-title: "Wykorzystanie Docker'a w celu zachowania czystości. Część 02 - Visual Studio Code"
+title: "Using Docker to stay clean. Part 02 - Visual Studio Code"
 date: 2021-07-05T20:38:11+02:00
 draft: true
 image: logo_dockera.jpg
-description: W niniejszym artykule przedstawiam mój sposób na pracę z Dockerem w taki sposób, aby zachować czystość komputera przy używaniu nowych technologii w celu nauki lub sporadycznym wykorzystaniu. Założenia, które sobie stawiam to "jak najmniej Dockera", czyli skupiam się na tym, aby wiedza potrzebna do jego wykorzystania nie przysłoniła tej wiedzy, którą chcemy posiąść. Jest to druga część artykułu na ten temat.
+description: In this article, I present my way of working with Docker in a way that keeps the computer clean when using new technology for learning or occasional use. The assumptions made here are "as little Docker as possible", that is, I focus on not letting the knowledge needed to use it overshadow the knowledge we want to possess. This is the second part of the article on this topic.
 categories: 
     - "Docker"
 tags:
     - "docker"
     - "node.js"
 series:
-    - Docker w służbie czystości
+    - Docker for cleanliness
 ---
-= Wykorzystanie Docker'a w celu zachowania czystości. Część 02 - Visual Studio Code
+= Using Docker to stay clean. Part 02 - Visual Studio Code
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:
 :source-highlighter: pygments
-:note-caption: Uwaga
 :icons: font
 :experimental:
 
-== Po prostu Docker
+== Just Docker
 
-.Widok pluginu
+.Plugin view
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_PLuginDocker.png[]
 
-Rozszerzenie Docker autorstwa firmy Microsoft dostępne pod adresem https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker pozwala nam na łatwe zarządzanie obrazami i ich uruchamianiem.
-Ma jeszcze wiele innych funkcji, z które jednak wykraczają poza zakres niniejszego artykułu.
+The Docker extension by Microsoft available at https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker allows us to easily manage and run images.
+It has many more features that are beyond the scope of this article.
 
-Najważniejsze jego funkcje to:
+Its most important features are:
 
-.Widok menu kontekstowego dającego dostęp do użytecznych funkcji
+.A context menu view that gives access to useful functions
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_FunkcjePluginuDocker.png[]
 
-Następujące funkcje są najciekawsze w przypadku _uruchamiania nowego kontenera z obrazu_:
+The following functions are most interesting for _starting a new container from an image_:
 
 Run::
-    Jest to odpowiednik uruchamiania serwisu z poprzedniej części artykułu. 
-    Uruchamia dany kontener i pozostawia go w tle.
+    This is the equivalent of running the service from the previous part of the article. 
+    It starts the given container and leaves it in the background.
 
 Run interactive::
-    Odpowiada uruchomieniu interaktywnego obrazu. 
-    Po użyciu tej komendy całe wyjście i możliwość interakcji z obrazem jest dostępna z poziomu terminala Visual Studio Code.
+    Corresponds to running an interactive image. 
+    After using this command, all output and the ability to interact with the image is available from the Visual Studio Code terminal.
 
 Pull::
-    Pozwala nam zaktualizować obraz, jeśli pojawiła się jego nowsza wersja pod danym tagiem.
+    Allows us to update the image if a newer version has appeared under the given tag.
 
 Remove::
-    Usuwa obraz, zwalniając przestrzeń dyskową.
+    Removes the image, freeing up disk space.
 
-W przypadku operacji na uruchomionym kontenerze najciekawsze funkcje to:
+For operations on a running container, the most interesting features are:
 
 Attach Shell::
-    Podłącza terminal Visual Studio Code pozwalając nam na działania w wybranym kontenerze. 
+    Connects the Visual Studio Code terminal allowing us to act in the selected container. 
 
 Open in Browser::
-    Otwiera kontener w przeglądarce (jeśli ten udostępnił do tego port)
+    Opens the container in a browser (if the browser has provided a port for this)
 
 Stop::
-    Zatrzymuje kontener.
+    Stops the container.
 
-Podsumowując – mamy do dyspozycji wszystkie podstawowe operacje co w konsoli tylko, że w dużo przyjemniejszym środowisku.
+In summary - we have all the basic operations as in the console but in a much more pleasant environment.
 
 == Remote - Containers
 
-.Widok wtyczki Remote-Containers
+.View of Remote-Containers plugin
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_RemoteContainers.png[]
 
-Jest to niewątpliwie najlepsza wtyczka do pracy z Dockerem, która dodatkowo w ciekawy sposób integruje się ze wtyczką powyżej, otóż: 
+This is undoubtedly the best plugin to work with Docker that integrates with the plugin above, well: 
 
-.Rozszerzenie pluginu Docker przez Remote - Containers.
+.Docker plugin extension by Remote - Containers.
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_FunkcjePluginuRemoteContainers.png[]
 
 Attach Visual Studio Code::
-    Funkcja ta powoduje, że nasze Visual Studio Code zostanie otwarte ponownie w kontekście kontenera!
-    Dzięki temu zyskujemy możliwość otwierania folderów, które tam się znajdują. 
-    Daje nam to świetną integrację, gdyż bez problemu możemy kopiować dane i pracować na plikach z poziomu Visual Studio Code. 
+    This function causes our Visual Studio Code to be reopened in the context of the container!
+    This gives us the ability to open folders that are located there. 
+    This gives us great integration as we can easily copy data and work on files from within Visual Studio Code. 
 
-.Widok Visual Studio Code wewnątrz kontenera. 
+.View Visual Studio Code inside the container. 
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_QisokVSCWKontenerze.png[]
 
-Jest jeszcze lepsza część tego rozszerzenia, otóż:
+There is an even better part of this extension, that is::
 
 === .devcontainer
 
-Visual Studio Code może działać w środowisko skonteneryzowanym (uruchamiać projekt w Dokerze) poprzez dodanie katalogu `.devcontainer` a w nim pliku `devcontainer.json` służącego do konfiguracji samego środowiska VSC oraz `Dockerfile`, który przechowuje informacje na temat naszego obrazu, w którym będziemy pracować.
-VSC może uzupełnić strukturę plików za ciebie poprzez polecenie `((Remote-Containers)): Add Development Container Configuration Files`, także nie musisz nic zapisywać ani zapamiętywać.
+Visual Studio Code can run in a containerized environment (run the project in Docker) by adding a `.devcontainer` directory and in it a `devcontainer.json` file used to configure the VSC environment and a `Dockerfile` that stores information about our image in which we will be working.
+VSC can complete the file structure for you through the command `((Remote-Containers)): Add Development Container Configuration Files`, so you don't have to save or remember anything.
 
-Struktura katalogów i treść plików wygląda następująco:
+The directory structure and file contents are as follows:
 
-.Struktura katalogów dla .devcontainer
+.directory structure for .devcontainer
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_WidokKonteneraDevContainer.png[]
 
-1. Widok na strukturę katalogów,
-2. Treść pliku Dockerfile dla środowiska, w którym pisze wpisy na tego bloga,
-3. Treść devcontainer.json, który automatycznie konfiguruje to środowisko przy pierwszym starcie.
-4. Terminal oraz możliwość *otwierania portów w trakcie działania w kontenerze*!
+1. a view of the directory structure,
+2. The contents of the Dockerfile for the environment in which I write posts for this blog,
+3. the contents of devcontainer.json, which automatically configures this environment on first startup.
+4. a terminal and the ability to *open ports while running in a container*!
 
 [sidebar]
 ****
-Więcej na temat konfiguracji Visual Studio Code pod kontenery znajdziesz https://code.visualstudio.com/docs/remote/containers-tutorial[tutaj], a jeszcze więcej informacji na https://code.visualstudio.com/docs/remote/containers[oficjalnej stronie Microsoft].
+You can find more about configuring Visual Studio Code under containers at https://code.visualstudio.com/docs/remote/containers-tutorial[here], and even more information at https://code.visualstudio.com/docs/remote/containers[the official Microsoft site].
 ****
 
 === Przykład z node.js 
