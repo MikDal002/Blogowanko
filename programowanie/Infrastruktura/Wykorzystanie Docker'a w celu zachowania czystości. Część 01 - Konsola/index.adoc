@@ -1,6 +1,6 @@
 ---
 title: "Wykorzystanie Docker'a w celu zachowania czystości. Część 01 - Konsola"
-date: 2021-06-28T20:38:11+02:00
+date: 2021-06-28
 draft: false
 image: logo_dockera.jpg
 description: W niniejszym artykule przedstawiam mój sposób na pracę z Dockerem w taki sposób, aby zachować czystość komputera przy używaniu nowych technologii w celu nauki lub sporadycznym wykorzystaniu. Założenia, które sobie stawiam to "jak najmniej Dockera", czyli skupiam się na tym, aby wiedza potrzebna do jego wykorzystania nie przysłoniła tej wiedzy, którą chcemy posiąść. Jest to pierwsza część z dwóch.
@@ -21,7 +21,7 @@ Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :note-caption: Uwaga
 
 == Czym jest Docker (dla tych, którzy nie wiedzą)
-Docker to otwartoźródłowe darmowe oprogramowanie służące do pracy w kontenerach, a kontenery można porównać do bardzo lekkich maszyn wirtualnych.
+Docker to otwartoźródłowe darmowe oprogramowanie służące do pracy w kontenerach, a te można porównać do bardzo lekkich maszyn wirtualnych.
 Ich zaletą w porównaniu do maszyn wirtualnych jest dużo większa lekkość, szybkość działania i czas potrzebny na uruchomienie. Wady natomiast to: mniejsza kontrola nad wirtualizowanym środowiskiem i mniejsze bezpieczeństwo (złośliwy kod ma większe szanse na ucieczkę z kontenera). Więcej na ten temat możesz poczytać, na przykład, tutaj: https://sii.pl/blog/docker-dla-programistow-co-to-jest/[Docker dla programistów, co to jest?].
 
 == Skąd wziąć Dockera?
@@ -34,12 +34,12 @@ Na początek chciałbym przedstawić Ci wersję chmurową.
 Znajdziesz ją pod adresem https://labs.play-with-docker.com/[Play with Docker], gdzie trzeba się zalogować. 
 Jeśli nie masz jeszcze konta, to jego założenie jest darmowe, tak samo, jak korzystanie z Docker'a. 
 
-NOTE: Według mnie wersja ta jest wciąż niedojrzała i w ramach moich testów nie nadawał się do żadnej pracy. Przedstawiam ją tutaj ku potomności, bo mam nadzieję, że w końcu rozwiną tę usługę.
+NOTE: Według mnie wersja ta jest wciąż niedojrzała i w ramach moich testów nie nadawał się do żadnej pracy. Przedstawiam ją tutaj ku potomności, bo mam nadzieję, że rozwiną tę usługę.
 
-.Widok na stronę Play with Docker z jednym kontenerem.
+.Widok na stronę Play with Docker z jednym kontenerem
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_PlayWithDocker.png[]
 
-Po lewej stronie możemy sobie tworzyć nowe, kolejne okna z Dockerem, natomiast u góry ekranu widzimy takie dane jak: • wewnętrzny adres IP (do komunikacji między kontenerami), • przycisk do otwierania portu (aby dostać się do poszczególnych usług), oraz adres SSH, który umożliwia nam wgranie plików lub połączenie się z Visual Studio Code.
+Po lewej stronie możemy tworzyć kolejne okna z Dockerem, natomiast u góry ekranu widzimy takie dane jak: • wewnętrzny adres IP (do komunikacji między kontenerami), • przycisk do otwierania portu (aby dostać się do poszczególnych usług), oraz adres SSH, który umożliwia nam wgranie plików lub połączenie się z Visual Studio Code.
 
 === Lokalnie
 
@@ -71,7 +71,7 @@ Mowa tu, na przykład o https://hub.docker.com/$$_$$/mongo/[MongoDb] czy https:/
 .Co znaczą poszczególne elementy?
 run::
     Powoduje wystartowanie kontenera.
-    Jeśli nie ma obrazu kontenera na dysku, to zostanie on wpierw ściągnięty z publicznego repozytorium.
+    Jeśli nie ma obrazu kontenera na dysku, to zostanie on wpierw ściągnięty z repozytorium.
 
 --name moje_mongo::
     Ustawia przyjazną nazwę _moje_mongo_, która później ułatwia orientowanie się w kontenerach obecnych na naszym komputerze.
@@ -96,9 +96,9 @@ Na końcu tego procesu ujrzysz długi ciąg znaków <1>:
 e7c364cf16898d636151d4b1be15caa5b726069c7fde2fa2cf241c4748ebd723 <1>
 ----
 
-Jest on niczym innym jak całkowicie unikalnym identyfikatorem kontenera, który właśnie utworzyłeś. 
+Jest on unikalnym identyfikatorem kontenera, który właśnie utworzyłeś. 
 Wpisując w konsoli `docker ps` możesz podejrzeć kontenery, które działają na twoim komputerze. 
-Zalecam jednak wykorzystać do tego program *Docker Dashboard*, który wyświetli Ci to w przyjaznej formie oraz pozwoli na wykonanie kilku prostych operacji za pomocą aplikacji okienkowej.
+Zalecam jednak wykorzystać do tego program *Docker Dashboard*, który wyświetli to w przyjaznej formie oraz pozwoli na wykonanie kilku prostych operacji za pomocą aplikacji okienkowej.
 
 .Widok aplikacji Docker Desktop po uruchomieniu kontenera mongo i kilku innych :)
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_DockerDesktop.png[]
@@ -113,7 +113,7 @@ Teraz w przeglądarce wystarczy wpisać https://localhost:2368 i powinniśmy zob
 
 === Uruchamianie obrazów interaktywnych
 
-W ten sposób można działać, na przykład, ucząc się nowego języka programowania.
+W ten sposób można działać, na przykład, ucząc się nowego języka programowania:
 
 [source,console]
 ----
@@ -145,7 +145,7 @@ W tym momencie możemy utworzyć plik `app.js` i wkleić do niego kod ze strony 
 ----
 const http = require('http');
 
-const hostname = '127.0.0.1'; <1>
+const hostname = '0.0.0.0'; <1>
 const port = 3000;
 
 const server = http.createServer((req, res) => {
@@ -159,7 +159,7 @@ server.listen(port, /*hostname,*/ () => { <2>
 });
 ----
 
-<1> Zakomentowałem `hostname` 
+<1> Zmieniłem `hostname` 
 <2> i wyłączyłem jego użycie.
 Jest to niezbędne, ponieważ adres `127.0.0.1` zakłada łączenie się z tej samej maszyny.
 My jednak uruchamiamy nasz program w kontenerze, który jest widoczny jako osobna maszyna, dlatego nie możemy ograniczać się tylko do localhost. 

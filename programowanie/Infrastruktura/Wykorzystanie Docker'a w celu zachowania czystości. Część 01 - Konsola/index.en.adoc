@@ -1,9 +1,9 @@
 ---
-title: "Wykorzystanie Docker'a w celu zachowania czystości. Część 01 - Konsola"
-date: 2021-06-28T20:38:11+02:00
+title: "Using Docker to stay clean. Part 01 - Console"
+date: 2021-06-28
 draft: true
 image: logo_dockera.jpg
-description: W niniejszym artykule przedstawiam mój sposób na pracę z Dockerem w taki sposób, aby zachować czystość komputera przy używaniu nowych technologii w celu nauki lub sporadycznym wykorzystaniu. Założenia, które sobie stawiam to "jak najmniej Dockera", czyli skupiam się na tym, aby wiedza potrzebna do jego wykorzystania nie przysłoniła tej wiedzy, którą chcemy posiąść. Jest to pierwsza część z dwóch.
+description: In this article, I present my way of working with Docker in a way that keeps the computer clean when using new technology for learning or occasional use. My assumptions are "as little Docker as possible", that is, I focus on not letting the knowledge needed to use it overshadow the knowledge we want to possess. This is the first part of two.
 categories: 
     - "Docker"
 tags:
@@ -12,134 +12,133 @@ tags:
     - ghost
     - mongodb
 series:
-    - Docker w służbie czystości
+    - Docker for cleanliness
 ---
-= Wykorzystanie Docker'a w celu zachowania czystości. Część 01 - Konsola
+= Using Docker to stay clean. Part 01 - Console
 Mikołaj Dalecki <mikolaj.dalecki@outlook.com>
 :toc:
 :source-highlighter: pygments
-:note-caption: Uwaga
 
-== Czym jest Docker (dla tych, którzy nie wiedzą)
-Docker to otwartoźródłowe darmowe oprogramowanie służące do pracy w kontenerach, a kontenery można porównać do bardzo lekkich maszyn wirtualnych.
-Ich zaletą w porównaniu do maszyn wirtualnych jest dużo większa lekkość, szybkość działania i czas potrzebny na uruchomienie. Wady natomiast to: mniejsza kontrola nad wirtualizowanym środowiskiem i mniejsze bezpieczeństwo (złośliwy kod ma większe szanse na ucieczkę z kontenera). Więcej na ten temat możesz poczytać, na przykład, tutaj: https://sii.pl/blog/docker-dla-programistow-co-to-jest/[Docker dla programistów, co to jest?].
+== What is Docker (for those who don't know)
+Docker is open source freeware used to run in containers, and these can be compared to very lightweight virtual machines.
+Their advantages over VMs are much greater lightness, speed, and startup time. The disadvantages are: less control over the virtualized environment and less security (malicious code has more chances to escape from the container). You can read more about this topic, for example, here: https://docs.docker.com/get-started/overview/[Docker overwiew].
 
-== Skąd wziąć Dockera?
-Dockerem można pobawić się zarówno w chmurze, jak i lokalnie.
-Jednak, gdy już postanowisz go używać do nauki/pracy stanowczo lepiej mieć go na komputerze.
+== Where to get Docker from?
+You can play with Docker both in the cloud and locally.
+However, once you decide to use it for learning/working it is definitely better to have it on your computer.
 
-=== W chmurze
+=== In the cloud
 
-Na początek chciałbym przedstawić Ci wersję chmurową.
-Znajdziesz ją pod adresem https://labs.play-with-docker.com/[Play with Docker], gdzie trzeba się zalogować. 
-Jeśli nie masz jeszcze konta, to jego założenie jest darmowe, tak samo, jak korzystanie z Docker'a. 
+Let me start by introducing you to the cloud version.
+You can find it at https://labs.play-with-docker.com/[Play with Docker], where you need to log in. 
+If you don't already have an account, it's free to create one, just like using Docker. 
 
-NOTE: Według mnie wersja ta jest wciąż niedojrzała i w ramach moich testów nie nadawał się do żadnej pracy. Przedstawiam ją tutaj ku potomności, bo mam nadzieję, że w końcu rozwiną tę usługę.
+NOTE: In my opinion, this version is still immature and within my testing it was not suitable for any work. I present it here for posterity, as I hope they develop this service.
 
-.Widok na stronę Play with Docker z jednym kontenerem.
+.A view of the Play with Docker page with one container
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_PlayWithDocker.png[]
 
-Po lewej stronie możemy sobie tworzyć nowe, kolejne okna z Dockerem, natomiast u góry ekranu widzimy takie dane jak: • wewnętrzny adres IP (do komunikacji między kontenerami), • przycisk do otwierania portu (aby dostać się do poszczególnych usług), oraz adres SSH, który umożliwia nam wgranie plików lub połączenie się z Visual Studio Code.
+On the left side we can create new windows with Docker, while at the top of the screen we see such data as: - internal IP address (for communication between containers), - a button to open a port (to get access to particular services), and SSH address, which allows us to upload files or connect to Visual Studio Code.
 
-=== Lokalnie
+=== Locally
 
-Dockera możemy zainstalować lokalnie, co sam uczyniłem.
-Pobierzesz go z tej strony: https://docs.docker.com/docker-for-windows/install/[Docker install].
-Nie będę tutaj przedstawiał całego procesu przechodzenia przez kreator – nie ma tam nic nadzwyczajnego, czego nie można zmienić później.
-Na koniec procesu instalacji i po ponownym uruchomieniu warto sprawdzić, czy Docker działa za pomocą polecenia:
+Docker can be installed locally, which I did myself.
+You can download it from this page: https://docs.docker.com/docker-for-windows/install/[Docker install].
+I won't cover the whole process of going through the wizard here - there's nothing extraordinary there that you can't change later.
+At the end of the installation process and after rebooting, it's a good idea to check that Docker is running using the command:
 
 [source,console]
 ----
 > docker help
 ----
 
-== Docker w konsoli
+== Docker in the console
 
-Na początek odrobina formalności.
-Czyli jak to wszystko uruchomić w konsoli – najbardziej podstawowym sposobem interakcji z Dockerem. 
-Całe szczęście to będą tylko dwa polecenia.
+First, a bit of formality.
+That is, how to run everything in the console - the most basic way to interact with Docker. 
+Fortunately, there are only two commands.
 
-=== Uruchamianie serwisów
-Czyli, jak uruchomić oprogramowanie, które w rzeczywistości jest usługą/serwisem działającym w tle.
-Mowa tu, na przykład o https://hub.docker.com/$$_$$/mongo/[MongoDb] czy https://hub.docker.com/$$_$$/microsoft-mssql-server/[Microsoft SQL Server].
+=== Starting services
+That is, how to start the software, which is actually a service running in the background.
+We are talking, for example, about https://hub.docker.com/$$_$$/mongo/[MongoDb] or https://hub.docker.com/$$_$$/microsoft-mssql-server/[Microsoft SQL Server].
 
 [source,console]
 ----
-> docker run --name moje_mongo -p 27017:27017 -d mongo 
+> docker run --name my_mongo -p 27017:27017 -d mongo 
 ----
 
-.Co znaczą poszczególne elementy?
+.What do the elements mean?
 run::
-    Powoduje wystartowanie kontenera.
-    Jeśli nie ma obrazu kontenera na dysku, to zostanie on wpierw ściągnięty z publicznego repozytorium.
+    Causes the container to be launched.
+    If there is no container image on disk, it will be downloaded from the repository first.
 
---name moje_mongo::
-    Ustawia przyjazną nazwę _moje_mongo_, która później ułatwia orientowanie się w kontenerach obecnych na naszym komputerze.
+--name my_mongo::
+    Sets a friendly name _my_mongo_, which later makes it easier to find out about the containers present on our computer.
 
 -p 27017:27017::
-    Określa jaki port ma zostać udostępniony – trochę tak, jakbyśmy otwierali port na firewallu. 
-    Dla uproszczenia polecam ustawianie na początku takich samych wartości w obu stronach znaku ':', co ułatwi rozpoczęcie pracy z Dockerem.
+    Specifies which port to share - a bit like opening a port on a firewall. 
+    For simplicity's sake, I recommend setting the same values on either side of the ':' at the beginning, which will make it easier to get started with Docker.
 
 -d::
-    Mówi o tym, że uruchomiamy w trybie „_odłączonym_” (z ang. _detatched_), co pasuje do natury serwisów, które działają w tle.
+    Tells you that you are running in _detached_ mode, which fits the nature of services that run in the background.
 
 mongo::
-    Określa jakiego obrazu chcemy użyć. 
-    W tym przypadku wybieramy MongoDB. 
-    Wszystkie dostępne publicznie obrazy możemy przeglądać tutaj: https://hub.docker.com/search?q=&type=image. 
+    Specifies which image we want to use. 
+    In this case, we choose MongoDB. 
+    We can browse all publicly available images here: https://hub.docker.com/search?q=&type=image. 
 
-Uruchamiając powyższą komendę, możesz zobaczyć informację o ściąganiu kolejnych warstw (z ang. _layers_).
-Na końcu tego procesu ujrzysz długi ciąg znaków <1>:
+By running the above command, you can see information about downloading more layers.
+At the end of this process you will see a long string <1>:
 [source,console]
 ----
-> docker run --name moje_mongo -p 27017:27017 -d mongo 
+> docker run --name my_mongo -p 27017:27017 -d mongo 
 e7c364cf16898d636151d4b1be15caa5b726069c7fde2fa2cf241c4748ebd723 <1>
 ----
 
-Jest on niczym innym jak całkowicie unikalnym identyfikatorem kontenera, który właśnie utworzyłeś. 
-Wpisując w konsoli `docker ps` możesz podejrzeć kontenery, które działają na twoim komputerze. 
-Zalecam jednak wykorzystać do tego program *Docker Dashboard*, który wyświetli Ci to w przyjaznej formie oraz pozwoli na wykonanie kilku prostych operacji za pomocą aplikacji okienkowej.
+It is the unique identifier of the container you just created. 
+By typing `docker ps` in the console, you can view the containers that are running on your machine. 
+However, I recommend using the *Docker Dashboard* for this, which will display this in a friendly form and allow you to perform some simple operations using a windowed application.
 
-.Widok aplikacji Docker Desktop po uruchomieniu kontenera mongo i kilku innych :)
+.View of the Docker Desktop application after running the mongo container and a few others :)
 image::WykorzystanieDockeraWCeluZachowaniaCzystyosci_DockerDesktop.png[]
 
-I tak dla przykładu, gdybyśmy chcieli pobawić się platformą https://hub.docker.com/_/ghost[ghost] (ciekawa usługa do obsługi bloga) wpisujemy:
+For example, if we wanted to play with https://hub.docker.com/_/ghost[ghost] (an interesting service for blogs) we would type
 [source,console]
 ----
 > docker run -d --name some-ghost -p 2368:2368 ghost
 ----
 
-Teraz w przeglądarce wystarczy wpisać https://localhost:2368 i powinniśmy zobaczyć naszą nową stronę internetową.
+Now just type https://localhost:2368 in your browser and we should see our new website.
 
-=== Uruchamianie obrazów interaktywnych
+=== Launching interactive images
 
-W ten sposób można działać, na przykład, ucząc się nowego języka programowania.
+You can work this way, for example, when learning a new programming language:
 
 [source,console]
 ----
 > docker run --name some-nodejs -p 3000:3000 -v "$(PWD):/mylocaldata" -it node bash
 ----
 
-Wartości te zostały przedstawione powyżej, pokrótce je przypomnijmy:
+These values are shown above, let us briefly recall them:
 
 run::
-    Uruchamia kontener, 
+    Runs the container, 
 --name some-nodejs::
-    Nadaje mu nazwę some-nodejs
+    Gives it the name some-nodejs
 -p 3000:3000:::
-    -Otwiera port 3000 – przyda się do uruchomienia przykładowego kodu z dokumentacji (z rozdziału _Getting started_, czyli z ang. _Rozpoczynanie pracy_).
+    -opens port 3000 - useful for running the example code from the documentation (from the _Getting started_ section).
 
-Nowością są:
+The new ones are:
 
 -v "$(PWD):/mylocaldata"::
-    Powoduje, że katalog w którym, uruchomisz to polecenie, stanie się dostępny dla kontenera i będzie możliwa łatwa wymiana plików pomiędzy twoim komputerem a Dockerem.
-    Udostępniony katalog będzie widoczny w kontenerze pod ścieżką `/mylocaldata`
+    Causes the directory in which, you run this command to become available to the container and allow easy file sharing between your computer and the Docker.
+    The shared directory will be visible in the container under the path `/mylocaldata`.
 -it node bash::
-    Mówi nam, aby w trybie interaktywnym uruchomić obraz `node` z poleceniem `bash` (Node domyślnie uruchamia konsolowy program `node`).
+    Tells us to run the `node` image in interactive mode with the `bash` command (Node runs the `node` console program by default).
 
-Po uruchomieniu powyższego polecenia konsola przeniesie nas do `bash` uruchomionego na platformie gdzie zainstalowany jest `node.js`. 
+After running the above command, the console will take us to `bash` running on the platform where `node.js` is installed. 
 
-W tym momencie możemy utworzyć plik `app.js` i wkleić do niego kod ze strony głównej Node. Niestety, aby uruchomić go bez problemu, należy dokonać dwóch modyfikacji
+At this point, we can create an `app.js` file and paste the code from the Node homepage into it. Unfortunately, in order to run it without a problem, two modifications need to be made
 
 [source,javascript]
 ----
@@ -159,12 +158,12 @@ server.listen(port, /*hostname,*/ () => { <2>
 });
 ----
 
-<1> Zakomentowałem `hostname` 
-<2> i wyłączyłem jego użycie.
-Jest to niezbędne, ponieważ adres `127.0.0.1` zakłada łączenie się z tej samej maszyny.
-My jednak uruchamiamy nasz program w kontenerze, który jest widoczny jako osobna maszyna, dlatego nie możemy ograniczać się tylko do localhost. 
-Pamiętaj, że powyższy plik możesz śmiało utworzyć pod Windowsem. 
-Potem przechodzimy do naszego kontenera i wykonujemy polecenia:
+<1> I changed the `hostname` 
+<2> and disabled its use.
+This is necessary because the `127.0.0.1` address assumes connecting from the same machine.
+However, we are running our program in a container that is visible as a separate machine, so we cannot limit ourselves to localhost. 
+Remember that you can easily create the above file under Windows. 
+Then we go to our container and execute the commands:
 
 [source,console]
 ----
@@ -172,8 +171,8 @@ Potem przechodzimy do naszego kontenera i wykonujemy polecenia:
 > node app.js
 ----
 
-Teraz przechodzimy w naszej przeglądarce pod adres https://localhost:3000 i widzimy naszą stronę. 
-Modyfikacji w pliku możemy śmiało dokonywać wprost spod Windows, używając ulubionego edytora.
+Now go to https://localhost:3000 in your browser and you can see our website. 
+You can modify the file directly from Windows using your favorite editor.
 
-Co, jeśli potrzebujemy otworzyć inny port? Niestety w tym przypadku najprościej jest usunąć kontener i postawić go od nowa. 
-Jednak jest proste rozwiązanie tego problemu – można to zrobić za pomocą Visual Studio Code, co zostanie przedstawione w następnej części.
+What if we need to open another port? Unfortunately in this case the easiest way is to delete the container and create it from scratch. 
+However, there is a simple solution to this problem - you can do it using Visual Studio Code, which will be presented in the next part.
