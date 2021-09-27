@@ -1,62 +1,62 @@
 ---
-title: "Event Storming: Pierwsze Starcie z big picture i process level"
+title: "Event Storming: First Clash with Big Picture and Process Level"
 date: 2021-07-23
 draft: true
 image: cover-image.jpg
-description: "W niniejszym artykule przedstawiam wstęp do Event Stormingu wystarczający do przeprowadzania małych warsztatów wewnętrznych.
-W końcu chcemy pisać kod tylko raz, więc najlepiej robić to od razu dobrze :)."
+description: "In this article I present an introduction to Event Storming sufficient for small internal workshops.
+After all, we only want to write code once, so it's best to do it right from the start :)."
 categories:
     - Event Storming
 tags:
     - Event Storming
-    - Karteczki samoprzylepne
-    - Warsztaty
+    - Sticky Notes
+    - Workshop
     - "Event Storming: Big Picture"
     - "Event Storming: Process Level"
 ---
 :toc:
-== Wstęp
+== Introduction
 
-[quote, Alexey Zimarew, Domain-Driven Design dla .NET Core (DDDNetCore)]
-Podstawowa koncepcja techniki EventStorming polega na zapewnieniu prostej notacji modelującej, używanej do wizualizacji zachowań systemu w sposób zrozumiały dla każdego.
+[quote, Alexey Zimarew, Domain-Driven Design dla .NET Core (DDDNetCore) – own translation]
+The basic concept of the EventStorming technique is to provide a simple modeling notation used to visualize system behavior in a way that anyone can understand.
 
-[quote, Tomasz Stolarczyk, NAJobszerniejsze wprowadzenie do Event Stormingu. Z przykładem! [DevStyleStolarczyk]]
-Jeśli chcemy pisać dobry kod, musimy rozumieć proces i model biznesowy, a tego nie dowiemy się lepiej od nikogo innego jak od biznesu i ekspertów domenowych.
+[quote, Tomasz Stolarczyk, NAJobszerniejsze wprowadzenie do Event Stormingu. Z przykładem! [DevStyleStolarczyk] – own translation]
+If we want to write good code, we need to understand the process and the business model, and we won't learn that better from anyone but business and domain experts.
 
 indexterm:[Event Storming]
-Metodę Event Stormingu opracował w 2013 roku Alberto Brandolini, polega ona na zebraniu faktów (zwanych także _zdarzeniami dziedzinowymi_), które się wydarzyły i są *nieodwracalne* w rozumieniu per se.
+The Event Storming method was developed in 2013 by Alberto Brandolini, it involves collecting facts (also called _domain events_) that have happened and are *unreversible* in a per se sense.
 
-Warsztaty w postaci Event Stormingu służą do wymiany wiedzy między uczestnikami, dlatego ważne jest, aby zaprosić ludzi z różnych kręgów: zarówno programistów, jak i ekspertów dziedzinowych. 
-W konsekwencji powodują one otwarcie silosów wiedzowych, wymiany doświadczeń pomiędzy nimi, co prowadzi dalej do zidentyfikowania możliwych problemów i usprawnień <<DDDNetCore>><<DevStyleStolarczyk>>.
-W dalszej perspektywie Event Storming pozwala na zamodelowanie architektury aplikacji, która zostanie przeniesiona do kodu – ta część nazywa się Event Storming: Desing Level i nie będzie tutaj omawiana. 
+Workshops in the form of Event Storming serve to exchange knowledge between participants, so it is important to invite people from different circles: both developers and domain experts. 
+Consequently, they cause the opening of knowledge silos, the exchange of experiences between them, which further leads to the identification of possible problems and improvements <<DDDNetCore>><DevStyleStolarczyk>>.
+In a further perspective, Event Storming allows for the modeling of the application architecture that will be transferred to the code - this part is called Event Storming: Desing Level and will not be discussed here. 
 
-=== Jak wygląda główna część warsztatów – po krótce
+=== How the main part of the workshop looks like - in a nutshell
 
 indexterm:[Event Storming, Chaotic Exploration]
-Na początku uczestnicy umieszczają *pomarańczowe karteczki* ze zdarzeniami domenowymi na ścianie.
-Zależy nam tutaj, aby tej wiedzy pojawiło się jak najwięcej, dlatego nie przejmujemy się duplikacją lub chronologią. 
-Aczkolwiek nie naciskajmy, aby pojawiły się tutaj koniecznie wszystkie możliwe zdarzenia – będą one dodawane również sukcesywnie w trakcie kolejnych etapów.
-Każdy z uczestników w tym momencie będzie najpewniej zajmował się fragmentem, który zna najlepiej. 
-Kiedy dojdzie do konfliktów związanych z tym, że nie wiadomo jak jakiś podsystem ma działać, zaznaczamy to karteczką zwaną _hotspotem_ (z ang. _hot spot_ – gorące miejsce) lub karteczką _system zewnętrzny_ jeśli dotyczy to zewnętrznej integracji. 
-Ważne jest to, abyśmy skupili się na *zdarzeniach, które dotyczą naszego systemu*, nie na tych, które dzieją się w świecie rzeczywistym lub w systemie towarzyszącym – choć i te warto umieścić na tablicy, aby uzyskać lepszy kontekst. 
-Tę część nazywamy *chaotyczną eksploracją* <<DevStyleStolarczyk>>. 
-Czasem można ją potraktować jako właściwą rozgrzewkę przed następnymi etapami mającą na celu zapoznanie się uczestników z ze sobą nawzajem <<kolinskaEventStormingGuide>>.
+At the beginning, participants place *orange cards* with domain events on the wall.
+We want as much knowledge as possible to appear here, so we do not care about duplication or chronology. 
+However, let's not insist that all possible events appear here at this moment- they will also be added gradually during the next stages.
+Each participant at this point will most likely be dealing with the part they know best. 
+When there are conflicts about how a subsystem should work, we mark it with a card called _hot spot_, or with _external system_ if it involves external integration. 
+It's important that we focus on *events that involve our system*, not on those that happen in the real world or in a companion system - although it's useful to put those on the board too to get more context. 
+We call this part *chaotic exploration* <<DevStyleStolarczyk>>. 
+Sometimes it can be treated as a proper warm-up before the next stages aimed at getting participants familiar with each other <<KolinskaEventStormingGuide>>.
 
-Następnie na tablicy wprowadzamy oś czasu: układamy karteczki zgodnie z chronologią i wstępnie grupujemy w podsystemy. 
-Przy okazji można usunąć duplikaty i ujednolicić język niektórych karteczek. 
+Next, we introduce a timeline on the board: we arrange the cards according to chronology and pre-group them into subsystems. 
+By the way, you can remove duplicates and standardize the language of some cards. 
 
 indexterm:[Event Storming, Big Picture]
 indexterm:[Event Storming, Process Level]
-Te dwa elementy dają nam część zwaną *Big picture*. Po czym przechodzimy do *Process Level*.
-W tym momencie będziemy wchodzić w szczegóły związane z każdym ze zdarzeń poprzez dodanie karteczek z:
+These two items give us the part called *Big picture*. After that, we move on to the *Process Level*.
+At this point, we will go into the details associated with each event by adding cards with:
 
-* aktorami – osobami i systemami wywołującymi lub odbierającymi dane zdarzenie, 
-* systemami – identyfikując zakresy odpowiedzialności, 
-* reakcjami naszego systemu na poszczególne zdarzenia domenowe,
-* widokami – na podstawie których użytkownik podejmuje decyzje. 
+* actors - the people and systems causing or receiving an event, 
+* systems - identifying areas of responsibility, 
+* reactions of our system to particular domain events,
+* views - based on which the user makes decisions. 
 
-Dopiero mając tak usystematyzowany system zdarzeń, przechodzimy do szczegółowego wyszukiwania możliwości i problemów, które również oznaczamy jako gorące miejsca. 
-Na koniec wybieramy zagadnienie, którym będziemy chcieli się zająć – po krótkiej przerwie lub na osobnym spotkaniu <<DevStyleStolarczyk>>. 
+Only when we have such a structured system of events do we move on to a detailed search for opportunities and problems, which we also mark as hot spots. 
+Finally, we choose the issue we want to address - after a short break or at a separate meeting <<DevStyleStolarczyk>>. 
 
 NOTE: Jeżeli zdecydowałeś się zamodelować cały system dojście do tego momentu może zająć Ci nawet kilka dni, dlatego warto rozważyć, czy aby część Process Level nie przeprowadzać etapami, nad kolejnymi elementami systemu.
 
