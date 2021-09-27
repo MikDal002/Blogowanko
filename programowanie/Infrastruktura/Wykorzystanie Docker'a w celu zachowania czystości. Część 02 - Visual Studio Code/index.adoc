@@ -126,10 +126,11 @@ Możesz to również zrobić za pomocą polecenia:
 
 Utwórz przykładowy Devcontainer::
 Wewnątrz Visual Studio Code naciśnij kbd:[F1] i wpisz `Remote-Container: Reopen in container` - polecenie to otworzy menu wyboru przykładowego kontenera, z którego wybierz `Node.js`, wersja dowolna (ja wybrałem 16).
-Teraz trzeba chwilę poczekać na pobranie obrazu i jego uruchomienie.
-W międzyczasie możesz zobaczyć, że w naszym katalogu `D:/mojnodejsproject` pojawił się katalog `
-* .devcontainer` a w nim dwa pliki (o których była mowa wyżej): `devcontainer.json`, który mówi nam o konfiguracji kontenera, która zostanie przeprowadzona przez VSC.
-* Dockerfile, który jest klasycznym plikiem Dockera, o którym więcej w oficjalnej dokumentacji: https://docs.docker.com/engine/reference/builder/.
+Pobranie obrazu i jego uruchomienie trochę potrwa.
+W międzyczasie możesz zobaczyć, że w naszym katalogu `D:/mojnodejsproject` pojawił się katalog
+* `.devcontainer` a w nim dwa pliki (o których była mowa wyżej): 
+** `devcontainer.json`, który mówi nam o konfiguracji kontenera, która zostanie przeprowadzona przez VSC.
+** Dockerfile, który jest klasycznym plikiem Dockera, o którym więcej w oficjalnej dokumentacji: https://docs.docker.com/engine/reference/builder/.
 
 W katalogu `D:/mojnodejsproject` utwórz plik `app.js`::
 Możesz to również zrobić z poziomu Visual Studio Code. 
