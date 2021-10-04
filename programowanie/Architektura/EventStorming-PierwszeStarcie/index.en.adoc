@@ -58,162 +58,164 @@ At this point, we will go into the details associated with each event by adding 
 Only when we have such a structured system of events do we move on to a detailed search for opportunities and problems, which we also mark as hot spots. 
 Finally, we choose the issue we want to address - after a short break or at a separate meeting <<DevStyleStolarczyk>>. 
 
-NOTE: Jeżeli zdecydowałeś się zamodelować cały system dojście do tego momentu może zająć Ci nawet kilka dni, dlatego warto rozważyć, czy aby część Process Level nie przeprowadzać etapami, nad kolejnymi elementami systemu.
+NOTE: If you have decided to model the whole system, it may take you a few days to get to this point, so you should consider whether to run the Process Level part in stages, over different elements of the system.
 
-Na koniec przechodzimy do etapu *Desing Level* na którym tworzymy model, który można przenieść bezpośrednio do kodu.
+Finally, we move to the *Desing Level* step, where we create a model that can be transferred directly into the code.
 
-NOTE: Ze względu na objętość tego artykułu oraz wiedzę z zakresu DDD potrzebną do pełnego wykorzystania tego etapu warsztatów pominąłem tę część warsztatów. 
-Nie mniej, element *Big picture* można z powodzeniem wykorzystać do zamodelowania już istniejącego systemu w celu jego diagnozy i wymiany wiedzy. 
+NOTE: Due to the size of this article, I skipped this part of the workshop. 
+No less, the *Big picture* element can be successfully used to model an already existing system for diagnosis and knowledge sharing. 
 
-=== Jak może wyglądać rezultat warsztatów
+=== What the outcome of the workshop might look like
 
-W tej sekcji pokażę mocno uproszczony i wymyślony przykład w celu zachowania pewnej spójności. 
-Ilustrację bardziej rozbudowanej sesji Event Stormingu planuję pokazać w przyszłości w osobnej serii artykułów.
+In this section I will show a highly simplified and contrived example for the sake of some consistency. 
+I plan to show an illustration of a more complex Event Storming session in a separate series of articles in the future.
 
-.Przykładowy element systemu po chaotycznej eksploracji
+.Example of a system element after chaotic exploration
 image:chaotic-exploration-example.svg[]
 
-Jak widać na początku napisaliśmy możliwie dużo zdarzeń. 
-Pojawiły się przy tym dwie wątpliwości oraz uściśliliśmy słownictwo, które mogło być problematyczne w trakcie warsztatów. 
-Jedyny system, który nam się pojawił to _Facebook_ jako dostawca logowania – został tutaj umieszczony, ponieważ jest systemem zewnętrznym, od którego zależy nasz przepływ.
+As you can see, we wrote as many events as possible at the beginning. 
+In doing so, we raised two concerns and clarified vocabulary that may have been problematic during the workshop. 
+The only system that came up for us was _Facebook_ as a login provider - it was put here because it is an external system that our flow depends on.
 
-Następnie postępujemy zgodnie z tym, co zostało napisane wcześniej: dodajemy pozostałe karteczki.
-Dobrze jest dadać je wszystkie od razu, ponieważ dodawanie ich pojedynczo może stanowczo przedłużyć warsztat i doprowadzić do lekkiej irytacji uczesników ciągłym przekładaniem karteczek.
+Then, as written before, add the remaining cards.
+It's a good idea to add them all at once, because adding them one by one can definitely prolong the workshop and lead to a slight annoyance by participants constantly rearranging the cards.
 
-.Przykładowy element systemu po uporządkowaniu (obrazek należy otworzyć w osobnym oknie aby zobaczyć coś więcej)
+.An example of a system component after cleaning (the image must be opened in a separate window to see the details)
 image:process-level-example.svg[]
 
-Rozbudowaliśmy logowanie o rejestrację oraz przypadek, w którym próbował zalogować się użytkownik, który jeszcze nie jest w naszej bazie. 
-Każdą swoją akcję mógł podjąć na podstawie pewnego widoku, z którego wykonywał polecenie na pewnym systemie, co generowało zdarzenia.
-Każde z nich może wygenerować kolejny widok lub politykę/reakcję, gdzie ta znów może kontynuować ciąg przyczynowo skutkowy. 
+We extended logging to include registration and the case where a user who is not yet in our database tried to log in. 
+He could take each of his actions based on the view from which he executed the command on some system, which generates events.
+Each of these could generate another view or policy/reaction, where this again could continue the cause and effect sequence. 
 
-Opis każdego typu karteczki znajduje się w dalszej części artykułu.
+A description of each type of card is provided below.
 
 [#notacja-w-chaotycznej-eksploracji]
-== Notacja w chaotycznej eksploracji
-Z racji, że Event Storming ma za zadanie zapewnić prostą notację, to przedstawiam ją poniżej.
-W tej sekcji znajduje się opis karteczek, które są używane w trakcie chaotycznej eksploracji oraz podczas części Process Level.
+== Notation in chaotic exploration
+Since Event Storming is intended to provide simple notation, I present it below.
+This section provides a description of the cards that are used during the chaotic exploration and during the Process Level portions.
 
-.Obrazek, który wjaśnia wszystko – Alberto Brandolini – „Introducting Event Storming”
+.A picture that explains everything – Alberto Brandolini – „Introducting Event Storming”
 image::notacja_01.svg[]
 
-Cóż tu może się stać? Na początku mamy świat zewnętrzny, który wpływa na naszego _aktora_.
-Ten mając na uwadze, to co się dzieje wokół niego oraz patrząc na _widok_ podejmuje decyzję o wykonaniu pewnego _polecenia_. 
-To _polecenie_ jest wykonywane na którymś z _systemów_, czy to naszym, czy zewnętrznym. 
-_System_ generuje _zdarzenie domenowe_, które jest tłumaczone na _widok_ oraz może wyzwolić jakąś _reakcję_ naszego _systemu_.  
-I tak koło się zamyka. 
-_Aktor_ po wykonaniu jakiejś akcji otrzymuje odświeżony _widok_, przez co może chcieć podjąć nową akcję poprzez zlecenie _polecenia_ <<stolarczykProcessLevelEvent2021>>.
+What can happen here? In the beginning we have the external world, which influences our _actor_.
+This one, having in mind what is going on around him and looking at the _view_, makes a decision to execute some _command_. 
+This _command_ is executed on some _system_, be it ours or the external one. 
+The _System_ generates a _domain event_, which is translated to the _view_ and may trigger some _reaction_ of our _system_.  
+And so the circle closes. 
+The _Actor_, after performing some action, receives a refreshed _view_, which allows it to take a new action by ordering a _command_ <<processLevelEvent2021>>.
 
-Osobno istnieją _gorące miejsce_ oraz _rysunki poglądowe_, które możemy umieszczać odpowiednio w miejscach zapalnych, co do których, trzeba podjąć pewne decyzje lub na ten moment nie wiadomo co tam się dzieje, oraz przy widokach, aby podkreślić, co na nich musi się znaleźć.
+Separately, there are _hot spot_ and _view drawings_, which we can place at hot spots about which, some decisions need to be made or at this point it is not known what is going on there, and at views to emphasize what needs to be on them.
 
-=== Zdarzenie domenowe
+=== Domain event
 
-.Przedstawienie zzdarzenia domenowego
+.Representation of a domain event
 image::domain-event.svg[align="center"]
 
-Jak już napisałem we wstępie, zdarzenie domenowe reprezentuje fakt nieodwracalny.
-Mówiąc, że fakt jest nieodwracalny, znaczy to, że gdy użytkownik kupił produkt – nie może już tego cofnąć (maszyna pakowania i nadawania numerów przesyłki już ruszyła), może on rozpocząć procedurę przeciwną, to znaczy zwrotu zakupionego produktu. 
-Co niezwykle ważne, fakty zapisujemy za pomocą *formy przeszłej*, czyli „użytkownik zapłacił za produkt”, „użytkownik zgłosił żądanie zwrotu zakupu”.
-Pozwala to uciąć dywagację na temat tego, co jeśli zdarzenie się nie udało, lub zaszło częściowo – w takim przypadku mamy do czynienia z innym zdarzeniem (na przykład: „użytkownik zapłaci połowę kwoty”).
-Zdarzenie domenowe musi być *zrozumiałe przez ludzi nietechnicznych* więc w konsekwencji nie może ono odnosić się do szczegółów implementacyjnych. 
-Mimo iż w przykładach znajduje się *kto* i *co*, zrobił, co zwiększa czytelność, jednak nie zapominajmy, że twórca danego zdarzenia zostanie jasno określony w dalszym etapie za pomocą karteczki _aktora_ <<DDDNetCore>>.
+As I wrote in the introduction, a domain event represents an irreversible fact.
+When we say that a fact is irreversible, it means that once the user has bought a product - he cannot undo it anymore (the packing and shipping machine has already started), he can start the opposite procedure, i.e. return the purchased product. 
+Extremely importantly, we record the facts using the *past* form, i.e. "the user paid for the product", "the user made a request to return the purchase".
+This cuts off the discussion about what if the event failed, or occurred partially - in which case we are dealing with a different event (for example, "the user will pay half the amount").
+The domain event must be *understood by non-technical people* so it cannot refer to implementation details. 
+Although the examples include *who* and *what* they did, which increases readability, but don't forget that the creator of the event will be made clear later with the _actor_ card <<DDNetCore>>.
 
-Mimo iż piszę o tym, że fakt już się stał, to nie należy się bać dodawania zdarzeń, które reprezentują pomysły i funkcje zaplanowane do realizacji w przyszłości.
-Dobrze jest je odpowiednio oznaczyć, na przykład, poprzez inny kolor karteczki.
+Although I am writing about a fact that has already happened, don't be afraid to add events that represent ideas and functions planned for future implementation.
+It's a good idea to label them appropriately, for example, by having a different color card.
 
-.Przykłady zdarzeń
+.Examples of events
 ====
 image:events-example.svg[align="center"]
 
-W przykładzie mamy już uszeregowany ciąg zdarzeń, tak, że każde ze zdarzeń następuje po sobie. 
-Karteczki są zapisane w formie przeszłej i do tego są krótkie i zwięzłe.
+In the example, we already have a sequence of events arranged so that each event follows one another. 
+The cards are written in past form and are short and concise.
 ====
 
-=== Gorące miejsce
+=== Hot spot
 
-.Przedstawienie gorącego miejsca
+.Introducing the hot spot
 image::hotspot.svg[align="center"]
 
-Jest to zazwyczaj fioletowa lub jaskraworóżowa karteczka (ważne, aby miała wyróżniający się kolor), która służy do oznaczania miejsc spornych, gdzie znalezienie odpowiedzi w trakcie warsztatów nie jest możliwe <<bourgauDetailedAgendaDDD2018>>.
+This is usually a purple or bright pink card (it is important that it has a distinctive color) that is used to mark areas of disagreement where it is not possible to find answers during the workshop <<bourgauDetailedAgendaDDD2018>>.
 
-.Przykłady gorących miejsc
+.Examples of hot spots
 ====
 image:hotspot-example.svg[ scaledwidth="50%"]
 
-Takie gorące miejsce zostało użyte w przykładzie. 
-Pojawiło się pytanie, na które odpowiedź Event Storming nie koniecznie przyniesie (bo jest pytaniem mocno technicznym), jednak to, jak dużo transferu używamy, może być już kwestią domenową, na przykład wtedy, gdy chcemy konstruować system wyróżniający się oszczędnością.
+Such a hot spot was used in the example. 
+There was a question that Event Storming will not necessarily bring an answer to (because it is a highly technical question), but how much transfer we use may already be a domain issue, for example when we want to construct a system distinguished by economy.
 ====
 
 === System
 
-.Przedstawienie systemu
+.Presentation of the system
 image::system.svg[align="center"]
 
-Początkowo, podczas *chaotycznej eksploracji*, karteczka ta służy do określania systemów zewnętrznych, które generują zdarzenia dla naszego systemu. 
-Następnie, w trakcie porządkowania, będziemy na niej zapisywać nasze systemy, takie jak „wyszukiwarka”, „użytkownicy”, „zamówienia”. 
-Uzupełnienie tej karteczki pozwoli nam jasno zobaczyć, które zdarzenia i operacje są wykonywane w tym samym miejscu, a które są w jakiś sposób niezależne. 
-Doprowadzi nas to do wyodrębnienia subdomen, które mogą później posłużyć jako punkt zaczepienia dla luźniejszej architektury aplikacji.
+Initially, during *chaotic exploration*, this card is used to identify external systems that generate events for our system. 
+Later, during organizing, we will record our systems on it, such as "search engine", "users", "orders". 
+Completing this sheet will allow us to clearly see which events and operations are performed in the same place, and which are somehow independent. 
+This will lead us to isolate subdomains, which can later serve as an anchor for a looser application architecture.
 
-.Przykłady systemów podczas chaotycznej eksploracji
+.Examples of systems during chaotic exploration
 ====
 image::systems-example.svg[align="center"]
 
-Powyżej widać przykłady systemów. 
-W tym przypadku pierwszy system to po prostu czujnik, który stanowi samodzielny moduł, backend – który stanowi aplikację internetową oraz Termostat, który również jest samodzielnym urządzeniem. 
+Above you can see examples of systems. 
+In this case, the first system is simply the sensor, which is a standalone module, the backend - which is a web application, and the Thermostat, which is also a standalone device. 
 
-NOTE: Czasem można spotkać się z propozycją, aby zewnętrzne systemy oznaczać innym kolorem karteczek.
-Jednak ile kolorów można znaleźć w sklepie? 
+NOTE: Sometimes you may encounter the suggestion that external systems should be labeled with a different color of card.
+However, how many colors can you find in a shop? 
 ====
 
-.Przykłady systemów po *Process Level*
+.Examples of systems after *Process Level*
 ====
 image::system-processlevelexample.svg[]
 
-Tutaj mamy już dużo więcej systemów, które wyraźnie pokazują ich zakres odpowiedzialności. 
-Użycie nazw jak _Backend_ czy _Frontend_ nie jest może najszczęśliwsze, ale w przypadku najprostszych systemów wystarczające.
+Here we already have many more systems that clearly show their responsibilities. 
+Using names like _Backend_ or _Frontend_ is not the best, but for the simplest systems it is sufficient.
 ====
 
-=== Słowo domenowe
+=== Domain word
 
-.Przedstawienie słowa domenowego
+.Representation of the domain word
 image::domain-word.svg[align="center"]
 
-Z umieszczeniem słowa domenowego spotkałem się raz (<<bourgauDetailedAgendaDDD2018>>) i traktuje je jako rozszerzenie podstawowej notacji Event Stormingu.
-Niemniej, uważam je za ciekawy, acz nieobowiązkowy element, gdyż w przypadku niektórych projektów może pojawić się problem ze słownictwem szczegółowym.
+I have encountered the inclusion of the domain word once (<<bourgauDetailedAgendaDDD2018>>) and I treat it as an extension of the basic Event Storming notation.
+Nonetheless, I find them an interesting, albeit optional, feature, as some projects may have a problem with detail vocabulary.
 
-.Przykład problemu z słownictwem domenowym
+.Example of a domain-specific vocabulary problem
 ====
 image::domain-word-example.svg[]
-W niektórych miejscach spotykałem się z problemem rozróżnienia słów _badanie_ i _pomiar_, które przez niektórych były stosowane zamiennie, mimo iż ostatecznie jedno było składową drugiego.
+
+In some places I encountered the problem of distinguishing between the words _research_ and _measurement_, which were used interchangeably by some, even though one was ultimately a component of the other.
 ====
 
-== Notacja w Process Level
+== Notation in Process Level
 
-W tej sekcji znajdziesz elementy notacji wykorzystywane głównie podczas części Process Level, co nie znaczy, że przedstawione <<notacja-w-chaotycznej-eksploracji,chwilę wczesniej>> karteczki już nie obowiązują. 
-Podziału dokonałem głównie ze względu na objętość materiału.
+In this section, you will find elements of notation used mainly during the Process Level part of the course, which doesn't mean that the cards presented <<notacja-w-chaotycznej-eksploracji,a while ago>> are no longer valid. 
+I made the division mainly because of the volume of the material.
 
-=== Aktor
+=== Actor
 
-.Przedstawienie aktora
+.Introducing the actor
 image::aktor.svg[align="center"]
 
-Aktor, mimo iż brzmi po ludzki, to nie musi być to człowiek – jest to karteczka, która reprezentuje, *kto* może wyzwolić daną akcję.
-Także może to być zarówno człowiek (na przykład poprzez interakcję z aplikacją), jak i na przykład czujka zalania mieszkania może wyzwolić alarm bądź powiadomienie. 
+An actor, although it sounds human, doesn't have to be a human - it's a card that represents *who* can trigger a particular action.
+Also, it can be both a human (for example, by interacting with the app) and, for example, an apartment flood detector can trigger an alarm or notification. 
 
-.Przykłady aktorów
+.Examples of actors
 ====
 image::actors-example.svg[align="center"]
 
-Aktorem może być zarówno użytkownik, jak i pewne zdarzenie jak na przykład czasomierz (z ang. _timer_). 
-Aktor jest karteczką, która pojawia się na samym początku łańcucha przyczynowo-skutkowego co pokazuje, kto jest twórcą danej akcji.
+
+An actor can be either a user or an empowered event source, such as a timer (from _timer_), which can invoke actions periodically.
+An actor is a card that appears at the very beginning of the cause-effect chain, which shows who is the creator of a given action.
 ====
 
-=== Polecenie
+=== Command
 image::command.svg[align="center"]
 
 Polecenie służy do pokazania zamiaru. 
 Umieszczenie ich na tablicy powoduje, że łatwiej zobaczyć jakie zdarzenia mogą zostać wykonane w przypadku, kiedy zamiar się nie powiedzie, lub powiedzie się częściowo.
-Doklejanie karteczek z poleceniem może wydawać się czysto mechaniczne, jednak nie musi takie być, dzięki metodzie 0, 50, 100 i 150 (więcej o niej w sekcji <<w-trakcie-warsztatow,W trakcie warsztatów>>).
+Doklejanie karteczek z poleceniem może wydawać się czysto mechaniczne, jednak nie musi takie być, dzięki metodzie 0, 50, 100 i 150 (więcej o niej w sekcji <<w-trakcie-warsztatow,During the workshop>>).
 Dlatego zaczynamy od zdarzeń, a nie od poleceń, ponieważ taka kolejność może prowadzić do zbytniego skupienia się nad nowymi funkcjami <<kolinskaEventStormingGuide>>. 
 
 .Przykłady poleceń
@@ -369,7 +371,7 @@ NOTE: Uważaj na pomysł z cichą burzą mózgów, gdy masz do czynienia z grup�
 Może się to skończyć dużą ilością karteczek, które nijak nie wpasowują się w notację.
 
 [#w-trakcie-warsztatow]
-=== W trakcie warsztatów
+=== During the workshop
 
 Jak zostało to powiedziane we wstępie, zajmiemy dwoma zasadniczymi częściami warsztatów Event Stormign: _Big Picture_ i _Process Level_.
 W warsztatach niezwykle ważne jest to, aby udział brali wszyscy uczestnicy, przez to prowadzący powinien ich obserwować i dawać wskazówki, a nie próbować kierować całością dyskusji.

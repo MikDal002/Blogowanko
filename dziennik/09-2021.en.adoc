@@ -1,6 +1,6 @@
 ---
 title: "Summary September 2021 (2021-09)"
-date: 2021-09-31
+date: 2021-09-30
 image: cover-diary.jpg
 draft: false
 description: "A brief look at what was happening in September 2021"

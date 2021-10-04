@@ -1,8 +1,8 @@
 ---
 title: "Podsumowanie września 2021 (2021-09)"
-date: 2021-09-31
+date: 2021-09-30
 image: cover-diary.jpg
-draft: true
+draft: false
 description: "Krótko o tym, co działo się we wrześniu 2021 roku"
 categories:
     - Blog Log

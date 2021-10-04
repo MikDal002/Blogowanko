@@ -60,9 +60,9 @@ Na koniec wybieramy zagadnienie, którym będziemy chcieli się zająć – po k
 
 NOTE: Jeżeli zdecydowałeś się zamodelować cały system dojście do tego momentu może zająć Ci nawet kilka dni, dlatego warto rozważyć, czy aby część Process Level nie przeprowadzać etapami, nad kolejnymi elementami systemu.
 
-Na koniec przechodzimy do etapu *Desing Level* na którym tworzymy model, który można przenieść bezpośrednio do kodu.
+Na koniec przechodzimy do etapu *Desing Level*, na którym tworzymy model, który można przenieść bezpośrednio do kodu.
 
-NOTE: Ze względu na objętość tego artykułu oraz wiedzę z zakresu DDD potrzebną do pełnego wykorzystania tego etapu warsztatów pominąłem tę część warsztatów. 
+NOTE: Ze względu na objętość tego artykułu pominąłem tę część warsztatów. 
 Nie mniej, element *Big picture* można z powodzeniem wykorzystać do zamodelowania już istniejącego systemu w celu jego diagnozy i wymiany wiedzy. 
 
 === Jak może wyglądać rezultat warsztatów
@@ -73,21 +73,21 @@ Ilustrację bardziej rozbudowanej sesji Event Stormingu planuję pokazać w przy
 .Przykładowy element systemu po chaotycznej eksploracji
 image:chaotic-exploration-example.svg[]
 
-Jak widać na początku napisaliśmy możliwie dużo zdarzeń. 
+Jak widać, na początku napisaliśmy możliwie dużo zdarzeń. 
 Pojawiły się przy tym dwie wątpliwości oraz uściśliliśmy słownictwo, które mogło być problematyczne w trakcie warsztatów. 
 Jedyny system, który nam się pojawił to _Facebook_ jako dostawca logowania – został tutaj umieszczony, ponieważ jest systemem zewnętrznym, od którego zależy nasz przepływ.
 
 Następnie postępujemy zgodnie z tym, co zostało napisane wcześniej: dodajemy pozostałe karteczki.
-Dobrze jest dadać je wszystkie od razu, ponieważ dodawanie ich pojedynczo może stanowczo przedłużyć warsztat i doprowadzić do lekkiej irytacji uczesników ciągłym przekładaniem karteczek.
+Dobrze jest dodać je wszystkie od razu, ponieważ dodawanie ich pojedynczo może stanowczo przedłużyć warsztat i doprowadzić do lekkiej irytacji uczestników ciągłym przekładaniem karteczek.
 
-.Przykładowy element systemu po uporządkowaniu (obrazek należy otworzyć w osobnym oknie aby zobaczyć coś więcej)
+.Przykładowy element systemu po uporządkowaniu (obrazek należy otworzyć w osobnym oknie, aby zobaczyć szczegóły)
 image:process-level-example.svg[]
 
 Rozbudowaliśmy logowanie o rejestrację oraz przypadek, w którym próbował zalogować się użytkownik, który jeszcze nie jest w naszej bazie. 
-Każdą swoją akcję mógł podjąć na podstawie pewnego widoku, z którego wykonywał polecenie na pewnym systemie, co generowało zdarzenia.
+Każdą swoją akcję mógł podjąć na podstawie pewnego widoku, z którego wykonywał polecenie na pewnym systemie, co generuje zdarzenia.
 Każde z nich może wygenerować kolejny widok lub politykę/reakcję, gdzie ta znów może kontynuować ciąg przyczynowo skutkowy. 
 
-Opis każdego typu karteczki znajduje się w dalszej części artykułu.
+Opis każdego typu karteczki znajduje się poniżej.
 
 [#notacja-w-chaotycznej-eksploracji]
 == Notacja w chaotycznej eksploracji
@@ -98,21 +98,21 @@ W tej sekcji znajduje się opis karteczek, które są używane w trakcie chaotyc
 image::notacja_01.svg[]
 
 Cóż tu może się stać? Na początku mamy świat zewnętrzny, który wpływa na naszego _aktora_.
-Ten mając na uwadze, to co się dzieje wokół niego oraz patrząc na _widok_ podejmuje decyzję o wykonaniu pewnego _polecenia_. 
+Ten mając na uwadze, to co się dzieje wokół niego oraz patrząc na _widok_, podejmuje decyzję o wykonaniu pewnego _polecenia_. 
 To _polecenie_ jest wykonywane na którymś z _systemów_, czy to naszym, czy zewnętrznym. 
 _System_ generuje _zdarzenie domenowe_, które jest tłumaczone na _widok_ oraz może wyzwolić jakąś _reakcję_ naszego _systemu_.  
 I tak koło się zamyka. 
-_Aktor_ po wykonaniu jakiejś akcji otrzymuje odświeżony _widok_, przez co może chcieć podjąć nową akcję poprzez zlecenie _polecenia_ <<stolarczykProcessLevelEvent2021>>.
+_Aktor_ po wykonaniu jakiejś akcji otrzymuje odświeżony _widok_, przez co może podjąć nową akcję poprzez zlecenie _polecenia_ <<stolarczykProcessLevelEvent2021>>.
 
-Osobno istnieją _gorące miejsce_ oraz _rysunki poglądowe_, które możemy umieszczać odpowiednio w miejscach zapalnych, co do których, trzeba podjąć pewne decyzje lub na ten moment nie wiadomo co tam się dzieje, oraz przy widokach, aby podkreślić, co na nich musi się znaleźć.
+Osobno istnieją _gorące miejsce_ oraz _rysunki poglądowe_, które możemy umieszczać w miejscach zapalnych, co do których, trzeba podjąć pewne decyzje lub na ten moment nie wiadomo co tam się dzieje, oraz przy widokach, aby podkreślić, co na nich musi się znaleźć.
 
 === Zdarzenie domenowe
 
-.Przedstawienie zzdarzenia domenowego
+.Przedstawienie zdarzenia domenowego
 image::domain-event.svg[align="center"]
 
 Jak już napisałem we wstępie, zdarzenie domenowe reprezentuje fakt nieodwracalny.
-Mówiąc, że fakt jest nieodwracalny, znaczy to, że gdy użytkownik kupił produkt – nie może już tego cofnąć (maszyna pakowania i nadawania numerów przesyłki już ruszyła), może on rozpocząć procedurę przeciwną, to znaczy zwrotu zakupionego produktu. 
+Mówiąc, że fakt jest nieodwracalny, znaczy to, że gdy użytkownik kupił produkt – nie może już tego cofnąć (maszyna pakowania i nadawania przesyłki już ruszyła), może on rozpocząć procedurę przeciwną, to znaczy zwrotu zakupionego produktu. 
 Co niezwykle ważne, fakty zapisujemy za pomocą *formy przeszłej*, czyli „użytkownik zapłacił za produkt”, „użytkownik zgłosił żądanie zwrotu zakupu”.
 Pozwala to uciąć dywagację na temat tego, co jeśli zdarzenie się nie udało, lub zaszło częściowo – w takim przypadku mamy do czynienia z innym zdarzeniem (na przykład: „użytkownik zapłaci połowę kwoty”).
 Zdarzenie domenowe musi być *zrozumiałe przez ludzi nietechnicznych* więc w konsekwencji nie może ono odnosić się do szczegółów implementacyjnych. 
@@ -178,10 +178,10 @@ Użycie nazw jak _Backend_ czy _Frontend_ nie jest może najszczęśliwsze, ale 
 .Przedstawienie słowa domenowego
 image::domain-word.svg[align="center"]
 
-Z umieszczeniem słowa domenowego spotkałem się raz (<<bourgauDetailedAgendaDDD2018>>) i traktuje je jako rozszerzenie podstawowej notacji Event Stormingu.
-Niemniej, uważam je za ciekawy, acz nieobowiązkowy element, gdyż w przypadku niektórych projektów może pojawić się problem ze słownictwem szczegółowym.
+Z umieszczeniem słowa domenowego spotkałem się raz (<<bourgauDetailedAgendaDDD2018>>) i traktuję je jako rozszerzenie podstawowej notacji Event Stormingu.
+Niemniej, uważam je za ciekawy, acz nieobowiązkowy element, gdyż w niektórych projektach może pojawić się problem ze słownictwem szczegółowym.
 
-.Przykład problemu z słownictwem domenowym
+.Przykład problemu ze słownictwem domenowym
 ====
 image::domain-word-example.svg[]
 W niektórych miejscach spotykałem się z problemem rozróżnienia słów _badanie_ i _pomiar_, które przez niektórych były stosowane zamiennie, mimo iż ostatecznie jedno było składową drugiego.
@@ -189,7 +189,7 @@ W niektórych miejscach spotykałem się z problemem rozróżnienia słów _bada
 
 == Notacja w Process Level
 
-W tej sekcji znajdziesz elementy notacji wykorzystywane głównie podczas części Process Level, co nie znaczy, że przedstawione <<notacja-w-chaotycznej-eksploracji,chwilę wczesniej>> karteczki już nie obowiązują. 
+W tej sekcji znajdziesz elementy notacji wykorzystywane głównie podczas części Process Level, co nie znaczy, że przedstawione <<notacja-w-chaotycznej-eksploracji,chwilę wcześniej>> karteczki już nie obowiązują. 
 Podziału dokonałem głównie ze względu na objętość materiału.
 
 === Aktor
@@ -197,14 +197,14 @@ Podziału dokonałem głównie ze względu na objętość materiału.
 .Przedstawienie aktora
 image::aktor.svg[align="center"]
 
-Aktor, mimo iż brzmi po ludzki, to nie musi być to człowiek – jest to karteczka, która reprezentuje, *kto* może wyzwolić daną akcję.
+Aktor, mimo iż brzmi to ludzko, to nie musi być to człowiek – jest to karteczka, która reprezentuje, *kto* może wyzwolić daną akcję.
 Także może to być zarówno człowiek (na przykład poprzez interakcję z aplikacją), jak i na przykład czujka zalania mieszkania może wyzwolić alarm bądź powiadomienie. 
 
 .Przykłady aktorów
 ====
 image::actors-example.svg[align="center"]
 
-Aktorem może być zarówno użytkownik, jak i pewne zdarzenie jak na przykład czasomierz (z ang. _timer_). 
+Aktorem może być zarówno użytkownik, jak i upodmiotowione źródło zdarzeń, takie jak czasomierz (z ang. _timer_), który może wywoływać akcje co pewien czas.
 Aktor jest karteczką, która pojawia się na samym początku łańcucha przyczynowo-skutkowego co pokazuje, kto jest twórcą danej akcji.
 ====
 
