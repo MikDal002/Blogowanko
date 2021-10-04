@@ -8,9 +8,10 @@ categories:
     - Blog Log
 ---
 
-Ten miesiąc upłyną pod symoblem jezyka angielskiego. 
-Uruchomiłem drugą wersję strony, gdzie znajdują się już #ABY NA PEWNO?# przetłumaczone wszystkie artykuły! 
-#TODO Link do angielskiej wersji#. 
+Ten miesiąc upłyną pod symbolem języka angielskiego. 
+Uruchomiłem drugą wersję strony, gdzie znajduje się już większość artykułów przetłumaczone na język angielski!
+Pozostał mi do przetłumaczenia artykuł na temat Event Stormingu, który wymaga jeszcze sporo pracy. 
+Aby dostać się do angielskiej, strony wystarczy dodać `/en` do adresu, tak więc gorąco zapraszam www.zaprogramujtoraz.pl/en.
 
 Artykuły, które powstały w tym miesiącu to:
 
@@ -18,11 +19,12 @@ Artykuły, które powstały w tym miesiącu to:
 * link:{{% ref "/programowanie/dotnet/Technologie/Szablon_Projektu/index.adoc" %}}[Własny szablon projektu .Net],
 
 Ten miesiąc był dla mnie bardzo pracowity. 
-Tłumaczenie bloga zajeło mi całkiem sporo czasu – choć i tak nie tak dużo, gdyby nie narzędzie, jakim jest Deepl.com. 
-Do tego w międzyczasie ciągnę inny projekt Xamarinowy a do tego niezwykle pochłania mnie temat idealnej architektury aplikacji. 
+Tłumaczenie bloga zajęło mi całkiem sporo czasu – choć i tak nie tak dużo, gdyby nie narzędzie, jakim jest Deepl.com. 
+W międzyczasie ciągnę inny projekt Xamarinowy a do tego niezwykle pochłania mnie temat idealnej architektury aplikacji. 
 Niestety nie mam pomysłu jak podzielić się z już zdobytą wiedzą, bo nie czuję, aby ona była kompletna.
-Na temat architektury siedzi we mnie coraz więcej i widzę, że coraz bardziej dojrzewam do niektórych rozwiązań.
-Może Ty masz jakąś architekturę, poradnik, przewodnik, szablon, który używasz i uważasz za najlepszy? Jeśli tak, to fajnie jakbyś napisał o tym w komentarzu!
+Temat architektury drążę coraz bardziej i widzę, że dojrzewam do niektórych rozwiązań.
+Może Ty masz jakąś architekturę, poradnik, przewodnik, szablon, który używasz i uważasz za najlepszy? 
+Jeśli tak, to fajnie jakbyś napisał o tym w komentarzu!
 
 [.small]
 ****

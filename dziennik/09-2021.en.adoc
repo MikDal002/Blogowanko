@@ -1,0 +1,34 @@
+---
+title: "Summary September 2021 (2021-09)"
+date: 2021-09-31
+image: cover-diary.jpg
+draft: false
+description: "A brief look at what was happening in September 2021"
+categories:
+    - Blog Log
+---
+
+This month will be marked by the English language. 
+I have launched the second version of the site, where most of the articles are already translated into English!
+I still have to translate the article about Event Storming, which still needs a lot of work. 
+To get to the English page just add `/en` to the address, so you are  welcome to www.zaprogramujtoraz.pl/en where you are at the moment :-).
+
+The articles that were written this month are:
+
+.an article about creating your own dotnet templates!
+* link:{{% ref "/programowanie/dotnet/Technologie/Szablon_Projektu/index.adoc" %}}[Custom .Net project template],
+
+This month has been a very busy one for me. 
+Translating the blog took me quite a bit of time - though not that much anyway, if it weren't for the tool that is Deepl.com. 
+In the meantime I've been working on another Xamarin project and I'm also very busy with the topic of ideal application architecture. 
+Unfortunately I have no idea how to share the knowledge I've already gained, because I don't feel it's complete.
+The topic of architecture I'm digging more and more and I can see that I'm maturing to some solutions.
+Maybe you have an architecture, tutorial, guide, template that you use and think is the best? 
+If so, it would be cool if you wrote about it in the comments!
+
+Translated with www.DeepL.com/Translator (free version)
+
+[.small]
+****
+Is there something you would like to see changed on the blog? Maybe you have a topic you'd like to learn more about? Go ahead and write! 
+****
