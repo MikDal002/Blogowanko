@@ -15,7 +15,7 @@ date: 2021-10-09
 
 [.lead]
 XAML has tremendous capabilities and I guess most of them are still unknown to me, and the few that I do learn often fly out of my mind due to unit usage. 
-In this article, I would like to keep my knowledge of `{((Binding TargetNullValue="..."))}` for longer because I find it useful and definitely speed up application development. 
+In this note, I would like to keep my knowledge of `{((Binding TargetNullValue="..."))}` for longer because I find it useful and definitely speed up application development. 
 
 == `((TargetNullValue))`
 

@@ -14,8 +14,8 @@ date: 2021-10-09
 = Kiedy chcesz ładnie pokazać, że wartość jest NULL
 
 [.lead]
-XAML posiada ogromne możliwości i chyba większość z nich nie jest mi jeszcze znana, a nieliczne, które poznaję, często wylatują mi z głowy ze względu na jednostkowe użycie. 
-W tym artykule chciałbym zachować na dłużej moją wiedzę na temat `{((Binding TargetNullValue="..."))}` ponieważ uważam ją za przydatną i stanowczo przyśpieszającą rozwój aplikacji. 
+XAML ma ogromne możliwości i chyba większość z nich nie jest mi jeszcze znana, a nieliczne, które poznaję, często wylatują mi z głowy ze względu na jednostkowe użycie. 
+W tym wpisie chciałbym zachować na dłużej moją wiedzę na temat `{((Binding TargetNullValue="..."))}` ponieważ uważam ją za przydatną i stanowczo przyśpieszającą rozwój aplikacji. 
 
 == `((TargetNullValue))`
 
