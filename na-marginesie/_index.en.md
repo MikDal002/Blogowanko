@@ -1,5 +1,5 @@
 ---
-title: Na marginesie
+title: Side notes
 menu:
     main:
         weight: -99

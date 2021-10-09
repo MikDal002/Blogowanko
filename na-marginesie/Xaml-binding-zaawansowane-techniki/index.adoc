@@ -1,5 +1,6 @@
 ---
 title: XAML i TargetNullValue
+description: Krótko o ustawianiu specyficznej kontrolki gdy wartość jest null.
 draft: false
 categories:
     - .Net
@@ -10,11 +11,10 @@ tags:
     - Binding
 date: 2021-10-09
 ---
-= Kiedy chcesz ładnie wyświetlić, że wartość jest NULL
+= Kiedy chcesz ładnie pokazać, że wartość jest NULL
 
 [.lead]
-XAML posiada ogromne możliwości i chyba większość z nich nie jest mi jeszcze znana.
-Niestety sam nie znam wielu z nich, a nieliczne, które poznaję, często wylatują mi z głowy ze względu na jednostkowe użycie. 
+XAML posiada ogromne możliwości i chyba większość z nich nie jest mi jeszcze znana, a nieliczne, które poznaję, często wylatują mi z głowy ze względu na jednostkowe użycie. 
 W tym artykule chciałbym zachować na dłużej moją wiedzę na temat `{((Binding TargetNullValue="..."))}` ponieważ uważam ją za przydatną i stanowczo przyśpieszającą rozwój aplikacji. 
 
 == `((TargetNullValue))`
@@ -28,7 +28,7 @@ Standardowo w większości przykładów widziałem, że `TargetNullValue` jest w
 ----
 
 Nigdzie dotychczas nie spotkałem się z tym, aby w miejsce `TargetNullValue` stosować inną kontrolkę, a jest to możliwe!
-Przy takiej sytuacji czeka nas kilka pułapek, ale wszystko to wyjaśnia poniższy przykład:
+Przy takiej sytuacji czeka nas kilka pułapek, ale wszystko wyjaśnia poniższy przykład:
 
 [source,xml]
 .Przykład wykorzystania `((TargetNullValue))`, gdzie wartością jest inna kontrolka XAML
@@ -54,7 +54,7 @@ Przy takiej sytuacji czeka nas kilka pułapek, ale wszystko to wyjaśnia poniżs
 Zwróć uwagę, że jest ona wewnątrz słownika `((ResourceDictionary))`, a co *najważniejsze* jest ona oznaczona jako `((x:Shared))="False"` – jest to niezbędne, bez tego, wykorzystując dany element wielokrotnie, mogą pojawić się takie błędy jak, to, że nasz `((SfBusyIndicator))` będzie wyświetlał się tylko w jednym miejscu. 
 <2> Właściwa definicja łączenia – zwróć uwagę, że wartość jest ustawiona standardowo, a `TargetNullValue` odwołuje się bezpośrednio do naszego słownika za pomocą konstrukcji `((StaticResource))`. 
 
-Dzięki takiemu rozwiązaniu uzyskujemy niezależny wskaźnik ładowania w każdym miejscu, którego wartość jest `null`!
+Dzięki takiemu rozwiązaniu uzyskujemy niezależny wskaźnik ładowania w każdym miejscu, gdzie wartość jest `null`!
 Zwróć uwagę również, że przy wykorzystaniu tej techniki byłem zmuszony do zrobienia własnego szablonu kolumny dla `((GridView))` – w toku moich działań nie udało mi się uruchomić tego w prostszy sposób.
 
 .Przykład działania kodu, gdzie kontrolka jest wartością dla `((TargetNullValue))`. To jest gif, więc powinien się ruszać.
