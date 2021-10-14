@@ -1,0 +1,57 @@
+---
+title: "Github Action własne CI/CD z paczką nugetową"
+date: 2021-10-14
+draft: false
+image: cover.jpg
+description: "Od ostatniego artykułu o szablonach korzystam z nich niezwykle dużo. Im dłużej korzystam, tym więcej poprawek, tym więcej ręcznych kroków. Tym artykułem postanowiłem położyć kres tej powtarzalności: automatyzujemy budowanie szablonów i publikowanie ich do Nuget.org. Niestety, aktualizację na komputerze lokalnym dalej musimy przeprowadzać ręcznie."
+categories: 
+    - ".Net"
+    - "Narzędzia"
+    - "Github Actions"
+    - "CI/CD"
+tags:
+    - "C-sharp"
+    - "csproj"
+    - "templates"
+
+---
+
+= Własny szablon projektu
+:toc: 
+
+dotnet new --install ZTR.Utilities.Templates::1.0.0
+dotnet new -u ZTR.Utilities.Templates
+dotnet nuget push */bin/Release/*.nupkg -k $NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
+
+name: .NET
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    - name: Pack
+      run: dotnet pack --no-build --configuration Release
+    - name: Publish to nuget.org
+      run: dotnet nuget push "./bin/Release/*.nupkg" -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
+
