@@ -13,27 +13,84 @@ tags:
     - "C-sharp"
     - "csproj"
     - "templates"
-
 ---
-
-= Własny szablon projektu
+= CI/CD dla własnego szablonu
 :toc: 
 
-dotnet new --install ZTR.Utilities.Templates::1.0.0
-dotnet new -u ZTR.Utilities.Templates
-dotnet nuget push */bin/Release/*.nupkg -k $NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
+W tym artykule nie będę szczegółowo opisywał kwestii tworzenia akcji Github. 
+Niemniej chciałbym, aby było to miejsce, w którym można zacząć swoją przygodę z tym tematem, dlatego poniżej znajdziesz wiele linków z odnośnikami do artykułów źródłowych.
+W tym momencie zakładam, że *masz już gotowe repozytorium na Githubie* – ten artykuł nie będzie pokrywał wypychania swoich zmian na zdalne repozytorium.
 
-name: .NET
+. Aby móc publikować w repozytorium nuget.org musimy najpierw założyć konto.
++
+****
+W tym celu udaj się na stronę nuget.org – możesz się tam zalogować nawet za pomocą konta Microsoft
+
+.Widok zakładania nowego konta
+image::nuget-org-signin.png[align="center"]
+****
+
+. Następnie przejdź do strony z kluczami API
++
+****
+Po zalogowaniu wybierz nazwę swojego konta a stamtąd _API Keys_.
+
+.Widok menu po zalogowaniu
+image::nuget-org-apikey-pages.png[align="center"]
+****
+
+. Potem utwórz nowy klucz API 
++
+****
+. Wprowadź nazwę klucza w polu _Key Name_, która określać, gdzie użyłeś danego klucza.
+Ja użyłem nazwy _ZtrTemplates_.
+. Wprowadź wzorzec, który określi jakie pakiety mogą być publikowane za pomocą tego klucza, np. `ZTR.*`.
+. Wybierz _Create_.
+. Od razu po utworzeniu skopiuj klucz i tymczasowo nie zamykaj karty.
+W ostrzeżeniu jest wyraźnie napisane, że po zamknięciu tej karty ponowne uzyskanie klucza nie będzie możliwe.
+
+.Widok tworzenia nowego klucza API
+image::nuget-org-apikeys-create.png[align="center"]
+
+.I widok po utworzeniu, kiedy kopiowanie klucza jest jeszcze możliwe
+image::nuget-org-apikey-aftercreation.png[align="center"]
+****
+
+. Dodaj klucz API do swojego repozytorium
++
+****
+. W tym celu udaj się do ustawień repoztorium, gdzie następnie przejdź do _Actions_ i wybierz _New repository secret_.
+. Następnie podaj nazwę klucza – postaraj się nie zrobić w niej błędu, będziemy jej później używać.
+W moim przypadku użyłem nazwy `NUGET_API_KEY`, i wklej klucz API skopiowany z nuget.org.
+
+.Strona sekretów repozytorium
+image::github-add-secrets-to-repo.png[align="center"]
+
+.Dodawanie nowego klucza
+image::github-add-secrets-to-repo-new-secret.png[align="center"]
+****
+
+. Następnym krokiem jest utworznie akcji w naszym repozytorium
++
+****
+Najprościej jest to zrobić, udając się na stronę _Actions_ a następnie wybierająć _set up a workflow yourself_.
+
+.Widok dodawania pierwszej akcji
+image::github-setup-first-action.png[align="center"]
+
+Następnie wklej w akcję poniższy kod i zatwierdź wszystko na swojej gałęzi:
+
+[source,yaml]
+.Cała akcja na Githubie
+----
+name: Publikuj szablon do Nuget.org
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ main ] <1>
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -51,7 +108,68 @@ jobs:
     - name: Pack
       run: dotnet pack --no-build --configuration Release
     - name: Publish to nuget.org
-      run: dotnet nuget push "./bin/Release/*.nupkg" -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
+      run: dotnet nuget push "./bin/Release/*.nupkg" -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate <2>
+----
+
+<1> W tym miejscu określamy, że chcemy, aby nasza akcja byłą wykonywana tylko wtedy, gdy pojawią się nowe zatwierdzenia (z ang. _commits_) na gałęzi `main`.
+<2> To jest serce całej akcji, publikujemy wszystkie paczki nuget znajdujace się w katalogu `./bin/Release`.
+Domyślnie będzie znajdowała się tam tylko nasza paczka, więc taka konstrukcja chroni nas przed zmianą nazwy w przyszłości.
+Do tego w miejscu `-k ${{ secrets.NUGET_API_KEY }}` przekazujemy nasz token do Nuget.org utworzony wcześniej.
+
+Dodatkowo warto pochylić się jeszcze nad:
+
+* `-s https://api.nuget.org/v3/index.json` – podanie adresu, gdzie chcemy publikować, jest wymagane w poleceniu, chyba, że wartość ta została zdefiniowana osobno w pliku projektu (więcej informacji w https://docs.microsoft.com/pl-pl/dotnet/core/tools/dotnet-nuget-push[dokumentacji])
+* `--skip-duplicate` – powoduje, że próba wypchnięcia tego samego pakietu (o tej samej wersji) zostanie pominięta a cała akcja zakończy się pozytywnie (bez zwracania kodu błędu).
+
+.Całość powinno wygądać podobnie
+image::github-set-action.png[align="center"]
+
+****
+
+. Teraz zrób dowolne zmiany w swoim kodzie (szablonie) i wyślij do repozytorium. 
++
+****
+#TODO: Uzupełnić#
+****
+
+. Poczekaj chwilę i sprawdź, czy jest już aktualizacja. 
+Jeśli tak, to aktualizuj!
++
+****
+
+[source,console]
+.Instalacja szablonów z Nuget.org
+dotnet new --install ZTR.Utilities.Templates
+
+dotnet new -u ZTR.Utilities.Templates
+
+[source,console]
+.Sprawdzanie aktualizacji i aktualizowanie szablonów
+----
+PS C:\Users\dalec> dotnet new --update-check
+Dostępne są aktualizacje dla następujących elementów:
+Dostępna jest aktualizacja pakietu szablonów ZTR.Utilities.Templates::1.0.0.
+    polecenie instalowania: dotnet new-i ZTR.Utilities.Templates::1.1.0
+
+PS C:\Users\dalec> dotnet new --update-apply
+Dostępna jest aktualizacja pakietu szablonów ZTR.Utilities.Templates::1.0.0.
+    polecenie instalowania: dotnet new-i ZTR.Utilities.Templates::1.1.0
+Trwa aktualizowanie...
+...Aktualizacja powiodła się.
+----
+
+[source,console]
+.Podgląd nowej wersji szablonów
+----
+PS C:\Users\dalec> dotnet new -u
+ ZTR.Utilities.Templates
+    Szczegóły:
+      NuGetPackageId: ZTR.Utilities.Templates
+      Version: 1.1.0
+      Author: Zaprogramuj to raz!
+----
+
+****
+
+
 
