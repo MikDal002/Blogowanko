@@ -1,5 +1,5 @@
 ---
-title: "Github Action own CI/CD with nuget package"
+title: "Github Action – own CI/CD with nuget package"
 date: 2021-10-14
 draft: false
 image: cover.png
@@ -18,71 +18,71 @@ tags:
 :toc: 
 :sectnums:
 
-W tym artykule nie będę szczegółowo opisywał kwestii tworzenia akcji Github. 
-Niemniej chciałbym, aby było to miejsce, w którym można zacząć swoją przygodę z tym tematem, dlatego poniżej znajdziesz wiele linków z odnośnikami do artykułów źródłowych.
-W tym momencie zakładam, że *masz już gotowe repozytorium na Githubie* – ten artykuł nie będzie pokrywał wypychania swoich zmian na zdalne repozytorium.
+In this article, I will not go into detail about creating Github actions. 
+Nevertheless, I'd like this to be a place to start, so the following tips are suitable for any type of project that involves publishing nuget.
+At this point, I'm assuming that you *already have a ready to go repository on Github* - this article will not cover pushing your changes out to a remote repository.
 
-== Aby móc publikować w repozytorium nuget.org musimy najpierw założyć konto i utworzyć klucz API
+== In order to publish to the nuget.org repository, we must first create an account and create an API key
 
 ****
-W tym celu udaj się na stronę nuget.org – możesz się tam zalogować nawet za pomocą konta Microsoft
+To do this, go to nuget.org - you can even log in there with your Microsoft account
 
-.Widok zakładania nowego konta
+.New account creation view
 image::nuget-org-signin.png[align="center"]
 ****
 
-==  Następnie przejdź do strony z kluczami API
+==  Then go to the API keys page
 
 ****
-Po zalogowaniu wybierz nazwę swojego konta a stamtąd _API Keys_.
+After logging in, select your account name and from there _API Keys_.
 
-.Widok menu po zalogowaniu
+.View of the menu after logging in
 image::nuget-org-apikey-pages.png[align="center"]
 ****
 
-== Potem utwórz nowy klucz API 
+== Then create a new API key
 
 ****
-. Wprowadź nazwę klucza w polu _Key Name_, która określać, gdzie użyłeś danego klucza.
-Ja użyłem nazwy _ZtrTemplates_.
-. Wprowadź wzorzec, który określi jakie pakiety mogą być publikowane za pomocą tego klucza, np. `ZTR.*`.
-. Wybierz _Create_.
-. Od razu po utworzeniu skopiuj klucz i tymczasowo nie zamykaj karty.
-W ostrzeżeniu jest wyraźnie napisane, że po zamknięciu tej karty ponowne uzyskanie klucza nie będzie możliwe.
+. Enter a key name in the _Key Name_ field that specifies where you used the key.
+I used the name _ZtrTemplates_.
+. Enter a pattern that specifies what packages can be published with this key, such as `ZTR.*`.
+. Select _Create_.
+. Immediately after creation, copy the key and temporarily do not close the card.
+The warning clearly states that once this card is closed, it will not be possible to obtain the key again.
 
-.Widok tworzenia nowego klucza API
+.View of creating a new API key
 image::nuget-org-apikeys-create.png[align="center"]
 
-.I widok po utworzeniu, kiedy kopiowanie klucza jest jeszcze możliwe
+.And the view after creation, when copying the key is still possible
 image::nuget-org-apikey-aftercreation.png[align="center"]
 ****
 
-== Dodaj klucz API do swojego repozytorium
+== Add the API key to your repository
 
 ****
-. W tym celu udaj się do ustawień repoztorium, gdzie następnie przejdź do _Actions_ i wybierz _New repository secret_.
-. Następnie podaj nazwę klucza – postaraj się nie zrobić w niej błędu, będziemy jej później używać.
-W moim przypadku użyłem nazwy `NUGET_API_KEY`, i wklej klucz API skopiowany z nuget.org.
+. To do this, go to the repository settings, then go to _Actions_ and select _New repository secret_.
+. Then enter the key name - try not to make a mistake in it, we will use it later.
+In my case I used the name `NUGET_API_KEY`, and paste the API key copied from nuget.org.
 
-.Strona sekretów repozytorium
+.Repository secrets page
 image::github-add-secrets-to-repo.png[align="center"]
 
-.Dodawanie nowego klucza
+.Adding a new key
 image::github-add-secrets-to-repo-new-secret.png[align="center"]
 ****
 
-== Następnym krokiem jest utworzenie akcji w naszym repozytorium
+== The next step is to create an action in our repository
 
 ****
-Najprościej jest to zrobić, udając się na stronę _Actions_ a następnie wybierająć _set up a workflow yourself_.
+The easiest way to do this is by going to the _Actions_ page and then selecting _set up a workflow yourself_.
 
-.Widok dodawania pierwszej akcji
+.View adding the first action
 image::github-setup-first-action.png[align="center"]
 
-Następnie wklej w akcję poniższy kod i zatwierdź wszystko na swojej gałęzi:
+Then paste the following code into the action and validate everything on your branch:
 
 [source,yaml]
-.Cała akcja na Githubie
+.The whole action on Github
 ----
 name: Publikuj szablon do Nuget.org
 
@@ -112,26 +112,28 @@ jobs:
       run: dotnet nuget push "./bin/Release/*.nupkg" -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate <2>
 ----
 
-<1> W tym miejscu określamy, że chcemy, aby nasza akcja byłą wykonywana tylko wtedy, gdy pojawią się nowe zatwierdzenia (z ang. _commits_) na gałęzi `main`.
-<2> To jest serce całej akcji, publikujemy wszystkie paczki nuget znajdujace się w katalogu `./bin/Release`.
-Domyślnie będzie znajdowała się tam tylko nasza paczka, więc taka konstrukcja chroni nas przed zmianą nazwy w przyszłości.
-Do tego w miejscu `-k ${{ secrets.NUGET_API_KEY }}` przekazujemy nasz token do Nuget.org utworzony wcześniej.
+<1> Here we specify that we want our action to be executed only when there are new commits on the `main` branch.
+<2> This is the heart of the action, we publish all nuget packages located in the `./bin/Release` directory.
+By default only our package will be there, so this design protects us from renaming it in the future.
+In addition, in the `-k ${{ secrets.NUGET_API_KEY }}`, we pass our token to Nuget.org that we created earlier.
 
-Dodatkowo warto pochylić się jeszcze nad:
+Additionally, it is worthwhile to delve into:
 
-* `-s https://api.nuget.org/v3/index.json` – podanie adresu, gdzie chcemy publikować, jest wymagane w poleceniu, chyba, że wartość ta została zdefiniowana osobno w pliku projektu (więcej informacji w https://docs.microsoft.com/pl-pl/dotnet/core/tools/dotnet-nuget-push[dokumentacji])
-* `--skip-duplicate` – powoduje, że próba wypchnięcia tego samego pakietu (o tej samej wersji) zostanie pominięta a cała akcja zakończy się pozytywnie (bez zwracania kodu błędu).
+* `-s https://api.nuget.org/v3/index.json` - the address where we want to publish, it is required in the `nuget push` command, unless this value is defined separately in the project file (more information in the https://docs.microsoft.com/pl-pl/dotnet/core/tools/dotnet-nuget-push[documentation])
+* `--skip-duplicate` - causes the attempt to push the same package (with the same version) to be skipped and the whole action to complete successfully (without returning an error code).
 
-.Całość powinno wygądać podobnie
+.The whole should look similar
 image::github-set-action.png[align="center"]
 
-****
-
-== Teraz zrób dowolne zmiany w swoim kodzie (szablonie) i wyślij do repozytorium. 
+The code you see below is a cluster of elements from the https://github.com/actions/setup-dotnet[setup-dotnet] repository and the https://docs.microsoft.com/pl-pl/dotnet/core/tools/dotnet-nuget-push[dotnet nuget push] documentation.
 
 ****
-Jedną z najważniejszych zmian będzie na pewno aktualizacja wersji. 
-Jeśli pracujesz na pliku projektu podobnym do tego z poprzedniego artykułu, wystarczy wprowadzić drobną aktualizację w pliku projektu:
+
+== Now make any changes to your code (template) and upload to the repository. 
+
+****
+One of the most important changes will definitely be the version update. 
+If you are working on a project file similar to the one in the previous article, just make a minor update to the project file:
 
 [source,xml]
 ----
@@ -161,37 +163,38 @@ Jeśli pracujesz na pliku projektu podobnym do tego z poprzedniego artykułu, wy
 ----
 ****
 
-== Poczekaj chwilę i sprawdź, czy jest już aktualizacja. 
+== Wait for a while and see if there is already an update. 
 
 ****
-Jeśli tak, to aktualizuj!
+If so, update!
 
-Dla przypomnienia szablon możesz zainstalować w następujący sposób – zostanie on automatycznie pobrany z witryny Nuget.org.
+As a reminder, you can install the template as follows - it will be automatically downloaded from Nuget.org.
+
 [source,console]
-.Instalacja szablonów z Nuget.org
+.Installing templates from Nuget.org
 dotnet new --install ZTR.Utilities.Templates
 
-Następnie możesz sprawdzić możliwe aktualizacje i je zestosować za pomocą dwóch poniższych poleceń:
+You can then check for possible updates and apply them using the following two commands:
 
 [source,console]
-.Sprawdzanie aktualizacji i aktualizowanie szablonów
+.Checking for updates and updating templates
 ----
 PS C:\Users\dalec> dotnet new --update-check
-Dostępne są aktualizacje dla następujących elementów:
-Dostępna jest aktualizacja pakietu szablonów ZTR.Utilities.Templates::1.0.0.
-    polecenie instalowania: dotnet new-i ZTR.Utilities.Templates::1.1.0
+Updates are available for the following:
+An update is available for the template package ZTR.Utilities.Templates::1.0.0.
+    command to install: dotnet new -i ZTR.Utilities.Templates::1.1.0
 
 PS C:\Users\dalec> dotnet new --update-apply
-Dostępna jest aktualizacja pakietu szablonów ZTR.Utilities.Templates::1.0.0.
-    polecenie instalowania: dotnet new-i ZTR.Utilities.Templates::1.1.0
-Trwa aktualizowanie...
-...Aktualizacja powiodła się.
+An update to the ZTR.Utilities.Templates::1.0.0 template package is available.
+    command to install: dotnet new -i ZTR.Utilities.Templates::1.1.0
+Update in progress...
+...Update was successful.
 ----
 
-Zawsze możesz podejrzeć zainstlowaną wersję za pomocą polecenia `dotnet new -u`.
+You can always preview the installed version with the `dotnet new -u` command.
 
 [source,console]
-.Podgląd nowej wersji szablonów
+.Preview the new version of the templates
 ----
 PS C:\Users\dalec> dotnet new -u
  ZTR.Utilities.Templates
@@ -201,10 +204,10 @@ PS C:\Users\dalec> dotnet new -u
       Author: Zaprogramuj to raz!
 ----
 
-Po wypchnięciu swojej paczki trzeba chwilę poczekać zanim przejdzie ona przez proces weryfikacji. 
-Kiedy wszystko pójdzie dobrze możesz zobaczyć na stronie paczki takie coś:
+After you push your package out, you have to wait a while before it goes through the verification process. 
+When all goes well you may see something like this on the package page:
 
-.Widok strony z paczką nugetową po aktualizacji
+.View of the nuget package page after the update
 image::nuget-org-template-package-page.png[align="center"]
 
 ****

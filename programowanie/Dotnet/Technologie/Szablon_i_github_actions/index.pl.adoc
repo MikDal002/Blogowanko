@@ -19,7 +19,7 @@ tags:
 :sectnums:
 
 W tym artykule nie będę szczegółowo opisywał kwestii tworzenia akcji Github. 
-Niemniej chciałbym, aby było to miejsce, w którym można zacząć swoją przygodę z tym tematem, dlatego poniżej znajdziesz wiele linków z odnośnikami do artykułów źródłowych.
+Niemniej chciałbym, aby było to miejsce, w którym można zacząć swoją przygodę, dlatego poniższe wskazówki nadają się do każdego typu projektu, który zakłada publikowanie nugeta.
 W tym momencie zakładam, że *masz już gotowe repozytorium na Githubie* – ten artykuł nie będzie pokrywał wypychania swoich zmian na zdalne repozytorium.
 
 == Aby móc publikować w repozytorium nuget.org musimy najpierw założyć konto i utworzyć klucz API
@@ -125,6 +125,8 @@ Dodatkowo warto pochylić się jeszcze nad:
 .Całość powinno wygądać podobnie
 image::github-set-action.png[align="center"]
 
+Kod, który widzisz poniżej jest zbitkiem elementów z repozytorium https://github.com/actions/setup-dotnet[setup-dotnet] oraz dokumentacji https://docs.microsoft.com/pl-pl/dotnet/core/tools/dotnet-nuget-push[dotnet nuget push].
+
 ****
 
 == Teraz zrób dowolne zmiany w swoim kodzie (szablonie) i wyślij do repozytorium. 
@@ -171,7 +173,7 @@ Dla przypomnienia szablon możesz zainstalować w następujący sposób – zost
 .Instalacja szablonów z Nuget.org
 dotnet new --install ZTR.Utilities.Templates
 
-Następnie możesz sprawdzić możliwe aktualizacje i je zestosować za pomocą dwóch poniższych poleceń:
+Następnie możesz sprawdzić możliwe aktualizacje i je zastosować za pomocą dwóch poniższych poleceń:
 
 [source,console]
 .Sprawdzanie aktualizacji i aktualizowanie szablonów
@@ -179,11 +181,11 @@ Następnie możesz sprawdzić możliwe aktualizacje i je zestosować za pomocą 
 PS C:\Users\dalec> dotnet new --update-check
 Dostępne są aktualizacje dla następujących elementów:
 Dostępna jest aktualizacja pakietu szablonów ZTR.Utilities.Templates::1.0.0.
-    polecenie instalowania: dotnet new-i ZTR.Utilities.Templates::1.1.0
+    polecenie instalowania: dotnet new -i ZTR.Utilities.Templates::1.1.0
 
 PS C:\Users\dalec> dotnet new --update-apply
 Dostępna jest aktualizacja pakietu szablonów ZTR.Utilities.Templates::1.0.0.
-    polecenie instalowania: dotnet new-i ZTR.Utilities.Templates::1.1.0
+    polecenie instalowania: dotnet new -i ZTR.Utilities.Templates::1.1.0
 Trwa aktualizowanie...
 ...Aktualizacja powiodła się.
 ----
