@@ -16,13 +16,14 @@ tags:
 ---
 = CI/CD dla własnego szablonu
 :toc: 
+:sectnums:
 
 W tym artykule nie będę szczegółowo opisywał kwestii tworzenia akcji Github. 
 Niemniej chciałbym, aby było to miejsce, w którym można zacząć swoją przygodę z tym tematem, dlatego poniżej znajdziesz wiele linków z odnośnikami do artykułów źródłowych.
 W tym momencie zakładam, że *masz już gotowe repozytorium na Githubie* – ten artykuł nie będzie pokrywał wypychania swoich zmian na zdalne repozytorium.
 
-. Aby móc publikować w repozytorium nuget.org musimy najpierw założyć konto.
-+
+== Aby móc publikować w repozytorium nuget.org musimy najpierw założyć konto i utworzyć klucz API
+
 ****
 W tym celu udaj się na stronę nuget.org – możesz się tam zalogować nawet za pomocą konta Microsoft
 
@@ -30,8 +31,8 @@ W tym celu udaj się na stronę nuget.org – możesz się tam zalogować nawet 
 image::nuget-org-signin.png[align="center"]
 ****
 
-. Następnie przejdź do strony z kluczami API
-+
+==  Następnie przejdź do strony z kluczami API
+
 ****
 Po zalogowaniu wybierz nazwę swojego konta a stamtąd _API Keys_.
 
@@ -39,8 +40,8 @@ Po zalogowaniu wybierz nazwę swojego konta a stamtąd _API Keys_.
 image::nuget-org-apikey-pages.png[align="center"]
 ****
 
-. Potem utwórz nowy klucz API 
-+
+== Potem utwórz nowy klucz API 
+
 ****
 . Wprowadź nazwę klucza w polu _Key Name_, która określać, gdzie użyłeś danego klucza.
 Ja użyłem nazwy _ZtrTemplates_.
@@ -56,8 +57,8 @@ image::nuget-org-apikeys-create.png[align="center"]
 image::nuget-org-apikey-aftercreation.png[align="center"]
 ****
 
-. Dodaj klucz API do swojego repozytorium
-+
+== Dodaj klucz API do swojego repozytorium
+
 ****
 . W tym celu udaj się do ustawień repoztorium, gdzie następnie przejdź do _Actions_ i wybierz _New repository secret_.
 . Następnie podaj nazwę klucza – postaraj się nie zrobić w niej błędu, będziemy jej później używać.
@@ -70,8 +71,8 @@ image::github-add-secrets-to-repo.png[align="center"]
 image::github-add-secrets-to-repo-new-secret.png[align="center"]
 ****
 
-. Następnym krokiem jest utworznie akcji w naszym repozytorium
-+
+== Następnym krokiem jest utworzenie akcji w naszym repozytorium
+
 ****
 Najprościej jest to zrobić, udając się na stronę _Actions_ a następnie wybierająć _set up a workflow yourself_.
 
@@ -126,22 +127,51 @@ image::github-set-action.png[align="center"]
 
 ****
 
-. Teraz zrób dowolne zmiany w swoim kodzie (szablonie) i wyślij do repozytorium. 
-+
+== Teraz zrób dowolne zmiany w swoim kodzie (szablonie) i wyślij do repozytorium. 
+
 ****
-#TODO: Uzupełnić#
+Jedną z najważniejszych zmian będzie na pewno aktualizacja wersji. 
+Jeśli pracujesz na pliku projektu podobnym do tego z poprzedniego artykułu, wystarczy wprowadzić drobną aktualizację w pliku projektu:
+
+[source,xml]
+----
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+
+    <PackageVersion>1.1</PackageVersion> <!--1-->
+    <PackageId>ZTR.Utilities.Templates</PackageId>
+    <Title>Zaprogramuj to raz! Core template</Title>
+    <Authors>Zaprogramuj to raz!</Authors>
+    <Description>Template for creating core projects</Description>
+    <PackageTags>dotnet-new;ztr;templates</PackageTags>
+    
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+</Project>
+----
 ****
 
-. Poczekaj chwilę i sprawdź, czy jest już aktualizacja. 
+== Poczekaj chwilę i sprawdź, czy jest już aktualizacja. 
+
+****
 Jeśli tak, to aktualizuj!
-+
-****
 
+Dla przypomnienia szablon możesz zainstalować w następujący sposób – zostanie on automatycznie pobrany z witryny Nuget.org.
 [source,console]
 .Instalacja szablonów z Nuget.org
 dotnet new --install ZTR.Utilities.Templates
 
-dotnet new -u ZTR.Utilities.Templates
+Następnie możesz sprawdzić możliwe aktualizacje i je zestosować za pomocą dwóch poniższych poleceń:
 
 [source,console]
 .Sprawdzanie aktualizacji i aktualizowanie szablonów
@@ -158,6 +188,8 @@ Trwa aktualizowanie...
 ...Aktualizacja powiodła się.
 ----
 
+Zawsze możesz podejrzeć zainstlowaną wersję za pomocą polecenia `dotnet new -u`.
+
 [source,console]
 .Podgląd nowej wersji szablonów
 ----
@@ -168,6 +200,12 @@ PS C:\Users\dalec> dotnet new -u
       Version: 1.1.0
       Author: Zaprogramuj to raz!
 ----
+
+Po wypchnięciu swojej paczki trzeba chwilę poczekać zanim przejdzie ona przez proces weryfikacji. 
+Kiedy wszystko pójdzie dobrze możesz zobaczyć na stronie paczki takie coś:
+
+.Widok strony z paczką nugetową po aktualizacji
+image::nuget-org-template-package-page.png[align="center"]
 
 ****
 
