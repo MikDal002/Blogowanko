@@ -3,7 +3,7 @@ title: "Github Action własne CI/CD z paczką nugetową"
 date: 2021-10-14
 draft: false
 image: cover.png
-description: "Od ostatniego artykułu o szablonach korzystam z nich niezwykle dużo. Im dłużej korzystam, tym więcej poprawek, tym więcej ręcznych kroków. Tym artykułem postanowiłem położyć kres tej powtarzalności: zautomatyzujmy budowanie szablonów i publikowanie ich do Nuget.org. Niestety, aktualizację na komputerze lokalnym dalej musimy przeprowadzać ręcznie."
+description: "Od ostatniego artykułu o szablonach korzystam z nich niezwykle dużo. Im dłużej korzystam, tym więcej poprawek, tym więcej ręcznych kroków. Dziś postanowiłem położyć kres tej powtarzalności: zautomatyzujmy budowanie szablonów i publikowanie ich do Nuget.org. Niestety, aktualizację na komputerze lokalnym dalej musimy przeprowadzać ręcznie."
 categories: 
     - ".Net"
     - "Narzędzia"
@@ -43,7 +43,7 @@ image::nuget-org-apikey-pages.png[align="center"]
 == Potem utwórz nowy klucz API 
 
 ****
-. Wprowadź nazwę klucza w polu _Key Name_, która określać, gdzie użyłeś danego klucza.
+. Wprowadź nazwę klucza w polu _Key Name_, która będzie określać, gdzie użyłeś danego klucza.
 Ja użyłem nazwy _ZtrTemplates_.
 . Wprowadź wzorzec, który określi jakie pakiety mogą być publikowane za pomocą tego klucza, np. `ZTR.*`.
 . Wybierz _Create_.
@@ -60,7 +60,7 @@ image::nuget-org-apikey-aftercreation.png[align="center"]
 == Dodaj klucz API do swojego repozytorium
 
 ****
-. W tym celu udaj się do ustawień repoztorium, gdzie następnie przejdź do _Actions_ i wybierz _New repository secret_.
+. W tym celu udaj się do ustawień repozytorium, gdzie następnie przejdź do _Actions_ i wybierz _New repository secret_.
 . Następnie podaj nazwę klucza – postaraj się nie zrobić w niej błędu, będziemy jej później używać.
 W moim przypadku użyłem nazwy `NUGET_API_KEY`, i wklej klucz API skopiowany z nuget.org.
 
@@ -74,7 +74,7 @@ image::github-add-secrets-to-repo-new-secret.png[align="center"]
 == Następnym krokiem jest utworzenie akcji w naszym repozytorium
 
 ****
-Najprościej jest to zrobić, udając się na stronę _Actions_ a następnie wybierająć _set up a workflow yourself_.
+Najprościej jest to zrobić, udając się na stronę _Actions_ a następnie wybierając _set up a workflow yourself_.
 
 .Widok dodawania pierwszej akcji
 image::github-setup-first-action.png[align="center"]
@@ -211,5 +211,6 @@ image::nuget-org-template-package-page.png[align="center"]
 
 ****
 
-
+Gotowe!
+Nie ma to jak automatyzacja, która zwalnia nas z robienia rzeczy, które w sumie nie wnoszą żadnej wartości do naszej pracy. 
 

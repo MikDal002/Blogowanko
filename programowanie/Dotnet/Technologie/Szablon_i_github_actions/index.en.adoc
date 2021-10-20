@@ -212,5 +212,5 @@ image::nuget-org-template-package-page.png[align="center"]
 
 ****
 
-
-
+Done!
+Nothing like automation to relieve us of doing things that don't actually add any value to our work. 
