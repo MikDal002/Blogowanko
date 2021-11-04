@@ -1,0 +1,39 @@
+---
+title: "Summary October 2021 (2021-10)"
+date: 2021-10-31
+image: cover-diary.jpg
+draft: false
+description: "A brief look at what was happening in October 2021"
+categories:
+    - Blog Log
+---
+
+This month, I finally got down to the blog's look.
+I fixed the ugly code displayed in the articles and a few other annoying aesthetic mistakes. 
+In addition, the English navigation should work without any problems now - previously selecting an item in the left menu caused redirection to the Polish version - I've managed to fix that, and the update is already available in the official repository (https://github.com/CaiJimmy/hugo-theme-stack).
+
+The second most important change to the blog is the addition of the "Side Notes" category, which you can see in the menu on the left. 
+Its purpose is to collect in one place short posts about small problems, ideas and solutions. 
+Such material usually appears during the work and I often do not want to forget about it - this is supposed to be a place addressed to such content.
+I don't know if it will stay in this form until the end, or if the form will change - we will see how it develops
+
+The articles produced this month are:
+
+.article about creating CI/CD for our own templates
+* link:{{% ref "/programowanie/dotnet/Technologie/Szablon_i_github_actions/index.adoc" %}}[Github Action – own CI/CD with nuget package],
+
+.A quick side note about XAML and TargetNullValue
+* link:{{% ref "/na-marginesie/Xaml-binding-zaawansowane-techniki/index.adoc" %}}[XAML and TargetNullValue],
+
+It was quite a productive time. 
+I managed to write a nice article and make some significant improvements to the blog code. 
+This is important because the launch is slowly approaching (which I plan for early 2022) and there is still some work to do.
+
+The fact is that the word "launch" is a lot to say, because I am not planning any fireworks or advertising campaign. 
+After this date I will try to promote the blog "quietly", linking to it on various forums and thus providing valuable content to others.
+If this mechanism will work, I plan something more interesting for the turn of 2022/2023, but it's a distant future.
+
+[.small]
+****
+Is there something you would like to see changed on the blog? Maybe you have a topic you'd like to learn more about? Go ahead and write!
+****

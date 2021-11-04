@@ -15,8 +15,7 @@ Do tego nawigacja w angielskiej wersji strony powinna działać już bez problem
 Drugą najważniejszą zmianą na blogu jest dodanie kategorii "Na marginesie", którą widać w menu po lewej. 
 Jej celem jest zbierać w jednym miejscu krótkie wpisy na temat drobnych problemów, pomysłów i rozwiązań. 
 Takie materiały pojawiają się najczęściej w trakcie pracy i często nie chcę o nim zapomnieć – to ma być miejsce adresowane właśnie takim treścią.
-Nie wiem, czy zostanie ono w takiej postaci do końca, czy może forma jeszcze się zmieni.
-Na ten moment jest to wstępny pomysł.
+Nie wiem, czy zostanie ono w takiej postaci do końca, czy może forma jeszcze się zmieni – zobaczymy jak to się rozwinie
 
 Artykuły, które powstały w tym miesiącu to:
 
