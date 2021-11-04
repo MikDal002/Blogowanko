@@ -1,0 +1,40 @@
+---
+title: "Podsumowanie października 2021 (2021-10)"
+date: 2021-10-31
+image: cover-diary.jpg
+draft: false
+description: "Krótko o tym, co działo się w październiku 2021 roku"
+categories:
+    - Blog Log
+---
+
+W tym miesiącu w końcu zabrałem się za wygląd.
+Ogarnąłem brzydkie wyświetlanie kodu w artykułach oraz kilka innych irytujących błędów estetycznych. 
+Do tego nawigacja w angielskiej wersji strony powinna działać już bez problemów – wcześniej wybranie pozycji w lewym menu powodowało przekierowanie do wersji polskiej – udało mi się to naprawić, a poprawka jest już dostępna w oficjalnym repozytorium (https://github.com/CaiJimmy/hugo-theme-stack).
+
+Drugą najważniejszą zmianą na blogu jest dodanie kategorii "Na marginesie", którą widać w menu po lewej. 
+Jej celem jest zbierać w jednym miejscu krótkie wpisy na temat drobnych problemów, pomysłów i rozwiązań. 
+Takie materiały pojawiają się najczęściej w trakcie pracy i często nie chcę o nim zapomnieć – to ma być miejsce adresowane właśnie takim treścią.
+Nie wiem, czy zostanie ono w takiej postaci do końca, czy może forma jeszcze się zmieni.
+Na ten moment jest to wstępny pomysł.
+
+Artykuły, które powstały w tym miesiącu to:
+
+.artykuł o tworzeniu CI/CD dla naszych własnych szablonów
+* link:{{% ref "/programowanie/dotnet/Technologie/Szablon_i_github_actions/index.adoc" %}}[Github Action własne CI/CD z paczką nugetową],
+
+.krótki wpis na marginesie o XAML i TargetNullValue
+* link:{{% ref "/na-marginesie/Xaml-binding-zaawansowane-techniki/index.adoc" %}}[XAML i TargetNullValue],
+
+To był całkiem owocny czas. 
+Udało mi się napisać fajny artykuł oraz wprowadzić ważne poprawki w kodzie bloga. 
+Jest to o tyle ważne, że powoli zbliża się premiera (którą planuję na początek roku 2022) i jeszcze jest trochę do zrobienia.
+
+Faktem jest, że słowo „premiera” to dużo powiedziane, ponieważ nie planuję żadnych fajerwerków ani kampanii reklamowej. 
+Po tej dacie będę starał się promować bloga „po cichu”, linkując do niego na różnych forach i dostarczając tym samym wartościowe treści innym.
+Jeśli taki mechanizm się sprawdzi, to coś ciekawszego planuję na przełom 2022/2023, ale to odległa przyszłość :-).
+
+[.small]
+****
+Jest coś, co chciałbyś, aby zmieniło się na blogu? Może masz temat, o którym chciałbyś się więcej dowiedzieć? Pisz śmiało! 
+****
