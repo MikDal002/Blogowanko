@@ -1,0 +1,18 @@
+---
+title: WiX – jak zacząć
+description: Kilka materiałów przydatnych by zaczać z WiX'em.
+draft: true
+categories:
+    - Na marginesie
+    - .Net
+    - WPF
+    - XAML
+tags:
+    - XAML
+    - Binding
+date: 2021-12-23
+---
+
+Powiem krótko: najlepsze wprowadzenie do WiX'a znalazłem na YouTube. 
+Film autorstwa AngelSix jest dostępny pod tym adresem: https://www.youtube.com/watch?v=6Yf-eDsRrnM. 
+Trwa on ponad 2 godziny, ale jest tego wart – nie udało mi się znaleźć równie dobrego wprowadzenia w formie pisanej. 

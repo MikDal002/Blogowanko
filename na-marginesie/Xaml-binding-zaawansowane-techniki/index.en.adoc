@@ -3,6 +3,7 @@ title: XAML and TargetNullValue
 description: Briefly about setting a specific control when the value is null.
 draft: false
 categories:
+    - Side notes
     - .Net
     - WPF
     - XAML
