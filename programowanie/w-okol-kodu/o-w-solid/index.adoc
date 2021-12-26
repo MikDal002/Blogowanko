@@ -1,0 +1,162 @@
+---
+title: "O w SOLID. Po co? Dlaczego?"
+date: 2021-12-20
+draft: false
+image: cover.jpg
+description: Czy OCP w ogóle warto stosować? Po kilku przygodach przeszła mi taka myśl przez głowę. Teraz jednak wiem, że stosowanie zasady otwarty na rozszerzenia i zamknięty na modyfikację to nie strata czasu na abstrakcje ale utwardzenie aplikacji w celu ochrony kodu gotowego produkcyjnego.
+
+categories: 
+    - "W okół kodu"
+tags:
+    - "SOLID"
+    - "OCP"
+    - Open-Close Principle
+    - Zasada Otwarty-Zamknięty
+series:
+    - SOLID
+---
+:toc: 
+
+> OCP jest o tym, aby nie zmieniać kodu gotowego produkcyjnie.
+
+I to według mnie jest wszystko, co mógłbym napisać o tej zasadzie po wielu godzinach poszukiwania. 
+Jednak jak osiągnąć taki stan rzeczy? 
+W tym artykule celowo zaczynam od bardziej teoretycznych rozważań na temat tej zasady, ponieważ błahych przykładów prezentujących zastosowanie jej jest mnóstwo w Internecie. 
+Niemniej, na końcu prezentuję kilka przykładów, które według mnie są bardziej realne w codziennej sztuce programowania.
+
+== Czym jest OCP i jak do niego dążyć
+
+[quote, Robert C. Martin, "Agile principles, patterns, and practices in C# (tłumaczenie własne)"]
+Elementy oprogramowania (klasy, moduły, funkcje itp.) powinny być otwarte na rozbudowę, ale zamknięte na modyfikację.
+
+Zasadę OCP spełniamy głównie poprzez *abstrakcję* wspartą kontenerem zależności i ich wstrzykiwaniem (dependency container).
+Możemy robić to na kilka sposobów. 
+Najlepiej zacząć od interfejsów, gdyż te pozwalają nam dowolnie podmieniać implementację.
+Następnie przejść do klas abstrakcyjnych, gdzie dużą część funkcjonalności można współdzielić.
+Dopiero na końcu wykorzystać dziedziczenie po pozostałych klasach, gdyż te rzadko są robione z myślą o byciu czyimś rodzicem.
+
+Zasadzie OCP możemy pomóc wykorzystując zasady odwróconej kontroli (inversion of control) oraz pojedynczej odpowiedzialności (single responsibility). 
+Jednak jak zobaczymy w przykładach i w trakcie własnej praktyki, niemożliwe jest wykorzystywanie tylko jednej z zasad SOLID – one wszystkie razem tworzą mur pozbawiony możliwie wszystkich słabych punktów. 
+
+Chciałbym jeszcze podkreślić, że w przypadku abstrakcji *w zadnym wypadku* nie chodzi o to, aby tworzyć rozbudowane drzewa genealogiczne klas. 
+Powinniśmy starać się ograniczać przede wszystkim do implementacji możliwie prostych interfejsów, gdyż ich implementacje najprościej jest zastąpić przy pomocy kontenera zależności. 
+W przypadku gdy chcemy uniknąć kopiowania kodu mamy często dwie możliwości: klasę abstrakcyjną (bazową) oraz *kompozycję*, gdzie w szczególności polecam to drugie. 
+
+.Notka nowicjusza: „implementacja interfejsu poprzez kompozycję”
+****
+
+Pamiętaj, że kompozycja też pozwala na rozszerzanie implementacji poprzez delegowanie jej.
+Pozwala nam to na uniknięcie duplikacji kodu, a nawet na podmianę implementacji w trakcie działania programu, gdyby była taka potrzeba. 
+
+.Przykad implementacji poprzez kompozycję. Kod skrócony dla czytelności.
+[source,csharp]
+----
+class IListExample<T> : IList<T>
+{
+    private readonly List<T> _internal = new();
+
+    public IEnumerator<T> GetEnumerator() => _internal.GetEnumerator();
+    
+    IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_internal).GetEnumerator();
+
+    public void Add(T item) => _internal.Add(item);
+
+    public void Clear() => _internal.Clear();
+
+    public bool Contains(T item) => _internal.Contains(item);
+
+    public T this[int index]
+    {
+        get => _internal[index];
+        set => _internal[index] = value;
+    }
+}
+----
+
+Piszę o tym, ponieważ pamiętam, że na początku mojej przygody z programowaniem nie było to dla mnie oczywiste.
+Przez to nie potrzebnie mnożyłem klasy nadrzędne, doprowadzając do eksplozji hierarchii. 
+
+****
+
+=== Czym się kierować?
+
+[quote, Robert C. Martin, "Agile principles, patterns, and practices in C#"]
+Fool me once, shame on you. Fool me twice, shame on me.
+
+Długo zastanawiałem się jak przetłumaczyć to przysłowie, ale nie potrafię zrobić tego wystarczająco gładko. 
+W skrócie, dla tych nieanglojęzycznych, będzie tak: „oszukaj mnie raz – wstydź się, oszukaj mnie ponownie – będę wstydził się ja”. 
+W tym przypadku Robert C. Martin ma na myśli to, żeby nie stosować abstrakcji zbyt pochopnie, co może prowadzić do nadmiernego skomplikowania kodu. 
+Więc kiedy najlepiej zacząć wprowadzać interfejsy i klasy wirtualne? _Za drugim razem!_ 
+Miał być tylko jeden typ użytkownika, a teraz dochodzi drugi? Zrób tak, aby i trzeci dodać łatwo. 
+
+[quote, Robert C. Martin, "Agile principles, patterns, and practices in C# (tłumaczenie własne)"]
+Im dłużej będziemy czekać, aby dowiedzieć się, jakiego rodzaju zmiany są prawdopodobne, tym trudniej będzie stworzyć odpowiednie abstrakcje
+
+#TODO: Rozwiń#
+
+[quote, Robert C. Martin, "Agile principles, patterns, and practices in C# (tłumaczenie własne)"]
+Bez względu na to, jak „zamknięty” jest moduł, zawsze będzie istniał jakiś rodziaj zmiany, przed którą nie jest on zamknięty.
+
+#TODO: Rozwiń#
+
+#TODO: Podsumowując#
+
+// Nor is it a good idea to apply rampant abstraction to every part of the application. Rather, it requires a dedication on the part of the developers to apply abstraction only to those parts of the program that exhibit frequent change. Resisting premature abstraction is as important as abstraction itself
+ 
+== Cóż nam daje OCP?
+
+Jeśli dbamy o kod przetestowany produkcyjnie dostajemy kilka benefitów:
+
+- architekturę pluginową,
+- łatwiejsze wdrożenie juniorów,
+- kod odporny na błędy,
+- szybsze wdrażanie funkcji.
+
+=== Architektura pluginowa
+
+Jak sam Robert C. Martin pisze, najwyższym wcieleniem OCP są pluginy <<theOCP>>.
+Jako przykład można podać wszechobecne edytory kodu, przeglądarki czy gry, którym można dodawać całkowicie nową funkcjonalność za pomocą rozszerzeń (modów).
+
+=== Łatwiejsze wdrożenie juniorów
+
+#TODO#
+
+=== Kod odporny na błędy
+
+#TODO#
+
+=== Szybsze wdrażanie funkcji
+
+#TODO#
+
+== Przykład kodu
+
+== Na co uważać?
+
+// Martin, Robert C. Clean Code: A Handbook of Agile Software Craftsmanship. Repr. Robert C. Martin Series. Upper Saddle River, NJ Munich: Prentice Hall, 2012.
+// My general rule for switch statements is that they can be tolerated if they appear only once, are used to create polymorphic objects, and are hidden behind an inheritance relationship so that the rest of the system can’t see them
+
+== Korzyści wynikające ze stosowania OCP
+
+* Elastyczność – łatwość dokonywania zmian w programie, poprzez ich odizolowywanie.
+* Solidność – mniejsza ilość błędów w gotowych już modułach, dzięki zostawieniu ich w spokoju,
+* Łatwiejszy w ponownym wykorzystaniu – poszczególne elementy oprogramowania mają większą szansę być wykorzystane w innym projekcie dzięki ich elastyczności.
+* Konkretność w dokonywaniu zmian – nowe funkcjonalności będą wymagały mniej klas do zmian.
+* Przejrzystość – odpowiednio pogrupowane klasy od razu prezentują swoje zależności – nie trzeba ich szukać po całym projekcie.
+
+[bibliography]
+== Źródła i materiały dodatkowe
+
+* [[[theOCP]]] Martin, Robert C. „Clean Coder Blog”. Dostęp z dnia 17 listopada 2021. https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html.
+* Samokhin, Vadim. „The Open-Closed Principle”. HackerNoon.Com (blog), 16 czerwiec 2018. https://medium.com/hackernoon/the-open-closed-principle-c3dc45419784.
+* Azevedo, Gustavo Peixoto de. „The Open/Closed Principle: Concerns about Change in Software Design”. The Sympriser Blog, 23 czerwiec 2009. https://blog.symprise.net/articles/open-closed-principle-concerns-about-change-in-software-design.
+* Chovatiya, Vishal. „Open Closed Principle in C++ | SOLID as a Rock”. Vishal Chovatiya, 7 kwiecień 2020. http://www.vishalchovatiya.com/open-closed-principle-in-cpp-solid-as-a-rock/.
+* Martin, Robert C. Clean Code: A Handbook of Agile Software Craftsmanship. Repr. Robert C. Martin Series. Upper Saddle River, NJ Munich: Prentice Hall, 2012.
+* Martin, Robert C., i Micah Martin. Agile Principles, Patterns, and Practices in C#. Robert C. Martin Series. Upper Saddle River, NJ: Prentice Hall, 2007.
+* Stackify. „SOLID Design Principles Explained: The Open/Closed Principle with Code Examples”, 28 marzec 2018. https://stackify.com/solid-design-open-closed-principle/.
+
+
+
+[small]
+Zdjęcie tytułowe:  https://unsplash.com/@enginakyurt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[engin akyurt] on https://unsplash.com/s/photos/hard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Unsplash]
+  
