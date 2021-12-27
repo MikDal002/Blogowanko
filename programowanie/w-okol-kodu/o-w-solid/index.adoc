@@ -92,16 +92,19 @@ Miał być tylko jeden typ użytkownika, a teraz dochodzi drugi? Zrób tak, aby 
 [quote, Robert C. Martin, "Agile principles, patterns, and practices in C# (tłumaczenie własne)"]
 Im dłużej będziemy czekać, aby dowiedzieć się, jakiego rodzaju zmiany są prawdopodobne, tym trudniej będzie stworzyć odpowiednie abstrakcje
 
-#TODO: Rozwiń#
+Coś w tym jest, że im dłużej czekamy, tym kolejne moduły wydają się coraz bardziej unikalne.
+A jednak i one składają się z małych komponentów, które można wydzielić. 
+Biorąc pod uwagę tę i poprzednią złotą radę, można by dojść do wniosku, że odpowiednią abstrakcję należy dodać zawsze, gdy pojawia się *drugi element* lub dochodzi do *drugiej zmiany* działającego już produkcyjnie kodu. Co ważne: _zmiany_, nie naprawy.
 
 [quote, Robert C. Martin, "Agile principles, patterns, and practices in C# (tłumaczenie własne)"]
-Bez względu na to, jak „zamknięty” jest moduł, zawsze będzie istniał jakiś rodziaj zmiany, przed którą nie jest on zamknięty.
+Bez względu na to, jak „zamknięty” jest moduł, zawsze będzie istniał jakiś rodzaj zmiany, przed którą nie jest on zamknięty.
 
-#TODO: Rozwiń#
+No i złota myśl na pocieszenie: nieważne jakbyśmy się starali i tak nie będzie idealnie. 
+Dlatego odpuść sobie ciężką pracę, aby wszystko było przygotowane na przyszłe zmiany: tak nie będzie. 
+Pamiętaj, że w aplikacji nie liczy się tylko odporność na przyszłe zmiany, ale również to aby dowieść funkcje potrzebne naszemu klientowi.
 
-#TODO: Podsumowując#
-
-// Nor is it a good idea to apply rampant abstraction to every part of the application. Rather, it requires a dedication on the part of the developers to apply abstraction only to those parts of the program that exhibit frequent change. Resisting premature abstraction is as important as abstraction itself
+Jak pisze sam Robert C. Martin (<<AgilePPP>>) należy uważać, aby nie przesadzić ze zbyt rozbudowaną abstrakcją. 
+Może się to skończyć przekombinowaniem całości.
  
 == Cóż nam daje OCP?
 
@@ -112,47 +115,58 @@ Jeśli dbamy o kod przetestowany produkcyjnie dostajemy kilka benefitów:
 - kod odporny na błędy,
 - szybsze wdrażanie funkcji.
 
-=== Architektura pluginowa
+=== Elastyczność – architektura pluginowa
 
-Jak sam Robert C. Martin pisze, najwyższym wcieleniem OCP są pluginy <<theOCP>>.
+Jak sam Robert C. Martin pisze, najwyższą formą OCP są pluginy <<theOCP>>.
 Jako przykład można podać wszechobecne edytory kodu, przeglądarki czy gry, którym można dodawać całkowicie nową funkcjonalność za pomocą rozszerzeń (modów).
+Taka elastyczność daje nam łatwość dokonywania zmian w programie, poprzez ich odizolowywanie w osobnych modułach.
 
-=== Łatwiejsze wdrożenie juniorów
+=== Konkretność w dokonywaniu zmian – łatwiejsze wdrożenie juniorów
 
-#TODO#
+Stanowczo łatwiej jest „wykorzystać” juniora w projekcie, który składa się z prostych interfejsów, bo cóż skomplikowanego może być w implementacji takiegoż interfejsu:
 
-=== Kod odporny na błędy
+[source,csharp]
+----
+public interface ICalcOperation
+{
+    string Name {get;}
+    double Calc(double left, double right);
+}
+----
 
-#TODO#
+Pomijając sensowność tego interfejsu, największe jego zalety to przede wszystkim przejrzystość: junior wie, w jakim zakresie ma wykonać swoją pracę, do tego wykona swoją pracę w osobnych, nowych klasach, nie dotykając kodu produkcyjnego.
+Bardziej obrazowe porównanie znajduje się poniżej.
 
-=== Szybsze wdrażanie funkcji
+=== Solidność – kod odporny na błędy wraz 
 
-#TODO#
+Kod staje się odporny na błędy poprzez rzadsze zmienianie tych fragmentów oprogramowania, które są już przetestowane w boju. 
+Co więcej, dzięki jasnemu podziałowi na klasy nadrzędne, odpowiadające za logikę, od tych wykonawczych (kłania się zasada odwróconej kontroli), można łatwiej ocenić, kto powinien zająć się ewentualnym błędem: junior, mid, czy może senior. 
+
+
+=== Wielorazowość i przejrzystość – szybsze wdrażanie funkcji
+
+Dzięki odseparowaniu pomniejszych funkcjonalności poszczególne elementy oprogramowania mają większą szansę być wykorzystane w innym projekcie.
+A rosnąca przejrzystość, dzięki prostym interfejsom i pluginowej architekturze, pozwala nam na szybsze dołączanie nowych funkcjonalności, zwłaszcza w aspektach, które mogą poszczycić się największym wskaźnikiem ponownego wykorzystania kodu.
 
 == Przykład kodu
 
+#TODO#
+
 == Na co uważać?
 
-// Martin, Robert C. Clean Code: A Handbook of Agile Software Craftsmanship. Repr. Robert C. Martin Series. Upper Saddle River, NJ Munich: Prentice Hall, 2012.
+// <<CleanHandBook>>.
 // My general rule for switch statements is that they can be tolerated if they appear only once, are used to create polymorphic objects, and are hidden behind an inheritance relationship so that the rest of the system can’t see them
 
-== Korzyści wynikające ze stosowania OCP
-
-* Elastyczność – łatwość dokonywania zmian w programie, poprzez ich odizolowywanie.
-* Solidność – mniejsza ilość błędów w gotowych już modułach, dzięki zostawieniu ich w spokoju,
-* Łatwiejszy w ponownym wykorzystaniu – poszczególne elementy oprogramowania mają większą szansę być wykorzystane w innym projekcie dzięki ich elastyczności.
-* Konkretność w dokonywaniu zmian – nowe funkcjonalności będą wymagały mniej klas do zmian.
-* Przejrzystość – odpowiednio pogrupowane klasy od razu prezentują swoje zależności – nie trzeba ich szukać po całym projekcie.
 
 [bibliography]
 == Źródła i materiały dodatkowe
 
 * [[[theOCP]]] Martin, Robert C. „Clean Coder Blog”. Dostęp z dnia 17 listopada 2021. https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html.
+* [[[CleanHandBook]]] Martin, Robert C. Clean Code: A Handbook of Agile Software Craftsmanship. Repr. Robert C. Martin Series. Upper Saddle River, NJ Munich: Prentice Hall, 2012.
+* [[[AgilePPP]]] Martin, Robert C., i Micah Martin. Agile Principles, Patterns, and Practices in C#. Robert C. Martin Series. Upper Saddle River, NJ: Prentice Hall, 2007.
 * Samokhin, Vadim. „The Open-Closed Principle”. HackerNoon.Com (blog), 16 czerwiec 2018. https://medium.com/hackernoon/the-open-closed-principle-c3dc45419784.
-* Azevedo, Gustavo Peixoto de. „The Open/Closed Principle: Concerns about Change in Software Design”. The Sympriser Blog, 23 czerwiec 2009. https://blog.symprise.net/articles/open-closed-principle-concerns-about-change-in-software-design.
 * Chovatiya, Vishal. „Open Closed Principle in C++ | SOLID as a Rock”. Vishal Chovatiya, 7 kwiecień 2020. http://www.vishalchovatiya.com/open-closed-principle-in-cpp-solid-as-a-rock/.
-* Martin, Robert C. Clean Code: A Handbook of Agile Software Craftsmanship. Repr. Robert C. Martin Series. Upper Saddle River, NJ Munich: Prentice Hall, 2012.
-* Martin, Robert C., i Micah Martin. Agile Principles, Patterns, and Practices in C#. Robert C. Martin Series. Upper Saddle River, NJ: Prentice Hall, 2007.
+* Azevedo, Gustavo Peixoto de. „The Open/Closed Principle: Concerns about Change in Software Design”. The Sympriser Blog, 23 czerwiec 2009. https://blog.symprise.net/articles/open-closed-principle-concerns-about-change-in-software-design.
 * Stackify. „SOLID Design Principles Explained: The Open/Closed Principle with Code Examples”, 28 marzec 2018. https://stackify.com/solid-design-open-closed-principle/.
 
 
