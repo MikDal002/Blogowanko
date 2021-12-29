@@ -150,12 +150,250 @@ A rosnąca przejrzystość, dzięki prostym interfejsom i pluginowej architektur
 
 == Przykład kodu
 
-#TODO#
+Teraz przejdźmy do przykładu. 
+Weźmy na tapet wyświechtany już kalkulator, który będzie inspirowany 
+Możemy go zrobić na dwa sposoby: rozrzucając wszystko jak popadnie, bądź z uwzględnieniem OCP.
+
+
+=== Sposób rozproszony
+
+Możemy naszą aplikację pisać w sposób prosty, niczym na projekt zaliczeniowy. 
+Jak to wtedy wygląda? 
+
+****
+Rozważmy następujący View Model:
+
+[source,csharp]
+----
+public class CalckViewModel
+{
+    public double ValueLeft { get; set; }
+    public double ValueRight { get; set; }
+    public double Result { get; set; }
+
+    public ICommand CernBasedCalculation { get; }
+    public ICommand Subtrack { get; }
+
+    public CalckViewModel(UserSettings settings)
+    {
+        Add = new DelegatedCommand(() => {
+            // Complicated task which requires data from e.g. CERN and Polish National Centre for Nuclear Research. 
+            // It has many dependencies: need to make some REST requests with appropriate api keys. 
+            if (settings.MakeCalculations)
+                Result = ValueLeft + ValueRight
+            else throw new Exception("Calculation disabled by user settings");
+            // Than you also have to store te result for later usage to decrease amount of requests.
+            });
+        Subtrack = new DelegatedCommand(() =>{
+            // It's quite simple command based only on in-company knowlage.
+            Result = ValueLeft - ValueRight
+        });
+    }
+}
+----
+
+Mamy wszystko w jednej klasie, a dodawanie nowych poleceń to po prostu "kopiuj-wklej" kilku linijek i wypełnienie ich odpowiednim kodem. 
+Konstruktor rośnie w oczach do kilkunastu lub nawet do kilkudziesięciu, właściwości po to, aby obsłużyć wszystkie wewnętrzne polecenia.
+
+Jednak rzeczywistość jest znacznie bardziej brutalna. 
+Aby dodać nowe polecenie, musimy skopiować kod przynajmniej w kilku miejscach, choćby: w widoku – dodanie nowej kontrolki/endpointu, w view modelu – dodając samą obsługę. 
+Jeśli mamy jeszcze jakieś warstwy pośrednie to ilość miejsc, o które trzeba zadbać, liczy się w dziesiątkach. 
+I to jest właśnie miejsce, w którym zadanie ocenione na jeden dzień pracy zajmuje ich 5. 
+„Dodanie nowego polecenia do kalkulatora? Przecież to drobnostka” – mówisz na spotkaniu. 
+A gdy bierzesz się za pracę, okazuje się, że musisz przejrzeć kilka dużych klas i je dokładnie przetestować. 
+
+****
+
+=== Krok 1: Przeniesienie
+
+Pierwszym krokiem, i często ostatnim, jest przeniesienie poszczególnych funkcjonalności do osobnych klas:
+
+
+****
+
+Przenieśmy poszczególne metody do osobnych klas, otrzymamy kod podobny do takiego:
+
+[source,csharp]
+----
+public class CalckViewModel
+{
+    public double ValueLeft { get; set; }
+    public double ValueRight { get; set; }
+    public double Result { get; set; }
+
+    public ICommand CernBasedCalculation { get; }
+    public ICommand Subtrack { get; }
+
+    public CalckViewModel(CernBasedCalculation cern, MakeSimpleCalculation simple, UserSettings settings)
+    {
+        Add = new DelegatedCommand(() => Result = cern.MakeCernCalculation(ValueLeft, ValueRight, settings));
+        Subtrack = new DelegatedCommand(() => Result = simple.MakeSimpleCalculation(ValueLeft, ValueRight));
+    }
+}
+
+class CernBasedCalculation 
+{
+    public double MakeCernCalculation(double left, double right, UserSettings settings) {
+            // Complicated task which requires data from e.g. CERN and Polish National Centre for Nuclear Research. 
+            // It has many dependencies: need to make some REST requests with appropriate api keys. 
+            if (settings.MakeCalculations)
+                Result = ValueLeft + ValueRight
+            else throw new Exception("Calculation disabled by user settings");
+            // Than you also have to store te result for later usage to decrease amount of requests.
+    }
+}
+
+class SimpleCalculation
+{
+    public double MakeSimpleCalculation(double left, double right) {
+            // It's quite simple command based only on in-company knowlage.
+            Result = ValueLeft - ValueRight
+    }
+}
+----
+
+Zaczyna się tworzyć zarys pewnej modularności, lecz niestety wiele osób czuje tutaj opór przed pójściem dalej. 
+Zwróć uwagę, że metody poszczególnych klas mają różne nazwy i parametry.
+Nie mają one wspólnego interfejsu – ktoś mógłby powiedzieć, że słusznie, gdyż nie byłby on tutaj wykorzystany – i będzie to prawda. 
+
+WARNING: Według mnie jest to bardzo niebezpieczny moment – zaczynamy przechodzić z programowania obiektowego na programowanie strukturalne! 
+Zamiast zmieniać stan obiektów, przekazujemy struktury do metod, które na nich operują, jak nic stare dobre ANSI C.
+
+****
+
+=== Krok 2: Izolacja z ujednoliceniem
+
+W tym kroku dokonamy odpowiedniej hermetyzacji obiektów w celu ukrycia zależności poszczególnych poleceń:
+
+****
+Aby to osiągnąć wystarczy przekazać nasze ustawienia użytkownika, tam gdzie one są na prawdę potrzebne
+
+
+[source,csharp,highlight="10,12,19-21,23,26"]
+----
+public class CalckViewModel
+{
+    public double ValueLeft { get; set; }
+    public double ValueRight { get; set; }
+    public double Result { get; set; }
+
+    public ICommand CernBasedCalculation { get; }
+    public ICommand Subtrack { get; }
+
+    public CalckViewModel(CernBasedCalculation cern, MakeSimpleCalculation simple)
+    {
+        Add = new DelegatedCommand(() => Result = cern.MakeCernCalculation(ValueLeft, ValueRight));
+        Subtrack = new DelegatedCommand(() => Result = simple.MakeSimpleCalculation(ValueLeft, ValueRight));
+    }
+}
+
+class CernBasedCalculation 
+{
+    private readonly UserSettings _settings;
+    public CernBasedCalculation(UserSettings settings) {
+        _settings = settings;
+    }
+    public double MakeCernCalculation(double left, double right) {
+            // Complicated task which requires data from e.g. CERN and Polish National Centre for Nuclear Research. 
+            // It has many dependencies: need to make some REST requests with appropriate api keys. 
+            if (_settings.MakeCalculations)
+                Result = ValueLeft + ValueRight
+            else throw new Exception("Calculation disabled by user settings");
+            // Than you also have to store te result for later usage to decrease amount of requests.
+    }
+}
+
+class SimpleCalculation
+{
+    public double MakeSimpleCalculation(double left, double right) {
+            // It's quite simple command based only on in-company knowlage.
+            Result = ValueLeft - ValueRight
+    }
+}
+----
+
+W ten sposób zależności naszych obliczeń nie będą już więcej wpływać na view model! 
+Dokonaliśmy pierwszego odizolowania warstw, dzięki czemu zmiany wprowadzane tylko w jednym module nie będą groziły popsuciem innego. 
+
+Ten krok wprowadziłem specjalnie, po to, aby podkreślić, że hermetyzacja klas jest ważnym krokiem na drodze do spełnienia zasady Otwarty-Zamknięty.
+
+****
+
+=== Krok 3: Wprowadzenie interfejsu
+
+Ten krok nie zawsze jest obowiązkowy. 
+Wiąże się on ze zmianą kilku warstw w sposób wymagający dużej wiedzy na temat języka i technologii, z której się korzysta – przez co, bez prawdziwych seniorów, może on być niewykonalny dla zespołu.
+Niemniej, czasem zdarza się, że wymagania co do warstwy prezentacji są tak szczegółowe, że ujednolicenie tej kwestii jest tak bardzo pracochłonne, że aż nieopłacalne.
+
+****
+
+Skoro już mamy metody o identycznej definicji (pomijając nazwę) możemy bez problemu wprowadzić wspólny interfejs:
+
+[source,csharp,highlight="1-4,12,14,16"]
+----
+public interface ICalcOperation {
+    string Name {get;}
+    double Calculate(double left, double right);
+}
+
+public class CalckViewModel
+{
+    public double ValueLeft { get; set; }
+    public double ValueRight { get; set; }
+    public double Result { get; set; }
+
+    public List<(string Name, ICommand Command)> AvailbleOperations {get;}
+
+    public CalckViewModel(IEnumerable<ICalcOperation> operations)
+    {
+        AvailbleOperations = operations.Select(d => (d.Name, new DelegatedCommand(() => Result = d.Calculate(ValueLeft, ValueRight)))).ToList();
+    }
+}
+
+class CernBasedCalculation : ICalcOperation
+{
+    string Name =>  "CERN Calculation";
+    private readonly UserSettings _settings;
+    public CernBasedCalculation(UserSettings settings) {
+        _settings = settings;
+    }
+    public double Calculate(double left, double right) {
+            // Complicated task which requires data from e.g. CERN and Polish National Centre for Nuclear Research. 
+            // It has many dependencies: need to make some REST requests with appropriate api keys. 
+            if (_settings.MakeCalculations)
+                Result = ValueLeft + ValueRight
+            else throw new Exception("Calculation disabled by user settings");
+            // Than you also have to store te result for later usage to decrease amount of requests.
+    }
+}
+
+class SimpleCalculation : ICalcOperation
+{
+    string Name =>  "Simple Calculation";
+    public double Calculate(double left, double right) {
+            // It's quite simple command based only on in-company knowlage.
+            Result = ValueLeft - ValueRight
+    }
+}
+----
+
+W tym kroku zmiany dotknęły przede wszystkim view modelu. 
+Dzięki wprowadzeniu interfejsu możemy uodpornić to miejsce na zmiany w przyszłości – np. dodawanie nowych metod obliczeń. 
+Dzięki takiej organizacji kodu zostaje tylko krok do architektury pluginowej: wystarczy ładować poszczególne kalkulacje w sposób dynamiczny.
+
+Jak pisałem na wstępie do tego kroku: dostosowanie warstwy wizualnej może być wyzwaniem dlatego należy podchodzić rozważnie do wymuszania takiego stylu kodu.
+Niemniej, w przypadku elementów backendowych, takie interfejsy potrafią robić całkiem niezłą robotę.
+
+****
 
 == Na co uważać?
 
-// <<CleanHandBook>>.
-// My general rule for switch statements is that they can be tolerated if they appear only once, are used to create polymorphic objects, and are hidden behind an inheritance relationship so that the rest of the system can’t see them
+Osobiście wyróżniam dwie rzeczy, na które trzeba w szczególnie uważać: enumy oraz programowanie strukturalne w połączeniu z obiektowym. 
+Na to pierwsze zwraca uwagę sam Robert C. Martin, mówiąc, ż  że toleruje je tylko wtedy, gdy są używane do utworzenia obiektu i dodatkowo nie są dostępne z zewnątrz <<CleanHandBook>>.
+Co więcej warto zwrócić uwagę, że wykorzystanie enuma więcej niż w jednym zestawie instrukcji `switch`...`case` lub `if`...`else` jest świetnym wskaźnikiem miejsca, którym można by się zaopiekować w celu zastosowania zasady Open Close Principle.
+
+Takie rozdwojenie kodu pomiędzy programowanie strukturalnym a obiektowym uważam za niebiezpieczne z prostego względu: zmiany w takim kodzie często są niezwykle kaskadowe a wyłuskanie odpowiedniej abstrakcji jest po prostu ciężkie. 
+Zapewne lepiej byłoby po prostu pisać albo strukturalnie albo obiektowo - najlepiej po prostu się zdecydować.
 
 
 [bibliography]
@@ -168,8 +406,6 @@ A rosnąca przejrzystość, dzięki prostym interfejsom i pluginowej architektur
 * Chovatiya, Vishal. „Open Closed Principle in C++ | SOLID as a Rock”. Vishal Chovatiya, 7 kwiecień 2020. http://www.vishalchovatiya.com/open-closed-principle-in-cpp-solid-as-a-rock/.
 * Azevedo, Gustavo Peixoto de. „The Open/Closed Principle: Concerns about Change in Software Design”. The Sympriser Blog, 23 czerwiec 2009. https://blog.symprise.net/articles/open-closed-principle-concerns-about-change-in-software-design.
 * Stackify. „SOLID Design Principles Explained: The Open/Closed Principle with Code Examples”, 28 marzec 2018. https://stackify.com/solid-design-open-closed-principle/.
-
-
 
 [small]
 Zdjęcie tytułowe:  https://unsplash.com/@enginakyurt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[engin akyurt] on https://unsplash.com/s/photos/hard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Unsplash]
