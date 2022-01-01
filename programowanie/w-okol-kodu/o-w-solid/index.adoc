@@ -19,7 +19,7 @@ series:
 
 > OCP jest o tym, aby nie zmieniać kodu gotowego produkcyjnie.
 
-I to według mnie jest wszystko, co mógłbym napisać o tej zasadzie po wielu godzinach poszukiwania. 
+I to według mnie jest wszystko, co mógłbym napisać o tej zasadzie po wielu godzinach poszukiwań. 
 Jednak jak osiągnąć taki stan rzeczy? 
 W tym artykule celowo zaczynam od bardziej teoretycznych rozważań na temat tej zasady, ponieważ błahych przykładów prezentujących zastosowanie jej jest mnóstwo w Internecie. 
 Niemniej, na końcu prezentuję kilka przykładów, które według mnie są bardziej realne w codziennej sztuce programowania.
@@ -38,7 +38,7 @@ Dopiero na końcu wykorzystać dziedziczenie po pozostałych klasach, gdyż te r
 Zasadzie OCP możemy pomóc wykorzystując zasady odwróconej kontroli (inversion of control) oraz pojedynczej odpowiedzialności (single responsibility). 
 Jednak jak zobaczymy w przykładach i w trakcie własnej praktyki, niemożliwe jest wykorzystywanie tylko jednej z zasad SOLID – one wszystkie razem tworzą mur pozbawiony możliwie wszystkich słabych punktów. 
 
-Chciałbym jeszcze podkreślić, że w przypadku abstrakcji *w zadnym wypadku* nie chodzi o to, aby tworzyć rozbudowane drzewa genealogiczne klas. 
+Chciałbym jeszcze podkreślić, że w przypadku abstrakcji *w zadnym wypadku* nie chodzi o to, aby tworzyć rozbudowane drzewa klas. 
 Powinniśmy starać się ograniczać przede wszystkim do implementacji możliwie prostych interfejsów, gdyż ich implementacje najprościej jest zastąpić przy pomocy kontenera zależności. 
 W przypadku gdy chcemy uniknąć kopiowania kodu mamy często dwie możliwości: klasę abstrakcyjną (bazową) oraz *kompozycję*, gdzie w szczególności polecam to drugie. 
 
@@ -85,7 +85,7 @@ Fool me once, shame on you. Fool me twice, shame on me.
 
 Długo zastanawiałem się jak przetłumaczyć to przysłowie, ale nie potrafię zrobić tego wystarczająco gładko. 
 W skrócie, dla tych nieanglojęzycznych, będzie tak: „oszukaj mnie raz – wstydź się, oszukaj mnie ponownie – będę wstydził się ja”. 
-W tym przypadku Robert C. Martin ma na myśli to, żeby nie stosować abstrakcji zbyt pochopnie, co może prowadzić do nadmiernego skomplikowania kodu. 
+Tym cytatem Robert C. Martin ma na myśli to, żeby nie stosować abstrakcji zbyt pochopnie, co może prowadzić do nadmiernego skomplikowania kodu. 
 Więc kiedy najlepiej zacząć wprowadzać interfejsy i klasy wirtualne? _Za drugim razem!_ 
 Miał być tylko jeden typ użytkownika, a teraz dochodzi drugi? Zrób tak, aby i trzeci dodać łatwo. 
 
@@ -117,7 +117,7 @@ Jeśli dbamy o kod przetestowany produkcyjnie dostajemy kilka benefitów:
 
 === Elastyczność – architektura pluginowa
 
-Jak sam Robert C. Martin pisze, najwyższą formą OCP są pluginy <<theOCP>>.
+Według Roberta C. Martina najwyższą formą OCP są pluginy <<theOCP>>.
 Jako przykład można podać wszechobecne edytory kodu, przeglądarki czy gry, którym można dodawać całkowicie nową funkcjonalność za pomocą rozszerzeń (modów).
 Taka elastyczność daje nam łatwość dokonywania zmian w programie, poprzez ich odizolowywanie w osobnych modułach.
 
@@ -134,10 +134,11 @@ public interface ICalcOperation
 }
 ----
 
-Pomijając sensowność tego interfejsu, największe jego zalety to przede wszystkim przejrzystość: junior wie, w jakim zakresie ma wykonać swoją pracę, do tego wykona swoją pracę w osobnych, nowych klasach, nie dotykając kodu produkcyjnego.
+Pomijając sensowność tego interfejsu, największe jego zalety to przede wszystkim przejrzystość: junior wie, w jakim zakresie ma wykonać swoją pracę. 
+Do tego wykona swoją pracę w osobnych, nowych klasach, nie dotykając kodu produkcyjnego.
 Bardziej obrazowe porównanie znajduje się poniżej.
 
-=== Solidność – kod odporny na błędy wraz 
+=== Solidność – kod odporny na błędy
 
 Kod staje się odporny na błędy poprzez rzadsze zmienianie tych fragmentów oprogramowania, które są już przetestowane w boju. 
 Co więcej, dzięki jasnemu podziałowi na klasy nadrzędne, odpowiadające za logikę, od tych wykonawczych (kłania się zasada odwróconej kontroli), można łatwiej ocenić, kto powinien zająć się ewentualnym błędem: junior, mid, czy może senior. 
@@ -146,12 +147,12 @@ Co więcej, dzięki jasnemu podziałowi na klasy nadrzędne, odpowiadające za l
 === Wielorazowość i przejrzystość – szybsze wdrażanie funkcji
 
 Dzięki odseparowaniu pomniejszych funkcjonalności poszczególne elementy oprogramowania mają większą szansę być wykorzystane w innym projekcie.
-A rosnąca przejrzystość, dzięki prostym interfejsom i pluginowej architekturze, pozwala nam na szybsze dołączanie nowych funkcjonalności, zwłaszcza w aspektach, które mogą poszczycić się największym wskaźnikiem ponownego wykorzystania kodu.
+Rosnąca przejrzystość, dzięki prostym interfejsom i pluginowej architekturze, pozwala nam na szybsze dołączanie nowych funkcjonalności, zwłaszcza w aspektach, które mogą poszczycić się największym wskaźnikiem ponownego wykorzystania kodu.
 
 == Przykład kodu
 
 Teraz przejdźmy do przykładu. 
-Weźmy na tapet wyświechtany już kalkulator, który będzie inspirowany 
+Weźmy na tapet wyświechtany już kalkulator, który oprzemy o interfejs przedstawiony powyżej.
 Możemy go zrobić na dwa sposoby: rozrzucając wszystko jak popadnie, bądź z uwzględnieniem OCP.
 
 
@@ -178,14 +179,14 @@ public class CalckViewModel
     {
         Add = new DelegatedCommand(() => {
             // Complicated task which requires data from e.g. CERN and Polish National Centre for Nuclear Research. 
-            // It has many dependencies: need to make some REST requests with appropriate api keys. 
+            // It has many dependencies: need to make some REST requests with appropriate API keys. 
             if (settings.MakeCalculations)
                 Result = ValueLeft + ValueRight
             else throw new Exception("Calculation disabled by user settings");
-            // Than you also have to store te result for later usage to decrease amount of requests.
+            // Than you also have to store the result for later usage to decrease amount of requests.
             });
         Subtrack = new DelegatedCommand(() =>{
-            // It's quite simple command based only on in-company knowlage.
+            // It's quite simple command based only on in-company knowledge.
             Result = ValueLeft - ValueRight
         });
     }
@@ -235,18 +236,18 @@ class CernBasedCalculation
 {
     public double MakeCernCalculation(double left, double right, UserSettings settings) {
             // Complicated task which requires data from e.g. CERN and Polish National Centre for Nuclear Research. 
-            // It has many dependencies: need to make some REST requests with appropriate api keys. 
+            // It has many dependencies: need to make some REST requests with appropriate API keys. 
             if (settings.MakeCalculations)
                 Result = ValueLeft + ValueRight
             else throw new Exception("Calculation disabled by user settings");
-            // Than you also have to store te result for later usage to decrease amount of requests.
+            // Than you also have to store the result for later usage to decrease amount of requests.
     }
 }
 
 class SimpleCalculation
 {
     public double MakeSimpleCalculation(double left, double right) {
-            // It's quite simple command based only on in-company knowlage.
+            // It's quite simple command based only on in-company knowledge.
             Result = ValueLeft - ValueRight
     }
 }
@@ -257,7 +258,7 @@ Zwróć uwagę, że metody poszczególnych klas mają różne nazwy i parametry.
 Nie mają one wspólnego interfejsu – ktoś mógłby powiedzieć, że słusznie, gdyż nie byłby on tutaj wykorzystany – i będzie to prawda. 
 
 WARNING: Według mnie jest to bardzo niebezpieczny moment – zaczynamy przechodzić z programowania obiektowego na programowanie strukturalne! 
-Zamiast zmieniać stan obiektów, przekazujemy struktury do metod, które na nich operują, jak nic stare dobre ANSI C.
+Zamiast zmieniać stan obiektów, przekazujemy struktury do metod, które na nich operują –stare dobre ANSI C.
 
 ****
 
@@ -295,18 +296,18 @@ class CernBasedCalculation
     }
     public double MakeCernCalculation(double left, double right) {
             // Complicated task which requires data from e.g. CERN and Polish National Centre for Nuclear Research. 
-            // It has many dependencies: need to make some REST requests with appropriate api keys. 
+            // It has many dependencies: need to make some REST requests with appropriate API keys. 
             if (_settings.MakeCalculations)
                 Result = ValueLeft + ValueRight
             else throw new Exception("Calculation disabled by user settings");
-            // Than you also have to store te result for later usage to decrease amount of requests.
+            // Than you also have to store the result for later usage to decrease amount of requests.
     }
 }
 
 class SimpleCalculation
 {
     public double MakeSimpleCalculation(double left, double right) {
-            // It's quite simple command based only on in-company knowlage.
+            // It's quite simple command based only on in-company knowledge.
             Result = ValueLeft - ValueRight
     }
 }
