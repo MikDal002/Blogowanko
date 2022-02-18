@@ -44,6 +44,8 @@ Następujące optymalizacje są zalecane footnote:BIA36JakubWaliszewski[https://
 
 Autor prezentacji na BIA36 footnote:BIA36JakubWaliszewski[] mówi o tym, że otrzymali narzędzie do transportu 500GB danych produkcyjnych z jednej instancji bazy CosmosDB do drugiej.
 
+Zwiększenei autoscale z 10x do 100x za pomocą API, wykorzystane przez Allegro Pay: https://www.youtube.com/watch?v=9kgdTDatPtU
+
 ==== Więcej na temat RU
 Jeśli zainteresował Cię temat RU, to więcej informacji znajdziesz na stronie Microsoftu: https://docs.microsoft.com/en-us/azure/cosmos-db/request-units[Request Units]. 
 Pokrótce mogę powiedzieć, że ilość użytych jednostek na żądanie zależy od tego, ile użyjesz pamięci, procesora i operacji wejścia/wyjścia na sekundę (z ang. IOPS – _input/output operations per second_). 
