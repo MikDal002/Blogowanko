@@ -1,16 +1,13 @@
 ---
 title: WiX – jak zacząć
-description: Kilka materiałów przydatnych by zaczać z WiX'em.
-draft: true
+description: Kilka materiałów przydatnych, by zacząć z WiX'em. 
+draft: false
 categories:
     - Na marginesie
-    - .Net
-    - WPF
-    - XAML
+    - Instalatory
 tags:
-    - XAML
-    - Binding
-date: 2021-12-23
+    - WiX
+date: 2022-05-03
 ---
 
 Powiem krótko: najlepsze wprowadzenie do WiX'a znalazłem na YouTube. 

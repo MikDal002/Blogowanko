@@ -3,6 +3,7 @@ title: XAML i TargetNullValue
 description: Krótko o ustawianiu specyficznej kontrolki gdy wartość jest null.
 draft: false
 categories:
+    - Na marginesie
     - .Net
     - WPF
     - XAML

@@ -1,0 +1,17 @@
+---
+title: WiX - how to get started
+description: Some useful resources to get started with WiX. 
+draft: false
+categories:
+    - Side notes
+    - Installers
+tags:
+    - WiX
+date: 2022-05-03
+---
+
+I'll be brief: the best introduction to WiX I've found on YouTube. 
+The video by AngelSix is available at this link: https://www.youtube.com/watch?v=6Yf-eDsRrnM. 
+It lasts over 2 hours, but it is worth it - I have not been able to find an introduction as good in written form. 
+
+In addition, a small collection of tips and tricks from the SO: https://stackoverflow.com/questions/471424/wix-tricks-and-tips. 

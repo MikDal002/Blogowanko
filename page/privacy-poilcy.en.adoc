@@ -9,7 +9,7 @@ lastmod: '2021-07-05'
 menu:
     main: 
         weight: -0
-        pre: user
+        pre: privacy
 ---
 
 == ADVERTISEMENTS 
