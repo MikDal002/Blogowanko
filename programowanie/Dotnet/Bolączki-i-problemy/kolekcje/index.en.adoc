@@ -1,0 +1,410 @@
+---
+title: "O in SOLID. For what? Why?"
+date: 2021-12-20
+draft: true
+image: cover.jpg
+description: Is OCP even worth using? After a few experiences this thought crossed my mind. But now I know that using the principle of open to extensions and closed to modification is not a waste of time on abstractions but to harden the application to protect production-ready code.
+
+categories: 
+    - "Around the code"
+tags:
+    - "SOLID"
+    - "OCP"
+    - Open-Close Principle
+series:
+    - SOLID
+---
+:toc: 
+
+> OCP is about not changing production-ready code.
+
+And that, in my opinion, is all I could write about this principle after many hours of research. 
+However, how to achieve such a state of affairs? 
+In this article I deliberately start with more theoretical considerations about this principle, because trivial examples demonstrating the application of it are plenty on the Internet. 
+Nevertheless, at the end I present some examples that I think are more realistic in the everyday art of programming.
+
+== What is OCP and how to pursue it
+
+[quote, Robert C. Martin, "Agile principles, patterns, and practices in C#"]
+Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification.
+
+We satisfy the OCP principle mainly through *abstraction* supported by a dependency container and dependency injection.
+We can do this in several ways. 
+The best way is to start with interfaces, because they allow us to freely change the implementation.
+Then move to abstract classes, where much of the functionality can be shared.
+Only at the end use the inheritance from other classes, because they are rarely made with a view to being someone's parent.
+
+The OCP principle can be supported by using the principles of inversion of control and single responsibility. 
+However, as we will see in the examples and in our own practice, it is impossible to use only one of the SOLID principles - they all together create a wall without as many weak points as possible. 
+
+I would like to further emphasize that abstraction is *never* about creating elaborate class trees. 
+We should mainly try to limit ourselves to implementations of as simple interfaces as possible, since their implementations are easiest to replace with a dependency container. 
+In case we want to avoid copying code we often have two options: abstract (base) class and *composition*, where I recommend the latter in particular. 
+
+.Newbie's note: "interface implementation through composition"
+****
+
+Remember that composition also allows us to extend an implementation by delegating it.
+This allows us to avoid code duplication, and even to swap implementations at runtime if needed. 
+
+.An example of implementation through composition. Code abbreviated for readability.
+[source,csharp]
+----
+class IListExample<T> : IList<T>
+{
+    private readonly List<T> _internal = new();
+
+    public IEnumerator<T> GetEnumerator() => _internal.GetEnumerator();
+    
+    IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_internal).GetEnumerator();
+
+    public void Add(T item) => _internal.Add(item);
+
+    public void Clear() => _internal.Clear();
+
+    public bool Contains(T item) => _internal.Contains(item);
+
+    public T this[int index]
+    {
+        get => _internal[index];
+        set => _internal[index] = value;
+    }
+}
+----
+
+I am writing about it because I remember that at the beginning of my adventure with programming it was not obvious to me.
+Because of that I unnecessarily multiplied overriding classes, leading to the explosion of hierarchy. 
+
+****
+
+=== What's the best way to go?
+
+[quote, Robert C. Martin, "Agile principles, patterns, and practices in C#"]
+Fool me once, shame on you. Fool me twice, shame on me.
+
+With this quote, Robert C. Martin means not to apply abstractions too hastily, which can lead to overcomplicated code. 
+So when is the best time to start introducing interfaces and virtual classes? _The second time!_
+There was only supposed to be one user type, and now a second one is coming? Make it so that you can add a third easily as well. 
+
+[quote, Robert C. Martin, "Agile principles, patterns, and practices in C#"]
+The longer we wait to find out what kinds of changes are likely, the more difficult it will be to create the appropriate abstractions.
+
+There's something about the fact that the longer we wait, the more unique the modules seem.
+They are also composed of small components that can be abstracted away. 
+Given this and the previous golden advice, you might conclude that an appropriate abstraction should be added whenever there is a *second component* or there is a *second change* to code already running in production. Importantly: _changes_, not repairs.
+
+[quote, Robert C. Martin, "Agile principles, patterns, and practices in C#"]
+In general, no matter how "closed" a module is, there will always be some kind of change against which it is not closed.
+
+Golden thought for inspiration: no matter how hard we try, it won't be perfect forever. 
+Therefore, don't work hard to make sure everything is prepared for future changes: it won't be. 
+Remember that in an application it is not only the resistance to future changes that matters, but also the fact that we have to provide the functions needed by our client.
+
+As Robert C. Martin (<<AgilePPP>>) writes, be careful not to overdo it with too much abstraction. 
+You may end up overcomplicating the whole thing.
+ 
+== What does OCP give us?
+
+If we take care of production tested code we get several benefits:
+
+- plugin architecture,
+- easier implementation for juniors,
+- fault-tolerant code,
+- faster deployment of features.
+
+=== Flexibility - plugin architecture
+
+According to Robert C. Martin, the highest form of OCP are plugins (<<theOCP>>).
+As an example, the ubiquitous code editors, browsers, or games can be given entirely new functionality by using extensions (mods).
+This flexibility gives us the ease of making changes to a program by isolating them in separate modules.
+
+=== Concreteness in making changes - easier implementation for juniors
+
+It is much easier to "use" junior in a project that consists of simple interfaces, because what can be complicated about implementing such an interface:
+
+[source,csharp]
+----
+public interface ICalcOperation
+{
+    string Name {get;}
+    double Calc(double left, double right);
+}
+----
+
+Leaving aside the sense of this interface, its biggest advantages are first of all transparency: junior knows in which scope he has to do his work. 
+On top of that, he will do his work in separate, new classes, without touching the production code.
+A more illustrative comparison can be found below.
+
+=== Robustness - fault-tolerant code
+
+Code becomes fault-tolerant by changing less frequently those pieces of software that are already battle-tested. 
+What's more, thanks to the clear division between superior classes, responsible for logic, and executive ones (the principle of inversion of control comes to mind), it's easier to assess who should take care of a possible bug: junior, mid, or maybe senior. 
+
+
+=== Reusability and transparency - faster feature deployment
+
+By isolating minor functionality, individual pieces of software are more likely to be used in another project.
+Increasing transparency, thanks to simple interfaces and plugin architecture, allows us to include new functionalities faster, especially in those aspects that have the highest rate of code reuse.
+
+== Code example
+
+Now let's move to an example. 
+Let's use a trivial model of a calculator, which will be based on the interface presented above.
+We can do this in two ways: decomposing everything into prime factors or taking OCP into account.
+
+
+=== Distributed method
+
+We can write our application in a simple way, like for a college project. 
+What does it look like then? 
+
+****
+Consider the following View Model:
+
+[source,csharp]
+----
+public class CalckViewModel
+{
+    public double ValueLeft { get; set; }
+    public double ValueRight { get; set; }
+    public double Result { get; set; }
+
+    public ICommand CernBasedCalculation { get; }
+    public ICommand Subtrack { get; }
+
+    public CalckViewModel(UserSettings settings)
+    {
+        Add = new DelegatedCommand(() => {
+            // Complicated task which requires data from e.g. CERN and Polish National Centre for Nuclear Research. 
+            // It has many dependencies: need to make some REST requests with appropriate API keys. 
+            if (settings.MakeCalculations)
+                Result = ValueLeft + ValueRight
+            else throw new Exception("Calculation disabled by user settings");
+            // Than you also have to store the result for later usage to decrease amount of requests.
+            });
+        Subtrack = new DelegatedCommand(() =>{
+            // It's quite simple command based only on in-company knowledge.
+            Result = ValueLeft - ValueRight
+        });
+    }
+}
+----
+
+We have everything in one class, and adding new commands is simply "copy-paste" a few lines and fill them with appropriate code. 
+The constructor grows in size to a dozens or even more, properties just to handle all the internal commands.
+
+However, the reality is much more brutal. 
+To add a new command we have to copy the code in at least a few places, for example: in the view - adding a new control/endpoint, in the view model - adding the support itself. 
+If we still have some intermediate layers then the number of places that need to be taken care of counts in tens. 
+And this is the place where a task evaluated for one day of work takes 5 of them. 
+"Adding a new command to the calculator? After all, it's a small thing," you say in a meeting. 
+And when you get to work, you find that you have to go through several large classes and test them thoroughly. 
+
+****
+
+=== Step 1: Relocation
+
+Pierwszym krokiem, i często ostatnim, jest przeniesienie poszczególnych funkcjonalności do osobnych klas:
+
+
+****
+
+By moving the individual methods into separate classes, we get code similar to this:
+
+[source,csharp]
+----
+public class CalckViewModel
+{
+    public double ValueLeft { get; set; }
+    public double ValueRight { get; set; }
+    public double Result { get; set; }
+
+    public ICommand CernBasedCalculation { get; }
+    public ICommand Subtrack { get; }
+
+    public CalckViewModel(CernBasedCalculation cern, MakeSimpleCalculation simple, UserSettings settings)
+    {
+        Add = new DelegatedCommand(() => Result = cern.MakeCernCalculation(ValueLeft, ValueRight, settings));
+        Subtrack = new DelegatedCommand(() => Result = simple.MakeSimpleCalculation(ValueLeft, ValueRight));
+    }
+}
+
+class CernBasedCalculation 
+{
+    public double MakeCernCalculation(double left, double right, UserSettings settings) {
+            // Complicated task which requires data from e.g. CERN and Polish National Centre for Nuclear Research. 
+            // It has many dependencies: need to make some REST requests with appropriate API keys. 
+            if (settings.MakeCalculations)
+                Result = ValueLeft + ValueRight
+            else throw new Exception("Calculation disabled by user settings");
+            // Than you also have to store the result for later usage to decrease amount of requests.
+    }
+}
+
+class SimpleCalculation
+{
+    public double MakeSimpleCalculation(double left, double right) {
+            // It's quite simple command based only on in-company knowledge.
+            Result = ValueLeft - ValueRight
+    }
+}
+----
+
+The outline of some modularity is beginning to form, but unfortunately many people feel resistance to going further here. 
+Note that the methods of each class have different names and parameters.
+They do not share a common interface - someone might say that quite rightly, as it would not be used here - and this will be true. 
+
+WARNING: In my opinion, this is a very dangerous point - we are starting to move from object-oriented programming to structured programming! 
+Instead of changing the state of objects, we pass structures to methods that operate on them – good old ANSI C.
+
+****
+
+=== Step 2: Isolation and unification
+
+In this step, we will encapsulate objects to hide the dependencies of individual commands:
+
+****
+To do this, we just need to pass our user settings where they are really needed
+
+
+[source,csharp,highlight="10,12,19-21,23,26"]
+----
+public class CalckViewModel
+{
+    public double ValueLeft { get; set; }
+    public double ValueRight { get; set; }
+    public double Result { get; set; }
+
+    public ICommand CernBasedCalculation { get; }
+    public ICommand Subtrack { get; }
+
+    public CalckViewModel(CernBasedCalculation cern, MakeSimpleCalculation simple)
+    {
+        Add = new DelegatedCommand(() => Result = cern.MakeCernCalculation(ValueLeft, ValueRight));
+        Subtrack = new DelegatedCommand(() => Result = simple.MakeSimpleCalculation(ValueLeft, ValueRight));
+    }
+}
+
+class CernBasedCalculation 
+{
+    private readonly UserSettings _settings;
+    public CernBasedCalculation(UserSettings settings) {
+        _settings = settings;
+    }
+    public double MakeCernCalculation(double left, double right) {
+            // Complicated task which requires data from e.g. CERN and Polish National Centre for Nuclear Research. 
+            // It has many dependencies: need to make some REST requests with appropriate API keys. 
+            if (_settings.MakeCalculations)
+                Result = ValueLeft + ValueRight
+            else throw new Exception("Calculation disabled by user settings");
+            // Than you also have to store the result for later usage to decrease amount of requests.
+    }
+}
+
+class SimpleCalculation
+{
+    public double MakeSimpleCalculation(double left, double right) {
+            // It's quite simple command based only on in-company knowledge.
+            Result = ValueLeft - ValueRight
+    }
+}
+----
+
+In this way, the dependencies of our calculations will no longer affect the view model! 
+We've done the first layer isolation, so that changes made to just one module won't risk messing up another. 
+
+I introduced this step specifically to emphasize that class encapsulation is an important step in satisfying the Open-Closed principle.
+
+****
+
+=== Step 3: Interface Implementation
+
+This step is not always mandatory. 
+It involves changing several layers in a way that requires a lot of knowledge about the language and technology being used - making it, without real seniors, potentially impossible for the team.
+However, sometimes it happens that the requirements for the presentation layer are so specific that unifying this issue is so much work that it is not profitable.
+
+****
+
+Since we already have methods with identical definition (omitting the name) we can easily introduce a common interface:
+
+[source,csharp,highlight="1-4,12,14,16"]
+----
+public interface ICalcOperation {
+    string Name {get;}
+    double Calculate(double left, double right);
+}
+
+public class CalckViewModel
+{
+    public double ValueLeft { get; set; }
+    public double ValueRight { get; set; }
+    public double Result { get; set; }
+
+    public List<(string Name, ICommand Command)> AvailbleOperations {get;}
+
+    public CalckViewModel(IEnumerable<ICalcOperation> operations)
+    {
+        AvailbleOperations = operations.Select(d => (d.Name, new DelegatedCommand(() => Result = d.Calculate(ValueLeft, ValueRight)))).ToList();
+    }
+}
+
+class CernBasedCalculation : ICalcOperation
+{
+    string Name =>  "CERN Calculation";
+    private readonly UserSettings _settings;
+    public CernBasedCalculation(UserSettings settings) {
+        _settings = settings;
+    }
+    public double Calculate(double left, double right) {
+            // Complicated task which requires data from e.g. CERN and Polish National Centre for Nuclear Research. 
+            // It has many dependencies: need to make some REST requests with appropriate API keys. 
+            if (_settings.MakeCalculations)
+                Result = ValueLeft + ValueRight
+            else throw new Exception("Calculation disabled by user settings");
+            // Than you also have to store the result for later usage to decrease amount of requests.
+    }
+}
+
+class SimpleCalculation : ICalcOperation
+{
+    string Name =>  "Simple Calculation";
+    public double Calculate(double left, double right) {
+            // It's quite simple command based only on in-company knowledge.
+            Result = ValueLeft - ValueRight
+    }
+}
+----
+
+In this step, the changes primarily affected the model view. 
+By introducing an interface, we can make this place immune to future changes - such as adding new calculation methods. 
+Thanks to this organization of the code, there is only one step left to the plugin architecture: it is enough to load individual calculations in a dynamic way.
+
+As I wrote in the introduction to this step: customizing the visual layer can be a challenge so you should be careful about enforcing this style of code.
+Nevertheless, for backend components, such interfaces can do a pretty good job.
+
+****
+
+== What to watch out for.
+
+Personally, there are two things to be careful about: enums and structured programming in combination with object oriented programming. 
+Robert C. Martin himself points out the former, saying that he tolerates them only if they are used to create an object and additionally are not accessible from the outside <<CleanHandBook>>.
+Furthermore, it is important to note that the use of an enum in more than one set of `switch`...`case` or `if`...`else` statements is a great indicator of the location that could be taken care of in order to apply the Open Close Principle.
+
+I find such a split between structured and object oriented programming dangerous for a simple reason: changes in such code are often cascading and extracting the right abstraction is simply hard. 
+It would probably be better to simply write either structured or object oriented code - it is best to just decide.
+
+
+[bibliography]
+== Sources and additional materials
+
+* [[[theOCP]]] Martin, Robert C. „Clean Coder Blog”. Dostęp z dnia 17 listopada 2021. https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html.
+* [[[CleanHandBook]]] Martin, Robert C. Clean Code: A Handbook of Agile Software Craftsmanship. Repr. Robert C. Martin Series. Upper Saddle River, NJ Munich: Prentice Hall, 2012.
+* [[[AgilePPP]]] Martin, Robert C., i Micah Martin. Agile Principles, Patterns, and Practices in C#. Robert C. Martin Series. Upper Saddle River, NJ: Prentice Hall, 2007.
+* Samokhin, Vadim. „The Open-Closed Principle”. HackerNoon.Com (blog), 16 czerwiec 2018. https://medium.com/hackernoon/the-open-closed-principle-c3dc45419784.
+* Chovatiya, Vishal. „Open Closed Principle in C++ | SOLID as a Rock”. Vishal Chovatiya, 7 kwiecień 2020. http://www.vishalchovatiya.com/open-closed-principle-in-cpp-solid-as-a-rock/.
+* Azevedo, Gustavo Peixoto de. „The Open/Closed Principle: Concerns about Change in Software Design”. The Sympriser Blog, 23 czerwiec 2009. https://blog.symprise.net/articles/open-closed-principle-concerns-about-change-in-software-design.
+* Stackify. „SOLID Design Principles Explained: The Open/Closed Principle with Code Examples”, 28 marzec 2018. https://stackify.com/solid-design-open-closed-principle/.
+
+[small]
+Title photo:  https://unsplash.com/@enginakyurt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[engin akyurt] from https://unsplash.com/s/photos/hard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Unsplash]
+  

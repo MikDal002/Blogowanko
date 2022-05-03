@@ -1,0 +1,174 @@
+---
+title: "Kolekcja w C#. Przypomnienie o dobrych praktykach"
+date: 2022-04-16
+draft: true
+image: cover.jpg
+description: "Dziś, w ramach przypomnienia, wpis na temat kolekcji oraz tego, czego z nimi nie robić. 
+Kolekcje są bardzo częstym elementem naszych programów i nierzadko potrafią sprawić wiele nieoczywistych problemów."
+
+categories: 
+    - "W okół kodu"
+tags:
+    - "SOLID"
+    - "OCP"
+    - Open-Close Principle
+    - Zasada Otwarty-Zamknięty
+series:
+    - SOLID
+---
+:toc:    
+
+Dla osób, które pracują już wiele lat w C# nie będzie tutaj nic nowego. 
+Jednak jeśli wpadłeś do projektu, gdzie zasady stosowania kolekcji przypominają dziki zachód – każdy używa ich, jak uważa za słuszne, i w sumie, sam już nie wiesz, co jest poprawne a co nie, to zapraszam do odświeżenia sobie tej wiedzy. 
+
+Motywacją do tego wpisu jest często ignorowany kawałek dokumentacji na temat kolekcji:
+
+[quote, Wycinek z dokumentacji klasy List<T>, https://docs.microsoft.com/pl-pl/dotnet/api/system.collections.ilist?view=net-6.0]
+Wykonywanie wielu operacji odczytu naraz na kolekcji jest bezpieczne. Problemy mogą wystąpić, gdy kolekcja zostanie zmieniona podczas odczytu. 
+Aby kolekcja była bezpieczna w odczycie i zapisie przez wiele wątków, należy zastosować własny mechanizm synchronizacji. 
+Kolekcje ze wbudowanymi mechanizmami synchronizacji znajdziesz w przestrzeni nazw System.Collection.Concurrent. 
+
+Niestety, często spotykam się, z tym że tak ważne założenie jest ignorowane, co potrafi skutkować, trudnymi w wytropieniu, wyjątkami `InvalidOperationException`. 
+Jednak łatwo powiedzieć, nie używam `List<T>` wielowątkowo, tylko jak to zrobić dobrze? 
+Otóż okazuje się, że odpowiedź wcale nie jest taka prosta. 
+
+## Skąd wogóle się bierze `IInvalidOperationException`?
+
+Jest to jedno z pytań, które zadałem sobie dawno temu: dlaczego!? 
+Dlaczego nie mogę iterować równocześnie po tej samej kolekcji, którą zmieniam? 
+Odpowiedź jest prosta: bo to bez [ogólnego] sensu.
+
+Tak naprawdę, aby odpowiedzieć na to pytanie, należy zadać inne: co jest dla nas istotne: zgodność, przewidywalność, szybkość? 
+W przypadku kolekcji nie idzie łatwo odpowiedzieć na to pytanie w sposób, który zadowoli wszystkich. 
+Rozważmy prosty przykład: 
+
+.Dlaczego List<T> rzuca wyjątkiem `IInvalidOperationException`
+====
+Mamy kolekcję, która zawiera `Jabłko` i `Banan`.
+Zaczynamy iterować po takiej kolekcji, wyświetlajac nazwy:
+
+[source,csharp]
+----
+var fruits = new [] { "Jabłko", "Banan"};
+foreach (var fruit in fruits) 
+    Console.Write(fruit);
+----
+
+Przy pierwszej iteracji wyświetli nam się napis `Jabłko`. 
+I w tym momencie, zanim przejdziemy do Banana, ktoś dodaje nam wpis "Cytryna" na pozycję 1 (po Jabłku). 
+Jakiego zachowania byś oczekiwał (daj znać w komentarzu)? 
+
+Otóż moglibyśmy wykryć, że kolekcja się zmieniła i uzyskać wynik `Jabłko Cytryna Banan`. 
+Wygląda to nawet rozsądnie.
+
+Co jednak z przypadkiem, kiedy "Cytryna" wejdzie na pozycję [1] (po Jabłku) w momencie, kiedy wyświetlimy już napis "Banan". 
+Czego należałoby oczekiwać? Napisu: "Jabłko Banan Cytryna"?
+To już nie ma sensu, bo mając kolekcję `{ "Jabłko", "Cytryna", "Banan" }` otrzymaliśmy coś odmiennego.
+Cofnąć się już w wykonaniu nie można, co poszło na ekran, to już poszło – mogłoby również pójść na serwer, prawda? 
+I w tym momencie, jedni mogliby powiedzieć, że tak, takie zachowanie jest ok, podczas gdy inni powiedzieliby, że jest niedopuszczalne.
+Jak więc pogodzić jednych i drugich? Dając im informację, że kolekcja uległa zmianie. 
+
+Są jak najbardziej przypadki, kiedy modyfikacja kolekcji nie wypływa na "popsucie" enumeratora. 
+Dla przykładu `ConcurrentQueue` jest zrobiony w taki sposób, że sam enumerator potrafi pracować ze zmieniająca się kolekcją. 
+Tylko że gdy mamy kolekcję typu kolejka, to w tym przypadku zachowanie jest jak najbardziej przewidywalne, więc w tym przypadku jestem w stanie zrozumieć taki podejście – w końcu dokładamy elementy na końcu.
+
+Podsumowując, (chyba) wszystkie kolekcje z przestrzeni nazw `System.Collections` i `System.Collections.Generic` implementują identyczne zachowanie: zmiana kolekcji w trakcie enumeracji zakończy się wyjątkiem `InvalidOperationException`. 
+Kolekcje z przestrzeni `System.Collections.Concurrent` obchodzą ten problem w różny sposób.
+====
+
+
+## Edycja listy, na której pracujemy
+
+Pierwszy błąd jest bardzo oczywisty.
+Polega na tym, że modyfikujemy kolekcję, na której aktualnie pracujemy.:
+
+.Zmienianie kolekcji na której pracujemy skutkuje błędem
+[source,csharp]
+----
+[Test]
+public void ModyfyingCollection_WeEnumerateOver_ShouldFail()
+{
+    var collectionTester = new List<object>();
+
+    var amount = 100;
+    for (var i = 0; i < amount; i++)
+        collectionTester.Add(new Object());
+
+    Action action = () =>
+    {
+        foreach (var el in collectionTester.Collection)
+        {
+            collectionTester.Remove(el); // Tu jest błąd
+        }
+    };
+
+    action.Should().Throw<InvalidOperationException>();
+}
+----
+
+W przykładzie przytoczonym powyżej nie ma szans, aby uniknąć wyjątku `InvalidOperationException`, ponieważ użyto prostego typu `List<T>`. 
+W takim przypadku nie można iterować po kolekcji, na której właśnie pracujemy. 
+Dotyczy to zarówno zwykłych list, jak i listy `SynchronizedCollection`. 
+Co ciekawe, istnieją takie kolekcje, które umożliwią nam podobną konstrukcję (np. ConcurrentBag, BlockingCollection). 
+Ich wadą jest to, że mogą wykonywać kopię całej kolekcji w momencie rozpoczęcia konstrukcji `foreach` (w metodzie `GetEnumerator`).  
+
+Chciałbym w tym momencie przypomnieć, że powyższej konstrukcji nie powinniśmy używać, ponieważ narusza zasadę Liskov.
+Tak nie jest w sensie językowym, ponieważ kolekcje, które poprawnie działają w sposób asynchroniczny, nie implementują interfejsu `ICollection<T>`, który jest niezbędny do usuwania elementów.
+Argumentem, który przemawia u mnie za tym, aby takiej konstrukcji nie stosować, w przypadku, gdy korzystamy z odpornych typów, to fakt, że ktoś inny może łatwo zmienić ją i zastąpić nasz (na przykład) `ConcurrentBag<T>` zwykłym `List<T>` i mamy problem. 
+Co gorsza, szerokie wykorzystanie takiej konstrukcji może nas uniewrażliwić i w konsekwencji dopuścić na produkcję coś błędnego. 
+
+Z tego powodu proponowałbym wykorzystanie bezpieczniejszej formy, która zakłada, że jawnie wykonujemy kopię i operujemy na dwóch kolekcjach: 
+
+[source,csharp]
+----
+[Test]
+public void ProperRemovingItemsFromList()
+{
+    var collection = new List<object>();
+    var amount = 100;
+    for (var i = 0; i < amount; i++)
+        collection.Add(new object());
+
+    var toRemove = collection.ToList(); // Jawna kopia listy
+
+    foreach (var rmv in toRemove) collection.Remove(rmv);
+    Assert.Pass();
+}
+----
+
+## Praca na zwykłej kolekcji wielowątkowo
+
+Drugi, mniej oczywisty błąd to praca na jednej zwykłej kolekcji w sposób wielowątkowy. 
+Nie zawsze dzieje się to w oczywisty sposób, na przykład taki jak poniżej: 
+
+#TODO: Dodac kawałek kodu#
+
+.Błąd z wielodostępem do zwykłej listy 
+[source,csharp]
+----
+
+----
+
+Problem wielodostępu w przykładzie powyżej można rozwiązać za pomocą konstrukcji `lock(...){...}`.
+
+
+.Wielodostęp zabezpieczony za poomcą lock'a
+[source,csharp]
+----
+
+----
+
+Jednak co z przypadkiem, kiedy kolekcja typu `List<T>` jest upubliczniona poprzez właściwość? 
+Jak kontrolować wielodostęp, nie mając wiedzy nawet, kto używa naszej właściwości? 
+Zacznijmy od tego, że w https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/guidelines-for-collections[wytycznych Microsoftu dotyczących kolekcji] jest wyraźnie napisane: 
+
+> NIE UŻYWAJ `ArrayList` lub `List<T>` w publicznym API.
+
+## Dobre praktyki w stosowaniu kolekcji
+
+Tak jak napisałem wcześniej, wiele dobrych praktyk zostało zapisanych na stronie https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/guidelines-for-collections[Microsoftu].
+Jakie one są, możesz przeczytać na miejscu.
+Tutaj chciałbym Ci przedstawić, to jak je odbieram wraz z przykładami. 
+
+#TODO#
+
