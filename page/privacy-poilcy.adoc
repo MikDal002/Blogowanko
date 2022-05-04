@@ -13,19 +13,19 @@ menu:
 ---
 
 == REKLAMY 
-Na tym blogu używam reklam osób trzecich (takich jak Google AdSense), aby go wspierać. 
-Niektórzy z tych reklamodawców mogą używać plików cookie do wyświetlania reklam w oparciu o wcześniejsze wizyty użytkownika na naszej stronie lub innych stronach internetowych.
+Na tym blogu używam reklam firm trzecich (takich jak Google AdSense), aby go wspierać. 
+Niektórzy z tych reklamodawców mogą używać plików cookie do wyświetlania reklam na podstawie wcześniejszych wizyty użytkownika na tej stronie lub innych stronach internetowych.
 
 == GOOGLE ANALYTICS
-Na tej stronie korzystam z Google Analytics. 
-Używa on plików cookie, aby pomóc witrynie analizować, co użytkownicy czytają i przeglądają.
+Na tej stronie korzystam z Google Analytics . 
+Używa one plików cookie, aby pomóc witrynie analizować, co użytkownicy czytają i przeglądają.
 
 Informacje generowane przez cookie na temat korzystania z witryny przez użytkownika (w tym jego adres IP) są przekazywane firmie Google i przechowywane na jej serwerach. 
 Google będzie korzystała z tych informacji w celu oceny korzystania z witryny przez użytkownika, tworzenia raportów dotyczących ruchu na stronach dla operatorów witryn oraz świadczenia innych usług związanych z ruchem na witrynach internetowych i korzystaniem z internetu. 
 Google może również przekazywać te informacje osobom trzecim, jeżeli będzie zobowiązana to uczynić na podstawie przepisów prawa lub w przypadku, gdy osoby te przetwarzają takie informacje w imieniu Google. 
 Google nie będzie łączyć adresu IP użytkownika z żadnymi innymi danymi przechowywanymi przez Google.
 
-Użytkownik może zrezygnować z cookies wybierając odpowiednie ustawienia w swojej przeglądarce.
+Użytkownik może zrezygnować z cookies, wybierając odpowiednie ustawienia w swojej przeglądarce, w https://www.google.com/settings/ads[ustwieniach reklam  Google] lub też poprzez odpowiednią konfigurację na stronie http://www.aboutads.info/choices/.
 
 Aby dowiedzieć się więcej, zobacz policies.google.com/technologies/partner-sites.
 

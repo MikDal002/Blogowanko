@@ -25,7 +25,7 @@ Google will use this information for the purpose of evaluating your use of the w
 Google may also transfer this information to third parties when required to do so by law, or where such third parties process the information on Google's behalf. 
 Google will not associate your IP address with any other data held by Google.
 
-You can refuse the use of cookies by selecting the appropriate settings on your browser.
+You may refuse the use of cookies by selecting the appropriate settings on your browser, at https://www.google.com/settings/ads[Google Ads Settings] or by configuring the appropriate settings on http://www.aboutads.info/choices/.
 
 To find out more, see policies.google.com/technologies/partner-sites.
 
