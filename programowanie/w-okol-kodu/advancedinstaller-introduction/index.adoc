@@ -1,0 +1,49 @@
+---
+title: "AdvancedInstaller - przygotowanie paczki MSI za darmo"
+date: 2022-05-16
+draft: false
+image: cover.jpg
+description: Krótkie przedstawienie jak w kilkanaście minut dodać instalator MSI do prostego projektu WPF, za pomocą darmowej wersji AdvancedInstaller.
+
+categories: 
+    - "W okół kodu"
+    - "Instalatory"
+
+tags:
+    - "AdvancedInstaler"
+    - "MSI"
+---
+:toc: 
+
+== Wstęp
+
+Ostatnimi czas stanąłem znów przed zadaniem utworzenia instalatora dla prostego programu okienkowego na Windows.
+Poprzedni wykonałem za pomocą technologi WiX, jednak jego ograniczenia takie jak: wymaganie budowania przez msbuild, brak sensownego kreatora,
+czy mnóstwo problemów przy automatycznym wykrywaniu plików, które powinny znaleźć się wewnątrz paczki, zachęciły mnie do poszukiwania rozwiązania, które jest zdecydowanie łatwiejsze w obsłudze. 
+
+Tak natrafiłem na AdvancedInstaller, który nie ma tych niedogodności. Jedno, co muszę wymienić, to, że w wersji darmowej nie ma możliwości robienia "pakietów". 
+Nie możesz tutaj dorzucić paczek zawierających wymagane przez twoją Aplikacje SDK, czy pakiety redystrybucyjne. 
+Jeśli jest to twoim wymaganiem, to niestety nie tutaj.
+
+Warto zwrócić uwagę, że licencja jasno wskazuje, że darmowa wersja AdvancedInstaller może być używana komercyjnie: 
+
+[quote,Advanced Installer End User Licence,https://www.advancedinstaller.com/eula.html]
+2.1 Freeware Features License. Caphyon grants you an unlimited license to use the Freeware Features of the Software. The install packages created using only the Freeware Features can be freely redistributed and used both in commercial and non-commercial purpose.
+
+== Logowanie, pobieranie oprogramowania, instalacja wtyczki do VS2022, potwierdzenie, że darmowa licencja mozę być wykorzystywana do pracy komercyjnej 
+Aby pobrać instalator udaj się na stronę https://www.advancedinstaller.com/download.html.
+
+
+
+
+Pobieranie wtyczki do VS 2022: https://marketplace.visualstudio.com/items?itemName=caphyon.AdvancedInstallerforVisualStudio2022
+
+== Przygotowanie projektu: 
+=== Przykładowy projekt WPF,
+=== Dodanie projektu instalatora
+=== Zapewnienie łatwej aktualizacji pakietu (zmiana wersji)
+=== Zaprezentowanie możliwości cichej instalacji
+
+== Dodatek: TeamCity
+=== Pobieranie i instalacja pluginu na TeamCity.
+=== Przykładowe wypełnienie kroku budowania.
