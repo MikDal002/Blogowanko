@@ -14,6 +14,7 @@ tags:
     - "MSI"
 ---
 :toc: 
+:experimental: true
 
 == Wstęp
 
@@ -30,20 +31,77 @@ Warto zwrócić uwagę, że licencja jasno wskazuje, że darmowa wersja Advanced
 [quote,Advanced Installer End User Licence,https://www.advancedinstaller.com/eula.html]
 2.1 Freeware Features License. Caphyon grants you an unlimited license to use the Freeware Features of the Software. The install packages created using only the Freeware Features can be freely redistributed and used both in commercial and non-commercial purpose.
 
-== Logowanie, pobieranie oprogramowania, instalacja wtyczki do VS2022, potwierdzenie, że darmowa licencja mozę być wykorzystywana do pracy komercyjnej 
-Aby pobrać instalator udaj się na stronę https://www.advancedinstaller.com/download.html.
+== Logowanie, pobieranie oprogramowania, instalacja wtyczki do VS2022
+
+****
+- Aby pobrać instalator udaj się na stronę https://www.advancedinstaller.com/download.html, zainstaluj go a następnie uruchom.
+- Pobieranie wtyczki do Visual Studio: https://marketplace.visualstudio.com/items?itemName=caphyon.AdvancedInstallerforVisualStudio2022
+
+
+///
+- Musisz założyć konto, aby mieć dostęp do darmowej wersji na komputerze osobismy.
+- Zainstaluj AI,
+- Zainstaluj wtyczkę
 
 
 
+![Image 1](https://image/src1) ![Image 2](https://image/src2)
+![Image 3](https://image/src3) ![Image 4](https://image/src4)
 
-Pobieranie wtyczki do VS 2022: https://marketplace.visualstudio.com/items?itemName=caphyon.AdvancedInstallerforVisualStudio2022
+**** 
 
 == Przygotowanie projektu: 
+
 === Przykładowy projekt WPF,
+
+- Utwórz nowy projekt WPF w Visualu bądź za pomocą dotnet new (u mine .Net 6.0) o nazwie AdvancedInstallerDemo.Wpf
+- Upewnij się, że program poprawnie się uruchamia (możesz dodać jakieś Hello World).
+
 === Dodanie projektu instalatora
+
+- Utwórz nowy projekt `Advanced Installer Project` za pomocą Visual studio o nazwie AdvancedInstallerDemo.Installer
+- Kliknij dwukrotnie na nowo utworzony projekt, otwrzy Ci się okno z wtyczką,
+- Wybierz "Files and Folders", następnie przycisk "Add Project Output".
+- Otworzy Ci się nowe okno, w którym zaznacz "Publish Profile" przy projekcie WPF. 
+Jeśli nie tworzyłeś wcześniej profilu publikacji, to w tym momencie zostaniesz o to poproszony. 
+Do działanai jest potrzebny profil publikacji do Folderu, także wybierz pozycję "Folder" i przejdź kreator z domyślnymi wartościami (zwróć uwagę, aby nie wybrać ClickOnce!).
+Teraz możesz wrócić do projektu instalatora i ponownie kliknąć przycisk "Publish Profile" i kliknąć "Ok".
+- Przebuduj projekt instalatora (PPM na projekt, następnie kliknij menu:Rebuild).
+- Przejdź do katalogu projektu instalatora, następnie do folderu `AdvancedInstallerDemo.Installer-SetupFiles`.
+Wewnątrz znajdziesz plik `AdvancedInstallerDemo.Installer.msi`! 
+Twój instalator jest już gotowy do pracy.
+
+
+=== Podstawowa konfiguracja
+
+Zapewne zauważyłeś, że twoja aplikacja instaluje się w dziwnym katalogu, jakim jest C:\Program Files(x86)\Your Company\Your Application.
+Aby to zmienić, najlepiej uzupełnić kilka podstawowych informacji na temat twojej aplikacji.
+
+- Wróć do Visual Studio i projektu `AdvancedInstallerDemo.Installer`, wybierz plik z rozszerzeniem *.aip. 
+- W zakładce "Product Details" uzupełnij pola "Product Name" nazwą twojej aplikacji, na przykład "Advanced Installer Demo".
+W polu "Company Name" wpisz nazwę organizacji, do której należy aplikacji, na przykład "Zaprogramuj to raz".
+- Zachęcam do wypełnienia pozostałych pól w tej zakładce, jednak nie będę ich tutaj omawiał. 
+Pamiętaj, że po wybraniu konkretnego pola, u dołu okna pojawia się krótki opis, do czego ono służy. 
+Jeśli i ta wiedza nie będzie wystarczająca, masz do dyspozycji jeszcze przycisk pomocy — znak zapytania w niebieskim okręgu w górnym prawym rogu okna. 
+- Pamiętaj, że jeszcze więcej ciekawych funkcji jest dostępnych pod przyciskiem w lewej dolnej krawędzi okna "Edit in Advanced Installer".
+
 === Zapewnienie łatwej aktualizacji pakietu (zmiana wersji)
+- Ustawienie konkretnej wersji
+- Zwiększanie wersji
+
 === Zaprezentowanie możliwości cichej instalacji
+- Instalator buduje się po cichu, z wykorzystanie komendy `twojaapka.ms \quiet`.
 
 == Dodatek: TeamCity
+
+Ta sekcja jest dodatkiem, ponieważ jest ona przeznaczona dla osób, które mają minimalne obeznanie z TeamCity.
+Pokazuję tutaj jak dodać krok, który zbuduje nam instalator, bez opisu całej procedury tworzenia projektu.
+
 === Pobieranie i instalacja pluginu na TeamCity.
+- pobieranie dodatek z githuba
+- zainstaluj go
+- pobierz narzędzie wykonawcze
+
 === Przykładowe wypełnienie kroku budowania.
+- W projekcie budującym dodaj krok instalacji
+- Uzupełnij pole z dopiskiem "SetVersion".
