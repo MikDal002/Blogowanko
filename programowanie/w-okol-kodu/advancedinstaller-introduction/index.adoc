@@ -23,101 +23,184 @@ Ostatnimi czas stanąłem znów przed zadaniem utworzenia instalatora dla proste
 Poprzedni wykonałem za pomocą technologi WiX, jednak jego ograniczenia takie jak: wymaganie budowania przez msbuild, brak sensownego kreatora,
 czy mnóstwo problemów przy automatycznym wykrywaniu plików, które powinny znaleźć się wewnątrz paczki, zachęciły mnie do poszukiwania rozwiązania, które jest zdecydowanie łatwiejsze w obsłudze. 
 
-Tak natrafiłem na AdvancedInstaller, który nie ma tych niedogodności. Jedno, co muszę wymienić, to, że w wersji darmowej nie ma możliwości robienia "pakietów". 
+Tak natrafiłem na Advanced Installer, który nie ma tych niedogodności. Jedno, co muszę wymienić, to, że w wersji darmowej nie ma możliwości robienia "pakietów". 
 Nie możesz tutaj dorzucić paczek zawierających wymagane przez twoją Aplikacje SDK, czy pakiety redystrybucyjne. 
 Jeśli jest to twoim wymaganiem, to niestety nie tutaj.
 
-Warto zwrócić uwagę, że licencja jasno wskazuje, że darmowa wersja AdvancedInstaller może być używana komercyjnie: 
+Warto zwrócić uwagę, że licencja jasno wskazuje, że darmowa wersja Advanced Installer może być używana komercyjnie: 
 
 [quote,Advanced Installer End User Licence,https://www.advancedinstaller.com/eula.html]
 2.1 Freeware Features License. Caphyon grants you an unlimited license to use the Freeware Features of the Software. The install packages created using only the Freeware Features can be freely redistributed and used both in commercial and non-commercial purpose.
 
-== Logowanie, pobieranie oprogramowania, instalacja wtyczki do VS2022
+== Przygotowanie lokalnego środowiska
 
-****
-- Aby pobrać instalator udaj się na stronę https://www.advancedinstaller.com/download.html, zainstaluj go a następnie uruchom.
-- Pobieranie wtyczki do Visual Studio: https://marketplace.visualstudio.com/items?itemName=caphyon.AdvancedInstallerforVisualStudio2022
+Przygotowanie lokalnego środowiska zacznijmy od pobrania instalatora z https://www.advancedinstaller.com/download.html[strony producenta]. 
+Zainstaluj go, a następnie uruchom.
 
+.Instalacja Advanced Installer
+[.table-gallery,cols="1,1,1"]
+|===
+a| 
+.Pobieranie
+image::download-installer.png[] 
+a| 
+.Instalacja
+image::install-installer-1.png[]
+a| 
+.Gotowy program
+image::ready-to-go-installer.png[]
+|===
 
-///
-- Musisz założyć konto, aby mieć dostęp do darmowej wersji na komputerze osobismy.
-- Zainstaluj AI,
-- Zainstaluj wtyczkę
+Następnie pobierz i zainstaluj wtyczkę do Visual Studio. 
+Znajdziesz ją https://marketplace.visualstudio.com/items?itemName=caphyon.AdvancedInstallerforVisualStudio2022[tutaj]. 
+Pamiętaj, aby ściągnąć wersję odpowiednią dla twojego środowiska.
 
-
-
-![Image 1](https://image/src1) ![Image 2](https://image/src2)
-![Image 3](https://image/src3) ![Image 4](https://image/src4)
-
-**** 
+.Instalacja dodatku do Visual Studio 2022
+[.table-gallery,cols="1,1"]
+|===
+a| 
+.Pobieranie
+image::vsaddon_download.png[] 
+a| 
+.Instalacja
+image::vsaddon_install.png[]
+|===
 
 == Przygotowanie projektu: 
 
+Mając odpowiednio przygotowane środowisko, możemy przejść do konkretów:
+
 === Przykładowy projekt WPF,
 
-- Utwórz nowy projekt WPF w Visualu bądź za pomocą dotnet new (u mine .Net 6.0) o nazwie AdvancedInstallerDemo.Wpf
-- Upewnij się, że program poprawnie się uruchamia (możesz dodać jakieś Hello World).
+Dla celów demonstracyjnych utwórzmy nowy projekt WPF (1) w Visualu o nazwie AdvancedInstallerDemo.Wpf (2).
+Dla pewności sprawdź, czy program poprawnie się uruchamia, aby nie było później niejasności.
+
+.Tworzenie nowego projektu
+[.table-gallery,cols="1,1,1"]
+|===
+a| 
+.Wybierz projekt WPF,
+image::VS_NewProject-1.png[]
+ 
+a| 
+.Nadaj mu nazwę,
+image::VS_NewProject-2.png[]
+
+a| 
+.Sprawdź, czy działa!
+image::VS_NewProject-3.png[]
+
+|===
+
 
 === Dodanie projektu instalatora
 
-- Utwórz nowy projekt `Advanced Installer Project` za pomocą Visual studio o nazwie AdvancedInstallerDemo.Installer
-- Kliknij dwukrotnie na nowo utworzony projekt, otwrzy Ci się okno z wtyczką,
-- Wybierz "Files and Folders", następnie przycisk "Add Project Output".
-- Otworzy Ci się nowe okno, w którym zaznacz "Publish Profile" przy projekcie WPF. 
+Teraz najważniejsze, dodajemy instalator!
+
+. W tym celu utwórz nowy projekt `Advanced Installer Project` za pomocą Visual studio o nazwie AdvancedInstallerDemo.Installer i kliknij dwukrotnie nowo utworzony projekt, otworzy Ci się okno z wtyczką,
+Następnie przejdź do "Files and Folders" (1), i kliknij przycisk "Add Project Output" (2).
+. Otworzy Ci się nowe okno, w którym zaznacz "Publish Profile" przy projekcie WPF.
 Jeśli nie tworzyłeś wcześniej profilu publikacji, to w tym momencie zostaniesz o to poproszony. 
-Do działanai jest potrzebny profil publikacji do Folderu, także wybierz pozycję "Folder" i przejdź kreator z domyślnymi wartościami (zwróć uwagę, aby nie wybrać ClickOnce!).
-Teraz możesz wrócić do projektu instalatora i ponownie kliknąć przycisk "Publish Profile" i kliknąć "Ok".
-- Przebuduj projekt instalatora (PPM na projekt, następnie kliknij menu:Rebuild).
-- Przejdź do katalogu projektu instalatora, następnie do folderu `AdvancedInstallerDemo.Installer-SetupFiles`.
+Do działania jest potrzebny profil publikacji do Folderu, także wybierz pozycję "Folder" i przejdź kreator z domyślnymi wartościami (zwróć uwagę, aby nie wybrać ClickOnce!).
+. Teraz możesz wrócić do projektu instalatora, przejść do "Files and Folder", kliknąć "Add Project Output" i upewnić się, że odpowiedni profil publikacji został wybrany.
+. Przebuduj projekt instalatora (PPM na projekt i wybierz pozycję Rebuild).
+. Przejdź do katalogu projektu instalatora, następnie do folderu `AdvancedInstallerDemo.Installer-SetupFiles`.
 Wewnątrz znajdziesz plik `AdvancedInstallerDemo.Installer.msi`! 
 Twój instalator jest już gotowy do pracy.
+
+.Dodawanie instalatora
+[.table-gallery,cols="1,1,1"]
+|===
+a| 
+.Dodaj projekt instalatora
+image::addaiproject.png[]
+ 
+a| 
+.Dodaj pliki projektu
+image::addprojectoutput.png[]
+
+a| 
+.Dodaj wyjście projektu WPF
+image::addprojectoutputcreator.png[]
+
+a| 
+.Utwórz profil publikacji (1)
+image::addpublishprofile-1.png[]
+
+a| 
+.Utwórz profil publikacji (2)
+image::addpublishprofile-2.png[]
+
+a| 
+.Upewnij się, że wybrany został profil 
+image::makesureprojectoutput.png[]
+
+|===
 
 
 === Podstawowa konfiguracja
 
-Zapewne zauważyłeś, że twoja aplikacja instaluje się w dziwnym katalogu, jakim jest C:\Program Files(x86)\Your Company\Your Application.
+Niestety, to nie wszystko.
+Aby móc korzystać z wielu udogodnień, musimy wykonać jeszcze kilka korków.
+
+Jeśli zainstalowałeś swoją paczkę, to zapewne zauważyłeś, że twoja aplikacja instaluje się w dziwnym katalogu, jakim jest `C:\Program Files(x86)\Your Company\Your Application`.
 Aby to zmienić, najlepiej uzupełnić kilka podstawowych informacji na temat twojej aplikacji.
 
 - Wróć do Visual Studio i projektu `AdvancedInstallerDemo.Installer`, wybierz plik z rozszerzeniem *.aip. 
 - W zakładce "Product Details" uzupełnij pola "Product Name" nazwą twojej aplikacji, na przykład "Advanced Installer Demo".
 W polu "Company Name" wpisz nazwę organizacji, do której należy aplikacji, na przykład "Zaprogramuj to raz".
-- Zachęcam do wypełnienia pozostałych pól w tej zakładce, jednak nie będę ich tutaj omawiał. 
+
+Zachęcam do wypełnienia pozostałych pól w tej zakładce, jednak nie będę ich tutaj omawiał. 
 Pamiętaj, że po wybraniu konkretnego pola, u dołu okna pojawia się krótki opis, do czego ono służy. 
 Jeśli i ta wiedza nie będzie wystarczająca, masz do dyspozycji jeszcze przycisk pomocy — znak zapytania w niebieskim okręgu w górnym prawym rogu okna. 
-- Pamiętaj, że jeszcze więcej ciekawych funkcji jest dostępnych pod przyciskiem w lewej dolnej krawędzi okna "Edit in Advanced Installer".
+
+TIP: Pamiętaj, że jeszcze więcej ciekawych funkcji jest dostępnych pod przyciskiem w lewej dolnej krawędzi okna "Edit in Advanced Installer".
 
 === Zapewnienie łatwej aktualizacji pakietu (zmiana wersji)
 
-- Aby instalator mógł aktualizować aplikację konieczna jest zmiana wersji (link do dokumentacji). 
-- W zakładce "Product Details" w polu "Product Version" możesz ustawić wersję.
-- Próba zainstalowania starszej wersji zakończy się błędem. 
-- Ścieżka instalacji nie zostanie zmieniona, w przypadku, gdy zaktualizowaliśmy pola "Comany Name" oraz "Product Name". 
-Ścieżka instalacji zostanie zmieniona dopiero po ponownej instalacji. 
-- Także, aby zapewnić swobodną aktualizację oprogramowania, musisz za każdym razem zmienić numer wersji, jednak gdy wykorzystujesz automatyczne budowanie, możesz zrobić to z konsoli.
-Pamiętaj, aby poniższe polecenia wykonać w katalogu, gdzie znajduje się projekt instalatora:
+Jednym z wymagań stawianych wobec instalatora jest aktualizacja aplikacji. 
+Kluczowym elementem jest *zwiększanie numeru wersji*.
+Bez tego próba instalacji zakończy się błędem. 
+Aby instalator mógł aktualizować aplikację konieczna jest zmiana wersji (link do dokumentacji). 
 
+Numer wersji możemy zmienić na dwa sposoby: 
+
+. W Visual studio
++
+W zakładce "Product Details" w polu "Product Version" możesz zmienić wersję.
+
+
+. Z konsoli
++
+Wykonując dwa następne polecenia, zmienisz tymczasowo plik projektu instalatora i zbudujesz go z tymi ustawieniami.
+Pamiętaj, aby poniższe polecenia wykonać w katalogu, gdzie znajduje się projekt instalatora!
++
 [source,powershell]
 ----
 & "C:\Program Files (x86)\Caphyon\Advanced Installer 19.4\bin\x86\AdvancedInstaller.com" /Edit .\AdvancedInstallerDemo.Installer.aip /SetVersion 1.3.0
 & "C:\Program Files (x86)\Caphyon\Advanced Installer 19.4\bin\x86\AdvancedInstaller.com" /Rebuild .\AdvancedInstallerDemo.Installer.aip
 ----
 
-- Wykonanie polecenia /Edit nie zmienia wartości "Product Version" w pliku projektu.
+
+
+IMPORTANT: Ścieżka instalacji nie zostanie zmieniona, w przypadku, gdy zaktualizowaliśmy pola "Comany Name" oraz "Product Name". 
+Ścieżka instalacji zostanie zmieniona dopiero po ponownej instalacji. 
 
 === Zaprezentowanie możliwości cichej instalacji
 
-https://www.advancedinstaller.com/user-guide/qa-silent-msi-install.html
-
-- Taki instalator może zostać uruchomiony w trybie cichym, co pozwala na wykorzystanie w automatyzacji, czy grupach GPO.
-Aby wywołać cichą instalację, wystarczy wykonać poniższe polecenie.
-
-[Notice]
-Pamiętaj, że instalacja w katalogu Program Files wymaga uprawnień administratora.
-Jeśli twoja aplikacja nie instaluje się poprawnie w trybie cichym, upewnij się, że uruchamiasz polecenie z odpowiednimi uprawnieniami!
+Dużą zaletą poprawnie przygotowanych instalatorów MSI jest możliwość ich instalacji z konsoli, bez interakcji z człowiekiem. 
+Taką funkcjonalność nazywamy trybem cichym, co pozwala na wykorzystanie go w automatyzacji, czy grupach GPO.
+Aby dowiedzieć się więcej, zapraszam do https://www.advancedinstaller.com/user-guide/qa-silent-msi-install.html[dokumentacji].
+Cichą instalację, wykonuje się poniższym poleceniem.
 
 .Pamiętaj, aby uruchamiać instalację jako administrator, jeśli aplikacja ma trafić do katalogu Program Files.
 [source,powershell]
  '.\AdvancedInstallerDemo.Installer 1.3.0.msi' /quiet
+
+
+NOTE: Pamiętaj, że instalacja w katalogu Program Files wymaga uprawnień administratora.
+Jeśli twoja aplikacja nie instaluje się poprawnie w trybie cichym, upewnij się, że uruchamiasz polecenie z odpowiednimi uprawnieniami!
+
 
 == Dodatek: TeamCity
 
@@ -125,10 +208,53 @@ Ta sekcja jest dodatkiem, ponieważ jest ona przeznaczona dla osób, które maj�
 Pokazuję tutaj jak dodać krok, który zbuduje nam instalator, bez opisu całej procedury tworzenia projektu.
 
 === Pobieranie i instalacja pluginu na TeamCity.
-- pobieranie dodatek z githuba
-- zainstaluj go
-- pobierz narzędzie wykonawcze
+Instalacja dodatku pozwala nam na proste tworzenie kroku budującego instalator oraz dodanie narzedzia, które będzie automatycznie instalowane na każdym agencie budującym. 
+Jest to bardzo wygodne, ponieważ nie musimy pilnować, czy nasz budujący znajduje się wszędzie tam, gdzie będzie potrzebny. 
+
+. Pobierz dodatek z GitHub'a https://github.com/Caphyon/teamcity-advinst-build-runner, wydania dostępne są w sekcji Releases. 
+Najnowsze wydanie do 1.3 dostępne bezpośrednio pod https://github.com/Caphyon/teamcity-advinst-build-runner/releases/download/v1.3/advinst-teamcity-plugin-1.3.zip[tym adresem]
+. Na TeamCity udaj się do zakładki Administrations (1) > Plugins (2) i kliknij "Upload plugin zip" (3), wybierz pobrany plik .zip (4) i załaduj go klikając ponownie przycisk "Upload plugin zip" (5).
+. Następnie włącz plugin klikając "Enable uploaded plugins" i znów "Enable".
+. Teraz przjdź do zakładki Tools (6) (również wewnątrz Administration), następnie wybierz "Install Tool..." (7), wybierz "Advanced Installer" (7) i kliknij "Add" (8).
+. W tym momencie, jeśli na serwerze budującym nie został zainstlowany Advanced Installer, masz możliwość to źrobić. Wybierz najnowszą wersję i kliknij "Add". 
+. Po chwili oczekiwania narzędzie jest gotowe do działania. 
+
+.Instalacja dodatku do Visual Studio 2022
+[.table-gallery,cols="1,1"]
+|===
+a| 
+.Instalowanie wtyczki
+image::TeamCity-InstallPlugin.png[]
+a| 
+.Instalowanie narzędzia
+image::TeamCity-InstallTools.png[]
+|===
 
 === Przykładowe wypełnienie kroku budowania.
-- W projekcie budującym dodaj krok instalacji
-- Uzupełnij pole z dopiskiem "SetVersion".
+
+.Przykładowy krok budowania instalatora na TeamCity
+image::TeamCity-ExampleStep.png[]
+
+. Przejdź do projektu, do którego chcesz dodać budowanie instalatora, 
+. Kliknij "Add build step",
+. Wybierz "Runner type" jako `Advanced Installer`.
+. Następnie podaj ścieżkę do pliku projektu instalatora. 
+Dla projektu utworzonego wcześniej byłoby to: `AdvancedInstallerDemo.Installer/AdvancedInstallerDemo.Installer.aip`.
+. Następnie musisz okreslić wartość "AIP Build". Domyślnie jest to `DefaultBuild`. 
+Tę wartość znajdziesz w narzędziu Advanced Installer (nie myl z pluginem do Visual Studio) w zakładce "Builds". 
+. Teraz możesz określić nazwę pliku wynikowego. 
+Ja lubię dodawac do instalatora numer wersji, na przykład: `AIDemoInstaller-%build.number%.msi`. 
+Pamiętaj, aby wcześniej określić poprawny numer wersji footnote:[Z opisu w oknie pluginu Visual Studio jest napisane, że numer wersji powinien wyglądać tak: "x.y.z", gdzie x, y i z są liczbami całkowitymi. Największa możliwa wartość to 255.255.65535.65535. Inne przykładowe, poprawne formaty, to: "3", "2.0", "2.11", "5.10.5". Opis ten pochodzi z pluginu do Visual Studio w wersji 19.4.] w zakładce "General Settings". Jeśli nie widzisz pola "Build number format", to kliknij "Show advanced options" ponizej formularza. 
+. Możesz dodatkowo okreslić katalog wyjściowy (Output Folder)
+. I najważniejsze, powinieneś okerślić transformacje wykonywane na pliku projektu przed wykonaniem budowania.
+Najwazniejsza jest zmiana nazwy, dlatego w pole "Commands" polecam wpisać Ci:
+
+[source]
+----
+SetVersion %build.number%
+Save
+----
+
+Wstęp i bardziej szczegółowy opis pliku poleceń znajdziesz https://www.advancedinstaller.com/user-guide/command-line.html#file[tutaj].
+
+Zdjęcie tytułowe by https://unsplash.com/photos/X_JsI_9Hl7o?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink[Zan].
