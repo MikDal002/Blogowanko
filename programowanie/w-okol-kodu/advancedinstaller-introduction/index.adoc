@@ -11,6 +11,7 @@ categories:
 
 tags:
     - "AdvancedInstaler"
+    - TeamCity
     - "MSI"
 ---
 :toc: 
@@ -86,11 +87,37 @@ Jeśli i ta wiedza nie będzie wystarczająca, masz do dyspozycji jeszcze przyci
 - Pamiętaj, że jeszcze więcej ciekawych funkcji jest dostępnych pod przyciskiem w lewej dolnej krawędzi okna "Edit in Advanced Installer".
 
 === Zapewnienie łatwej aktualizacji pakietu (zmiana wersji)
-- Ustawienie konkretnej wersji
-- Zwiększanie wersji
+
+- Aby instalator mógł aktualizować aplikację konieczna jest zmiana wersji (link do dokumentacji). 
+- W zakładce "Product Details" w polu "Product Version" możesz ustawić wersję.
+- Próba zainstalowania starszej wersji zakończy się błędem. 
+- Ścieżka instalacji nie zostanie zmieniona, w przypadku, gdy zaktualizowaliśmy pola "Comany Name" oraz "Product Name". 
+Ścieżka instalacji zostanie zmieniona dopiero po ponownej instalacji. 
+- Także, aby zapewnić swobodną aktualizację oprogramowania, musisz za każdym razem zmienić numer wersji, jednak gdy wykorzystujesz automatyczne budowanie, możesz zrobić to z konsoli.
+Pamiętaj, aby poniższe polecenia wykonać w katalogu, gdzie znajduje się projekt instalatora:
+
+[source,powershell]
+----
+& "C:\Program Files (x86)\Caphyon\Advanced Installer 19.4\bin\x86\AdvancedInstaller.com" /Edit .\AdvancedInstallerDemo.Installer.aip /SetVersion 1.3.0
+& "C:\Program Files (x86)\Caphyon\Advanced Installer 19.4\bin\x86\AdvancedInstaller.com" /Rebuild .\AdvancedInstallerDemo.Installer.aip
+----
+
+- Wykonanie polecenia /Edit nie zmienia wartości "Product Version" w pliku projektu.
 
 === Zaprezentowanie możliwości cichej instalacji
-- Instalator buduje się po cichu, z wykorzystanie komendy `twojaapka.ms \quiet`.
+
+https://www.advancedinstaller.com/user-guide/qa-silent-msi-install.html
+
+- Taki instalator może zostać uruchomiony w trybie cichym, co pozwala na wykorzystanie w automatyzacji, czy grupach GPO.
+Aby wywołać cichą instalację, wystarczy wykonać poniższe polecenie.
+
+[Notice]
+Pamiętaj, że instalacja w katalogu Program Files wymaga uprawnień administratora.
+Jeśli twoja aplikacja nie instaluje się poprawnie w trybie cichym, upewnij się, że uruchamiasz polecenie z odpowiednimi uprawnieniami!
+
+.Pamiętaj, aby uruchamiać instalację jako administrator, jeśli aplikacja ma trafić do katalogu Program Files.
+[source,powershell]
+ '.\AdvancedInstallerDemo.Installer 1.3.0.msi' /quiet
 
 == Dodatek: TeamCity
 
