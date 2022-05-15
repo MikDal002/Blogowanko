@@ -97,9 +97,9 @@ image::VS_NewProject-3.png[]
 
 Teraz najważniejsze, dodajemy instalator!
 
-. W tym celu utwórz nowy projekt `Advanced Installer Project` za pomocą Visual studio o nazwie AdvancedInstallerDemo.Installer i kliknij dwukrotnie nowo utworzony projekt, otworzy Ci się okno z wtyczką,
+. W tym celu utwórz nowy projekt `Advanced Installer Project` za pomocą Visual studio o nazwie AdvancedInstallerDemo.Installer i kliknij dwukrotnie nowo utworzony projekt, otworzy się okno z wtyczką,
 Następnie przejdź do "Files and Folders" (1), i kliknij przycisk "Add Project Output" (2).
-. Otworzy Ci się nowe okno, w którym zaznacz "Publish Profile" przy projekcie WPF.
+. Otworzy się nowe okno, w którym zaznacz "Publish Profile" przy projekcie WPF.
 Jeśli nie tworzyłeś wcześniej profilu publikacji, to w tym momencie zostaniesz o to poproszony. 
 Do działania jest potrzebny profil publikacji do Folderu, także wybierz pozycję "Folder" i przejdź kreator z domyślnymi wartościami (zwróć uwagę, aby nie wybrać ClickOnce!).
 . Teraz możesz wrócić do projektu instalatora, przejść do "Files and Folder", kliknąć "Add Project Output" i upewnić się, że odpowiedni profil publikacji został wybrany.
@@ -141,7 +141,7 @@ image::makesureprojectoutput.png[]
 === Podstawowa konfiguracja
 
 Niestety, to nie wszystko.
-Aby móc korzystać z wielu udogodnień, musimy wykonać jeszcze kilka korków.
+Aby móc korzystać z wielu udogodnień, musimy wykonać jeszcze kilka kroków.
 
 Jeśli zainstalowałeś swoją paczkę, to zapewne zauważyłeś, że twoja aplikacja instaluje się w dziwnym katalogu, jakim jest `C:\Program Files(x86)\Your Company\Your Application`.
 Aby to zmienić, najlepiej uzupełnić kilka podstawowych informacji na temat twojej aplikacji.
@@ -154,14 +154,15 @@ Zachęcam do wypełnienia pozostałych pól w tej zakładce, jednak nie będę i
 Pamiętaj, że po wybraniu konkretnego pola, u dołu okna pojawia się krótki opis, do czego ono służy. 
 Jeśli i ta wiedza nie będzie wystarczająca, masz do dyspozycji jeszcze przycisk pomocy — znak zapytania w niebieskim okręgu w górnym prawym rogu okna. 
 
-TIP: Pamiętaj, że jeszcze więcej ciekawych funkcji jest dostępnych pod przyciskiem w lewej dolnej krawędzi okna "Edit in Advanced Installer".
+TIP: Pamiętaj, że jeszcze więcej ciekawych funkcji jest dostępnych pod przyciskiem "Edit in Advanced Installer" w lewej dolnej krawędzi okna.
 
 === Zapewnienie łatwej aktualizacji pakietu (zmiana wersji)
 
 Jednym z wymagań stawianych wobec instalatora jest aktualizacja aplikacji. 
 Kluczowym elementem jest *zwiększanie numeru wersji*.
 Bez tego próba instalacji zakończy się błędem. 
-Aby instalator mógł aktualizować aplikację konieczna jest zmiana wersji (link do dokumentacji). 
+Aby instalator mógł aktualizować aplikację, konieczna jest zmiana wersji. 
+Dlaczego przeczytasz https://www.advancedinstaller.com/user-guide/set-version.html#set-version[tutaj] i https://www.advancedinstaller.com/user-guide/changing-version.html[tutaj].
 
 Numer wersji możemy zmienić na dwa sposoby: 
 
@@ -181,16 +182,14 @@ Pamiętaj, aby poniższe polecenia wykonać w katalogu, gdzie znajduje się proj
 & "C:\Program Files (x86)\Caphyon\Advanced Installer 19.4\bin\x86\AdvancedInstaller.com" /Rebuild .\AdvancedInstallerDemo.Installer.aip
 ----
 
-
-
-IMPORTANT: Ścieżka instalacji nie zostanie zmieniona, w przypadku, gdy zaktualizowaliśmy pola "Comany Name" oraz "Product Name". 
+IMPORTANT: Ścieżka instalacji nie zostanie zmieniona, w przypadku, gdy zaktualizowaliśmy pola "Company Name" oraz "Product Name". 
 Ścieżka instalacji zostanie zmieniona dopiero po ponownej instalacji. 
 
-=== Zaprezentowanie możliwości cichej instalacji
+=== Cicha instalacja
 
 Dużą zaletą poprawnie przygotowanych instalatorów MSI jest możliwość ich instalacji z konsoli, bez interakcji z człowiekiem. 
 Taką funkcjonalność nazywamy trybem cichym, co pozwala na wykorzystanie go w automatyzacji, czy grupach GPO.
-Aby dowiedzieć się więcej, zapraszam do https://www.advancedinstaller.com/user-guide/qa-silent-msi-install.html[dokumentacji].
+Aby dowiedzieć się więcej, zajrzyj do https://www.advancedinstaller.com/user-guide/qa-silent-msi-install.html[dokumentacji].
 Cichą instalację, wykonuje się poniższym poleceniem.
 
 .Pamiętaj, aby uruchamiać instalację jako administrator, jeśli aplikacja ma trafić do katalogu Program Files.
@@ -208,18 +207,18 @@ Ta sekcja jest dodatkiem, ponieważ jest ona przeznaczona dla osób, które maj�
 Pokazuję tutaj jak dodać krok, który zbuduje nam instalator, bez opisu całej procedury tworzenia projektu.
 
 === Pobieranie i instalacja pluginu na TeamCity.
-Instalacja dodatku pozwala nam na proste tworzenie kroku budującego instalator oraz dodanie narzedzia, które będzie automatycznie instalowane na każdym agencie budującym. 
+Instalacja dodatku pozwala nam na proste tworzenie kroku budującego instalator oraz dodanie narzędzia, które będzie automatycznie instalowane na każdym agencie budującym. 
 Jest to bardzo wygodne, ponieważ nie musimy pilnować, czy nasz budujący znajduje się wszędzie tam, gdzie będzie potrzebny. 
 
 . Pobierz dodatek z GitHub'a https://github.com/Caphyon/teamcity-advinst-build-runner, wydania dostępne są w sekcji Releases. 
-Najnowsze wydanie do 1.3 dostępne bezpośrednio pod https://github.com/Caphyon/teamcity-advinst-build-runner/releases/download/v1.3/advinst-teamcity-plugin-1.3.zip[tym adresem]
+Najnowsze wydanie jest w wersji 1.3 dostępne bezpośrednio pod https://github.com/Caphyon/teamcity-advinst-build-runner/releases/download/v1.3/advinst-teamcity-plugin-1.3.zip[tym adresem]
 . Na TeamCity udaj się do zakładki Administrations (1) > Plugins (2) i kliknij "Upload plugin zip" (3), wybierz pobrany plik .zip (4) i załaduj go klikając ponownie przycisk "Upload plugin zip" (5).
 . Następnie włącz plugin klikając "Enable uploaded plugins" i znów "Enable".
 . Teraz przjdź do zakładki Tools (6) (również wewnątrz Administration), następnie wybierz "Install Tool..." (7), wybierz "Advanced Installer" (7) i kliknij "Add" (8).
 . W tym momencie, jeśli na serwerze budującym nie został zainstlowany Advanced Installer, masz możliwość to źrobić. Wybierz najnowszą wersję i kliknij "Add". 
 . Po chwili oczekiwania narzędzie jest gotowe do działania. 
 
-.Instalacja dodatku do Visual Studio 2022
+.Instalacja dodatku do TeamCity
 [.table-gallery,cols="1,1"]
 |===
 a| 
@@ -241,11 +240,11 @@ image::TeamCity-ExampleStep.png[]
 . Następnie podaj ścieżkę do pliku projektu instalatora. 
 Dla projektu utworzonego wcześniej byłoby to: `AdvancedInstallerDemo.Installer/AdvancedInstallerDemo.Installer.aip`.
 . Następnie musisz okreslić wartość "AIP Build". Domyślnie jest to `DefaultBuild`. 
-Tę wartość znajdziesz w narzędziu Advanced Installer (nie myl z pluginem do Visual Studio) w zakładce "Builds". 
+Tę wartość znajdziesz w narzędziu Advanced Installer (nie pomyl z pluginem do Visual Studio) w zakładce "Builds". 
 . Teraz możesz określić nazwę pliku wynikowego. 
-Ja lubię dodawac do instalatora numer wersji, na przykład: `AIDemoInstaller-%build.number%.msi`. 
+Ja lubię dodawać do instalatora numer wersji, na przykład: `AIDemoInstaller-%build.number%.msi`. 
 Pamiętaj, aby wcześniej określić poprawny numer wersji footnote:[Z opisu w oknie pluginu Visual Studio jest napisane, że numer wersji powinien wyglądać tak: "x.y.z", gdzie x, y i z są liczbami całkowitymi. Największa możliwa wartość to 255.255.65535.65535. Inne przykładowe, poprawne formaty, to: "3", "2.0", "2.11", "5.10.5". Opis ten pochodzi z pluginu do Visual Studio w wersji 19.4.] w zakładce "General Settings". Jeśli nie widzisz pola "Build number format", to kliknij "Show advanced options" ponizej formularza. 
-. Możesz dodatkowo okreslić katalog wyjściowy (Output Folder)
+. Możesz dodatkowo określić katalog wyjściowy (Output Folder)
 . I najważniejsze, powinieneś okerślić transformacje wykonywane na pliku projektu przed wykonaniem budowania.
 Najwazniejsza jest zmiana nazwy, dlatego w pole "Commands" polecam wpisać Ci:
 
