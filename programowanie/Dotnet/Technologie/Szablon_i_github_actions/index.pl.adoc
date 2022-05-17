@@ -25,7 +25,7 @@ W tym momencie zakładam, że *masz już gotowe repozytorium na Githubie* – te
 == Aby móc publikować w repozytorium nuget.org musimy najpierw założyć konto i utworzyć klucz API
 
 ****
-W tym celu udaj się na stronę nuget.org – możesz się tam zalogować nawet za pomocą konta Microsoft
+W tym celu udaj się na stronę https://www.nuget.org[Nuget.org] – możesz się tam zalogować nawet za pomocą konta Microsoft
 
 .Widok zakładania nowego konta
 image::nuget-org-signin.png[align="center"]
