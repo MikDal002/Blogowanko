@@ -32,7 +32,7 @@ Note that the license clearly indicates that the free version of Advanced Instal
 [quote,Advanced Installer End User Licence,https://www.advancedinstaller.com/eula.html]
 2.1 Freeware Features License. Caphyon grants you an unlimited license to use the Freeware Features of the Software. The install packages created using only the Freeware Features can be freely redistributed and used both in commercial and non-commercial purpose.
 
-== Przygotowanie lokalnego środowiska
+== Prepare the local environment
 
 Let's start preparing the local environment by downloading the installer from https://www.advancedinstaller.com/download.html[manufacturer's website]. 
 Install it and then run it.
@@ -70,7 +70,7 @@ image::vsaddon_install.png[]
 
 With the environment properly prepared, we can move on to specifics:
 
-=== Przykładowy projekt WPF,
+=== Sample WPF project,
 
 For demonstration purposes, let's create a new WPF project (1) in Visual called AdvancedInstallerDemo.Wpf (2).
 Just to be sure, check that the program starts correctly so that there will be no confusion later.
