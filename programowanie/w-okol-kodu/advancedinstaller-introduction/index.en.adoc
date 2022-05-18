@@ -96,7 +96,7 @@ image::VS_NewProject-3.png[]
 
 Now the most important thing, we add the installer!
 
-. To do this, create a new `Advanced Installer Project` using Visual studio named AdvancedInstallerDemo.Installer and double-click the file with the extension *.aip in the newly created project, the plug-in window will open,
+. To do this, create a new `Advanced Installer Project` using Visual studio named AdvancedInstallerDemo.Installer and double-click the file with the extension *.aip in the newly created project, the plug-in window will open.
 Then go to "Files and Folders" (1), and click "Add Project Output" (2).
 . A new window will open where you select "Publish Profile" next to the WPF project.
 If you have not created a publish profile before, you will be asked to do so at this point. 
@@ -221,7 +221,7 @@ The installation path will only be changed after reinstallation.
 [WARNING]
 A bug was noticed during the silent installation. 
 Well, if the installation fails, you will not get any error! 
-To prevent this, run the installation from a powershell script:
+To prevent this, run the installation from a PowerShell script:
 
 .Retrieve the error code from the installer. The code should be placed in one *.ps1 file
 [source,powershell]

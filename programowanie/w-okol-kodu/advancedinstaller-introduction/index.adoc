@@ -96,7 +96,7 @@ image::VS_NewProject-3.png[]
 
 Teraz najważniejsze, dodajemy instalator!
 
-. W tym celu utwórz nowy projekt `Advanced Installer Project` za pomocą Visual studio o nazwie AdvancedInstallerDemo.Installer i kliknij dwukrotnie nowo utworzony projekt, otworzy się okno z wtyczką,
+. W tym celu utwórz nowy projekt `Advanced Installer Project` za pomocą Visual studio o nazwie AdvancedInstallerDemo.Installer i kliknij dwukrotnie nowo utworzony projekt, otworzy się okno ze wtyczką.
 Następnie przejdź do "Files and Folders" (1), i kliknij przycisk "Add Project Output" (2).
 . Otworzy się nowe okno, w którym zaznacz "Publish Profile" przy projekcie WPF.
 Jeśli nie tworzyłeś wcześniej profilu publikacji, to w tym momencie zostaniesz o to poproszony. 
@@ -219,8 +219,8 @@ IMPORTANT: Ścieżka instalacji nie zostanie zmieniona, w przypadku, gdy zaktual
 
 [WARNING]
 Podczas cichej instalacji zauważony został pewien błąd. 
-Otóż, jeśli instalacja sie nie powiedzie, to nie otrzymasz żadnego błędu! 
-Aby temu zapobiec, należy uruchomić instalację ze skryptu powershell:
+Otóż, jeśli instalacja się nie powiedzie, to nie otrzymasz żadnego błędu! 
+Aby temu zapobiec, należy uruchomić instalację ze skryptu PowerShell:
 
 .Pobieranie kodu błędu z instalatora. Kod należy umieścić w jednym pliku *.ps1
 [source,powershell]
