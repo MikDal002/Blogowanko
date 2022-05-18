@@ -16,7 +16,6 @@ tags:
 ---
 = CI/CD dla własnego szablonu
 :toc: 
-:sectnums:
 
 W tym artykule nie będę szczegółowo opisywał kwestii tworzenia akcji Github. 
 Niemniej chciałbym, aby było to miejsce, w którym można zacząć swoją przygodę, dlatego poniższe wskazówki nadają się do każdego typu projektu, który zakłada publikowanie nugeta.
