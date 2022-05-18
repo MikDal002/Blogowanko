@@ -153,7 +153,37 @@ I encourage you to fill in the other fields on this tab, but I won't discuss the
 Remember that after selecting a particular field, a short description of what it is used for appears at the bottom of the window. 
 If this is not enough, there is a help button - a question mark in a blue circle in the upper right corner of the window. 
 
-TIP: Remember that even more interesting features are available under the "Edit in Advanced Installer" button at the bottom left of the window .
+TIP: Remember that even more interesting features are available under the "Edit in Advanced Installer" button at the bottom left of the window.
+
+=== Adding a shortcut to the desktop
+
+You can add a desktop shortcut in the dedicated Advanced Installer application.
+To do this, click the blue "Edit in Advanced Installer" button in Visual Studio, or double-click on the installer project in File Explorer.
+
+. Go to the "Shortcuts" tab, then right-click and select "Installed File" (1).
+. Then go to the directory where the application is installed, select the main executable file (2) and click ok.
+. Then in the properties window, next to the "Shortcut folder" field, click the button with three dots (3) and select the "Desktop" folder (4) and click Ok (5). 
+
+Now, the next time you install it, the shortcut will appear on your desktop! 
+
+.Setting a shortcut to an application on the desktop
+[.table-gallery,cols="1,1"]
+|===
+a| 
+
+image::AddingShortcut_1.png[]
+a| 
+
+image::AddingShortcut_2.png[]
+a| 
+
+image::AddingShortcut_3.png[]
+a| 
+
+image::AddingShortcut_4.png[]
+
+|===
+
 
 === Provide easy package upgrade (version change)
 
@@ -185,6 +215,22 @@ IMPORTANT: The installation path will not be changed if we have updated the "Com
 The installation path will only be changed after reinstallation. 
 
 === Quiet installation
+
+==== Attention
+
+[WARNING]
+A bug was noticed during the silent installation. 
+Well, if the installation fails, you will not get any error! 
+To prevent this, run the installation from a powershell script:
+
+.Retrieve the error code from the installer. The code should be placed in one *.ps1 file
+[source,powershell]
+----
+& '.\AdvancedInstallerDemo.Installer.msi' /qn
+if( ($LASTEXITCODE -ne 0) -and -not ( $LASTEXITCODE -eq $null) ) {
+	throw "Exit code is $LASTEXITCODE"
+}
+----
 
 A big advantage of properly prepared MSI installers is the ability to install them from the console, without human interaction. 
 Such functionality is called quiet mode, which allows you to use it in automation, or GPO groups.

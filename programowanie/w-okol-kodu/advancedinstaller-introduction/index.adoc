@@ -157,10 +157,10 @@ TIP: Pamiętaj, że jeszcze więcej ciekawych funkcji jest dostępnych pod przyc
 
 === Dodawanie skrótu na pulpicie
 
-Aby dodać skrót na pulpicie, musimy otworzyć nasz projekt instalatora w dedykowanej aplikacji Advanced Installer.
-Aby to zrobić, kliknij niebieski przycisk "Edit in Advanced Installer" w Visual Studio, albo dwukrotnie na projekt instalatora w Eksploratorze Plików.
+Skrót na pulpicie można dodać w dedykowanej aplikacji Advanced Installer.
+By to zrobić, kliknij niebieski przycisk "Edit in Advanced Installer" w Visual Studio, albo dwukrotnie na projekt instalatora w Eksploratorze Plików.
 
-. Przejdź do zakładki "Shortcuts", następnie kliknij Prawym Przyciskiem Myszki i wybierz "Installed File" (1).
+. Przejdź do zakładki "Shortcuts", następnie kliknij prawym przyciskiem myszki i wybierz "Installed File" (1).
 . Następnie przejdź do katalogu, gdzie jest zainstalowana aplikacja, wybierz główny plik wykonawczy (2) i kliknij ok.
 . Następnie w oknie właściwości, przy polu "Shortcut folder" kliknij przycisk z trzema kropkami (3) i wybierz katalog "Desktop" (4) i kliknij Ok (5). 
 
