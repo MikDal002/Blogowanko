@@ -92,7 +92,6 @@ image::VS_NewProject-3.png[]
 
 |===
 
-
 === Dodanie projektu instalatora
 
 Teraz najważniejsze, dodajemy instalator!
@@ -156,6 +155,35 @@ Jeśli i ta wiedza nie będzie wystarczająca, masz do dyspozycji jeszcze przyci
 
 TIP: Pamiętaj, że jeszcze więcej ciekawych funkcji jest dostępnych pod przyciskiem "Edit in Advanced Installer" w lewej dolnej krawędzi okna.
 
+=== Dodawanie skrótu na pulpicie
+
+Aby dodać skrót na pulpicie, musimy otworzyć nasz projekt instalatora w dedykowanej aplikacji Advanced Installer.
+Aby to zrobić, kliknij niebieski przycisk "Edit in Advanced Installer" w Visual Studio, albo dwukrotnie na projekt instalatora w Eksploratorze Plików.
+
+. Przejdź do zakładki "Shortcuts", następnie kliknij Prawym Przyciskiem Myszki i wybierz "Installed File" (1).
+. Następnie przejdź do katalogu, gdzie jest zainstalowana aplikacja, wybierz główny plik wykonawczy (2) i kliknij ok.
+. Następnie w oknie właściwości, przy polu "Shortcut folder" kliknij przycisk z trzema kropkami (3) i wybierz katalog "Desktop" (4) i kliknij Ok (5). 
+
+Teraz, przy następnej instalacji skrót pojawi sie na pulpicie! 
+
+.Ustawienie skrótu do aplikacji na pulpicie
+[.table-gallery,cols="1,1"]
+|===
+a| 
+
+image::AddingShortcut_1.png[]
+a| 
+
+image::AddingShortcut_2.png[]
+a| 
+
+image::AddingShortcut_3.png[]
+a| 
+
+image::AddingShortcut_4.png[]
+
+|===
+
 === Zapewnienie łatwej aktualizacji pakietu (zmiana wersji)
 
 Jednym z wymagań stawianych wobec instalatora jest aktualizacja aplikacji. 
@@ -187,6 +215,22 @@ IMPORTANT: Ścieżka instalacji nie zostanie zmieniona, w przypadku, gdy zaktual
 
 === Cicha instalacja
 
+==== Uwaga
+
+[WARNING]
+Podczas cichej instalacji zauważony został pewien błąd. 
+Otóż, jeśli instalacja sie nie powiedzie, to nie otrzymasz żadnego błędu! 
+Aby temu zapobiec, należy uruchomić instalację ze skryptu powershell:
+
+.Pobieranie kodu błędu z instalatora. Kod należy umieścić w jednym pliku *.ps1
+[source,powershell]
+----
+& '.\AdvancedInstallerDemo.Installer.msi' /qn
+if( ($LASTEXITCODE -ne 0) -and -not ( $LASTEXITCODE -eq $null) ) {
+	throw "Exit code is $LASTEXITCODE"
+}
+----
+
 Dużą zaletą poprawnie przygotowanych instalatorów MSI jest możliwość ich instalacji z konsoli, bez interakcji z człowiekiem. 
 Taką funkcjonalność nazywamy trybem cichym, co pozwala na wykorzystanie go w automatyzacji, czy grupach GPO.
 Aby dowiedzieć się więcej, zajrzyj do https://www.advancedinstaller.com/user-guide/qa-silent-msi-install.html[dokumentacji].
@@ -199,7 +243,6 @@ Cichą instalację, wykonuje się poniższym poleceniem.
 
 NOTE: Pamiętaj, że instalacja w katalogu Program Files wymaga uprawnień administratora.
 Jeśli twoja aplikacja nie instaluje się poprawnie w trybie cichym, upewnij się, że uruchamiasz polecenie z odpowiednimi uprawnieniami!
-
 
 == Dodatek: TeamCity
 
