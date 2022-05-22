@@ -1,5 +1,5 @@
 ---
-title: Privacy plicy
+title: Privacy policy
 date: '2021-07-31'
 aliases:
   - rodo
