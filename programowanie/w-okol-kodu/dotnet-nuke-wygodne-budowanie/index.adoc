@@ -1,0 +1,24 @@
+---
+title: "Nuke – wygodne CI/CD w C#"
+date: 2022-05-16
+draft: false
+image: cover.jpg
+description: Nuke pozwala nam na opisanie proste opisanie procesu budowania i publikowania naszej aplikacji w języku C#. Niniejszy artykuł nie skończy się na samym wprowadzeniu. Zamierzam pokazać Ci jak zbudować aplikację, uruchomić testy jednostkowe, wymusić odpowiednie pokrycie kodu oraz jak przygotować aplikację do publikacji. 
+Opiszę również sposób przygotowania CI/CD dla Github Actions. 
+
+categories: 
+    - "W okół kodu"
+    - "CI/CD"
+tags:
+    - ".Net"
+    - "CI/CD"
+    - "Testy jednostkowe"
+    - "Github Actions"
+---
+:toc: 
+:experimental: true
+
+== Wstęp
+
+
+Photo by https://unsplash.com/es/@burgessbadass?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Burgess Milner] on https://unsplash.com/s/photos/nuke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Unsplash].
