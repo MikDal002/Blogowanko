@@ -1,10 +1,10 @@
 ---
 title: "Nuke – wygodne CI/CD w C#"
-date: 2022-05-16
+date: 2022-06-12
 draft: false
 image: cover.jpg
-description: Nuke pozwala nam na opisanie proste opisanie procesu budowania i publikowania naszej aplikacji w języku C#. Niniejszy artykuł nie skończy się na samym wprowadzeniu. Zamierzam pokazać Ci jak zbudować aplikację, uruchomić testy jednostkowe, wymusić odpowiednie pokrycie kodu oraz jak przygotować aplikację do publikacji. 
-Opiszę również sposób przygotowania CI/CD dla Github Actions. 
+description: "Nuke pozwala nam na proste opisanie procesu budowania i publikowania naszej aplikacji w języku C#. Niniejszy artykuł nie skończy się na samym wprowadzeniu. Zamierzam pokazać Ci jak zbudować aplikację, uruchomić testy jednostkowe, wymusić odpowiednie pokrycie kodu oraz jak przygotować aplikację do publikacji. 
+Opiszę również sposób przygotowania CI/CD dla Github Actions z uwzględnieniem parametrów pobierania sekretów repozytorium."
 
 categories: 
     - "W okół kodu"
@@ -19,6 +19,72 @@ tags:
 :experimental: true
 
 == Wstęp
+Nuke podoba mi się, ponieważ: a) nie muszę uczyć się osobno konstruować budowania dla Github Actions, TeamCity osobno, b) mogę współdzielić dużą część kodu między różnymi zestawami budowania (np. dla PR i CI/CD używam tego samego kodu). c) używam języka, który znam, co ułatwia mi realizowanie zadań. 
 
+
+== Wstępna konfiguracja z pomocą kreatora
+
+=== Plugin do Visual Studio 2022
+
+=== Wyjaśnienie:
+==== DependsOn 
+==== Unlisted
+==== Requires 
+==== Parameter
+==== Secret
+==== OnlyWhenStatic
+
+== Testy jednostkowe
+
+== Pokrycie testami jednostkowymi
+
+WARNING: Działa tylko na Windows.
+
+== Raport z testów jednostkowych
+
+== Publikowanie z wysyłką do Netlify jako przykład CI/CD.
+
+== Github Actions
+
+=== Nowe wydanie na githubie (tu jest tylko wycinek)
+
+https://www.ariank.dev/create-a-github-release-with-nuke-build-automation-tool/
+
+[source,csharp]
+----
+GitHubTasks.GitHubClient = new GitHubClient(new ProductHeaderValue(nameof(NukeBuild)))
+{
+  Credentials = new Credentials(GithubRepositoryAuthToken)
+};
+var newRelease = new NewRelease(BuildInfo.TagName)
+{
+  TargetCommitish = CommitSha,
+  Draft = true,
+  Name = $"Release version {BuildInfo.SemanticVersion}",
+  Prerelease = BuildInfo.SemanticVersion.IsPrerelease,
+  Body =
+    @$"See release notes in [docs](https://[YourSite]/{BuildInfo.SemanticVersion.Major}.{BuildInfo.nticVersion.Minor}/)"
+};
+
+var createdRelease = GitHubTasks.GitHubClient.Repository.Release.Create(RepositoryId, newRelease).Result;
+----
+
+=== Dla pull requestów
+
+NOTE: Nie zapomnij dodać definicji parametrów pobieranych z skeretów do pliku YAML. 
+
+=== Dla CI/CD.
+
+== GitSemVersion
+
+== Opis dodatkowy
+`build.ps1 --help`
+`build.ps1 --plan`
+
+
+=== Budowanie równoległe niektórych kroków
+=== Logowanie Serilog.Warning()
+=== CombineWith
+=== Łączenie ścieżek do pliku za pomocą operatora /
 
 Photo by https://unsplash.com/es/@burgessbadass?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Burgess Milner] on https://unsplash.com/s/photos/nuke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Unsplash].
