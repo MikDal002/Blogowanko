@@ -1,5 +1,5 @@
 ---
-title: "Nuke – wygodne CI/CD w C#"
+title: "Nuke – wygodne CI/CD programu końcowego w C#"
 date: 2022-06-12
 draft: false
 image: cover.jpg
@@ -21,34 +21,168 @@ tags:
 == Wstęp
 Nuke podoba mi się, ponieważ: a) nie muszę uczyć się osobno konstruować budowania dla Github Actions, TeamCity osobno, b) mogę współdzielić dużą część kodu między różnymi zestawami budowania (np. dla PR i CI/CD używam tego samego kodu). c) używam języka, który znam, co ułatwia mi realizowanie zadań. 
 
-
 == Wstępna konfiguracja z pomocą kreatora
+
+Zainstalowanie narzedzia nuke globalnie stanowczo ułatwi nam proces konfiguracji i rozowju naszego projektu. 
+Co ważne, nie jest ono niezbędędne na docelowej maszynie budującej, jest ono tak zaprojektowane, aby ułatwić pracę dewelopera.
+
+[source,powershell]
+----
+dotnet tool install Nuke.GlobalTool --global
+----
+
+Konfigurator Nuke pozwala nam bardzo sprawnie rozpocząć pracę.
+Przygotowuje on w zasadzie cały powtarzalny kod, który jest niezbędny do tego, aby rozpocząć z nim zabawę.
 
 === Plugin do Visual Studio 2022
 
-=== Wyjaśnienie:
-==== DependsOn 
-==== Unlisted
-==== Requires 
-==== Parameter
-==== Secret
-==== OnlyWhenStatic
+Plugin do Visual Studio pozwala nam na wywoływanie akcji budowania prosto z IDE. 
+Do tego dochodzi możliwość debugowania.
+
+NOTE: Często, aby zmiany w kodzie budującym zostały zastosowane, niezbędne jest przebudowanie projektu. 
+Samo budowanie, bez czyszczenia, rzadko daje efekty.
+
+// Wyjaśnienie poszczególnych elementów raczej wolałbym dać w ramkach w tekście
+.DependsOn()
+****
+`DependsOn` pozwala nam na określenie, jakie kroki trzeba wykonać przed wykonaniem wybranej akcji.
+****
+
+.Requires()
+****
+`Requires` pozwala określić nam, wymagania niezbędne do uruchomienia danej akcji. 
+Jeśli, któryś z warunków nie będzie spełniony, zostanie wyświetlony błąd a cała procedura przerwana.
+****
+
+.Atrybut [Parameter]
+****
+Atrybut `Parameter` pozwala nam jasno określić parametry konfiguracyjne naszego procesu budującego. 
+Daje on nam możliwość ustawienia opisu, wartości domyślnej.
+Co ważne, wartości oznaczone atrybutem `Parameter` mogą być pozyskane zarówno z wiersza poleceń, przy uruchomieniu programu budującego, jak i ze zmiennych środowiskowyhc.
+****
+
+.Secret()
+****
+Oznaczenie parametru jako `Secret` spowoduje, że jego wartość nie zostanie wyświetlona w trakcie precesu budującego.
+****
+
+.CombineWith()
+****
+`CombineWith` pozwala nam na proste tworzenie kombinacji budowania. 
+Kopiuje on konfigurację i pozwala na zmianę poszczególnych parametrów na podstawie dostarczonej kolekcji.
+****
 
 == Testy jednostkowe
 
+Testy jednostkowe są niezbędnym elementem, jeśli chcemy utrzymać wysoką jakość naszego projektu oraz łatwość jego rozwoju w dłuższym czasie. 
+
 == Pokrycie testami jednostkowymi
+
+Pokrycie testami jednostkowymi jest badane za pomocą `Coverlet`, które jest domyślnie używane przez środowisko `dotnet test`.
+Jednak jego poprawne użycie zajęło mi na prawdę sporo czasu. 
+Aby móc z niego skorzystać musisz zainstalować odpowiednia paczkę:
+
+[source,powershell]
+----
+nuke :add-package coverlet.console --version 3.1.2
+# lub, jeśli nie zainstalowałeś narzędzia nuke
+dotnet tool install --global coverlet.console --version 3.1.2
+----
+
+Największym problemem, okazało się wymuszenie odpowiedniego pokrycia testami.
+Tylko jedna, z wielu testowanych przeze mnie konfiguracji, działa, to jest, zwraca błąd, gdy pokrycie testami jest niższe niż wskazane.
+
+Nie użyłem DotCover, ponieważ nie jestem pewien, czy mogę go wykrzystywać w każdym projekcie.
 
 WARNING: Działa tylko na Windows.
 
 == Raport z testów jednostkowych
 
+Raport ułatwi nam śledzenie, które moduły naszej aplikacji są testowane w najwyższym stopniu, a które w najniższym.
+Istnieją także platformy, które potafią zrobić z nich większy użytek
+
 == Publikowanie z wysyłką do Netlify jako przykład CI/CD.
+
+Jako przykład pełnego CI/CD pokażę publikowanie projektu blazorowego do usługi Netlify, dzięki czemu, aplikacja Web Assembly będzie dostępna w Internecie.
+
+Przykłady publikowania paczek nuget są łatwo dostępne w Internecie #TODO: Dodać przykładowy link!#, a moje podejście do sprawy pokażę w następnej części tej serii artykułów.
 
 == Github Actions
 
-=== Nowe wydanie na githubie (tu jest tylko wycinek)
+Wszelką konfigurację github action robimy za pomocą atrybutu.
 
-https://www.ariank.dev/create-a-github-release-with-nuke-build-automation-tool/
+=== Dla pull requestów
+
+NOTE: Nie zapomnij dodać definicji parametrów pobieranych z sekretów do pliku YAML. 
+
+=== Dla CI/CD.
+
+Proces budowania dla CI/CD chcemy, aby był uruchamiany tylko po poprawnym połączeniu z gałęzią master. 
+
+== Opis dodatkowy
+`build.ps1 --help`
+`build.ps1 --plan`
+
+
+=== Budowanie równoległe niektórych kroków
+=== Logowanie Serilog.Warning()
+=== Łączenie ścieżek do pliku za pomocą operatora /
+
+Photo by https://unsplash.com/es/@burgessbadass?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Burgess Milner] on https://unsplash.com/s/photos/nuke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Unsplash].
+
+== Podsumowanie
+
+=== Minusy
+Słaba dokumentacja. 
+Szukanie zawsze trzeba wykonywać w dwóch kierunkach: 1) jak to powinno być zrobione natywnie za pomocą danego narzędzia, 2) jak to zrobic w Nuke. 
+Mogłoby być zdecydowanie więcej przykładów.
+
+== Część druga
+
+
+=== Automatyczne numerowanie: GitVersion
+
+// Z tym mam problem, no bo nie ogarnąłem tak na prawdę tematu i muszę zrobić to osobno
+
+https://blog.dangl.me/archive/escalating-automation-the-nuclear-option/
+
+
+=== Przygotowywanie i publikacji paczki Nuget
+https://github.com/zarunbal/LogExpert/blob/master/build/Build.cs
+https://github.com/fluentassertions/fluentassertions/blob/master/Build/Build.cs
+
+----
+    Target Push => _ => _
+        .DependsOn(Pack)
+        .OnlyWhenDynamic(() => IsTag)
+        .Executes(() =>
+        {
+            IReadOnlyCollection<string> packages = GlobFiles(ArtifactsDirectory, "*.nupkg");
+
+            Assert.NotEmpty(packages.ToList());
+
+            DotNetNuGetPush(s => s
+                .SetApiKey(ApiKey)
+                .EnableSkipDuplicate()
+                .SetSource("https://api.nuget.org/v3/index.json")
+                .EnableNoSymbols()
+                .CombineWith(packages,
+                    (v, path) => v.SetTargetPath(path)));
+        });
+----
+
+
+=== Changelog z GitHub (i nie tylko...??)
+https://github.com/nuke-build/nuke/blob/develop/build/Build.GitFlow.cs
+
+https://blog.dangl.me/archive/escalating-automation-the-nuclear-option/
+Nuke.Github.GetCompleteChangeLog()
+
+=== Nowe wydanie na GitHubie 
+
+https://github.com/zarunbal/LogExpert/blob/master/build/Build.cs
+https://blog.dangl.me/archive/escalating-automation-the-nuclear-option/
+https://www.ariank.dev/create-a-github-release-with-nuke-build-automation-tool/ (tu jest tylko wycinek)
 
 [source,csharp]
 ----
@@ -69,22 +203,23 @@ var newRelease = new NewRelease(BuildInfo.TagName)
 var createdRelease = GitHubTasks.GitHubClient.Repository.Release.Create(RepositoryId, newRelease).Result;
 ----
 
-=== Dla pull requestów
+== Część tzecia, będzie bardziej tematyczna
 
-NOTE: Nie zapomnij dodać definicji parametrów pobieranych z skeretów do pliku YAML. 
-
-=== Dla CI/CD.
-
-== GitSemVersion
-
-== Opis dodatkowy
-`build.ps1 --help`
-`build.ps1 --plan`
+=== Dodawanie sonar qube 
+To będzie wymagało trochę więcej pracy, bo jeszcze trzeba ogarnąć samego Sonara i wdrożenie go do projektu. 
+Bo jak wdrażać Sonar, to tak, aby traktować ostrzeżenia jako błędy. 
+https://github.com/ChilliCream/hotchocolate/blob/main/.build/Build.Sonar.cs
 
 
-=== Budowanie równoległe niektórych kroków
-=== Logowanie Serilog.Warning()
-=== CombineWith
-=== Łączenie ścieżek do pliku za pomocą operatora /
+=== Budowanie obrazu dockera 
+https://github.com/avivasolutionsnl/sitecore-docker/tree/master/build
 
-Photo by https://unsplash.com/es/@burgessbadass?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Burgess Milner] on https://unsplash.com/s/photos/nuke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Unsplash].
+.Unlisted
+****
+#TODO: Nie mam pojęcia na ten moment#
+****
+
+.=== OnlyWhenStatic
+****
+#TODO: Nie mam pojęcia na ten moment#
+****
