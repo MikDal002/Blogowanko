@@ -19,12 +19,33 @@ tags:
 :experimental: true
 
 == Wstęp
-Nuke podoba mi się, ponieważ: a) nie muszę uczyć się osobno konstruować budowania dla Github Actions, TeamCity osobno, b) mogę współdzielić dużą część kodu między różnymi zestawami budowania (np. dla PR i CI/CD używam tego samego kodu). c) używam języka, który znam, co ułatwia mi realizowanie zadań. 
+Wyobraź sobie, że całe CI/CD swojej aplikacji możesz opisać za pomocą C#.
+Bez potrzeby nauki środowiska graficznego TeamCity, czy YAML'i GitHuba. 
+
+Nuke jest jednym ze sposobów opisu budowania naszej aplikacji w języku C#. 
+Jeżeli chcemy, aby nasz projekt był cały czas łatwo zarządzalny, musimy mieć sposób na opis wszystkich wymagań stawianych przed nim. 
+I tak oto, możemy opisać:
+
+1. (Czyszczenie) jak powinny wyglądać katalogi przed rozpoczęciem budowania projektu,
+2. (Przygotowanie) jakich zależności potrzebuje nasza aplikacja do kompilacji,
+3. (Budowanie) w jakiej kolejności budować poszczególne elementy,
+4. (Testowanie) jak uruchamiać testy jednostkowe i jakie są nasze wymagania co do pokrycia nimi naszego kodu,
+5. (Publikacja) jak spakować naszą aplikację i wysłać ją na środowisko produkcyjne. 
+
+Nie jest to kompletna lista, tego, co możemy zrobić w trakcie procesu ciągłej integracji i dostarczania. 
+Na pewno pokazuje ona podstawowe zagadnienia, przed którymi jesteśmy stawiani podczas wydawania kolejnej wersji naszego oprogramowania. 
+I jak to w życiu bywa, jeśli czegoś nie zapiszemy, to pewno o tym zapomnimy.
+A po co zapisywać coś na skrawku papieru, gdy można to zrobić za pomocą kodu, który wykona się sam? 
+
+Wszystkie wyżej opisane kroki możemy opisywać w różnych językach.
+Robimy to często w tak wyspecjalizowanych formach, jak projekty budujące na TeamCity, czy GitHub Actions. 
+Nuke przekonał mnie tym, że nie muszę uczyć się tych wszystkich konfiguracji osobno – mogę opisać wszystko, co niezbędne za pomocą dobrze mi znanego języka C# i wykorzystywać tam, gdzie potrzebuję.
+W przypadku GitHub Actions mogę bez problemu również wykorzystać raz napisany kod w wielu różnych przepływach, co stanowczo upraszcza pracę i testowanie.
 
 == Wstępna konfiguracja z pomocą kreatora
 
-Zainstalowanie narzedzia nuke globalnie stanowczo ułatwi nam proces konfiguracji i rozowju naszego projektu. 
-Co ważne, nie jest ono niezbędędne na docelowej maszynie budującej, jest ono tak zaprojektowane, aby ułatwić pracę dewelopera.
+Wstępną konfigurację naszego projektu warto zacząć od instalacji narzędzia Nuke, które stanowczo ułatwia pracę dewelopera.
+Co ważne, nie jest ono niezbędne na serwerze budującym.
 
 [source,powershell]
 ----
