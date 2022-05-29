@@ -52,10 +52,94 @@ Co ważne, nie jest ono niezbędne na serwerze budującym.
 dotnet tool install Nuke.GlobalTool --global
 ----
 
-Konfigurator Nuke pozwala nam bardzo sprawnie rozpocząć pracę.
-Przygotowuje on w zasadzie cały powtarzalny kod, który jest niezbędny do tego, aby rozpocząć z nim zabawę.
+.Widok konfiguratora Nuke
+image::nuke-setup.png[]
 
-=== Plugin do Visual Studio 2022
+1. Wybierz nazwę projektu budującego, 
+2. Katalog, w którym będzie on zapisany,
+3. Wersję Nuke,
+4. Domyślne rozwiązanie, które będzie budowane,
+5. Wybierz, czy chcesz, aby podstawowe polecenia budujące zostały już umieszczone w nowym projekcie. 
+6. Wybierz środowisku, które będzie budować twoje rozwiązanie.
+7. Wybierz miejsce, gdzie są umieszczone twoje projekty (w tym katalogu będzie przeprowadzane czyszczenie dodatkowe),
+8. Wybierz, gdzie mają trafiać artefakty, czyli pliki wynikowe budowania, jak paczki nuget. 
+9. Wybierz, gdzie są twoje projekty, które testują rozwiązanie.
+10 Wybierz, czy używasz GitVersion. Ja wybrałem, że tak, jednak opis tego narzędzia znajdzie się w innym artykule.
+
+Rezultatem takich wyborów, będzie klasa C#, która będzie wyglądać mniej więcej tak, jak poniżej.
+Obok tego dostaniemy kilka plików build.sh i build.cmd i build.ps1, które pozwalają nam na budowę naszej aplikacji nawet w środowisku, które nie ma zainstalowanego środowiska .Net. 
+Pojawi się również katalog `.nuke`, który przechowuje kilka ustawień.
+
+.Widok klasy Build.cs
+[source,csharp]
+----
+[CheckBuildProjectConfigurations]
+[ShutdownDotNetAfterServerBuild]
+class Build : NukeBuild
+{
+    public static int Main () => Execute<Build>(x => x.Compile);
+
+    [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
+    readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
+
+    [Solution] readonly Solution Solution;
+    [GitRepository] readonly GitRepository GitRepository;
+    [GitVersion] readonly GitVersion GitVersion;
+
+    AbsolutePath SourceDirectory => RootDirectory / "src";
+    AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
+
+    Target Clean => _ => _
+        .Before(Restore)
+        .Executes(() =>
+        {
+            SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
+            EnsureCleanDirectory(ArtifactsDirectory);
+        });
+
+    Target Restore => _ => _
+        .Executes(() =>
+        {
+            DotNetRestore(s => s
+                .SetProjectFile(Solution));
+        });
+
+    Target Compile => _ => _
+        .DependsOn(Restore)
+        .Executes(() =>
+        {
+            DotNetBuild(s => s
+                .SetProjectFile(Solution)
+                .SetConfiguration(Configuration)
+                .SetAssemblyVersion(GitVersion.AssemblySemVer)
+                .SetFileVersion(GitVersion.AssemblySemFileVer)
+                .SetInformationalVersion(GitVersion.InformationalVersion)
+                .EnableNoRestore());
+        });
+
+}
+----
+
+=== Jak budować projekt z pomocą Nuke
+
+Projekt budujący Nuke możemy uruchomić przynajmniej na trzy sposoby:
+
+==== Z konsoli
+
+* __dotnet run__ -
+Standardowym poleceniem `dotnet run` wywołanym w katalogu, gdzie znajduje się nasz projekt budujący (u mnie jest to katalog CICD).
+
+* __Narzędzie nuke__ -
+Jeśli zainstalowałeś wcześniej globalne narzędzie nuke, to możesz użyć również go.
+Podejście to jest bardziej elastyczne, ponieważ zadziała niezależnie od katalogu, w którym je wywołasz. 
+Potrafi ono samo znaleźć katalog główny rozwiązania i tam poszukać odpowiednich dojść.
+
+Niezależnie od podejścia, pamiętaj, że przy uruchomieniu możesz podawać własne parametry uruchomieniowe. 
+Możesz spróbować poprzez dodanie flagi `--Configuration Release`, co spowoduje zbudowanie aplikacji w trybie release. 
+
+Więcej o definiowaniu własnych parametrów znajdziesz w dalszej części artykułu, w sekcji na temat CI/CD.
+
+==== Plugin do Visual Studio 2022
 
 Plugin do Visual Studio pozwala nam na wywoływanie akcji budowania prosto z IDE. 
 Do tego dochodzi możliwość debugowania.
@@ -124,6 +208,8 @@ Istnieją także platformy, które potafią zrobić z nich większy użytek
 
 == Publikowanie z wysyłką do Netlify jako przykład CI/CD.
 
+#TODO: W tej sekcji powinno nastąpić opisanie parametrów#
+
 Jako przykład pełnego CI/CD pokażę publikowanie projektu blazorowego do usługi Netlify, dzięki czemu, aplikacja Web Assembly będzie dostępna w Internecie.
 
 Przykłady publikowania paczek nuget są łatwo dostępne w Internecie #TODO: Dodać przykładowy link!#, a moje podejście do sprawy pokażę w następnej części tej serii artykułów.
@@ -149,8 +235,6 @@ Proces budowania dla CI/CD chcemy, aby był uruchamiany tylko po poprawnym poł�
 === Logowanie Serilog.Warning()
 === Łączenie ścieżek do pliku za pomocą operatora /
 
-Photo by https://unsplash.com/es/@burgessbadass?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Burgess Milner] on https://unsplash.com/s/photos/nuke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Unsplash].
-
 == Podsumowanie
 
 === Minusy
@@ -158,89 +242,5 @@ Słaba dokumentacja.
 Szukanie zawsze trzeba wykonywać w dwóch kierunkach: 1) jak to powinno być zrobione natywnie za pomocą danego narzędzia, 2) jak to zrobic w Nuke. 
 Mogłoby być zdecydowanie więcej przykładów.
 
-== Część druga
 
-
-=== Automatyczne numerowanie: GitVersion
-
-// Z tym mam problem, no bo nie ogarnąłem tak na prawdę tematu i muszę zrobić to osobno
-
-https://blog.dangl.me/archive/escalating-automation-the-nuclear-option/
-
-
-=== Przygotowywanie i publikacji paczki Nuget
-https://github.com/zarunbal/LogExpert/blob/master/build/Build.cs
-https://github.com/fluentassertions/fluentassertions/blob/master/Build/Build.cs
-
-----
-    Target Push => _ => _
-        .DependsOn(Pack)
-        .OnlyWhenDynamic(() => IsTag)
-        .Executes(() =>
-        {
-            IReadOnlyCollection<string> packages = GlobFiles(ArtifactsDirectory, "*.nupkg");
-
-            Assert.NotEmpty(packages.ToList());
-
-            DotNetNuGetPush(s => s
-                .SetApiKey(ApiKey)
-                .EnableSkipDuplicate()
-                .SetSource("https://api.nuget.org/v3/index.json")
-                .EnableNoSymbols()
-                .CombineWith(packages,
-                    (v, path) => v.SetTargetPath(path)));
-        });
-----
-
-
-=== Changelog z GitHub (i nie tylko...??)
-https://github.com/nuke-build/nuke/blob/develop/build/Build.GitFlow.cs
-
-https://blog.dangl.me/archive/escalating-automation-the-nuclear-option/
-Nuke.Github.GetCompleteChangeLog()
-
-=== Nowe wydanie na GitHubie 
-
-https://github.com/zarunbal/LogExpert/blob/master/build/Build.cs
-https://blog.dangl.me/archive/escalating-automation-the-nuclear-option/
-https://www.ariank.dev/create-a-github-release-with-nuke-build-automation-tool/ (tu jest tylko wycinek)
-
-[source,csharp]
-----
-GitHubTasks.GitHubClient = new GitHubClient(new ProductHeaderValue(nameof(NukeBuild)))
-{
-  Credentials = new Credentials(GithubRepositoryAuthToken)
-};
-var newRelease = new NewRelease(BuildInfo.TagName)
-{
-  TargetCommitish = CommitSha,
-  Draft = true,
-  Name = $"Release version {BuildInfo.SemanticVersion}",
-  Prerelease = BuildInfo.SemanticVersion.IsPrerelease,
-  Body =
-    @$"See release notes in [docs](https://[YourSite]/{BuildInfo.SemanticVersion.Major}.{BuildInfo.nticVersion.Minor}/)"
-};
-
-var createdRelease = GitHubTasks.GitHubClient.Repository.Release.Create(RepositoryId, newRelease).Result;
-----
-
-== Część tzecia, będzie bardziej tematyczna
-
-=== Dodawanie sonar qube 
-To będzie wymagało trochę więcej pracy, bo jeszcze trzeba ogarnąć samego Sonara i wdrożenie go do projektu. 
-Bo jak wdrażać Sonar, to tak, aby traktować ostrzeżenia jako błędy. 
-https://github.com/ChilliCream/hotchocolate/blob/main/.build/Build.Sonar.cs
-
-
-=== Budowanie obrazu dockera 
-https://github.com/avivasolutionsnl/sitecore-docker/tree/master/build
-
-.Unlisted
-****
-#TODO: Nie mam pojęcia na ten moment#
-****
-
-.=== OnlyWhenStatic
-****
-#TODO: Nie mam pojęcia na ten moment#
-****
+Photo by https://unsplash.com/es/@burgessbadass?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Burgess Milner] on https://unsplash.com/s/photos/nuke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Unsplash].

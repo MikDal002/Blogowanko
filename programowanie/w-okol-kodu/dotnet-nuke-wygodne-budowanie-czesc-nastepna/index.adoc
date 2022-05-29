@@ -1,0 +1,105 @@
+---
+title: "Nuke – wygodne CI/CD programu końcowego w C# część następna"
+date: 2022-06-24
+draft: true
+description: "TODO"
+
+categories: 
+    - "W okół kodu"
+    - "CI/CD"
+tags:
+    - ".Net"
+    - "CI/CD"
+    - "Testy jednostkowe"
+    - "Github Actions"
+---
+:toc: 
+:experimental: true
+
+== Część druga
+
+
+=== Automatyczne numerowanie: GitVersion
+
+// Z tym mam problem, no bo nie ogarnąłem tak na prawdę tematu i muszę zrobić to osobno
+
+https://blog.dangl.me/archive/escalating-automation-the-nuclear-option/
+
+
+=== Przygotowywanie i publikacji paczki Nuget
+https://github.com/zarunbal/LogExpert/blob/master/build/Build.cs
+https://github.com/fluentassertions/fluentassertions/blob/master/Build/Build.cs
+
+----
+    Target Push => _ => _
+        .DependsOn(Pack)
+        .OnlyWhenDynamic(() => IsTag)
+        .Executes(() =>
+        {
+            IReadOnlyCollection<string> packages = GlobFiles(ArtifactsDirectory, "*.nupkg");
+
+            Assert.NotEmpty(packages.ToList());
+
+            DotNetNuGetPush(s => s
+                .SetApiKey(ApiKey)
+                .EnableSkipDuplicate()
+                .SetSource("https://api.nuget.org/v3/index.json")
+                .EnableNoSymbols()
+                .CombineWith(packages,
+                    (v, path) => v.SetTargetPath(path)));
+        });
+----
+
+
+=== Changelog z GitHub (i nie tylko...??)
+https://github.com/nuke-build/nuke/blob/develop/build/Build.GitFlow.cs
+
+https://blog.dangl.me/archive/escalating-automation-the-nuclear-option/
+Nuke.Github.GetCompleteChangeLog()
+
+=== Nowe wydanie na GitHubie 
+
+https://github.com/zarunbal/LogExpert/blob/master/build/Build.cs
+https://blog.dangl.me/archive/escalating-automation-the-nuclear-option/
+https://www.ariank.dev/create-a-github-release-with-nuke-build-automation-tool/ (tu jest tylko wycinek)
+
+[source,csharp]
+----
+GitHubTasks.GitHubClient = new GitHubClient(new ProductHeaderValue(nameof(NukeBuild)))
+{
+  Credentials = new Credentials(GithubRepositoryAuthToken)
+};
+var newRelease = new NewRelease(BuildInfo.TagName)
+{
+  TargetCommitish = CommitSha,
+  Draft = true,
+  Name = $"Release version {BuildInfo.SemanticVersion}",
+  Prerelease = BuildInfo.SemanticVersion.IsPrerelease,
+  Body =
+    @$"See release notes in [docs](https://[YourSite]/{BuildInfo.SemanticVersion.Major}.{BuildInfo.nticVersion.Minor}/)"
+};
+
+var createdRelease = GitHubTasks.GitHubClient.Repository.Release.Create(RepositoryId, newRelease).Result;
+----
+
+
+== Część trzecia, będzie bardziej tematyczna
+
+=== Dodawanie sonar qube 
+To będzie wymagało trochę więcej pracy, bo jeszcze trzeba ogarnąć samego Sonara i wdrożenie go do projektu. 
+Bo jak wdrażać Sonar, to tak, aby traktować ostrzeżenia jako błędy. 
+https://github.com/ChilliCream/hotchocolate/blob/main/.build/Build.Sonar.cs
+
+
+=== Budowanie obrazu dockera 
+https://github.com/avivasolutionsnl/sitecore-docker/tree/master/build
+
+.Unlisted
+****
+#TODO: Nie mam pojęcia na ten moment#
+****
+
+.OnlyWhenStatic
+****
+#TODO: Nie mam pojęcia na ten moment#
+****
