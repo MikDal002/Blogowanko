@@ -250,9 +250,12 @@ Polecenia te pozwalają nam kształtować łańcuch wywołań bez konieczności 
 
 == Pokrycie testami jednostkowymi
 
-Pokrycie testami jednostkowymi jest badane za pomocą `Coverlet`, które jest domyślnie używane przez środowisko `dotnet test`.
-Jednak jego poprawne użycie zajęło mi na prawdę sporo czasu. 
-Aby móc z niego skorzystać musisz zainstalować odpowiednia paczkę:
+Uruchomienie badania pokrycia testami jednostkowymi i zwracanie błędu, gdy to pokrycie jest za małe, zajęło mi na prawdę sporo czasu.
+Niestety to rozwiązanie wciąż nie jest idealne, ponieważ działa tylko na maszynie z Windows, a do tego potrzebuje trochę kodu.
+
+Badanie pokrycia kodu testami jednostkowymi jest wykonywane za pomocą `Coverlet`, które jest używane przez środowisko `dotnet test`.
+Nie użyłem DotCover, ponieważ nie jestem pewien, czy mogę tego narzędzie używać w każdym projekcie.
+Aby móc z niego skorzystać, musisz zainstalować odpowiednią paczkę:
 
 [source,powershell]
 ----
@@ -262,11 +265,132 @@ dotnet tool install --global coverlet.console --version 3.1.2
 ----
 
 Największym problemem, okazało się wymuszenie odpowiedniego pokrycia testami.
-Tylko jedna, z wielu testowanych przeze mnie konfiguracji, działa, to jest, zwraca błąd, gdy pokrycie testami jest niższe niż wskazane.
+Tylko jedna, z wielu testowanych przeze mnie konfiguracji, działa, to jest, zwraca błąd, gdy pokrycie testami jest niższe niż wskazane, oto ona: 
 
-Nie użyłem DotCover, ponieważ nie jestem pewien, czy mogę go wykrzystywać w każdym projekcie.
+[source,csharp]
+----
+Target TestCoverage => _ => _
+    .DependsOn(Tests)
+    .TriggeredBy(Tests)
+    .OnlyWhenStatic(() => IsWindowsWhenReleaseOrAnyOsWhenOther()) // <1>
+    .Executes(() =>
+    {
+        var coverageTestSettings = TestSettings
+            .SetConfiguration(Configuration.Debug)
+            .SetProjectFile(Solution); 
+        DotNetTest(coverageTestSettings); // <2>
 
-WARNING: Działa tylko na Windows.
+        var previousCoverageFileResult = string.Empty;
+        CoverletTasks.Coverlet(s => s
+            .SetFormat(CoverletOutputFormat.cobertura, CoverletOutputFormat.json) // <3> 
+            .CombineWith(TestsProjects, (settings, project) =>
+                PrepareCoverageSettingsForCoveringProject(project, settings, coverageTestSettings,ref previousCoverageFileResult) // <4>
+            )
+        );
+
+        // <5>
+        ReportGeneratorTasks.ReportGenerator(s => s
+            .SetTargetDirectory(TestResultDirectory / "report")
+            .SetFramework("net6.0")
+            .SetReports(TestResultDirectory.GlobFiles("**/*.cobertura.xml").Select(d => d.ToString())));
+    });
+
+CoverletSettings PrepareCoverageSettingsForCoveringProject(Project project, CoverletSettings settings,
+    DotNetTestSettings coverageTestSettings, ref string previousCoverageFileResult)
+{
+    var assemblyPath = FindAssemblyForProject(project);
+    var coverageResultDirectory = TestResultDirectory / project.Name;
+
+    settings = settings
+        .SetAssembly(assemblyPath)
+        // Ukośnik na końcu jest niezbędny, aby coverlet wiedziało, że ścieżkę ma traktować jako katalog.
+        .SetOutput(coverageResultDirectory + "/")
+        .SetTargetSettings(coverageTestSettings
+            // Zbudowanie testów osobno jest kluczowym elementem do poprawnego działania Coverlet.
+            .EnableNoBuild()
+            .SetProjectFile(project));
+
+    settings = MergeCoverageResultsWithPreviousRun(previousCoverageFileResult, settings); <5>
+    previousCoverageFileResult = SetThresholdForLastRun(project, coverageResultDirectory, ref settings); <6>
+
+    return settings;
+}
+
+string SetThresholdForLastRun(Project project, AbsolutePath testResultFile, ref CoverletSettings settings)
+{
+    if (TestsProjects.Select(d => d.ProjectId).Last() == project.ProjectId)
+        settings = settings.SetThreshold(UnitTestCoverage_Minimum);
+    string previousCoverageResult = testResultFile / "coverage.json";
+    return previousCoverageResult;
+}
+
+static CoverletSettings MergeCoverageResultsWithPreviousRun(string previousCoverageResult,
+    CoverletSettings settings)
+{
+    if (!string.IsNullOrWhiteSpace(previousCoverageResult))
+        settings = settings.SetMergeWith(previousCoverageResult);
+    return settings;
+}
+
+AbsolutePath FindAssemblyForProject(Project project)
+{
+    var projectName = $"**/{Configuration.Debug}/**/" + project.Name + ".dll";
+    var first = SourceDirectory.GlobFiles(projectName).First();
+    return first;
+}
+----
+
+No i wylądowała nieczytelna ściana kodu. 
+Wybacz, że jest ona tak duża, ale myślę, że dzięki temu będziesz w stanie łatwiej ją skopiować. 
+Omówmy najważniejsze fragmenty kodu: 
+
+<1> Na początku pomińmy uruchamianie tegoż kroku na wszystkich platformach po za Windows. 
+Kod tej metody znajduje się poniżej. 
+Jest on tak rozbudowany, ponieważ zwykle sprawdzenia zmiennych w klasie `EnvironmentInfo` nie dawało dobrych skutków na serwerach budujących.
+<2> 
+
+.OnlyWhenStatic() 
+****
+Funkcja ta powoduje, że warunki podane w niej zostaną sprawdzone w momencie rozpoczęcia kompilacji, czyli na długo przed uruchomieniem pierwszego kroku budowania. 
+Pozwala nam to łatwo odsiać te kroki, które i tak nie mają sensu przy danej konfiguracji.
+****
+
+.Kod poprawnie sprawdzający, czy mamy do czynienia z systemem operacyjnym Windows, czy też może nie.
+[source,csharp]
+----
+bool IsWindowsWhenReleaseOrAnyOsWhenOther()
+{
+    var isWindows = IsWindows();
+    if (isWindows && Configuration == Configuration.Release) return true;
+    return Configuration.Release != Configuration;
+}
+
+static bool IsWindows()
+{
+    try
+    {
+        Process p = new Process
+        {
+            StartInfo =
+            {
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                FileName = "uname",
+                Arguments = "-s"
+            }
+        };
+        p.Start();
+        string uname = p.StandardOutput.ReadToEnd().Trim();
+        Serilog.Log.Information($"You run this built on {uname} machine.");
+        // MSYS_NT - this name return uname on Github Action's machine.
+        return uname.Contains("MSYS_NT", StringComparison.InvariantCultureIgnoreCase);
+    }
+    catch (Exception)
+    {
+        return true;
+    }
+}
+----
 
 == Raport z testów jednostkowych
 
