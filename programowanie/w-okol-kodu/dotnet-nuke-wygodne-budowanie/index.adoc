@@ -18,6 +18,8 @@ tags:
 :toc: 
 :experimental: true
 
+Końcowy kod z opisanymi tutaj elementami, i kilkoma więcej, znajdziesz na moim GitHubie: https://github.com/MikDal002/ZTR.AI/tree/master/CICD[Ztr.AI].
+
 == Wstęp
 Wyobraź sobie, że całe CI/CD swojej aplikacji możesz opisać za pomocą C#.
 Bez potrzeby nauki środowiska graficznego TeamCity, czy YAML'i GitHuba. 
@@ -124,34 +126,39 @@ class Build : NukeBuild
 
 Projekt budujący Nuke możemy uruchomić przynajmniej na trzy sposoby:
 
+NOTE: Niezależnie od wybranej metody, często, aby zmiany w kodzie budującym zostały zastosowane, niezbędne jest przebudowanie projektu. 
+Samo budowanie, bez czyszczenia, rzadko daje efekty.
+
 ==== Z konsoli
 
 * __dotnet run__ -
-Standardowym poleceniem `dotnet run` wywołanym w katalogu, gdzie znajduje się nasz projekt budujący (u mnie jest to katalog CICD).
+Budować możesz poleceniem `dotnet run` wywołanym w katalogu, gdzie znajduje się nasz projekt budujący (u mnie jest to katalog CICD).
 
-* __Narzędzie nuke__ -
-Jeśli zainstalowałeś wcześniej globalne narzędzie nuke, to możesz użyć również go.
+* __Narzędziem nuke__ -
+Jeśli zainstalowałeś wcześniej globalne narzędzie nuke, to możesz użyć również go. 
+Wywołaj w konsoli polecenie `nuke`.
+Spowoduje ono wywołanie domyślnego celu budowania, czyli kompilację. 
 Podejście to jest bardziej elastyczne, ponieważ zadziała niezależnie od katalogu, w którym je wywołasz. 
 Potrafi ono samo znaleźć katalog główny rozwiązania i tam poszukać odpowiednich dojść.
 
 Niezależnie od podejścia, pamiętaj, że przy uruchomieniu możesz podawać własne parametry uruchomieniowe. 
 Możesz spróbować poprzez dodanie flagi `--Configuration Release`, co spowoduje zbudowanie aplikacji w trybie release. 
-
 Więcej o definiowaniu własnych parametrów znajdziesz w dalszej części artykułu, w sekcji na temat CI/CD.
+
+Jeśli chcesz wywołać inny cel, wystarczy, że podasz jego nazwę: `nuke restore` (`dotnet run restore`).
 
 ==== Plugin do Visual Studio 2022
 
 Plugin do Visual Studio pozwala nam na wywoływanie akcji budowania prosto z IDE. 
 Do tego dochodzi możliwość debugowania.
+Plugin ściągniesz https://marketplace.visualstudio.com/items?itemName=nuke.visualstudio[tutaj]. 
 
-NOTE: Często, aby zmiany w kodzie budującym zostały zastosowane, niezbędne jest przebudowanie projektu. 
-Samo budowanie, bez czyszczenia, rzadko daje efekty.
+Po instalacji zobaczysz dodatkową ikonkę obok każdego celu budowania:
+
+.Visual Studio 2022 z zainstalowanym wsparciem dla Nuke
+image::vs22-withnuke.png[]
 
 // Wyjaśnienie poszczególnych elementów raczej wolałbym dać w ramkach w tekście
-.DependsOn()
-****
-`DependsOn` pozwala nam na określenie, jakie kroki trzeba wykonać przed wykonaniem wybranej akcji.
-****
 
 .Requires()
 ****
@@ -179,7 +186,67 @@ Kopiuje on konfigurację i pozwala na zmianę poszczególnych parametrów na pod
 
 == Testy jednostkowe
 
-Testy jednostkowe są niezbędnym elementem, jeśli chcemy utrzymać wysoką jakość naszego projektu oraz łatwość jego rozwoju w dłuższym czasie. 
+Mając już przygotowane środowisko, możemy dodać testy jednostkowe. 
+
+[source,csharp]
+----
+Target Tests => _ => _
+        .DependsOn(Compile) // <1>
+        .TriggeredBy(Compile) // <2>
+        .Executes(() =>
+        {
+            EnsureCleanDirectory(TestResultDirectory); // <3>
+            DotNetTest(new DotNetTestSettings() 
+                .SetConfiguration(Configuration) // <4>
+                .EnableNoBuild() // <5>
+                .SetProjectFile(Solution)); // <6>
+        });
+----
+
+Powyższy kod w zupełności wystarczy, aby uruchomić testy jednostkowe znajdujące się w całym naszym rozwiązaniu.
+
+<1> Najpierw określamy, że testy muszą zostać wykonane po kompilacji.
+<2> Następnie, że są one wywoływane po zakończeniu kompilacji.  
+Więcej na temat tych dwóch metod przeczytasz w ramce poniżej. 
+<3> W tym miejscu upewniamy się, że folder wynikowy testów jednostkowych jest pusty. 
+Czasem potrafią znaleźć się tam ciekawe rzeczy, zwłaszcza gdy coś nie działa. 
+<4> W tym miejscu ustawiamy konfigurację, czyli to, w jaki sposób chcemy budować naszą aplikację, czy w trybie `debug`, czy `release`. 
+Jak spojrzysz na kod wygenerowany przez konfigurator parametr `Configuration`, który dostarcza nam takową informację.
+Zawsze możesz go nadpisać, używając parametru `--Configuration [Debug|Release]`. 
+<5> Ustawiamy flagę, informujacą o tym, że mechanizm testowy ma nie budować ponownie naszych projektów. Zrobiliśmy to w kroku `Compile``, więc powinno nam to zaoszczędzić trochę czasu.
+<6> Określamy projekt, a w tym przypadku całe rozwiązanie, które chcemy przetestować. 
+
+Mając dodane te kilka linijek do naszej klasy `Build.cs` możemy wywołać polecenie `nuke Compile`. 
+Powinniśmy osatecznie uzyskać wynik na kształt: 
+
+[source,console]
+----
+═══════════════════════════════════════
+Target             Status      Duration
+───────────────────────────────────────
+Clean              Succeeded     < 1sec
+Restore            Succeeded     < 1sec
+Compile            Succeeded       0:02
+Tests              Succeeded       0:02
+───────────────────────────────────────
+Total                              0:15
+═══════════════════════════════════════
+​
+Build succeeded on 29.05.2022 18:38:46. ＼（＾ᴗ＾）／
+
+----
+
+.DependsOn() i TriggeredBy()
+****
+`DependsOn` pozwala nam na określenie, jakie kroki muszą zostać wykonane przed wykonaniem wybranej akcji.
+Natomiast `TriggeredBy` powoduje, że krok ten zostanie wywołany przez ten, podany jako argument. 
+W powyższym kodzie, w punkcie <1> i <2> mamy przykład, że testy muszą być wykonane po kompilacji i są też przez nią wywoływane. 
+Dzięki temu nie ważne, czy wykonamy polecenie `nuke compile` czy `nuke tests`, zawsze zostaną wykonane testy jednostkowe.
+
+Polecenia te pozwalają nam kształtować łańcuch wywołań bez konieczności zmiany innych elementów wywołujących.
+****
+
+
 
 == Pokrycie testami jednostkowymi
 
@@ -241,6 +308,8 @@ Proces budowania dla CI/CD chcemy, aby był uruchamiany tylko po poprawnym poł�
 Słaba dokumentacja. 
 Szukanie zawsze trzeba wykonywać w dwóch kierunkach: 1) jak to powinno być zrobione natywnie za pomocą danego narzędzia, 2) jak to zrobic w Nuke. 
 Mogłoby być zdecydowanie więcej przykładów.
+
+Końcowy kod z opisanymi tutaj elementami, i kilkoma więcej, znajdziesz na moim GitHubie: https://github.com/MikDal002/ZTR.AI/tree/master/CICD[Ztr.AI].
 
 
 Photo by https://unsplash.com/es/@burgessbadass?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Burgess Milner] on https://unsplash.com/s/photos/nuke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Unsplash].
