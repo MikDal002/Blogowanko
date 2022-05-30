@@ -345,15 +345,28 @@ Wybacz, że jest ona tak duża, ale myślę, że dzięki temu będziesz w stanie
 Omówmy najważniejsze fragmenty kodu: 
 
 <1> Na początku pomińmy uruchamianie tegoż kroku na wszystkich platformach po za Windows. 
-Kod tej metody znajduje się poniżej. 
-Jest on tak rozbudowany, ponieważ zwykle sprawdzenia zmiennych w klasie `EnvironmentInfo` nie dawało dobrych skutków na serwerach budujących.
-<2> 
+Kod metody sprawdzającej platformę znajduje się poniżej. 
+<2> Dla pewności uruchomy testy ponownie w konfiguracji Debug. 
+Badanie pokrycia dla kodu zbudowanego w Release nie zawsze daje dobre wyniki. 
+<3> Pokrycie kodu będziemy badać dla każdego projektu z testami osobno. 
+Dlatego potrzebujemy dwóch formatów wyjściowych: cobertura dla wygenerowania raportu oraz json, który, jako natywny format, pozwala na łączenie wyników. 
+Samo łączenie następuje w punkcie 5.
+<4> Z racji, że badamy pokrycie dla każdego projektu osobno, musimy przygotować odpowiednie parametry.
+<5> Musimy pamiętać, że mamy coś do połaczenia dopiero po pierwszym uruchomieniu programu.
+<6> Na koniec, po wykonaniu ostatniego badania, możemy ustawić wymagany poziom pokrycia kodu testami jednostkowymi. 
+Jeśli zrobimy to wcześniej, to poziom ten będzie sprawdzany dla każdego uruchomienia, co w niektórych przypadkach może skończyć się błędem.
 
 .OnlyWhenStatic() 
 ****
 Funkcja ta powoduje, że warunki podane w niej zostaną sprawdzone w momencie rozpoczęcia kompilacji, czyli na długo przed uruchomieniem pierwszego kroku budowania. 
 Pozwala nam to łatwo odsiać te kroki, które i tak nie mają sensu przy danej konfiguracji.
 ****
+
+=== Sprawdzanie systemu operacyjnego
+
+Podczas próby sprawdzenia, na jakim środowisku jest uruchamiany kod porpzez GitHub Actions, miałem dużo mylnych informacji.
+Nawet dane z klasy `EnvironmentInfo` zwracały mi informację, że środowiskiem uruchomieniowym jest windows, podczas gdy była to dystrybucja Ubuntu.
+Jedynym sensownym sposobem mi znanym, na ten moment, jest wywołanie polecenia `uname`.
 
 .Kod poprawnie sprawdzający, czy mamy do czynienia z systemem operacyjnym Windows, czy też może nie.
 [source,csharp]
