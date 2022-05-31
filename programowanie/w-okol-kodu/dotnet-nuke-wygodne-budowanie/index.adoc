@@ -288,7 +288,7 @@ Target TestCoverage => _ => _
             )
         );
 
-        // <5>
+        // <7>
         ReportGeneratorTasks.ReportGenerator(s => s
             .SetTargetDirectory(TestResultDirectory / "report")
             .SetFramework("net6.0")
@@ -355,6 +355,7 @@ Samo łączenie następuje w punkcie 5.
 <5> Musimy pamiętać, że mamy coś do połaczenia dopiero po pierwszym uruchomieniu programu.
 <6> Na koniec, po wykonaniu ostatniego badania, możemy ustawić wymagany poziom pokrycia kodu testami jednostkowymi. 
 Jeśli zrobimy to wcześniej, to poziom ten będzie sprawdzany dla każdego uruchomienia, co w niektórych przypadkach może skończyć się błędem.
+<7> W tym miejscu mamy już zbadane pokrycie kodu testami jednostkowymi, i możemy wygenerować raport.
 
 .OnlyWhenStatic() 
 ****
@@ -405,18 +406,81 @@ static bool IsWindows()
 }
 ----
 
-== Raport z testów jednostkowych
+=== Raport z testów jednostkowych
 
-Raport ułatwi nam śledzenie, które moduły naszej aplikacji są testowane w najwyższym stopniu, a które w najniższym.
-Istnieją także platformy, które potafią zrobić z nich większy użytek
+Jeszcze kilka słów o raporcie. 
+Raport ułatwi nam śledzenie, które moduły naszej aplikacji są testowane w największym stopniu, a które w najniższym.
+Istnieją także platformy, które potafią zrobić z nich większy użytek i ładnie je wyświetlić, jednak na razie nie miałem potrzeby aby bawić się tym dalej. 
+Jeśli znasz jakieś ciekawe zastosowanie dla raportu to daj znać w komentarzach!
+
+Zwróć uwagę, na to jak wyszukiwane są pliki cubertury do wygenerowania raportu: `TestResultDirectory.GlobFiles("**/*.cobertura.xml")`. 
+Jak widzisz, Nuke daje nam fajne narzędzie do operowania na plikach i katalogach.
+
 
 == Publikowanie z wysyłką do Netlify jako przykład CI/CD.
 
-#TODO: W tej sekcji powinno nastąpić opisanie parametrów#
+Cały proces CI/CD nie może obejść się bez publikacji rozwiązania na serwer roboczy. 
+W ramach przykładu, pokaże jak dochodzi do publikacji aplikacji Web Assembly (WASM) wykonanej w technologii Blazor na serwer Netlify.
 
-Jako przykład pełnego CI/CD pokażę publikowanie projektu blazorowego do usługi Netlify, dzięki czemu, aplikacja Web Assembly będzie dostępna w Internecie.
+Przy publikacji projektu korzystam z biblioteki https://github.com/daveaglick/NetlifySharp[NetlifySharp], także do poprawnego działania poniższego skrawka kodu musisz ją doinstalować:
 
-Przykłady publikowania paczek nuget są łatwo dostępne w Internecie #TODO: Dodać przykładowy link!#, a moje podejście do sprawy pokażę w następnej części tej serii artykułów.
+[source,powershell]
+Install-Package NetlifySharp -Version 1.1.1
+
+
+Kod wygląda następująco: 
+
+[source,csharp]
+----
+[Parameter] readonly string NetlifySiteId;
+
+[Parameter][Secret] readonly string NetlifySiteAccessToken; // <1> 
+
+Target Publish => _ => _
+    .DependsOn(Compile)
+    .Executes(() =>
+    {
+        var projectToPublish = Solution.GetProject("ZTR.AI.Example"); // <2> 
+        DotNetPublish(s => s
+            .SetProject(projectToPublish)
+            .SetConfiguration(Configuration)
+            .SetOutput(ArtifactsDirectory)); // <3> 
+    });
+
+Target PushToNetlify => _ => _
+    .DependsOn(Publish)
+    .Requires(() => NetlifySiteId, () => NetlifySiteAccessToken) // <4> 
+    .Executes(async () =>
+    {
+        var netlifyClient = new NetlifyClient(NetlifySiteAccessToken); 
+        var rootDirectory = ArtifactsDirectory / "wwwroot";
+        await netlifyClient.UpdateSiteAsync(rootDirectory, NetlifySiteId); // <5>
+    });
+----
+
+<1> Najpierw zdefiniujmy niezbędne parametry do działania naszej publijacji. 
+W tym przypadu potrzebujemy identyfikatora strony Netlify oraz kodu dostępu do API (który możemy wygenerować w ustawieniach portalu).
+Więcej o parametrach w ramce poniżej.
+<2> Z racji, że wiele projektów może nadawać się do publikacji, choćby w postaci pakietów Nuget, to w tym przypadku interesuje mnie ten jeden. 
+Poprzez proste podanie nazwy takiego projektu, można go łatwo wybrać. 
+<3> W tym miejscu określamy do jakigo katalogu ma zostac opublikowana nasza strona, tak aby było ją łatwo wysłać.
+<4> Przed wypchnięciem do Netlify upewnijmy się, że znane są nam parametry połączeniowe. 
+Bez tego możemy otrzymać zestaw dziwnych błędów. 
+<5> I tak przygotowaną stronę możemy wysłać dwoma linijkami prosto na serwer! 
+
+.ParameterAttribute i SecretAttribute
+****
+Parametry maja bardzo dużo, różnych właściwości. 
+Gdy oznaczymy jakieś pole atrybutem `Parameter`, to Nuke samodzielnie potraktuje to jako parametr wejściowy, który może zostać podany zarówno w linii poleceń jak i pobrany samoczynnie ze zmiennych środowiskowych.
+Nuke potrafi nawet przechowywać parametry w celu wielokrotnego użycia. 
+Więcej przykładów użyć znajdziesz między innymi na https://twitter.com/nukebuildnet/status/1365023015688413187[Twitterze].
+
+Atrybut `Secret` powoduje, że Nuke nie będzie przechowywał tej wartości czystym tekstem.
+W niektórych przypadkach potrafi nawet chronić taki sekret hasłem użytkownika, ale nie miałem okazji testować tej funkcjonalności.
+****
+
+Pominąłem tutaj przykład publikowania paczek nuget, gdyż te są łatwo dostępne w Internecie, na przykład https://cfrenzel.com/publishing-nuget-nuke-appveyor/[tutaj]. 
+Moje podejście do sprawy pokażę w przyszłej części tej serii artykułów.
 
 == Github Actions
 
