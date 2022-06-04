@@ -1,6 +1,6 @@
 ---
 title: "Nuke – wygodne CI/CD programu końcowego w C# część następna"
-date: 2022-06-24
+date: 2022-07-24
 draft: true
 description: "TODO"
 
@@ -22,8 +22,6 @@ series:
 
 
 === Automatyczne numerowanie: GitVersion
-
-// Z tym mam problem, no bo nie ogarnąłem tak na prawdę tematu i muszę zrobić to osobno
 
 https://blog.dangl.me/archive/escalating-automation-the-nuclear-option/
 

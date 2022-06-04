@@ -1,9 +1,9 @@
 ---
-title: "Nuke – wygodne CI/CD programu w C#. Część 1"
-date: 2022-06-12
+title: "Nuke – wygodne CI/CD programu w C#. Część 2"
+date: 2022-07-12
 draft: false
 image: cover.jpg
-description: "Nuke pozwala nam na proste opisanie procesu budowania i publikowania naszej aplikacji w języku C#. Niniejszy artykuł nie skończy się na samym wprowadzeniu. Zamierzam pokazać Ci jak zbudować aplikację, uruchomić testy jednostkowe, wymusić odpowiednie pokrycie kodu oraz jak przygotować aplikację do publikacji. 
+description: "Nuke pozwala nam na proste opisanie procesu budowania i publikowania naszej aplikacji w języku C#. Niniejszy artykuł jest kontynuacja. Zamierzam pokazać tutaj wymusić odpowiednie pokrycie kodu oraz jak przygotować aplikację do publikacji. 
 Opiszę również sposób przygotowania CI/CD dla Github Actions z uwzględnieniem parametrów pobierania sekretów repozytorium."
 
 categories: 
@@ -20,213 +20,11 @@ series:
 :toc: 
 :experimental: true
 
-Końcowy kod z opisanymi tutaj elementami, i kilkoma więcej, znajdziesz na moim GitHubie: https://github.com/MikDal002/ZTR.AI/tree/master/CICD[Ztr.AI].
-
 == Wstęp
-Wyobraź sobie, że całe CI/CD swojej aplikacji możesz opisać za pomocą C#.
-Bez potrzeby nauki środowiska graficznego TeamCity, czy YAML'i GitHuba. 
 
-Nuke jest jednym ze sposobów opisu budowania naszej aplikacji w języku C#. 
-Jeżeli chcemy, aby nasz projekt był cały czas łatwo zarządzalny, musimy mieć sposób na opis wszystkich wymagań stawianych przed nim. 
-I tak oto, możemy opisać:
+Ten artykuł jest drum z serii artykułów o Nuke. Poprzedni znajdziesz w liście u dołu artykułu.
 
-1. (Czyszczenie) jak powinny wyglądać katalogi przed rozpoczęciem budowania projektu,
-2. (Przygotowanie) jakich zależności potrzebuje nasza aplikacja do kompilacji,
-3. (Budowanie) w jakiej kolejności budować poszczególne elementy,
-4. (Testowanie) jak uruchamiać testy jednostkowe i jakie są nasze wymagania co do pokrycia nimi naszego kodu,
-5. (Publikacja) jak spakować naszą aplikację i wysłać ją na środowisko produkcyjne. 
-
-Nie jest to kompletna lista, tego, co możemy zrobić w trakcie procesu ciągłej integracji i dostarczania. 
-Na pewno pokazuje ona podstawowe zagadnienia, przed którymi jesteśmy stawiani podczas wydawania kolejnej wersji naszego oprogramowania. 
-I jak to w życiu bywa, jeśli czegoś nie zapiszemy, to pewno o tym zapomnimy.
-A po co zapisywać coś na skrawku papieru, gdy można to zrobić za pomocą kodu, który wykona się sam? 
-
-Wszystkie wyżej opisane kroki możemy opisywać w różnych językach.
-Robimy to często w tak wyspecjalizowanych formach, jak projekty budujące na TeamCity, czy GitHub Actions. 
-Nuke przekonał mnie tym, że nie muszę uczyć się tych wszystkich konfiguracji osobno – mogę opisać wszystko, co niezbędne za pomocą dobrze mi znanego języka C# i wykorzystywać tam, gdzie potrzebuję.
-W przypadku GitHub Actions mogę bez problemu również wykorzystać raz napisany kod w wielu różnych przepływach, co stanowczo upraszcza pracę i testowanie.
-
-== Wstępna konfiguracja z pomocą kreatora
-
-Wstępną konfigurację naszego projektu warto zacząć od instalacji narzędzia Nuke, które stanowczo ułatwia pracę dewelopera.
-Co ważne, nie jest ono niezbędne na serwerze budującym.
-
-[source,powershell]
-----
-dotnet tool install Nuke.GlobalTool --global
-----
-
-.Widok konfiguratora Nuke
-image::nuke-setup.png[]
-
-1. Wybierz nazwę projektu budującego, 
-2. Katalog, w którym będzie on zapisany,
-3. Wersję Nuke,
-4. Domyślne rozwiązanie, które będzie budowane,
-5. Wybierz, czy chcesz, aby podstawowe polecenia budujące zostały już umieszczone w nowym projekcie. 
-6. Wybierz środowisku, które będzie budować twoje rozwiązanie.
-7. Wybierz miejsce, gdzie są umieszczone twoje projekty (w tym katalogu będzie przeprowadzane czyszczenie dodatkowe),
-8. Wybierz, gdzie mają trafiać artefakty, czyli pliki wynikowe budowania, jak paczki nuget. 
-9. Wybierz, gdzie są twoje projekty, które testują rozwiązanie.
-10 Wybierz, czy używasz GitVersion. Ja wybrałem, że tak, jednak opis tego narzędzia znajdzie się w innym artykule.
-
-Rezultatem takich wyborów, będzie klasa C#, która będzie wyglądać mniej więcej tak, jak poniżej.
-Obok tego dostaniemy kilka plików build.sh i build.cmd i build.ps1, które pozwalają nam na budowę naszej aplikacji nawet w środowisku, które nie ma zainstalowanego środowiska .Net. 
-Pojawi się również katalog `.nuke`, który przechowuje kilka ustawień.
-
-.Widok klasy Build.cs
-[source,csharp]
-----
-[CheckBuildProjectConfigurations]
-[ShutdownDotNetAfterServerBuild]
-class Build : NukeBuild
-{
-    public static int Main () => Execute<Build>(x => x.Compile);
-
-    [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
-    readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
-
-    [Solution] readonly Solution Solution;
-    [GitRepository] readonly GitRepository GitRepository;
-    [GitVersion] readonly GitVersion GitVersion;
-
-    AbsolutePath SourceDirectory => RootDirectory / "src";
-    AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
-
-    Target Clean => _ => _
-        .Before(Restore)
-        .Executes(() =>
-        {
-            SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
-            EnsureCleanDirectory(ArtifactsDirectory);
-        });
-
-    Target Restore => _ => _
-        .Executes(() =>
-        {
-            DotNetRestore(s => s
-                .SetProjectFile(Solution));
-        });
-
-    Target Compile => _ => _
-        .DependsOn(Restore)
-        .Executes(() =>
-        {
-            DotNetBuild(s => s
-                .SetProjectFile(Solution)
-                .SetConfiguration(Configuration)
-                .SetAssemblyVersion(GitVersion.AssemblySemVer)
-                .SetFileVersion(GitVersion.AssemblySemFileVer)
-                .SetInformationalVersion(GitVersion.InformationalVersion)
-                .EnableNoRestore());
-        });
-
-}
-----
-
-.Łączenie ścieżek
-****
-Już w tym miejscu warto zwrócić naszą uwagę na bardzo ciekawe zastosowanie operatora `/` do łączenia ścieżek: `AbsolutePath SourceDirectory => RootDirectory / "src";`.
-W trakcie pracy z Nuke zauważyłem, że jest to bardzo poręczne podejście i gorąco zachęcam Cię do jego używania.
-****
-
-=== Jak budować projekt z pomocą Nuke
-
-Projekt budujący Nuke możemy uruchomić przynajmniej na trzy sposoby:
-
-NOTE: Niezależnie od wybranej metody, często, aby zmiany w kodzie budującym zostały zastosowane, niezbędne jest przebudowanie projektu. 
-Samo budowanie, bez czyszczenia, rzadko daje efekty.
-
-==== Z konsoli
-
-* __dotnet run__ -
-Budować możesz poleceniem `dotnet run` wywołanym w katalogu, gdzie znajduje się nasz projekt budujący (u mnie jest to katalog CICD).
-
-* __Narzędziem nuke__ -
-Jeśli zainstalowałeś wcześniej globalne narzędzie nuke, to możesz użyć również go. 
-Wywołaj w konsoli polecenie `nuke`.
-Spowoduje ono wywołanie domyślnego celu budowania, czyli kompilację. 
-Podejście to jest bardziej elastyczne, ponieważ zadziała niezależnie od katalogu, w którym je wywołasz. 
-Potrafi ono samo znaleźć katalog główny rozwiązania i tam poszukać odpowiednich dojść.
-
-Niezależnie od podejścia, pamiętaj, że przy uruchomieniu możesz podawać własne parametry uruchomieniowe. 
-Możesz spróbować poprzez dodanie flagi `--Configuration Release`, co spowoduje zbudowanie aplikacji w trybie release. 
-Więcej o definiowaniu własnych parametrów znajdziesz w dalszej części artykułu, w sekcji na temat CI/CD.
-
-Jeśli chcesz wywołać inny cel, wystarczy, że podasz jego nazwę: `nuke restore` (`dotnet run restore`).
-
-==== Plugin do Visual Studio 2022
-
-Plugin do Visual Studio pozwala nam na wywoływanie akcji budowania prosto z IDE. 
-Do tego dochodzi możliwość debugowania.
-Plugin ściągniesz https://marketplace.visualstudio.com/items?itemName=nuke.visualstudio[tutaj]. 
-
-Po instalacji zobaczysz dodatkową ikonkę obok każdego celu budowania:
-
-.Visual Studio 2022 z zainstalowanym wsparciem dla Nuke
-image::vs22-withnuke.png[]
-
-== Testy jednostkowe
-
-Mając już przygotowane środowisko, możemy dodać testy jednostkowe. 
-
-[source,csharp]
-----
-Target Tests => _ => _
-        .DependsOn(Compile) // <1>
-        .TriggeredBy(Compile) // <2>
-        .Executes(() =>
-        {
-            EnsureCleanDirectory(TestResultDirectory); // <3>
-            DotNetTest(new DotNetTestSettings() 
-                .SetConfiguration(Configuration) // <4>
-                .EnableNoBuild() // <5>
-                .SetProjectFile(Solution)); // <6>
-        });
-----
-
-Powyższy kod w zupełności wystarczy, aby uruchomić testy jednostkowe znajdujące się w całym naszym rozwiązaniu.
-
-<1> Najpierw określamy, że testy muszą zostać wykonane po kompilacji.
-<2> Następnie, że są one wywoływane po zakończeniu kompilacji.  
-Więcej na temat tych dwóch metod przeczytasz w ramce poniżej. 
-<3> W tym miejscu upewniamy się, że folder wynikowy testów jednostkowych jest pusty. 
-Czasem potrafią znaleźć się tam ciekawe rzeczy, zwłaszcza gdy coś nie działa. 
-<4> W tym miejscu ustawiamy konfigurację, czyli to, w jaki sposób chcemy budować naszą aplikację, czy w trybie `debug`, czy `release`. 
-Jak spojrzysz na kod wygenerowany przez konfigurator parametr `Configuration`, który dostarcza nam takową informację.
-Zawsze możesz go nadpisać, używając parametru `--Configuration [Debug|Release]`. 
-<5> Ustawiamy flagę, informujacą o tym, że mechanizm testowy ma nie budować ponownie naszych projektów. Zrobiliśmy to w kroku `Compile``, więc powinno nam to zaoszczędzić trochę czasu.
-<6> Określamy projekt, a w tym przypadku całe rozwiązanie, które chcemy przetestować. 
-
-Mając dodane te kilka linijek do naszej klasy `Build.cs` możemy wywołać polecenie `nuke Compile`. 
-Powinniśmy osatecznie uzyskać wynik na kształt: 
-
-[source,console]
-----
-═══════════════════════════════════════
-Target             Status      Duration
-───────────────────────────────────────
-Clean              Succeeded     < 1sec
-Restore            Succeeded     < 1sec
-Compile            Succeeded       0:02
-Tests              Succeeded       0:02
-───────────────────────────────────────
-Total                              0:15
-═══════════════════════════════════════
-​
-Build succeeded on 29.05.2022 18:38:46. ＼（＾ᴗ＾）／
-
-----
-
-.DependsOn() i TriggeredBy()
-****
-`DependsOn` pozwala nam na określenie, jakie kroki muszą zostać wykonane przed wykonaniem wybranej akcji.
-Natomiast `TriggeredBy` powoduje, że krok ten zostanie wywołany przez ten, podany jako argument. 
-W powyższym kodzie, w punkcie <1> i <2> mamy przykład, że testy muszą być wykonane po kompilacji i są też przez nią wywoływane. 
-Dzięki temu nie ważne, czy wykonamy polecenie `nuke compile` czy `nuke tests`, zawsze zostaną wykonane testy jednostkowe.
-
-Polecenia te pozwalają nam kształtować łańcuch wywołań bez konieczności zmiany innych elementów wywołujących.
-****
+Końcowy kod z opisanymi tutaj elementami, i kilkoma więcej, znajdziesz na moim GitHubie: https://github.com/MikDal002/ZTR.AI/tree/master/CICD[Ztr.AI].
 
 == Pokrycie testami jednostkowymi
 
@@ -615,71 +413,7 @@ jobs:
 .Widok strony konfiguracji sekretów dla GitHub Actions
 image::githubactions_view.png[]
 
-== Dodatkowe informacje
 
-=== Pomoc
-
-W każdym momencie możesz wywołać pomoc przy budowaniu. 
-Można zrobić to na wiele rożnych sposobów:
-
-* `nuke help` w dowolnym katalogu rozwiązania, jeśli masz zainstalowane narzędzie Nuke.
-* `dotnet run -- --help` w katalogu projektu budujacego 
-* `.\build.ps1 --help` w katalogu, gdzie znajduje się skrypt budujący. 
-
-Przykładowe rezultat takigo polecenia jest widoczny ponizej.
-Zwróć uwagę na to, że widocznej są wszystkie wcześniej określone cele budowania oraz parametry wraz z opisem. 
-Daje nam to bardzo fajną  odkrywalność naszego procesu budującego. 
-
-[source,console]
-----
-███╗   ██╗██╗   ██╗██╗  ██╗███████╗
-████╗  ██║██║   ██║██║ ██╔╝██╔════╝
-██╔██╗ ██║██║   ██║█████╔╝ █████╗  
-██║╚██╗██║██║   ██║██╔═██╗ ██╔══╝  
-██║ ╚████║╚██████╔╝██║  ██╗███████╗
-╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
-​
-NUKE Execution Engine version 6.0.3 (Windows,.NETCoreApp,Version=v6.0)
-​
-Targets (with their direct dependencies):
-
-  Clean
-  Restore
-  Compile (default)    -> Clean, Restore
-  Tests                -> Compile
-  Publish              -> Compile
-  PushToNetlify        -> Publish
-  TestCoverage         -> Tests
-
-Parameters:
-
-  --configuration            Configuration to build - Default is 'Debug' (local) or
-                             'Release' (server).
-  --netlify-site-access-token   <no description>
-  --netlify-site-id          <no description>
-
-  --continue                 Indicates to continue a previously failed build attempt.
-  --help                     Shows the help text for this build assembly.
-  --host                     Host for execution. Default is 'automatic'.
-  --no-logo                  Disables displaying the NUKE logo.
-  --plan                     Shows the execution plan (HTML).
-  --profile                  Defines the profiles to load.
-  --root                     Root directory during build execution.
-  --skip                     List of targets to be skipped. Empty list skips all
-                             dependencies.
-  --target                   List of targets to be invoked. Default is 'Compile'.
-  --verbosity                Logging verbosity during build execution. Default is
-                             'Normal'.
-----
-
-=== Jaka jest kolejność? 
-
-Gdy już ilość celów budowania będzie duża, a zależności między nimi będzie co niemiara, warto pamiętać o narzędziu, które w przejrzysty sposób wyświetli nam, co będzie się działo. 
-Do teog służy flaga `plan`, która używamy w następujący sposób: `nuke --plan`, lub, jesli chcemy zobacz plan dla niestadardowego wywołania to mozemy podać dotkowe parametry, jak na przykład nazwę celu budowania: `nuke PushToNetlify --plan`.
-Pamiętaj, że podobnie jak polecenie help, również to można wywołać na analogiczne sposoby.
-
-.Wynik działania polecenie `nuke --plan`
-image:nuke-plan.png[]
 
 == Podsumowanie
 
@@ -693,5 +427,5 @@ Jednak ma to też dobre strony: nie jesteśmy obarczeni blokadą stawianą przez
 
 Końcowy kod z opisanymi tutaj elementami, i kilkoma więcej, znajdziesz na moim GitHubie: https://github.com/MikDal002/ZTR.AI/tree/master/CICD[Ztr.AI].
 
-
+[.small]
 Photo by https://unsplash.com/es/@burgessbadass?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Burgess Milner] on https://unsplash.com/s/photos/nuke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Unsplash].
