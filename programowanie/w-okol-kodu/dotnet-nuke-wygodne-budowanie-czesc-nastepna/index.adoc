@@ -12,6 +12,8 @@ tags:
     - "CI/CD"
     - "Testy jednostkowe"
     - "Github Actions"
+series:
+    - "Nuke"
 ---
 :toc: 
 :experimental: true
@@ -103,3 +105,6 @@ https://github.com/avivasolutionsnl/sitecore-docker/tree/master/build
 ****
 #TODO: Nie mam pojęcia na ten moment#
 ****
+
+
+=== Budowanie równoległe niektórych kroków

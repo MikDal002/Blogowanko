@@ -1,5 +1,5 @@
 ---
-title: "Nuke – wygodne CI/CD programu końcowego w C#"
+title: "Nuke – wygodne CI/CD programu w C#. Część 1"
 date: 2022-06-12
 draft: false
 image: cover.jpg
@@ -14,6 +14,8 @@ tags:
     - "CI/CD"
     - "Testy jednostkowe"
     - "Github Actions"
+series: 
+    - "Nuke"
 ---
 :toc: 
 :experimental: true
@@ -122,6 +124,12 @@ class Build : NukeBuild
 }
 ----
 
+.Łączenie ścieżek
+****
+Już w tym miejscu warto zwrócić naszą uwagę na bardzo ciekawe zastosowanie operatora `/` do łączenia ścieżek: `AbsolutePath SourceDirectory => RootDirectory / "src";`.
+W trakcie pracy z Nuke zauważyłem, że jest to bardzo poręczne podejście i gorąco zachęcam Cię do jego używania.
+****
+
 === Jak budować projekt z pomocą Nuke
 
 Projekt budujący Nuke możemy uruchomić przynajmniej na trzy sposoby:
@@ -157,32 +165,6 @@ Po instalacji zobaczysz dodatkową ikonkę obok każdego celu budowania:
 
 .Visual Studio 2022 z zainstalowanym wsparciem dla Nuke
 image::vs22-withnuke.png[]
-
-// Wyjaśnienie poszczególnych elementów raczej wolałbym dać w ramkach w tekście
-
-.Requires()
-****
-`Requires` pozwala określić nam, wymagania niezbędne do uruchomienia danej akcji. 
-Jeśli, któryś z warunków nie będzie spełniony, zostanie wyświetlony błąd a cała procedura przerwana.
-****
-
-.Atrybut [Parameter]
-****
-Atrybut `Parameter` pozwala nam jasno określić parametry konfiguracyjne naszego procesu budującego. 
-Daje on nam możliwość ustawienia opisu, wartości domyślnej.
-Co ważne, wartości oznaczone atrybutem `Parameter` mogą być pozyskane zarówno z wiersza poleceń, przy uruchomieniu programu budującego, jak i ze zmiennych środowiskowyhc.
-****
-
-.Secret()
-****
-Oznaczenie parametru jako `Secret` spowoduje, że jego wartość nie zostanie wyświetlona w trakcie precesu budującego.
-****
-
-.CombineWith()
-****
-`CombineWith` pozwala nam na proste tworzenie kombinacji budowania. 
-Kopiuje on konfigurację i pozwala na zmianę poszczególnych parametrów na podstawie dostarczonej kolekcji.
-****
 
 == Testy jednostkowe
 
@@ -245,8 +227,6 @@ Dzięki temu nie ważne, czy wykonamy polecenie `nuke compile` czy `nuke tests`,
 
 Polecenia te pozwalają nam kształtować łańcuch wywołań bez konieczności zmiany innych elementów wywołujących.
 ****
-
-
 
 == Pokrycie testami jednostkowymi
 
@@ -363,6 +343,15 @@ Funkcja ta powoduje, że warunki podane w niej zostaną sprawdzone w momencie ro
 Pozwala nam to łatwo odsiać te kroki, które i tak nie mają sensu przy danej konfiguracji.
 ****
 
+.CombineWith()
+****
+`CombineWith` pozwala nam na proste tworzenie wielu konfiguracji budowania budowania. 
+
+Ważne jest, aby zauważyc, że wszystkie metody zmieniające konfigurację dokonują kopii obiektu i dopiero wtedy wprowadzają modyfikację. 
+Aby uprosić nam pracę nad wieloma możliwościami otrzymujemy metodę `CombineWith`, która kopiuje nam obiekt konfiguracyjny i pozwala na wprowadzenie zmian. 
+Następnie niemalże wszystkie metody wykonujące krok budowania są w stanie przyjąć, jako parametr wejściowy, wiele konfiguracji, co powoduje, że zostaną one uruchomione wielokrotnie.
+****
+
 === Sprawdzanie systemu operacyjnego
 
 Podczas próby sprawdzenia, na jakim środowisku jest uruchamiany kod porpzez GitHub Actions, miałem dużo mylnych informacji.
@@ -405,6 +394,12 @@ static bool IsWindows()
     }
 }
 ----
+
+.Logowanie procesu budowania
+****
+Warto zwrócić uwage na linijkę zaczynającą się od `Serilog.Log.Information`. 
+Serilog jest domyslnym silnikiem służącym do logowania procesu budowania i jest to też zalecany sposób, na zwracanie naszych informacji na wyjście.
+****
 
 === Raport z testów jednostkowych
 
@@ -468,6 +463,9 @@ Poprzez proste podanie nazwy takiego projektu, można go łatwo wybrać.
 Bez tego możemy otrzymać zestaw dziwnych błędów. 
 <5> I tak przygotowaną stronę możemy wysłać dwoma linijkami prosto na serwer! 
 
+Pominąłem w tym przykładzie kwestię publikowania paczek nuget, gdyż te są łatwo dostępne w Internecie, na przykład https://cfrenzel.com/publishing-nuget-nuke-appveyor/[tutaj]. 
+Moje podejście do sprawy pokażę w przyszłej części tej serii artykułów.
+
 .ParameterAttribute i SecretAttribute
 ****
 Parametry maja bardzo dużo, różnych właściwości. 
@@ -479,36 +477,219 @@ Atrybut `Secret` powoduje, że Nuke nie będzie przechowywał tej wartości czys
 W niektórych przypadkach potrafi nawet chronić taki sekret hasłem użytkownika, ale nie miałem okazji testować tej funkcjonalności.
 ****
 
-Pominąłem tutaj przykład publikowania paczek nuget, gdyż te są łatwo dostępne w Internecie, na przykład https://cfrenzel.com/publishing-nuget-nuke-appveyor/[tutaj]. 
-Moje podejście do sprawy pokażę w przyszłej części tej serii artykułów.
+.Requires()
+****
+`Requires` pozwala określić nam, wymagania niezbędne do uruchomienia danej akcji. 
+Jeśli, któryś z warunków nie będzie spełniony, zostanie wyświetlony błąd a cała procedura przerwana.
+
+W przykładzie powyżej, w punkcje 4 podajemy, że do wykonania danego kroku niezbędę są wartości `NetlifySideId` oraz `NetlifySiteAccessToken`. 
+Wartości string nie mogą być `null` ani pustym ciągiem znaków.
+****
 
 == Github Actions
 
-Wszelką konfigurację github action robimy za pomocą atrybutu.
+Wszelką konfigurację GitHub Actions robimy za pomocą atrybutu.
+Z racji, że możemy mieć wiele wystąpień atrybutu `GitHubActions`, może określić różne docelowe kroki budowania w zależności od naszych potrzeb.
+Poniżej pokazuję przykładową konfigurację budowania dla każdej propozycji nowego kodu (prośba dodania z ang. _pull request_ ) oraz gdy wejdą nowe zmiany do gałęzi głównej, kiedy to ma zostać wykonane wdrożenie strony.
 
-=== Dla pull requestów
+[source,csharp]
+----
+[GitHubActions(
+    "ForPR", // <1> 
+    GitHubActionsImage.WindowsLatest, // <2> 
+    GitHubActionsImage.UbuntuLatest,
+    OnPullRequestBranches = new[] { DevelopBranch, MasterBranch }, // <3> 
+    PublishArtifacts = false,
+    InvokedTargets = new[] { nameof(Tests) }, // <4>
+    CacheKeyFiles = new[] { "global.json", "source/**/*.csproj" },
+    EnableGitHubToken = true)]
+[GitHubActions(
+    "Deploy", // <1> 
+    GitHubActionsImage.WindowsLatest, // <2> 
+    OnPushBranches = new[] { MasterBranch }, // <3>
+    PublishArtifacts = false,
+    InvokedTargets = new[] { nameof(Tests), nameof(PushToNetlify) }, // <4>
+    CacheKeyFiles = new[] { "global.json", "source/**/*.csproj" },
+    EnableGitHubToken = true, 
+    ImportSecrets = new [] {nameof(NetlifySiteId), nameof(NetlifySiteAccessToken) } // <5>
+    )]
+partial class Build : NukeBuild
+{
+    const string MasterBranch = "master";
+    const string DevelopBranch = "develop";
 
-NOTE: Nie zapomnij dodać definicji parametrów pobieranych z sekretów do pliku YAML. 
+    [Parameter] readonly string NetlifySiteId;
 
-=== Dla CI/CD.
+    [Parameter][Secret] readonly string NetlifySiteAccessToken; // <5>
+}
+----
 
-Proces budowania dla CI/CD chcemy, aby był uruchamiany tylko po poprawnym połączeniu z gałęzią master. 
+<1> Dla każdej akcji msuimy podać naszą nazwę, która będzie wyświetlana na GitHubie.
+<2> Musimy również podać na jakim środowisku mają być wykonywane nasze procedury.
+<3> Możemy określić zasady, według których będa uruchamiane poszczególne konfigurację (więcej szczegółów znajdziesz w https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpushbranchestagsbranches-ignoretags-ignore[dokumentacji]).
+I tak `OnPullRequestBranches` powoduje wywołanie danej konfiguracji, gdy pojawi się nowe żądanie (PR), które będzie adresowane do poszczególnych gałęzi.
+Natomiast `OnPushBranches` powoduje wywołanie danego przepływu każdorazowo, gdy zostaną wypchnięte na daną gałąź nowe zmiany.
+<4> Najciekawszym elementem jest `InvokedTargets`, który określa nam wyraźnie, który krok naszego budowania ma być uruchomiony w danych przypadku. 
+To właśnie tutaj zyskujemy najwięcej na wielorazowym wykorzystaniu kodu: nie ważne w ile przepływów wymyślimy, to ciągle wywołujemy dokładnie ten sam kod!
+<5> Fragment `ImportSecrets` jest istotny, gdy chcemy pobrać pewne zmienne z środowiska GitHub Actions.
+Zwróć uwagę (zrzut ekranu poniżej), że nazwa parametru, na przykład `NetlifySiteId`, zostanie zamieniona na `NETLIFY_SITE_ID`.
+Pola parametrów `NetlifySIteId` oraz `NetlifySiteAccessToken` zostały tutaj dodane dla przejżystości przykładu. 
 
-== Opis dodatkowy
-`build.ps1 --help`
-`build.ps1 --plan`
+Wynikiem pracy takich atrybutów będą następujace pliki YAML:
 
+.Konfiguracja publikowania strny
+[source,yaml]
+----
+name: Deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  windows-latest:
+    name: windows-latest
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Cache .nuke/temp, ~/.nuget/packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            .nuke/temp
+            ~/.nuget/packages
+          key: ${{ runner.os }}-${{ hashFiles('global.json', 'source/**/*.csproj') }}
+      - name: Run './build.cmd Tests PushToNetlify'
+        run: ./build.cmd Tests PushToNetlify
+        env:
+          NetlifySiteId: ${{ secrets.NETLIFY_SITE_ID }}
+          NetlifySiteAccessToken: ${{ secrets.NETLIFY_SITE_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-=== Budowanie równoległe niektórych kroków
-=== Logowanie Serilog.Warning()
-=== Łączenie ścieżek do pliku za pomocą operatora /
+----
+
+.Konifguracja sprawdzająca prośbę dodania kodu
+[source,yaml]
+----
+name: ForPR
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+jobs:
+  windows-latest:
+    name: windows-latest
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Cache .nuke/temp, ~/.nuget/packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            .nuke/temp
+            ~/.nuget/packages
+          key: ${{ runner.os }}-${{ hashFiles('global.json', 'source/**/*.csproj') }}
+      - name: Run './build.cmd Tests'
+        run: ./build.cmd Tests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  ubuntu-latest:
+    name: ubuntu-latest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Cache .nuke/temp, ~/.nuget/packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            .nuke/temp
+            ~/.nuget/packages
+          key: ${{ runner.os }}-${{ hashFiles('global.json', 'source/**/*.csproj') }}
+      - name: Run './build.cmd Tests'
+        run: ./build.cmd Tests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+----
+
+.Widok strony konfiguracji sekretów dla GitHub Actions
+image::githubactions_view.png[]
+
+== Dodatkowe informacje
+
+=== Pomoc
+
+W każdym momencie możesz wywołać pomoc przy budowaniu. 
+Można zrobić to na wiele rożnych sposobów:
+
+* `nuke help` w dowolnym katalogu rozwiązania, jeśli masz zainstalowane narzędzie Nuke.
+* `dotnet run -- --help` w katalogu projektu budujacego 
+* `.\build.ps1 --help` w katalogu, gdzie znajduje się skrypt budujący. 
+
+Przykładowe rezultat takigo polecenia jest widoczny ponizej.
+Zwróć uwagę na to, że widocznej są wszystkie wcześniej określone cele budowania oraz parametry wraz z opisem. 
+Daje nam to bardzo fajną  odkrywalność naszego procesu budującego. 
+
+[source,console]
+----
+███╗   ██╗██╗   ██╗██╗  ██╗███████╗
+████╗  ██║██║   ██║██║ ██╔╝██╔════╝
+██╔██╗ ██║██║   ██║█████╔╝ █████╗  
+██║╚██╗██║██║   ██║██╔═██╗ ██╔══╝  
+██║ ╚████║╚██████╔╝██║  ██╗███████╗
+╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+​
+NUKE Execution Engine version 6.0.3 (Windows,.NETCoreApp,Version=v6.0)
+​
+Targets (with their direct dependencies):
+
+  Clean
+  Restore
+  Compile (default)    -> Clean, Restore
+  Tests                -> Compile
+  Publish              -> Compile
+  PushToNetlify        -> Publish
+  TestCoverage         -> Tests
+
+Parameters:
+
+  --configuration            Configuration to build - Default is 'Debug' (local) or
+                             'Release' (server).
+  --netlify-site-access-token   <no description>
+  --netlify-site-id          <no description>
+
+  --continue                 Indicates to continue a previously failed build attempt.
+  --help                     Shows the help text for this build assembly.
+  --host                     Host for execution. Default is 'automatic'.
+  --no-logo                  Disables displaying the NUKE logo.
+  --plan                     Shows the execution plan (HTML).
+  --profile                  Defines the profiles to load.
+  --root                     Root directory during build execution.
+  --skip                     List of targets to be skipped. Empty list skips all
+                             dependencies.
+  --target                   List of targets to be invoked. Default is 'Compile'.
+  --verbosity                Logging verbosity during build execution. Default is
+                             'Normal'.
+----
+
+=== Jaka jest kolejność? 
+
+Gdy już ilość celów budowania będzie duża, a zależności między nimi będzie co niemiara, warto pamiętać o narzędziu, które w przejrzysty sposób wyświetli nam, co będzie się działo. 
+Do teog służy flaga `plan`, która używamy w następujący sposób: `nuke --plan`, lub, jesli chcemy zobacz plan dla niestadardowego wywołania to mozemy podać dotkowe parametry, jak na przykład nazwę celu budowania: `nuke PushToNetlify --plan`.
+Pamiętaj, że podobnie jak polecenie help, również to można wywołać na analogiczne sposoby.
+
+.Wynik działania polecenie `nuke --plan`
+image:nuke-plan.png[]
 
 == Podsumowanie
 
-=== Minusy
-Słaba dokumentacja. 
-Szukanie zawsze trzeba wykonywać w dwóch kierunkach: 1) jak to powinno być zrobione natywnie za pomocą danego narzędzia, 2) jak to zrobic w Nuke. 
-Mogłoby być zdecydowanie więcej przykładów.
+Muszę przyznać, że podejście, które reprezentuje Nuke bardzo mi się podoba: mogę opisać cały proces budowania raz w języku, który znam i łatwo testować całość lokalnie.
+Niestety nie ma róży bez kolców. 
+Na ten moment, dokumentacja i przykłady użycia są znikome. 
+Dużo, z tego co jest zaprezentowane w tej serii artykułów (i co zaprezentowane jeszcze będzie) zostało wyrwane z kodów różnych repozytoriów. 
+Na ten moment, nauka płynąca z używania Nuke płynie taka: Nuke to framework do wołania innych narzędzi. 
+Ma to dwie konsekwencje: duża ilość możliwości oraz duża ilość szukania odpowiedzi. 
+Jednak ma to też dobre strony: nie jesteśmy obarczeni blokadą stawianą przez bibliotekę (tak zwany vendor-lock), gdyż łatwo możemy przejść do innych dostępnych narzędzi, bądź wywoływać konkretne polecenia bezposrednio.
 
 Końcowy kod z opisanymi tutaj elementami, i kilkoma więcej, znajdziesz na moim GitHubie: https://github.com/MikDal002/ZTR.AI/tree/master/CICD[Ztr.AI].
 
