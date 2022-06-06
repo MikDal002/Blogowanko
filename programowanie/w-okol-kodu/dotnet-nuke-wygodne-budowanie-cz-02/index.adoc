@@ -1,7 +1,7 @@
 ---
 title: "Nuke – wygodne CI/CD programu w C#. Część 2"
 date: 2022-07-12
-draft: false
+draft: true
 image: cover.jpg
 description: "Nuke pozwala nam na proste opisanie procesu budowania i publikowania naszej aplikacji w języku C#. Niniejszy artykuł jest kontynuacja. Zamierzam pokazać tutaj wymusić odpowiednie pokrycie kodu oraz jak przygotować aplikację do publikacji. 
 Opiszę również sposób przygotowania CI/CD dla Github Actions z uwzględnieniem parametrów pobierania sekretów repozytorium."
