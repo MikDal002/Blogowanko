@@ -72,7 +72,7 @@ image::nuke-setup.png[]
 10 Wybierz, czy używasz GitVersion. Ja wybrałem, że tak, jednak opis tego narzędzia znajdzie się w innym artykule.
 
 Rezultatem takich wyborów, będzie klasa C#, która będzie wyglądać mniej więcej tak, jak poniżej.
-Obok tego dostaniemy kilka plików build.sh i build.cmd i build.ps1, które pozwalają nam na budowę naszej aplikacji nawet w środowisku, które nie ma zainstalowanego środowiska .Net. 
+Obok tego dostaniemy kilka plików build.sh, build.cmd i build.ps1, które pozwalają nam na budowę naszej aplikacji nawet w środowisku, które nie ma zainstalowanego środowiska .Net. 
 Pojawi się również katalog `.nuke`, który przechowuje kilka ustawień.
 
 .Widok klasy Build.cs
@@ -148,7 +148,7 @@ Jeśli zainstalowałeś wcześniej globalne narzędzie nuke, to możesz użyć r
 Wywołaj w konsoli polecenie `nuke`.
 Spowoduje ono wywołanie domyślnego celu budowania, czyli kompilację. 
 Podejście to jest bardziej elastyczne, ponieważ zadziała niezależnie od katalogu, w którym je wywołasz. 
-Potrafi ono samo znaleźć katalog główny rozwiązania i tam poszukać odpowiednich dojść.
+Potrafi ono samo znaleźć katalog główny rozwiązania i tam poszukać odpowiednich plików.
 
 Niezależnie od podejścia, pamiętaj, że przy uruchomieniu możesz podawać własne parametry uruchomieniowe. 
 Możesz spróbować poprzez dodanie flagi `--Configuration Release`, co spowoduje zbudowanie aplikacji w trybie release. 
@@ -190,17 +190,17 @@ Powyższy kod w zupełności wystarczy, aby uruchomić testy jednostkowe znajduj
 
 <1> Najpierw określamy, że testy muszą zostać wykonane po kompilacji.
 <2> Następnie, że są one wywoływane po zakończeniu kompilacji.  
-Więcej na temat tych dwóch metod przeczytasz w ramce poniżej. 
+Więcej na temat tych dwóch metod przeczytasz w ramkach poniżej. 
 <3> W tym miejscu upewniamy się, że folder wynikowy testów jednostkowych jest pusty. 
 Czasem potrafią znaleźć się tam ciekawe rzeczy, zwłaszcza gdy coś nie działa. 
 <4> W tym miejscu ustawiamy konfigurację, czyli to, w jaki sposób chcemy budować naszą aplikację, czy w trybie `debug`, czy `release`. 
 Jak spojrzysz na kod wygenerowany przez konfigurator parametr `Configuration`, który dostarcza nam takową informację.
 Zawsze możesz go nadpisać, używając parametru `--Configuration [Debug|Release]`. 
-<5> Ustawiamy flagę, informujacą o tym, że mechanizm testowy ma nie budować ponownie naszych projektów. Zrobiliśmy to w kroku `Compile``, więc powinno nam to zaoszczędzić trochę czasu.
+<5> Ustawiamy flagę, informującą o tym, że mechanizm testowy ma nie budować ponownie naszych projektów. Zrobiliśmy to w kroku `Compile``, więc powinno nam to zaoszczędzić trochę czasu.
 <6> Określamy projekt, a w tym przypadku całe rozwiązanie, które chcemy przetestować. 
 
 Mając dodane te kilka linijek do naszej klasy `Build.cs` możemy wywołać polecenie `nuke Compile`. 
-Powinniśmy osatecznie uzyskać wynik na kształt: 
+Powinniśmy ostatecznie uzyskać wynik na kształt: 
 
 [source,console]
 ----
@@ -240,9 +240,9 @@ Można zrobić to na wiele rożnych sposobów:
 * `dotnet run -- --help` w katalogu projektu budujacego 
 * `.\build.ps1 --help` w katalogu, gdzie znajduje się skrypt budujący. 
 
-Przykładowe rezultat takigo polecenia jest widoczny ponizej.
+Przykładowe rezultat takiego polecenia jest widoczny ponizej.
 Zwróć uwagę na to, że widocznej są wszystkie wcześniej określone cele budowania oraz parametry wraz z opisem. 
-Daje nam to bardzo fajną  odkrywalność naszego procesu budującego. 
+Daje nam to bardzo fajną odkrywalność naszego procesu budującego. 
 
 [source,console]
 ----
@@ -289,7 +289,7 @@ Parameters:
 === Jaka jest kolejność? 
 
 Gdy już ilość celów budowania będzie duża, a zależności między nimi będzie co niemiara, warto pamiętać o narzędziu, które w przejrzysty sposób wyświetli nam, co będzie się działo. 
-Do teog służy flaga `plan`, która używamy w następujący sposób: `nuke --plan`, lub, jesli chcemy zobacz plan dla niestadardowego wywołania to mozemy podać dotkowe parametry, jak na przykład nazwę celu budowania: `nuke PushToNetlify --plan`.
+Do tego służy flaga `plan`, która używamy w następujący sposób: `nuke --plan`, lub, jeśli chcemy zobaczyć plan dla niestandardowego wywołania, to możemy podać dodatkowe parametry, jak na przykład nazwę celu budowania: `nuke PushToNetlify --plan`.
 Pamiętaj, że podobnie jak polecenie help, również to można wywołać na analogiczne sposoby.
 
 .Wynik działania polecenie `nuke --plan`
@@ -297,7 +297,7 @@ image:nuke-plan.png[]
 
 == Podsumowanie 
 
-W następnej zamierzam pokazać Ci jak zbudować aplikację, uruchomić testy jednostkowe, wymusić odpowiednie pokrycie kodu oraz jak przygotować aplikację do publikacji. 
+W następnej części zamierzam pokazać Ci jak z wymusić odpowiednie pokrycie kodu testami jednostkowymi oraz jak przygotować aplikację do publikacji. 
 Opiszę również sposób przygotowania CI/CD dla Github Actions z uwzględnieniem parametrów pobierania sekretów repozytorium.
 
 Końcowy kod z opisanymi tutaj elementami, i kilkoma więcej, znajdziesz na moim GitHubie: https://github.com/MikDal002/ZTR.AI/tree/master/CICD[Ztr.AI].
