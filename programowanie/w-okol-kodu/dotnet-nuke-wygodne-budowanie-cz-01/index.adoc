@@ -4,7 +4,7 @@ date: 2022-06-12
 draft: false
 image: cover.jpg
 description: "Nuke pozwala nam na proste opisanie procesu budowania i publikowania naszej aplikacji w języku C#. Niniejszy artykuł jest wstępem do serii. 
-W tej części dowiesz się jak czym jest Nuke i jak go uruchomić w swoim projekcie. 
+W tej części dowiesz się czym jest Nuke i jak go uruchomić w swoim projekcie. 
 Oprócz konfiguracji środowiska i wyjaśnienia kilku podstawowych elementów pokażę Ci jak dodać wykonanie testów jednostkowych."
 
 categories: 
@@ -32,10 +32,10 @@ Jeżeli chcemy, aby nasz projekt był cały czas łatwo zarządzalny, musimy mie
 I tak oto, możemy opisać:
 
 1. (Czyszczenie) jak powinny wyglądać katalogi przed rozpoczęciem budowania projektu,
-2. (Przygotowanie) jakich zależności potrzebuje nasza aplikacja do kompilacji,
+2. (Przygotowanie) jakich zależności potrzebuje aplikacja do kompilacji,
 3. (Budowanie) w jakiej kolejności budować poszczególne elementy,
-4. (Testowanie) jak uruchamiać testy jednostkowe i jakie są nasze wymagania co do pokrycia nimi naszego kodu,
-5. (Publikacja) jak spakować naszą aplikację i wysłać ją na środowisko produkcyjne. 
+4. (Testowanie) jak uruchamiać testy jednostkowe i jakie są wymagania co do pokrycia nimi naszego kodu,
+5. (Publikacja) jak spakować aplikację i wysłać ją na środowisko produkcyjne. 
 
 Nie jest to kompletna lista, tego, co możemy zrobić w trakcie procesu ciągłej integracji i dostarczania. 
 Na pewno pokazuje ona podstawowe zagadnienia, przed którymi jesteśmy stawiani podczas wydawania kolejnej wersji naszego oprogramowania. 
@@ -60,18 +60,20 @@ dotnet tool install Nuke.GlobalTool --global
 .Widok konfiguratora Nuke
 image::nuke-setup.png[]
 
-1. Wybierz nazwę projektu budującego, 
-2. Katalog, w którym będzie on zapisany,
-3. Wersję Nuke,
-4. Domyślne rozwiązanie, które będzie budowane,
-5. Wybierz, czy chcesz, aby podstawowe polecenia budujące zostały już umieszczone w nowym projekcie. 
-6. Wybierz środowisku, które będzie budować twoje rozwiązanie.
-7. Wybierz miejsce, gdzie są umieszczone twoje projekty (w tym katalogu będzie przeprowadzane czyszczenie dodatkowe),
-8. Wybierz, gdzie mają trafiać artefakty, czyli pliki wynikowe budowania, jak paczki nuget. 
-9. Wybierz, gdzie są twoje projekty, które testują rozwiązanie.
-10 Wybierz, czy używasz GitVersion. Ja wybrałem, że tak, jednak opis tego narzędzia znajdzie się w innym artykule.
+Narzędzie poprosi o podjęcie szeregu decyzji, jak widać na ilustracji powyżej: 
 
-Rezultatem takich wyborów, będzie klasa C#, która będzie wyglądać mniej więcej tak, jak poniżej.
+. Wybierz nazwę projektu budującego.
+. Katalog, w którym będzie on zapisany.
+. Wersję Nuke.
+. Domyślne rozwiązanie, które będzie budowane.
+. Czy chcesz, aby podstawowe polecenia budujące zostały już umieszczone w nowym projekcie.
+. Środowisko, które będzie budować twoje rozwiązanie.
+. Miejsce, gdzie są umieszczone twoje projekty (w tym katalogu będzie przeprowadzane czyszczenie dodatkowe).
+. Gdzie mają trafiać artefakty, czyli pliki wynikowe budowania, jak paczki nuget.
+. Gdzie są twoje projekty, które testują rozwiązanie.
+. Czy używasz GitVersion. Ja wybrałem, że tak, jednak opis tego narzędzia znajdzie się w innym artykule.
+
+Rezultatem takich wyborów, jest klasa C#, która będzie wyglądać mniej więcej tak, jak poniżej.
 Obok tego dostaniemy kilka plików build.sh, build.cmd i build.ps1, które pozwalają nam na budowę naszej aplikacji nawet w środowisku, które nie ma zainstalowanego środowiska .Net. 
 Pojawi się również katalog `.nuke`, który przechowuje kilka ustawień.
 
@@ -194,7 +196,7 @@ Więcej na temat tych dwóch metod przeczytasz w ramkach poniżej.
 <3> W tym miejscu upewniamy się, że folder wynikowy testów jednostkowych jest pusty. 
 Czasem potrafią znaleźć się tam ciekawe rzeczy, zwłaszcza gdy coś nie działa. 
 <4> W tym miejscu ustawiamy konfigurację, czyli to, w jaki sposób chcemy budować naszą aplikację, czy w trybie `debug`, czy `release`. 
-Jak spojrzysz na kod wygenerowany przez konfigurator parametr `Configuration`, który dostarcza nam takową informację.
+Jak spojrzysz na kod wygenerowany przez konfigurator, zobaczysz właściwość o nazwie `Configuration`, która dostarcza nam takową informację.
 Zawsze możesz go nadpisać, używając parametru `--Configuration [Debug|Release]`. 
 <5> Ustawiamy flagę, informującą o tym, że mechanizm testowy ma nie budować ponownie naszych projektów. Zrobiliśmy to w kroku `Compile``, więc powinno nam to zaoszczędzić trochę czasu.
 <6> Określamy projekt, a w tym przypadku całe rozwiązanie, które chcemy przetestować. 
@@ -237,11 +239,11 @@ W każdym momencie możesz wywołać pomoc przy budowaniu.
 Można zrobić to na wiele rożnych sposobów:
 
 * `nuke help` w dowolnym katalogu rozwiązania, jeśli masz zainstalowane narzędzie Nuke.
-* `dotnet run -- --help` w katalogu projektu budujacego 
+* `dotnet run -- --help` w katalogu projektu budujacego.
 * `.\build.ps1 --help` w katalogu, gdzie znajduje się skrypt budujący. 
 
-Przykładowe rezultat takiego polecenia jest widoczny ponizej.
-Zwróć uwagę na to, że widocznej są wszystkie wcześniej określone cele budowania oraz parametry wraz z opisem. 
+Przykładowy rezultat takiego polecenia jest widoczny ponizej.
+Zwróć uwagę na to, że widoczne są wszystkie wcześniej określone cele budowania oraz parametry wraz z opisem. 
 Daje nam to bardzo fajną odkrywalność naszego procesu budującego. 
 
 [source,console]
@@ -297,8 +299,9 @@ image:nuke-plan.png[]
 
 == Podsumowanie 
 
-W następnej części zamierzam pokazać Ci jak z wymusić odpowiednie pokrycie kodu testami jednostkowymi oraz jak przygotować aplikację do publikacji. 
+W następnej części zamierzam pokazać Ci jak wymusić odpowiednie pokrycie kodu testami jednostkowymi oraz jak przygotować aplikację do publikacji. 
 Opiszę również sposób przygotowania CI/CD dla Github Actions z uwzględnieniem parametrów pobierania sekretów repozytorium.
+Jeśli masz pomysły, co mógłbym jeszcze opisać w sprawie Nuke, daj znać w komentarzu!
 
 Końcowy kod z opisanymi tutaj elementami, i kilkoma więcej, znajdziesz na moim GitHubie: https://github.com/MikDal002/ZTR.AI/tree/master/CICD[Ztr.AI].
 
