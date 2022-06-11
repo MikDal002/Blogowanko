@@ -1,0 +1,36 @@
+---
+title: "Jak (nie)wdrażać nowego programisty w zespole – z doświadczenia"
+date: 2022-07-12
+draft: true
+image: cover.jpg
+description: "Niedawno zakończyłem pracę nad jednym projektem. Cieszę się o tyle, że praca nad nim sprawiała mi dużo trudności. Przez to, dostałem wskazówki, jak nie powinno się wdrażać nowego programisty do pracy nad działającym już projektem. Czuję, że potrzebuje miejsca, gdzie mógłbym zapisać swoje spostrzeżenia, aby w przyszłości nie popełnić podobnych błędów."
+
+categories: 
+    - "W okół kodu"
+    - "Zespół"
+tags:
+    - "Zespół"
+    - "Wdrażanie"
+    - "Testy jednostkowe"
+---
+:toc: 
+:experimental: true
+
+== Wstęp
+
+Nie ma człowieka i zespołu, który nie popełniałby błędów. 
+Prawdziwym błędem jednak jest niewyciąganie wniosków. 
+Niniejszy artykuł ma za zadanie zarchiwizować moje spojrzenie, na to, co według mnie było nie tak. 
+
+Poniższe notatki dotyczą oprogramowania (mówię o całości), które w całości składało się z kilkunastu projektów łącznie. 
+Pracowało nad nim łącznie 8 programistów w szczytowym momencie. 
+Ponizej będę mówił tylko o perspektywie jednego z nich.
+
+== Odkrywalność
+
+Zacznę od końca, bo myślę, że ta wyniesiona lekcja jest najważniejsza. 
+Postawienie na łatwość w odkrywaniu zależności wewnątrz projektu jest kluczem, zarówno do wdrażania nowych członków zespołu, jak i samej przyjemności płynącej z pracy. 
+Nie ma nic gorszego, niż dostać zadanie i nie wiedzieć gdzie zacząć – i wcale nie chodzi o mnogość możliwości, tylko o dosłowne podejście, czyli moment, w którym zastanawiasz się, gdzie w ogóle jest repozytorium, nad którym masz pracować. 
+
+Czytając poniższe akapity, miej z tyłu głowy słowo "odkrywalność" (od angielskiego pojęcia _discoverability_). 
+Rozumiane jako wysiłek niezbędny do tego, aby znaleźć wiedzę konieczną do wykonania zadania.
