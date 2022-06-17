@@ -1,5 +1,5 @@
 ---
-title: "Jak (nie)wdrażać nowego programisty w zespole – z doświadczenia"
+title: "O dzieleniu projektu na mniejsze częśći słów kilka"
 date: 2022-07-12
 draft: true
 image: cover.jpg
@@ -34,3 +34,81 @@ Nie ma nic gorszego, niż dostać zadanie i nie wiedzieć gdzie zacząć – i w
 
 Czytając poniższe akapity, miej z tyłu głowy słowo "odkrywalność" (od angielskiego pojęcia _discoverability_). 
 Rozumiane jako wysiłek niezbędny do tego, aby znaleźć wiedzę konieczną do wykonania zadania.
+
+== Wiele solucji w wielu repozytoriach
+
+Wiele solucji, które znajdowały się w osobnych repozytoriach, powodowało, że miałem ogromne trudności ze znajdowaniem wszystkich zależności, które powinienem zmienić, wykonując zadanie. 
+Dodatkową trudność może sprawiać fakt, że podczas pracy nad rozproszonym monolit musimy dbać, o to, aby wiele fragmentów naszej aplikacji korzystało z tego samego kodu źródłowego. 
+Poprzez rozproszony monolit (więcej na ten temat https://bulldogjob.pl/readme/czy-monolity-to-architektura-przyszlosci[tutaj]) rozumiem zestaw aplikacji, które działają na wielu różnych maszynach, a żeby poprawnie działać, wszystkie lub większość musi zostać podegrana równocześnie. 
+
+Także wyobraź sobie, że szukając, co wywołuje daną metodę, nie możesz wykorzystać "Znajdź wszystkie odwołania", tylko musisz tekstowo szukać w kilku repozytoriach, a wszystkie zmiany w definicji synchronizować, czy to ręcznie, czy przez często się zmieniającego nugeta. 
+Kosztowało mnie to mnóstwo energii, aby wszystko działało tak, jak należy. 
+
+=== Problem współdzielenia kodu
+
+Takie podejście powoduje jeszcze jeden poważny problem: dużą duplikację kodu. 
+Kiedy nasze oprogramowanie jest rozbite na osobne repozytoria, to przychodzą mi do głowy dwa rozwiązania, aby sensownie współdzielić kod: subrepozytorium lub nuget. 
+
+Podejście z subrepozytorium pozwala na szybsze stosowanie zmian. 
+Spotkałem się z dość dużym oporem przed wykorzystaniem tego rozwiązania, który nie zawsze był dla mnie zrozumiały.
+Jeśli też jesteś przeciwny temu podejściu, proszę napisz w komentarzu, dlaczego. 
+
+Podejście z nugetem stanowczo wydłuża cały proces. 
+Zmiany wprowadzone do projektu muszą zostać wysłane na serwer budujący, upublicznione w firmowym źródle, stamtąd rozdystrybuowany do poszczególnych projektów. 
+A co najgorsze, często, zanim cały ten proces się zacznie, musimy przejść proces przeglądu kodu (code review) i zebrać przynajmniej dwie akceptacje, co po prostu trwa. 
+Dodatkowo zmiana kodu współdzielonego żadko kończy się na jednej interacji, co jeszcz bardziej wydłuża cały proces. 
+
+Taka żmudność powoduje, że programiści odpuszczają współdzielenie kodu i wolą go po prostu skopiować z jednego projektu do drugiego. 
+Niestety ten efekt powoduje degradacje naszego projektu, przez to, że chcąc poprawić jakiś błąd, lub coś usprawnić, musimy wyszukać powtarzające się fragmenty.
+I tutaj zaczyna się pętla na szyi zaciskać: kopiujemy kod, którego musimy szukać, szukanie sobie utrudniamy przez rozbijanie projektu na wiele repozytorium, przez co jeszcze więcej kopiujemy. 
+I tak w koło. 
+
+Kwestia ta nie kończy się na duplikacji kodu produkcyjnego. 
+Mnożenie nugetów wiąże się często też z mnożeniem konfiguracji na serwerze budującym, co ma swoje konsekwencje w postaci przestarzałych procesów budujących czy wiecznie kończących się licencjach. 
+
+=== Testy jednostkowe
+
+Jak wydłuż jeszcze bardziej proces współdzielenia kodu przez nugety? 
+Pomińmy testy jednostkowe, przecież nie ma nic lepszego niż ręczne testy! 
+Jeśli chcesz współdzielić kod za pomocą nugeta niezbędne będą testy jednostkowe, pokrywające jego funkcjonalność.
+Może się przydać też projekt demonstracyjny. 
+Jeśli spróbujemy tutaj "oszczędzić" nasz czas, to szybko stracimy go na więcej kółek w postaci koła: zmiana kodu współdzielonego, code review, budowanie, testy w końcowym projekcie. 
+
+Nie można też przecenić roli testów jednostkowych jak pewnego zaworu bezpieczeństwa. 
+Ich brak, powoduje, że zużywam stanowczo więcej energii na kontrolę swojego działania, a drobne poprawki wprowadzam dużo rzadziej. 
+Jednak w tym temacie zostało już sporo powiedziane, więc na tym zakończę/
+
+=== Propozycja rozwiązania 
+
+Rozwiązanie tych problemów na początku jest proste: dopóki nie masz kilkudziesięciu projektów, to często rozmiar repozytorium nie ma większego znaczenia i nie warto poświęcać czasu pracowników na to, aby wyszukiwali powiązań w różnych miejscach. 
+Warto więc trzymać kod w jednym repozytorium i solucji najdłużej jak to możliwe. 
+
+Kiedy jednak wystąpią pewne problemy, trzeba działać.
+Kroki, które bym podjął w tej kolejności:
+
+. Jeśli dotyka cię _syndrom następnego poranka_ <<APZ>> (czyli programiści poświęcają mnóstwo czasu na rozwiązywanie konfliktów przy łączeniu zmian) to często podział na repozytorium tylko ukryje ten problem bardziej i na pewien czas – w tym momencie potrzeba przemyślenia podziału projektu na poszczególne komponenty (wskazówki na ten temat znajdziesz w tej samej publikacji <<APZ>> w części IV).
+. Przeorganizuj projekty, tak aby wszystkie klasy, które zmieniały się razem były w jednym projekcie. 
+Projekty, które zmieniają się razem (na przykład: api, testy i logika) również trzymaj blisko siebie – będzie to dobry zalążek na przyszłość.
+. Jeśli czas budowania wszystkich projektów jest przytłaczający, to można wydzielić wolnozmienne klasy narzędziowe do osobnej solucji, ale wciąż nie do osobnego repozytorium. 
+Tak, aby było łatwo je znaleźć.
+
+Przy dzieleniu rozwiązania na komponenty, pamiętaj, aby trzymać razem te klasy, które zmieniają się razem i postarać się, aby do Nugetów trafiły te rzeczy, które zmieniają się rzadko. 
+Do takich nugetów i projektów, które są używane w wielu miejscach, powinny trafiać klasy możliwe abstrakcyjne, tak aby drobne zmiany w zachowaniu nie wymagały przebudowywania wszystkiego. 
+
+Niestety jednak jest taki moment, w którym przychodzi potrzeba podzielenia projektu na osobne repozytoria.
+Często jest to też dobry moment, aby rozbić jeden zespół na wiele mniejszych. 
+Kiedy jesteś już zmuszony do tego kroku, postaraj się, aby osobne repozytorium i programy w nim zawarte, mogły być traktowane tak, jakby było to rozwiązanie dostarczane przez całkowicie zewnętrzny zespół. 
+Taki podejście zapewni Ci sporą elastyczność oraz zminimalizuje problemy wynikające ze ścisłego powiązania.
+
+== Podsumowanie
+
+Musimy pamiętać, że raz dokonany podział nie jest trwały i powinien się zmieniać, odzwierciedlając potrzeby klientów i zespołu. 
+W końcu chodzi o to, aby pracować sprawnie, poświęcając energię na rozwój, a nie wyszukiwanie ukrytych powiązań.
+
+Nie mniej, podziały trwalsze, jak choćby wyodrębnienie nugetów, powinny być podejmowane przez doświadczone osoby.
+
+
+[bibliography]
+== Odwołania
+
+* [[[APZ]]] - Agile Programowanie Zwinne. Zasady, wzorce i praktyki zwinnego wytwarzania w C#. Robert C. Martin, Micah Martin.
