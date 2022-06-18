@@ -1,9 +1,9 @@
 ---
 title: "O dzieleniu projektu na mniejsze częśći słów kilka"
 date: 2022-07-12
-draft: true
+draft: false
 image: cover.jpg
-description: "Niedawno zakończyłem pracę nad jednym projektem. Cieszę się o tyle, że praca nad nim sprawiała mi dużo trudności. Przez to, dostałem wskazówki, jak nie powinno się wdrażać nowego programisty do pracy nad działającym już projektem. Czuję, że potrzebuje miejsca, gdzie mógłbym zapisać swoje spostrzeżenia, aby w przyszłości nie popełnić podobnych błędów."
+description: "Niedawno zakończyłem pracę nad jednym projektem, który pokazał mi, jakie mogą być problemy z nazbyt szybkiego dzielenia projektu na mniejsze kawałki. Czuję, że potrzebuje miejsca, gdzie mógłbym zapisać swoje spostrzeżenia, aby w przyszłości nie popełnić podobnych błędów."
 
 categories: 
     - "W okół kodu"
@@ -24,16 +24,7 @@ Niniejszy artykuł ma za zadanie zarchiwizować moje spojrzenie, na to, co wedł
 
 Poniższe notatki dotyczą oprogramowania (mówię o całości), które w całości składało się z kilkunastu projektów łącznie. 
 Pracowało nad nim łącznie 8 programistów w szczytowym momencie. 
-Ponizej będę mówił tylko o perspektywie jednego z nich.
-
-== Odkrywalność
-
-Zacznę od końca, bo myślę, że ta wyniesiona lekcja jest najważniejsza. 
-Postawienie na łatwość w odkrywaniu zależności wewnątrz projektu jest kluczem, zarówno do wdrażania nowych członków zespołu, jak i samej przyjemności płynącej z pracy. 
-Nie ma nic gorszego, niż dostać zadanie i nie wiedzieć gdzie zacząć – i wcale nie chodzi o mnogość możliwości, tylko o dosłowne podejście, czyli moment, w którym zastanawiasz się, gdzie w ogóle jest repozytorium, nad którym masz pracować. 
-
-Czytając poniższe akapity, miej z tyłu głowy słowo "odkrywalność" (od angielskiego pojęcia _discoverability_). 
-Rozumiane jako wysiłek niezbędny do tego, aby znaleźć wiedzę konieczną do wykonania zadania.
+Poniżej będę mówił o tym, jaka organizacja sprawiała mi trudności i dlaczego. 
 
 == Wiele solucji w wielu repozytoriach
 
@@ -102,10 +93,13 @@ Taki podejście zapewni Ci sporą elastyczność oraz zminimalizuje problemy wyn
 
 == Podsumowanie
 
-Musimy pamiętać, że raz dokonany podział nie jest trwały i powinien się zmieniać, odzwierciedlając potrzeby klientów i zespołu. 
-W końcu chodzi o to, aby pracować sprawnie, poświęcając energię na rozwój, a nie wyszukiwanie ukrytych powiązań.
 
-Nie mniej, podziały trwalsze, jak choćby wyodrębnienie nugetów, powinny być podejmowane przez doświadczone osoby.
+Postawienie na łatwość w odkrywaniu zależności wewnątrz projektu jest kluczem, zarówno do wdrażania nowych członków zespołu, jak i samej przyjemności płynącej z pracy. 
+Nie ma nic gorszego, niż dostać zadanie i nie wiedzieć gdzie zacząć – i wcale nie chodzi o mnogość możliwości, tylko o dosłowne podejście, czyli moment, w którym zastanawiasz się, gdzie w ogóle jest repozytorium, nad którym masz pracować. 
+
+Czytając powyższe akapity, można by użyć słowa "odkrywalność" (od angielskiego pojęcia _discoverability_). 
+Rozumiane jako wysiłek niezbędny do tego, aby znaleźć wiedzę konieczną do wykonania zadania.
+Poprzez dzielenie naszego projektu na mniejsze kawałki, pamiętajmy, że przyjdzie czas, w którym każda ze stworzonych zależności będzie musiała być prześledzona. 
 
 
 [bibliography]
