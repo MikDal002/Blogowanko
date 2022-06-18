@@ -2,7 +2,7 @@
 title: "O dzieleniu projektu na mniejsze części słów kilka"
 date: 2022-07-12
 draft: false
-image: cover.jpg
+image: cover.en.jpg
 description: "Niedawno zakończyłem pracę nad jednym projektem, który pokazał mi, jakie mogą być problemy z nazbyt szybkiego dzielenia projektu na mniejsze kawałki. Czuję, że potrzebuje miejsca, gdzie mógłbym zapisać swoje spostrzeżenia, aby w przyszłości nie popełnić podobnych błędów."
 
 categories: 
