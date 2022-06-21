@@ -29,11 +29,14 @@ Poniżej będę mówił o tym, jaka organizacja sprawiała mi trudności i dlacz
 == Wiele solucji w wielu repozytoriach
 
 Wiele solucji, które znajdowały się w osobnych repozytoriach, powodowało, że miałem ogromne trudności ze znajdowaniem wszystkich zależności, które powinienem zmienić, wykonując zadanie. 
-Dodatkową trudność może sprawiać fakt, że podczas pracy nad rozproszonym monolit musimy dbać, o to, aby wiele fragmentów naszej aplikacji korzystało z tego samego kodu źródłowego. 
-Poprzez rozproszony monolit (więcej na ten temat https://bulldogjob.pl/readme/czy-monolity-to-architektura-przyszlosci[tutaj]) rozumiem zestaw aplikacji, które działają na wielu różnych maszynach, a żeby poprawnie działać, wszystkie lub większość musi zostać podegrana równocześnie. 
+Dodatkową trudność może sprawiać fakt, że podczas pracy nad rozproszonym monolitem musimy dbać, o to, aby wiele fragmentów naszej aplikacji korzystało z tej samej wersji kodu źródłowego. 
+Poprzez rozproszony monolit (więcej na ten temat https://bulldogjob.pl/readme/czy-monolity-to-architektura-przyszlosci[tutaj]) rozumiem zestaw aplikacji, które są uruchamiane na wielu różnych maszynach, a żeby poprawnie działać, wszystkie, lub większość, musi zostać podegrana równocześnie. 
 
-Także wyobraź sobie, że szukając, co wywołuje daną metodę, nie możesz wykorzystać "Znajdź wszystkie odwołania", tylko musisz tekstowo szukać w kilku repozytoriach, a wszystkie zmiany w definicji synchronizować, czy to ręcznie, czy przez często się zmieniającego nugeta. 
+Także wyobraź sobie, że szukając, co wywołuje daną metodę, nie możesz wykorzystać środowiska programistycznego i funkcji "Znajdź wszystkie odwołania", tylko musisz tekstowo szukać w kilku repozytoriach, a wszystkie zmiany w definicji synchronizować, czy to ręcznie, czy przez często zmieniającego się nugeta. 
 Kosztowało mnie to mnóstwo energii, aby wszystko działało tak, jak należy. 
+
+.Search all references
+image::search-all-references.png[]
 
 === Problem współdzielenia kodu
 
@@ -77,9 +80,9 @@ Warto więc trzymać kod w jednym repozytorium i solucji najdłużej jak to moż
 Kiedy jednak wystąpią pewne problemy, trzeba działać.
 Kroki, które bym podjął w tej kolejności:
 
-. Jeśli dotyka cię _syndrom następnego poranka_ <<APZ>> (czyli programiści poświęcają mnóstwo czasu na rozwiązywanie konfliktów przy łączeniu zmian) to często podział na repozytorium tylko ukryje ten problem bardziej i na pewien czas – w tym momencie potrzeba przemyślenia podziału projektu na poszczególne komponenty (wskazówki na ten temat znajdziesz w tej samej publikacji <<APZ>> w części IV).
-. Przeorganizuj projekty, tak aby wszystkie klasy, które zmieniały się razem były w jednym projekcie. 
-Projekty, które zmieniają się razem (na przykład: api, testy i logika) również trzymaj blisko siebie – będzie to dobry zalążek na przyszłość.
+. Jeśli dotyka cię *syndrom następnego poranka* <<APZ>> (czyli programiści poświęcają mnóstwo czasu na rozwiązywanie konfliktów przy łączeniu zmian) to często podział na repozytorium tylko ukryje ten problem bardziej i na pewien czas – w tym momencie potrzeba przemyślenia podziału projektu na poszczególne komponenty (wskazówki na ten temat znajdziesz w tej samej publikacji <<APZ>> w części IV).
+. Przeorganizuj projekty, tak aby wszystkie klasy, które zmieniają się razem były w jednym miejscu. 
+Projekty, które zmieniają się razem, na przykład: api, testy i logika, również trzymaj blisko siebie – będzie to dobry zalążek na przyszłość.
 . Jeśli czas budowania wszystkich projektów jest przytłaczający, to można wydzielić wolnozmienne klasy narzędziowe do osobnej solucji, ale wciąż nie do osobnego repozytorium. 
 Tak, aby było łatwo je znaleźć.
 
