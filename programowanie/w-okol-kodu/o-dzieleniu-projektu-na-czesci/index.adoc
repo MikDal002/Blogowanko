@@ -10,7 +10,8 @@ categories:
     - "Zespół"
 tags:
     - "Zespół"
-    - "Wdrażanie"
+    - "Rozwiązanie"
+    - "Nuget"
     - "Testy jednostkowe"
 ---
 :toc: 

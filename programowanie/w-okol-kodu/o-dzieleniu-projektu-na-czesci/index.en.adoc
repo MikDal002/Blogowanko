@@ -1,44 +1,45 @@
 ---
-title: "O dzieleniu projektu na mniejsze części słów kilka"
+title: "A few words about dividing a project into smaller parts"
 date: 2022-07-12
 draft: false
 image: cover.en.jpg
-description: "Niedawno zakończyłem pracę nad jednym projektem, który pokazał mi, jakie mogą być problemy z nazbyt szybkiego dzielenia projektu na mniejsze kawałki. Czuję, że potrzebuje miejsca, gdzie mógłbym zapisać swoje spostrzeżenia, aby w przyszłości nie popełnić podobnych błędów."
+description: "I recently finished working on one project that showed me what the problems can be from splitting a project into smaller pieces too quickly. I feel like it needs a place where I can write down my observations so I don't make similar mistakes in the future."
 
 categories: 
-    - "W okół kodu"
-    - "Zespół"
+    - "Around the code"
+    - "Team"
 tags:
-    - "Zespół"
-    - "Wdrażanie"
-    - "Testy jednostkowe"
+    - "Team"
+    - "Solutions"
+    - "Nuget"
+    - "Unit tests"
 ---
 :toc: 
 :experimental: true
 
-== Wstęp
+== Introduction
 
-Nie ma człowieka i zespołu, który nie popełniałby błędów. 
-Prawdziwym błędem jednak jest niewyciąganie wniosków. 
-Niniejszy artykuł ma za zadanie zarchiwizować moje spojrzenie, na to, co według mnie było nie tak. 
+There is no person or team that does not make mistakes. 
+The real mistake, however, is not learning from them. 
+This article is intended to archive my perspective on what I think went wrong. 
 
-Poniższe notatki dotyczą oprogramowania (mówię o całości), które w całości składało się z kilkunastu projektów łącznie. 
-Pracowało nad nim łącznie 8 programistów w szczytowym momencie. 
-Poniżej będę mówił o tym, jaka organizacja sprawiała mi trudności i dlaczego. 
+The following notes are about the software, which in total consisted of about a dozen projects. 
+There were a total of about 8 programmers working on it at its peak. 
+Below I'll talk about what organization caused me difficulty and why. 
 
-== Wiele solucji w wielu repozytoriach
+== Multiple solutions in multiple repositories
 
-Wiele solucji, które znajdowały się w osobnych repozytoriach, powodowało, że miałem ogromne trudności ze znajdowaniem wszystkich zależności, które powinienem zmienić, wykonując zadanie. 
-Dodatkową trudność może sprawiać fakt, że podczas pracy nad rozproszonym monolitem musimy dbać, o to, aby wiele fragmentów naszej aplikacji korzystało z tej samej wersji kodu źródłowego. 
-Poprzez rozproszony monolit (więcej na ten temat https://bulldogjob.pl/readme/czy-monolity-to-architektura-przyszlosci[tutaj]) rozumiem zestaw aplikacji, które są uruchamiane na wielu różnych maszynach, a żeby poprawnie działać, wszystkie, lub większość, musi zostać podegrana równocześnie. 
+Many solutions, which were located in separate repositories, caused that I had to spend much more time to find all the dependencies that I should change while doing the task. 
+An additional difficulty was the fact that when working on a distributed monolith you have to make sure that many parts of your application are using the same version of the source code. 
+By distributed monolith (more on this topic https://atechnologistspov.com/i-just-heard-that-monoliths-are-the-future-of-software-development-2190bf7f3c40[here]) I mean a set of applications that are run on many different machines, and in order to work properly, all, or most of them, need to be running at the same time. 
 
-Także wyobraź sobie, że szukając, co wywołuje daną metodę, nie możesz wykorzystać środowiska programistycznego i funkcji "Znajdź wszystkie odwołania", tylko musisz tekstowo szukać w kilku repozytoriach, a wszystkie zmiany w definicji synchronizować, czy to ręcznie, czy przez często zmieniającego się nugeta. 
-Kosztowało mnie to mnóstwo energii, aby wszystko działało tak, jak należy. 
+So, imagine that when looking for what calls a certain method, you can't use the development environment and the "Find all references" function, but you have to text search in several repositories, and synchronize all changes in the definition, either manually or through the frequently changing nuget. 
+It cost me a lot of energy to get everything working as it should, and it still didn't always work. 
 
-.Search all references
+.Convenient search for all references
 image::search-all-references.png[]
 
-=== Problem współdzielenia kodu
+=== The problem of code sharing
 
 Takie podejście powoduje jeszcze jeden poważny problem: dużą duplikację kodu. 
 Kiedy nasze oprogramowanie jest rozbite na osobne repozytoria, to przychodzą mi do głowy dwa rozwiązania, aby sensownie współdzielić kod: subrepozytorium lub nuget. 
@@ -46,39 +47,40 @@ Kiedy nasze oprogramowanie jest rozbite na osobne repozytoria, to przychodzą mi
 Podejście z subrepozytorium pozwala na szybsze stosowanie zmian. 
 Spotkałem się z dość dużym oporem przed wykorzystaniem tego rozwiązania, który nie zawsze był dla mnie zrozumiały.
 Jeśli też jesteś przeciwny temu podejściu, proszę napisz w komentarzu, dlaczego. 
+Sam stosuję to podejście w projektach prywatnych i sprawdza się naprawdę dobrze.
 
 Podejście z nugetem stanowczo wydłuża cały proces. 
-Zmiany wprowadzone do projektu muszą zostać wysłane na serwer budujący, upublicznione w firmowym źródle, stamtąd rozdystrybuowany do poszczególnych projektów. 
+Zmiany wprowadzone do projektu muszą zostać wysłane na serwer budujący, upublicznione w firmowym źródle, stamtąd rozdystrybuowane do poszczególnych projektów. 
 A co najgorsze, często, zanim cały ten proces się zacznie, musimy przejść proces przeglądu kodu (code review) i zebrać przynajmniej dwie akceptacje, co po prostu trwa. 
-Dodatkowo zmiana kodu współdzielonego żadko kończy się na jednej interacji, co jeszcz bardziej wydłuża cały proces. 
+Dodatkowo zmiana kodu współdzielonego rzadko kończy się na jednej iteracji, co jeszcze bardziej wydłuża cały proces. 
 
 Taka żmudność powoduje, że programiści odpuszczają współdzielenie kodu i wolą go po prostu skopiować z jednego projektu do drugiego. 
 Niestety ten efekt powoduje degradacje naszego projektu, przez to, że chcąc poprawić jakiś błąd, lub coś usprawnić, musimy wyszukać powtarzające się fragmenty.
-I tutaj zaczyna się pętla na szyi zaciskać: kopiujemy kod, którego musimy szukać, szukanie sobie utrudniamy przez rozbijanie projektu na wiele repozytorium, przez co jeszcze więcej kopiujemy. 
+Tutaj zaczyna się pętla na szyi zaciskać: kopiujemy kod, którego musimy szukać, szukanie sobie utrudniamy przez rozbijanie projektu na wiele repozytorium, przez co jeszcze więcej kopiujemy. 
 I tak w koło. 
 
 Kwestia ta nie kończy się na duplikacji kodu produkcyjnego. 
-Mnożenie nugetów wiąże się często też z mnożeniem konfiguracji na serwerze budującym, co ma swoje konsekwencje w postaci przestarzałych procesów budujących czy wiecznie kończących się licencjach. 
+Mnożenie nugetów wiąże się często też z mnożeniem konfiguracji na serwerze budującym, co ma swoje konsekwencje w postaci przestarzałych procesów budujących, wiecznie kończących się licencjach, przestojach ciągłej integracji oraz degradacji całego procesu. 
 
 === Testy jednostkowe
 
-Jak wydłuż jeszcze bardziej proces współdzielenia kodu przez nugety? 
+Jak wydłużyć jeszcze bardziej proces współdzielenia kodu przez nugety? 
 Pomińmy testy jednostkowe, przecież nie ma nic lepszego niż ręczne testy! 
 Jeśli chcesz współdzielić kod za pomocą nugeta niezbędne będą testy jednostkowe, pokrywające jego funkcjonalność.
 Może się przydać też projekt demonstracyjny. 
-Jeśli spróbujemy tutaj "oszczędzić" nasz czas, to szybko stracimy go na więcej kółek w postaci koła: zmiana kodu współdzielonego, code review, budowanie, testy w końcowym projekcie. 
+Jeśli spróbujemy tutaj "oszczędzić" nasz czas, to szybko stracimy go na więcej okrążeń w postaci: zmiana kodu współdzielonego, code review, budowanie, testy w końcowym projekcie. 
 
 Nie można też przecenić roli testów jednostkowych jak pewnego zaworu bezpieczeństwa. 
 Ich brak, powoduje, że zużywam stanowczo więcej energii na kontrolę swojego działania, a drobne poprawki wprowadzam dużo rzadziej. 
-Jednak w tym temacie zostało już sporo powiedziane, więc na tym zakończę/
+Jednak, w tym temacie zostało już sporo powiedziane, więc na tym zakończę.
 
 === Propozycja rozwiązania 
 
-Rozwiązanie tych problemów na początku jest proste: dopóki nie masz kilkudziesięciu projektów, to często rozmiar repozytorium nie ma większego znaczenia i nie warto poświęcać czasu pracowników na to, aby wyszukiwali powiązań w różnych miejscach. 
-Warto więc trzymać kod w jednym repozytorium i solucji najdłużej jak to możliwe. 
+Rozwiązanie tych problemów, według mnie, na początku jest proste: dopóki nie masz kilkudziesięciu projektów, to często rozmiar repozytorium nie ma większego znaczenia i nie warto poświęcać czasu pracowników na to, aby wyszukiwali powiązań w różnych miejscach. 
+Warto więc trzymać kod w jednym repozytorium i solucji, najdłużej jak to możliwe. 
 
 Kiedy jednak wystąpią pewne problemy, trzeba działać.
-Kroki, które bym podjął w tej kolejności:
+Kroki, które bym podjął to:
 
 . Jeśli dotyka cię *syndrom następnego poranka* <<APZ>> (czyli programiści poświęcają mnóstwo czasu na rozwiązywanie konfliktów przy łączeniu zmian) to często podział na repozytorium tylko ukryje ten problem bardziej i na pewien czas – w tym momencie potrzeba przemyślenia podziału projektu na poszczególne komponenty (wskazówki na ten temat znajdziesz w tej samej publikacji <<APZ>> w części IV).
 . Przeorganizuj projekty, tak aby wszystkie klasy, które zmieniają się razem były w jednym miejscu. 
@@ -91,7 +93,7 @@ Do takich nugetów i projektów, które są używane w wielu miejscach, powinny 
 
 Niestety jednak jest taki moment, w którym przychodzi potrzeba podzielenia projektu na osobne repozytoria.
 Często jest to też dobry moment, aby rozbić jeden zespół na wiele mniejszych. 
-Kiedy jesteś już zmuszony do tego kroku, postaraj się, aby osobne repozytorium i programy w nim zawarte, mogły być traktowane tak, jakby było to rozwiązanie dostarczane przez całkowicie zewnętrzny zespół. 
+Kiedy jesteś już zmuszony do tego kroku, postaraj się, aby osobne repozytorium i programy w nim zawarte, mogły być traktowane tak, jakby było to rozwiązanie dostarczane przez całkowicie zewnętrzny zespół, niemalże jak oprogramowanie firmy trzeciej. 
 Taki podejście zapewni Ci sporą elastyczność oraz zminimalizuje problemy wynikające ze ścisłego powiązania.
 
 == Podsumowanie
