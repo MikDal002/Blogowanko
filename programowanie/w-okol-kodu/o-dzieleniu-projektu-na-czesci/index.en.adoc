@@ -41,76 +41,76 @@ image::search-all-references.png[]
 
 === The problem of code sharing
 
-Takie podejście powoduje jeszcze jeden poważny problem: dużą duplikację kodu. 
-Kiedy nasze oprogramowanie jest rozbite na osobne repozytoria, to przychodzą mi do głowy dwa rozwiązania, aby sensownie współdzielić kod: subrepozytorium lub nuget. 
+This approach causes another major problem: a lot of code duplication. 
+When our software is broken into separate repositories, I can think of two solutions to share code reasonably: sub-repositories or nuget. 
 
-Podejście z subrepozytorium pozwala na szybsze stosowanie zmian. 
-Spotkałem się z dość dużym oporem przed wykorzystaniem tego rozwiązania, który nie zawsze był dla mnie zrozumiały.
-Jeśli też jesteś przeciwny temu podejściu, proszę napisz w komentarzu, dlaczego. 
-Sam stosuję to podejście w projektach prywatnych i sprawdza się naprawdę dobrze.
+The sub-repository approach allows changes to be applied more quickly. 
+I have encountered quite a bit of resistance to using this solution, which I have not always understood.
+If you are also against this approach, please write in the comments why. 
+I myself use this approach in private projects and it works really well.
 
-Podejście z nugetem stanowczo wydłuża cały proces. 
-Zmiany wprowadzone do projektu muszą zostać wysłane na serwer budujący, upublicznione w firmowym źródle, stamtąd rozdystrybuowane do poszczególnych projektów. 
-A co najgorsze, często, zanim cały ten proces się zacznie, musimy przejść proces przeglądu kodu (code review) i zebrać przynajmniej dwie akceptacje, co po prostu trwa. 
-Dodatkowo zmiana kodu współdzielonego rzadko kończy się na jednej iteracji, co jeszcze bardziej wydłuża cały proces. 
+The nuget approach makes the process much longer. 
+Changes made to the project must be uploaded to the build server, made public in the corporate source, and then distributed to individual projects. 
+And what's worst, often before the whole process starts we have to go through the code review process and get at least two approvals, which simply takes time. 
+Additionally, changing shared code rarely ends in a single iteration, making the whole process even longer. 
 
-Taka żmudność powoduje, że programiści odpuszczają współdzielenie kodu i wolą go po prostu skopiować z jednego projektu do drugiego. 
-Niestety ten efekt powoduje degradacje naszego projektu, przez to, że chcąc poprawić jakiś błąd, lub coś usprawnić, musimy wyszukać powtarzające się fragmenty.
-Tutaj zaczyna się pętla na szyi zaciskać: kopiujemy kod, którego musimy szukać, szukanie sobie utrudniamy przez rozbijanie projektu na wiele repozytorium, przez co jeszcze więcej kopiujemy. 
-I tak w koło. 
+This tediousness causes developers to give up on sharing code and prefer to simply copy it from one project to another. 
+Unfortunately, this effect causes degradation of our project, by the fact that in order to fix a bug or improve something, we have to search for repeated fragments.
+This is where the loop around our neck starts to tighten: we copy the code that we have to search for, we make the search harder by splitting the project into many repositories, which makes us copy even more. 
+And so on and so forth. 
 
-Kwestia ta nie kończy się na duplikacji kodu produkcyjnego. 
-Mnożenie nugetów wiąże się często też z mnożeniem konfiguracji na serwerze budującym, co ma swoje konsekwencje w postaci przestarzałych procesów budujących, wiecznie kończących się licencjach, przestojach ciągłej integracji oraz degradacji całego procesu. 
+The issue does not end with duplication of production code. 
+The multiplication of nugets is often also associated with a proliferation of configurations on the build server, which has consequences in terms of outdated build processes, perpetually running out of licenses, continuous integration downtime, and degradation of the overall process. 
 
-=== Testy jednostkowe
+=== Unit tests
 
-Jak wydłużyć jeszcze bardziej proces współdzielenia kodu przez nugety? 
-Pomińmy testy jednostkowe, przecież nie ma nic lepszego niż ręczne testy! 
-Jeśli chcesz współdzielić kod za pomocą nugeta niezbędne będą testy jednostkowe, pokrywające jego funkcjonalność.
-Może się przydać też projekt demonstracyjny. 
-Jeśli spróbujemy tutaj "oszczędzić" nasz czas, to szybko stracimy go na więcej okrążeń w postaci: zmiana kodu współdzielonego, code review, budowanie, testy w końcowym projekcie. 
+How to make the code sharing process even longer for nugets? 
+Let's skip the unit tests, after all there is nothing better than manual testing! 
+If you want to share code via nuget you will need unit tests that cover its functionality.
+A demo project may also be useful. 
+If we try to "save" our time here, we will quickly lose it to more rounds of: changing shared code, code review, build, testing in the final project. 
 
-Nie można też przecenić roli testów jednostkowych jak pewnego zaworu bezpieczeństwa. 
-Ich brak, powoduje, że zużywam stanowczo więcej energii na kontrolę swojego działania, a drobne poprawki wprowadzam dużo rzadziej. 
-Jednak, w tym temacie zostało już sporo powiedziane, więc na tym zakończę.
+The role of unit tests as a safety valve cannot be overestimated either. 
+Lack of them causes that I use much more energy to control my work, and I make small corrections much less often. 
+However, a lot has already been said on this topic, so I will end here.
 
-=== Propozycja rozwiązania 
+=== Solution proposal
 
-Rozwiązanie tych problemów, według mnie, na początku jest proste: dopóki nie masz kilkudziesięciu projektów, to często rozmiar repozytorium nie ma większego znaczenia i nie warto poświęcać czasu pracowników na to, aby wyszukiwali powiązań w różnych miejscach. 
-Warto więc trzymać kod w jednym repozytorium i solucji, najdłużej jak to możliwe. 
+The solution to these problems, in my opinion, is simple at first: as long as you don't have dozens of projects, the size of the repository often doesn't matter much, and it's not worth spending staff time having them search for links in different places. 
+So it's worth keeping the code in a single repository and solver for as long as possible. 
 
-Kiedy jednak wystąpią pewne problemy, trzeba działać.
-Kroki, które bym podjął to:
+However, when certain problems occur, action is needed.
+The steps I would take are:
 
-. Jeśli dotyka cię *syndrom następnego poranka* <<APZ>> (czyli programiści poświęcają mnóstwo czasu na rozwiązywanie konfliktów przy łączeniu zmian) to często podział na repozytorium tylko ukryje ten problem bardziej i na pewien czas – w tym momencie potrzeba przemyślenia podziału projektu na poszczególne komponenty (wskazówki na ten temat znajdziesz w tej samej publikacji <<APZ>> w części IV).
-. Przeorganizuj projekty, tak aby wszystkie klasy, które zmieniają się razem były w jednym miejscu. 
-Projekty, które zmieniają się razem, na przykład: api, testy i logika, również trzymaj blisko siebie – będzie to dobry zalążek na przyszłość.
-. Jeśli czas budowania wszystkich projektów jest przytłaczający, to można wydzielić wolnozmienne klasy narzędziowe do osobnej solucji, ale wciąż nie do osobnego repozytorium. 
-Tak, aby było łatwo je znaleźć.
+. If you are affected by *next morning syndrome* <<APZ>> (i.e. developers spend a lot of time resolving conflicts when merging changes) then often splitting into a repository will only hide the problem more and for a while - at which point you need to rethink splitting the project into individual components (see the same <<APZ>> publication in Part IV for tips on this).
+. Reorganize your projects so all classes that change together are in one place. 
+Keep projects that change together, for example: api, tests, and logic, close together too - this will be a good seed for the future.
+. If the build time for all projects is overwhelming, then you can spin off the slowly changing tool classes into a separate soloution, but still not into a separate repository. 
+That way it's easy to find them.
 
-Przy dzieleniu rozwiązania na komponenty, pamiętaj, aby trzymać razem te klasy, które zmieniają się razem i postarać się, aby do Nugetów trafiły te rzeczy, które zmieniają się rzadko. 
-Do takich nugetów i projektów, które są używane w wielu miejscach, powinny trafiać klasy możliwe abstrakcyjne, tak aby drobne zmiany w zachowaniu nie wymagały przebudowywania wszystkiego. 
+When dividing the solution into components, be sure to keep together those classes that change together and try to get those things that change infrequently into Nugets. 
+Possible abstract classes should go into such nugets and projects that are used in many places, so that minor changes in behavior won't require rebuilding everything. 
 
-Niestety jednak jest taki moment, w którym przychodzi potrzeba podzielenia projektu na osobne repozytoria.
-Często jest to też dobry moment, aby rozbić jeden zespół na wiele mniejszych. 
-Kiedy jesteś już zmuszony do tego kroku, postaraj się, aby osobne repozytorium i programy w nim zawarte, mogły być traktowane tak, jakby było to rozwiązanie dostarczane przez całkowicie zewnętrzny zespół, niemalże jak oprogramowanie firmy trzeciej. 
-Taki podejście zapewni Ci sporą elastyczność oraz zminimalizuje problemy wynikające ze ścisłego powiązania.
+Unfortunately, however, there is a point at which the need to split a project into separate repositories comes.
+It is also often a good time to break one team into many smaller ones. 
+When you are forced to take this step, try to make the separate repository and the programs in it, can be treated as if it was a solution provided by a completely external team, almost like a third party software. 
+This approach will give you a fair amount of flexibility and minimize the problems that come with tight coupling.
 
-== Podsumowanie
+== Summary
 
 
-Postawienie na łatwość w odkrywaniu zależności wewnątrz projektu jest kluczem, zarówno do wdrażania nowych członków zespołu, jak i samej przyjemności płynącej z pracy. 
-Nie ma nic gorszego, niż dostać zadanie i nie wiedzieć gdzie zacząć – i wcale nie chodzi o mnogość możliwości, tylko o dosłowne podejście, czyli moment, w którym zastanawiasz się, gdzie w ogóle jest repozytorium, nad którym masz pracować. 
+Focusing on the ease of discovering dependencies within a project is key, both for the introduction of new team members and the enjoyment of the work itself. 
+There's nothing worse than getting a task and not knowing where to start - and it's not about the multitude of possibilities at all, it's about the literal approach, which is the moment when you wonder where the repository you're supposed to be working on even is. 
 
-Czytając powyższe akapity, można by użyć słowa "odkrywalność" (od angielskiego pojęcia _discoverability_). 
-Rozumiane jako wysiłek niezbędny do tego, aby znaleźć wiedzę konieczną do wykonania zadania.
-Poprzez dzielenie naszego projektu na mniejsze kawałki, pamiętajmy, że przyjdzie czas, w którym każda ze stworzonych zależności będzie musiała być prześledzona. 
+Reading the above paragraphs, one might use the word "discoverability".
+Understood as the effort required to find the knowledge necessary to complete a task.
+By dividing our project into smaller pieces, let's keep in mind that there will come a time when each of the dependencies created will need to be traced. 
 
 
 [bibliography]
 == Odwołania
 
-* [[[APZ]]] - Agile Programowanie Zwinne. Zasady, wzorce i praktyki zwinnego wytwarzania w C#. Robert C. Martin, Micah Martin.
+* [[[APZ]]] - Agile Principles, Patterns, and Practices in C#. Robert C. Martin, Micah Martin.
 
 [.small]
 Photo from Unslash by 
