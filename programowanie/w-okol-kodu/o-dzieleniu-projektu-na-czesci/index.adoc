@@ -1,9 +1,9 @@
 ---
 title: "O dzieleniu projektu na mniejsze części słów kilka"
-date: 2022-07-12
+date: 2022-07-07
 draft: false
 image: cover.jpg
-description: "Niedawno zakończyłem pracę nad jednym projektem, który pokazał mi, jakie mogą być problemy z nazbyt szybkiego dzielenia projektu na mniejsze kawałki. Czuję, że potrzebuje miejsca, gdzie mógłbym zapisać swoje spostrzeżenia, aby w przyszłości nie popełnić podobnych błędów."
+description: "Niedawno zakończyłem pracę nad jednym projektem, który pokazał mi, jakie mogą być problemy z nazbyt szybkiego dzielenia projektu na mniejsze kawałki. Potrzebuje miejsca, gdzie mógłbym zapisać swoje spostrzeżenia, aby w przyszłości nie popełnić podobnych błędów."
 
 categories: 
     - "W okół kodu"
@@ -20,16 +20,16 @@ tags:
 == Wstęp
 
 Nie ma człowieka i zespołu, który nie popełniałby błędów. 
-Prawdziwym błędem jednak jest niewyciąganie wniosków. 
-Niniejszy artykuł ma za zadanie zarchiwizować moje spojrzenie, na to, co według mnie było nie tak. 
+Prawdziwym błędem jest niewyciąganie wniosków. 
+Niniejszy artykuł ma za zadanie zarchiwizować moje spojrzenie i wnioski. 
 
-Poniższe notatki dotyczą oprogramowania (mówię o całości), które w całości składało się w sumie z kilkunastu projektów. 
+Poniższe notatki dotyczą oprogramowania, które w całości składało się w sumie z kilkunastu projektów. 
 Pracowało nad nim łącznie około 8 programistów w szczytowym momencie. 
 Poniżej będę mówił o tym, jaka organizacja sprawiała mi trudności i dlaczego. 
 
 == Wiele solucji w wielu repozytoriach
 
-Wiele solucji, które znajdowały się w osobnych repozytoriach, powodowało, że miałem potrzeba było poświęcić zdecydowanie więcej czasu na znalezienie wszystkich zależności, które powinienem zmienić, wykonując zadanie. 
+Wiele solucji, które znajdowały się w osobnych repozytoriach, powodowało, że musiałem poświęcić zdecydowanie więcej czasu na znalezienie wszystkich zależności, które powinienem zmienić, wykonując zadanie. 
 Dodatkową trudność sprawiał fakt, że podczas pracy nad rozproszonym monolitem trzeba dbać, o to, aby wiele fragmentów naszej aplikacji korzystało z tej samej wersji kodu źródłowego. 
 Poprzez rozproszony monolit (więcej na ten temat https://bulldogjob.pl/readme/czy-monolity-to-architektura-przyszlosci[tutaj]) rozumiem zestaw aplikacji, które są uruchamiane na wielu różnych maszynach, a żeby poprawnie działać, wszystkie, lub większość, musi zostać podegrana w tym samym czasie. 
 
@@ -88,13 +88,13 @@ Projekty, które zmieniają się razem, na przykład: api, testy i logika, równ
 . Jeśli czas budowania wszystkich projektów jest przytłaczający, to można wydzielić wolnozmienne klasy narzędziowe do osobnej solucji, ale wciąż nie do osobnego repozytorium. 
 Tak, aby było łatwo je znaleźć.
 
-Przy dzieleniu rozwiązania na komponenty, pamiętaj, aby trzymać razem te klasy, które zmieniają się razem i postarać się, aby do Nugetów trafiły te rzeczy, które zmieniają się rzadko. 
+Przy dzieleniu rozwiązania na komponenty, pamiętaj, aby trzymać razem te klasy, które zmieniają się razem i postarać się, aby do nugetów trafiły te rzeczy, które zmieniają się rzadko. 
 Do takich nugetów i projektów, które są używane w wielu miejscach, powinny trafiać klasy możliwe abstrakcyjne, tak aby drobne zmiany w zachowaniu nie wymagały przebudowywania wszystkiego. 
 
 Niestety jednak jest taki moment, w którym przychodzi potrzeba podzielenia projektu na osobne repozytoria.
 Często jest to też dobry moment, aby rozbić jeden zespół na wiele mniejszych. 
 Kiedy jesteś już zmuszony do tego kroku, postaraj się, aby osobne repozytorium i programy w nim zawarte, mogły być traktowane tak, jakby było to rozwiązanie dostarczane przez całkowicie zewnętrzny zespół, niemalże jak oprogramowanie firmy trzeciej. 
-Taki podejście zapewni Ci sporą elastyczność oraz zminimalizuje problemy wynikające ze ścisłego powiązania.
+Takie podejście zapewni Ci sporą elastyczność oraz zminimalizuje problemy wynikające ze ścisłego powiązania.
 
 == Podsumowanie
 

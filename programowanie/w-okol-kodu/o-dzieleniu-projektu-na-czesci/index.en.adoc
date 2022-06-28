@@ -1,6 +1,6 @@
 ---
 title: "A few words about dividing a project into smaller parts"
-date: 2022-07-12
+date: 2022-07-07
 draft: false
 image: cover.en.jpg
 description: "I recently finished working on one project that showed me what the problems can be from splitting a project into smaller pieces too quickly. I feel like it needs a place where I can write down my observations so I don't make similar mistakes in the future."
