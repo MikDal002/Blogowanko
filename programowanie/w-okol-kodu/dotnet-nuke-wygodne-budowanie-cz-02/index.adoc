@@ -1,9 +1,9 @@
 ---
 title: "Nuke – wygodne CI/CD programu w C#. Część 2"
 date: 2022-07-12
-draft: true
+draft: false
 image: cover.jpg
-description: "Nuke pozwala nam na proste opisanie procesu budowania i publikowania naszej aplikacji w języku C#. Niniejszy artykuł jest kontynuacja. Zamierzam pokazać tutaj wymusić odpowiednie pokrycie kodu oraz jak przygotować aplikację do publikacji. 
+description: "Nuke pozwala nam na proste opisanie procesu budowania i publikowania naszej aplikacji w języku C#. Niniejszy artykuł jest kontynuacją. Zamierzam pokazać tutaj jak wymusić odpowiednie pokrycie kodu oraz przygotować aplikację do publikacji, a następnie wysłać ją na serwery Netlify. 
 Opiszę również sposób przygotowania CI/CD dla Github Actions z uwzględnieniem parametrów pobierania sekretów repozytorium."
 
 categories: 
@@ -22,7 +22,7 @@ series:
 
 == Wstęp
 
-Ten artykuł jest drum z serii artykułów o Nuke. Poprzedni znajdziesz w liście u dołu artykułu.
+Ten artykuł jest drugim z serii artykułów o Nuke. Poprzedni znajdziesz w liście u dołu artykułu.
 
 Końcowy kod z opisanymi tutaj elementami, i kilkoma więcej, znajdziesz na moim GitHubie: https://github.com/MikDal002/ZTR.AI/tree/master/CICD[Ztr.AI].
 
@@ -32,7 +32,7 @@ Uruchomienie badania pokrycia testami jednostkowymi i zwracanie błędu, gdy to 
 Niestety to rozwiązanie wciąż nie jest idealne, ponieważ działa tylko na maszynie z Windows, a do tego potrzebuje trochę kodu.
 
 Badanie pokrycia kodu testami jednostkowymi jest wykonywane za pomocą `Coverlet`, które jest używane przez środowisko `dotnet test`.
-Nie użyłem DotCover, ponieważ nie jestem pewien, czy mogę tego narzędzie używać w każdym projekcie.
+Nie użyłem DotCover, ponieważ nie jestem pewien, czy mogę tego narzędzie używać w każdym projekcie, a potrzebuję czegoś możliwie uniwersalnego.
 Aby móc z niego skorzystać, musisz zainstalować odpowiednią paczkę:
 
 [source,powershell]
@@ -122,15 +122,15 @@ No i wylądowała nieczytelna ściana kodu.
 Wybacz, że jest ona tak duża, ale myślę, że dzięki temu będziesz w stanie łatwiej ją skopiować. 
 Omówmy najważniejsze fragmenty kodu: 
 
-<1> Na początku pomińmy uruchamianie tegoż kroku na wszystkich platformach po za Windows. 
+<1> Na początku pomińmy uruchamianie tegoż kroku na wszystkich platformach poza Windowsem. 
 Kod metody sprawdzającej platformę znajduje się poniżej. 
-<2> Dla pewności uruchomy testy ponownie w konfiguracji Debug. 
+<2> Dla pewności uruchamiamy testy ponownie w konfiguracji Debug. 
 Badanie pokrycia dla kodu zbudowanego w Release nie zawsze daje dobre wyniki. 
 <3> Pokrycie kodu będziemy badać dla każdego projektu z testami osobno. 
-Dlatego potrzebujemy dwóch formatów wyjściowych: cobertura dla wygenerowania raportu oraz json, który, jako natywny format, pozwala na łączenie wyników. 
+Dlatego potrzebujemy dwóch formatów wyjściowych: `cobertura` dla wygenerowania raportu oraz `json`, który, jako natywny format, pozwala na łączenie wyników. 
 Samo łączenie następuje w punkcie 5.
 <4> Z racji, że badamy pokrycie dla każdego projektu osobno, musimy przygotować odpowiednie parametry.
-<5> Musimy pamiętać, że mamy coś do połaczenia dopiero po pierwszym uruchomieniu programu.
+<5> Musimy pamiętać, że mamy coś do połączenia dopiero po pierwszym uruchomieniu programu.
 <6> Na koniec, po wykonaniu ostatniego badania, możemy ustawić wymagany poziom pokrycia kodu testami jednostkowymi. 
 Jeśli zrobimy to wcześniej, to poziom ten będzie sprawdzany dla każdego uruchomienia, co w niektórych przypadkach może skończyć się błędem.
 <7> W tym miejscu mamy już zbadane pokrycie kodu testami jednostkowymi, i możemy wygenerować raport.
@@ -143,18 +143,18 @@ Pozwala nam to łatwo odsiać te kroki, które i tak nie mają sensu przy danej 
 
 .CombineWith()
 ****
-`CombineWith` pozwala nam na proste tworzenie wielu konfiguracji budowania budowania. 
+`CombineWith` pozwala nam na proste tworzenie wielu konfiguracji budowania aplikacji. 
 
-Ważne jest, aby zauważyc, że wszystkie metody zmieniające konfigurację dokonują kopii obiektu i dopiero wtedy wprowadzają modyfikację. 
-Aby uprosić nam pracę nad wieloma możliwościami otrzymujemy metodę `CombineWith`, która kopiuje nam obiekt konfiguracyjny i pozwala na wprowadzenie zmian. 
+Ważne jest, aby zauważyć, że wszystkie metody zmieniające konfigurację dokonują kopii obiektu i dopiero wtedy wprowadzają modyfikację. 
+Aby uprosić nam pracę nad wieloma kombinacjami, otrzymujemy metodę `CombineWith`, która kopiuje nam obiekt konfiguracyjny i pozwala na wprowadzenie zmian. 
 Następnie niemalże wszystkie metody wykonujące krok budowania są w stanie przyjąć, jako parametr wejściowy, wiele konfiguracji, co powoduje, że zostaną one uruchomione wielokrotnie.
 ****
 
 === Sprawdzanie systemu operacyjnego
 
-Podczas próby sprawdzenia, na jakim środowisku jest uruchamiany kod porpzez GitHub Actions, miałem dużo mylnych informacji.
-Nawet dane z klasy `EnvironmentInfo` zwracały mi informację, że środowiskiem uruchomieniowym jest windows, podczas gdy była to dystrybucja Ubuntu.
-Jedynym sensownym sposobem mi znanym, na ten moment, jest wywołanie polecenia `uname`.
+Podczas próby sprawdzenia, na jakim środowisku jest uruchamiany kod poprzez GitHub Actions, miałem dużo mylnych informacji.
+Nawet dane z klasy `EnvironmentInfo` zwracały mi informację, że środowiskiem uruchomieniowym jest Windows, podczas gdy była to dystrybucja Ubuntu.
+Jedynym sensownym znanym mi sposobem, na ten moment, jest wywołanie polecenia `uname`.
 
 .Kod poprawnie sprawdzający, czy mamy do czynienia z systemem operacyjnym Windows, czy też może nie.
 [source,csharp]
@@ -195,31 +195,30 @@ static bool IsWindows()
 
 .Logowanie procesu budowania
 ****
-Warto zwrócić uwage na linijkę zaczynającą się od `Serilog.Log.Information`. 
-Serilog jest domyslnym silnikiem służącym do logowania procesu budowania i jest to też zalecany sposób, na zwracanie naszych informacji na wyjście.
+Warto zwrócić uwagę na linijkę zaczynającą się od `Serilog.Log.Information`. 
+Serilog jest domyślnym silnikiem służącym do logowania procesu budowania i jest to też zalecany sposób, na zwracanie naszych informacji na wyjście.
 ****
 
 === Raport z testów jednostkowych
 
 Jeszcze kilka słów o raporcie. 
 Raport ułatwi nam śledzenie, które moduły naszej aplikacji są testowane w największym stopniu, a które w najniższym.
-Istnieją także platformy, które potafią zrobić z nich większy użytek i ładnie je wyświetlić, jednak na razie nie miałem potrzeby aby bawić się tym dalej. 
-Jeśli znasz jakieś ciekawe zastosowanie dla raportu to daj znać w komentarzach!
+Istnieją także platformy, które potrafią zrobić z nich większy użytek i ładnie je wyświetlić, jednak na razie nie miałem potrzeby, aby bawić się tym dalej. 
+Jeśli znasz jakieś ciekawe zastosowanie dla raportu, to daj znać w komentarzach!
 
-Zwróć uwagę, na to jak wyszukiwane są pliki cubertury do wygenerowania raportu: `TestResultDirectory.GlobFiles("**/*.cobertura.xml")`. 
+Zwróć uwagę, na to, jak wyszukiwane są pliki `cubertury` do wygenerowania raportu: `TestResultDirectory.GlobFiles("**/*.cobertura.xml")`. 
 Jak widzisz, Nuke daje nam fajne narzędzie do operowania na plikach i katalogach.
 
 
 == Publikowanie z wysyłką do Netlify jako przykład CI/CD.
 
 Cały proces CI/CD nie może obejść się bez publikacji rozwiązania na serwer roboczy. 
-W ramach przykładu, pokaże jak dochodzi do publikacji aplikacji Web Assembly (WASM) wykonanej w technologii Blazor na serwer Netlify.
+W ramach przykładu pokażę, jak dochodzi do publikacji aplikacji Web Assembly (WASM) wykonanej w technologii Blazor na serwer Netlify.
 
 Przy publikacji projektu korzystam z biblioteki https://github.com/daveaglick/NetlifySharp[NetlifySharp], także do poprawnego działania poniższego skrawka kodu musisz ją doinstalować:
 
 [source,powershell]
 Install-Package NetlifySharp -Version 1.1.1
-
 
 Kod wygląda następująco: 
 
@@ -251,12 +250,12 @@ Target PushToNetlify => _ => _
     });
 ----
 
-<1> Najpierw zdefiniujmy niezbędne parametry do działania naszej publijacji. 
-W tym przypadu potrzebujemy identyfikatora strony Netlify oraz kodu dostępu do API (który możemy wygenerować w ustawieniach portalu).
+<1> Najpierw zdefiniujmy niezbędne parametry do działania naszej publikacji. 
+W tym przypadku potrzebujemy identyfikatora strony Netlify oraz kodu dostępu do API (który możemy wygenerować w ustawieniach portalu).
 Więcej o parametrach w ramce poniżej.
-<2> Z racji, że wiele projektów może nadawać się do publikacji, choćby w postaci pakietów Nuget, to w tym przypadku interesuje mnie ten jeden. 
+<2> Z racji, że wiele projektów może nadawać się do publikacji, choćby w postaci pakietów nuget, to w tym przypadku interesuje mnie ten jeden. 
 Poprzez proste podanie nazwy takiego projektu, można go łatwo wybrać. 
-<3> W tym miejscu określamy do jakigo katalogu ma zostac opublikowana nasza strona, tak aby było ją łatwo wysłać.
+<3> W tym miejscu określamy, do jakiego katalogu ma zostać opublikowana nasza strona, tak aby było ją łatwo wysłać.
 <4> Przed wypchnięciem do Netlify upewnijmy się, że znane są nam parametry połączeniowe. 
 Bez tego możemy otrzymać zestaw dziwnych błędów. 
 <5> I tak przygotowaną stronę możemy wysłać dwoma linijkami prosto na serwer! 
@@ -266,8 +265,8 @@ Moje podejście do sprawy pokażę w przyszłej części tej serii artykułów.
 
 .ParameterAttribute i SecretAttribute
 ****
-Parametry maja bardzo dużo, różnych właściwości. 
-Gdy oznaczymy jakieś pole atrybutem `Parameter`, to Nuke samodzielnie potraktuje to jako parametr wejściowy, który może zostać podany zarówno w linii poleceń jak i pobrany samoczynnie ze zmiennych środowiskowych.
+Parametry mają bardzo dużo, różnych właściwości. 
+Gdy oznaczymy jakieś pole atrybutem `Parameter`, to Nuke samodzielnie potraktuje to jako parametr wejściowy, który może zostać podany zarówno w linii poleceń, jak i pobrany samoczynnie ze zmiennych środowiskowych.
 Nuke potrafi nawet przechowywać parametry w celu wielokrotnego użycia. 
 Więcej przykładów użyć znajdziesz między innymi na https://twitter.com/nukebuildnet/status/1365023015688413187[Twitterze].
 
@@ -280,7 +279,7 @@ W niektórych przypadkach potrafi nawet chronić taki sekret hasłem użytkownik
 `Requires` pozwala określić nam, wymagania niezbędne do uruchomienia danej akcji. 
 Jeśli, któryś z warunków nie będzie spełniony, zostanie wyświetlony błąd a cała procedura przerwana.
 
-W przykładzie powyżej, w punkcje 4 podajemy, że do wykonania danego kroku niezbędę są wartości `NetlifySideId` oraz `NetlifySiteAccessToken`. 
+W przykładzie powyżej, w punkcje 4 podajemy, że do wykonania danego kroku niezbędne są wartości `NetlifySideId` oraz `NetlifySiteAccessToken`. 
 Wartości string nie mogą być `null` ani pustym ciągiem znaków.
 ****
 
@@ -322,18 +321,18 @@ partial class Build : NukeBuild
 }
 ----
 
-<1> Dla każdej akcji msuimy podać naszą nazwę, która będzie wyświetlana na GitHubie.
-<2> Musimy również podać na jakim środowisku mają być wykonywane nasze procedury.
-<3> Możemy określić zasady, według których będa uruchamiane poszczególne konfigurację (więcej szczegółów znajdziesz w https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpushbranchestagsbranches-ignoretags-ignore[dokumentacji]).
+<1> Dla każdej akcji musimy podać naszą nazwę, która będzie wyświetlana na GitHubie.
+<2> Musimy również podać, na jakim środowisku mają być wykonywane nasze procedury.
+<3> Możemy określić zasady, według których będą uruchamiane poszczególne konfiguracje (więcej szczegółów znajdziesz w https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpushbranchestagsbranches-ignoretags-ignore[dokumentacji]).
 I tak `OnPullRequestBranches` powoduje wywołanie danej konfiguracji, gdy pojawi się nowe żądanie (PR), które będzie adresowane do poszczególnych gałęzi.
 Natomiast `OnPushBranches` powoduje wywołanie danego przepływu każdorazowo, gdy zostaną wypchnięte na daną gałąź nowe zmiany.
-<4> Najciekawszym elementem jest `InvokedTargets`, który określa nam wyraźnie, który krok naszego budowania ma być uruchomiony w danych przypadku. 
-To właśnie tutaj zyskujemy najwięcej na wielorazowym wykorzystaniu kodu: nie ważne w ile przepływów wymyślimy, to ciągle wywołujemy dokładnie ten sam kod!
-<5> Fragment `ImportSecrets` jest istotny, gdy chcemy pobrać pewne zmienne z środowiska GitHub Actions.
+<4> Najciekawszym elementem jest `InvokedTargets`, który określa nam wyraźnie, który krok naszego budowania ma być uruchomiony w danym przypadku. 
+To właśnie tutaj zyskujemy najwięcej na wielorazowym wykorzystaniu kodu: nieważne ile przepływów wymyślimy, to ciągle wywołujemy dokładnie ten sam kod!
+<5> Fragment `ImportSecrets` jest istotny, gdy chcemy pobrać pewne zmienne ze środowiska GitHub Actions.
 Zwróć uwagę (zrzut ekranu poniżej), że nazwa parametru, na przykład `NetlifySiteId`, zostanie zamieniona na `NETLIFY_SITE_ID`.
-Pola parametrów `NetlifySIteId` oraz `NetlifySiteAccessToken` zostały tutaj dodane dla przejżystości przykładu. 
+Pola parametrów `NetlifySIteId` oraz `NetlifySiteAccessToken` zostały tutaj dodane dla przejrzystości przykładu. 
 
-Wynikiem pracy takich atrybutów będą następujace pliki YAML:
+Wynikiem pracy takich atrybutów będą następujące pliki YAML:
 
 .Konfiguracja publikowania strny
 [source,yaml]
@@ -413,8 +412,6 @@ jobs:
 .Widok strony konfiguracji sekretów dla GitHub Actions
 image::githubactions_view.png[]
 
-
-
 == Podsumowanie
 
 Muszę przyznać, że podejście, które reprezentuje Nuke bardzo mi się podoba: mogę opisać cały proces budowania raz w języku, który znam i łatwo testować całość lokalnie.
@@ -423,7 +420,7 @@ Na ten moment, dokumentacja i przykłady użycia są znikome.
 Dużo, z tego co jest zaprezentowane w tej serii artykułów (i co zaprezentowane jeszcze będzie) zostało wyrwane z kodów różnych repozytoriów. 
 Na ten moment, nauka płynąca z używania Nuke płynie taka: Nuke to framework do wołania innych narzędzi. 
 Ma to dwie konsekwencje: duża ilość możliwości oraz duża ilość szukania odpowiedzi. 
-Jednak ma to też dobre strony: nie jesteśmy obarczeni blokadą stawianą przez bibliotekę (tak zwany vendor-lock), gdyż łatwo możemy przejść do innych dostępnych narzędzi, bądź wywoływać konkretne polecenia bezposrednio.
+Jednak ma to też dobre strony: nie jesteśmy obarczeni blokadą stawianą przez bibliotekę (tak zwany vendor-lock), gdyż łatwo możemy przejść do innych dostępnych narzędzi, bądź wywoływać konkretne polecenia bezpośrednio.
 
 Końcowy kod z opisanymi tutaj elementami, i kilkoma więcej, znajdziesz na moim GitHubie: https://github.com/MikDal002/ZTR.AI/tree/master/CICD[Ztr.AI].
 
