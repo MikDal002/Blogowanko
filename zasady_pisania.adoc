@@ -1,2 +1,6 @@
+---
+draft: true
+---
+
 1. Napisz szkielet artykułu, zanim przejdziesz do szczegółów.
 2. W szkielecie nie pisz gotowych zdań – i tak ich nie wykorzystasz.
