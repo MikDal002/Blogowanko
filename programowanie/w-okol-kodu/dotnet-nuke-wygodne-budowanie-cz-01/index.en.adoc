@@ -2,7 +2,7 @@
 title: "Nuke - convenient CI/CD of a program in C#. Part 1"
 date: 2022-06-12
 draft: false
-image: cover.jpg
+image: cover.en.webp
 description: "Nuke allows us to simply describe the process of building and publishing our C# application. This article is an introduction to the series. 
 In this part you will learn what Nuke is and how to run it in your project. 
 Besides environment configuration and explaining some basic elements I will show you how to add unit tests execution."

@@ -1,18 +1,18 @@
 ---
-title: "Nuke – wygodne CI/CD programu w C#. Część 2"
+title: "Nuke - convenient CI/CD of a program in C#. Part 2"
 date: 2022-07-12
 draft: false
-image: cover.jpg
-description: "Nuke pozwala nam na proste opisanie procesu budowania i publikowania naszej aplikacji w języku C#. Niniejszy artykuł jest kontynuacją. Zamierzam pokazać tutaj jak wymusić odpowiednie pokrycie kodu oraz przygotować aplikację do publikacji, a następnie wysłać ją na serwery Netlify. 
-Opiszę również sposób przygotowania CI/CD dla Github Actions z uwzględnieniem parametrów pobierania sekretów repozytorium."
+image: cover.en.webp
+description: "Nuke allows us to simply describe the process of building and publishing our application in C#. This article is a continuation. I'm going to show here how to enforce proper code coverage and prepare the application for publication and then upload it to Netlify servers. 
+I will also describe how to prepare a CI/CD for Github Actions including parameters for downloading repository secrets."
 
 categories: 
-    - "W okół kodu"
+    - "Around the code"
     - "CI/CD"
 tags:
     - ".Net"
     - "CI/CD"
-    - "Testy jednostkowe"
+    - "Unit tests"
     - "Github Actions"
 series: 
     - "Nuke"
@@ -20,30 +20,30 @@ series:
 :toc: 
 :experimental: true
 
-== Wstęp
+== Introduction
 
-Ten artykuł jest drugim z serii artykułów o Nuke. Poprzedni znajdziesz w liście u dołu artykułu.
+This article is the second in a series of articles about Nuke. You can find the previous one in the list at the bottom of the article.
 
-Końcowy kod z opisanymi tutaj elementami, i kilkoma więcej, znajdziesz na moim GitHubie: https://github.com/MikDal002/ZTR.AI/tree/master/CICD[Ztr.AI].
+You can find the final code with the elements described here, and some more, on my GitHub: https://github.com/MikDal002/ZTR.AI/tree/master/CICD[Ztr.AI].
 
-== Pokrycie testami jednostkowymi
+== Unit test coverage
 
-Uruchomienie badania pokrycia testami jednostkowymi i zwracanie błędu, gdy to pokrycie jest za małe, zajęło mi na prawdę sporo czasu.
-Niestety to rozwiązanie wciąż nie jest idealne, ponieważ działa tylko na maszynie z Windows, a do tego potrzebuje trochę kodu.
+It took me a really long time to run the unit test coverage check and return an error when this coverage is too small.
+Unfortunately, this solution is still not perfect, because it only works on a Windows machine, and it needs some code.
 
-Badanie pokrycia kodu testami jednostkowymi jest wykonywane za pomocą `Coverlet`, które jest używane przez środowisko `dotnet test`.
-Nie użyłem DotCover, ponieważ nie jestem pewien, czy mogę tego narzędzie używać w każdym projekcie, a potrzebuję czegoś możliwie uniwersalnego.
-Aby móc z niego skorzystać, musisz zainstalować odpowiednią paczkę:
+Examining code coverage with unit tests is done with `Coverlet`, which is used by the `dotnet test` environment.
+I didn't use DotCover because I'm not sure I can use this tool in every project, and I need something as universal as possible.
+To use it, you need to install the appropriate package:
 
 [source,powershell]
 ----
 nuke :add-package coverlet.console --version 3.1.2
-# lub, jeśli nie zainstalowałeś narzędzia nuke
+# or, if you have not installed the nuke tool
 dotnet tool install --global coverlet.console --version 3.1.2
 ----
 
-Największym problemem, okazało się wymuszenie odpowiedniego pokrycia testami.
-Tylko jedna, z wielu testowanych przeze mnie konfiguracji, działa, to jest, zwraca błąd, gdy pokrycie testami jest niższe niż wskazane, oto ona: 
+The biggest problem, it turned out, was forcing appropriate test coverage.
+Only one, of the many configurations I tested, works, that is, it returns an error when test coverage is lower than indicated, here it is: 
 
 [source,csharp]
 ----
@@ -81,10 +81,10 @@ CoverletSettings PrepareCoverageSettingsForCoveringProject(Project project, Cove
 
     settings = settings
         .SetAssembly(assemblyPath)
-        // Ukośnik na końcu jest niezbędny, aby coverlet wiedziało, że ścieżkę ma traktować jako katalog.
+        // The slash at the end is necessary so that coverlet knows to treat the path as a directory.
         .SetOutput(coverageResultDirectory + "/")
         .SetTargetSettings(coverageTestSettings
-            // Zbudowanie testów osobno jest kluczowym elementem do poprawnego działania Coverlet.
+            // Building the tests separately is a key element for Coverlet to work properly.
             .EnableNoBuild()
             .SetProjectFile(project));
 
@@ -118,45 +118,45 @@ AbsolutePath FindAssemblyForProject(Project project)
 }
 ----
 
-No i wylądowała nieczytelna ściana kodu. 
-Wybacz, że jest ona tak duża, ale myślę, że dzięki temu będziesz w stanie łatwiej ją skopiować. 
-Omówmy najważniejsze fragmenty kodu: 
+Well, and landed an unreadable wall of code. 
+Forgive it for being so large, but I think this will make it easier for you to copy. 
+Let's discuss the most important parts of the code: 
 
-<1> Na początku pomińmy uruchamianie tegoż kroku na wszystkich platformach poza Windowsem. 
-Kod metody sprawdzającej platformę znajduje się poniżej. 
-<2> Dla pewności uruchamiamy testy ponownie w konfiguracji Debug. 
-Badanie pokrycia dla kodu zbudowanego w Release nie zawsze daje dobre wyniki. 
-<3> Pokrycie kodu będziemy badać dla każdego projektu z testami osobno. 
-Dlatego potrzebujemy dwóch formatów wyjściowych: `cobertura` dla wygenerowania raportu oraz `json`, który, jako natywny format, pozwala na łączenie wyników. 
-Samo łączenie następuje w punkcie 5.
-<4> Z racji, że badamy pokrycie dla każdego projektu osobno, musimy przygotować odpowiednie parametry.
-<5> Musimy pamiętać, że mamy coś do połączenia dopiero po pierwszym uruchomieniu programu.
-<6> Na koniec, po wykonaniu ostatniego badania, możemy ustawić wymagany poziom pokrycia kodu testami jednostkowymi. 
-Jeśli zrobimy to wcześniej, to poziom ten będzie sprawdzany dla każdego uruchomienia, co w niektórych przypadkach może skończyć się błędem.
-<7> W tym miejscu mamy już zbadane pokrycie kodu testami jednostkowymi, i możemy wygenerować raport.
+<1> At first, let's skip running this step on all platforms except Windows. 
+The code for the method that checks the platform is below. 
+<2> To be sure, we run the tests again in the Debug configuration. 
+Testing coverage for code built in Release does not always give good results. 
+<3> We will examine code coverage for each project with tests separately. 
+Therefore, we need two output formats: `cobertura` for generating the report and `json`, which, as a native format, allows us to merge the results. 
+The merging itself occurs in step 5.
+<4> Since we are examining coverage for each project separately, we need to prepare the appropriate parameters.
+<5> We need to remember that we only have something to merge when we first run the program.
+<6> Finally, after doing the last test, we can set the required level of code coverage with unit tests. 
+If we do this beforehand, this level will be checked for each run, which in some cases may end up with an error.
+<7> At this point, we have already examined the code coverage with unit tests, and we can generate a report.
 
 .OnlyWhenStatic() 
 ****
-Funkcja ta powoduje, że warunki podane w niej zostaną sprawdzone w momencie rozpoczęcia kompilacji, czyli na długo przed uruchomieniem pierwszego kroku budowania. 
-Pozwala nam to łatwo odsiać te kroki, które i tak nie mają sensu przy danej konfiguracji.
+This function causes the conditions given in it to be checked at the start of compilation, that is, long before the first build step is run. 
+This allows us to easily sift out those steps that don't make sense with a given configuration anyway.
 ****
 
 .CombineWith()
 ****
-`CombineWith` pozwala nam na proste tworzenie wielu konfiguracji budowania aplikacji. 
+`CombineWith` allows us to easily create multiple configurations for building an application. 
 
-Ważne jest, aby zauważyć, że wszystkie metody zmieniające konfigurację dokonują kopii obiektu i dopiero wtedy wprowadzają modyfikację. 
-Aby uprosić nam pracę nad wieloma kombinacjami, otrzymujemy metodę `CombineWith`, która kopiuje nam obiekt konfiguracyjny i pozwala na wprowadzenie zmian. 
-Następnie niemalże wszystkie metody wykonujące krok budowania są w stanie przyjąć, jako parametr wejściowy, wiele konfiguracji, co powoduje, że zostaną one uruchomione wielokrotnie.
+It's important to note that all configuration changing methods make a copy of the object and only then make the modification. 
+To make it simpler for us to work on multiple combinations, we can use the `CombineWith` method, which copies the configuration object and allows us to make changes. 
+After that, almost all methods that perform the build step are able to accept, as an input parameter, multiple configurations, which causes them to be run multiple times.
 ****
 
-=== Sprawdzanie systemu operacyjnego
+=== Checking the operating system
 
-Podczas próby sprawdzenia, na jakim środowisku jest uruchamiany kod poprzez GitHub Actions, miałem dużo mylnych informacji.
-Nawet dane z klasy `EnvironmentInfo` zwracały mi informację, że środowiskiem uruchomieniowym jest Windows, podczas gdy była to dystrybucja Ubuntu.
-Jedynym sensownym znanym mi sposobem, na ten moment, jest wywołanie polecenia `uname`.
+When trying to check what environment the code is running on via GitHub Actions, I had a lot of confusing information.
+Even the data from the `EnvironmentInfo` class was returning that the runtime environment was Windows, while it was the Ubuntu distribution.
+The only sensible way I know of, at this point, is to call the `uname` command.
 
-.Kod poprawnie sprawdzający, czy mamy do czynienia z systemem operacyjnym Windows, czy też może nie.
+.Code that correctly checks whether or not we are running a Windows operating system.
 [source,csharp]
 ----
 bool IsWindowsWhenReleaseOrAnyOsWhenOther()
@@ -193,34 +193,34 @@ static bool IsWindows()
 }
 ----
 
-.Logowanie procesu budowania
+.Logging during the building process
 ****
-Warto zwrócić uwagę na linijkę zaczynającą się od `Serilog.Log.Information`. 
-Serilog jest domyślnym silnikiem służącym do logowania procesu budowania i jest to też zalecany sposób, na zwracanie informacji na wyjście.
+It is worth to pay attention to the line starting with `Serilog.Log.Information`. 
+Serilog is the default engine for logging the build process, and it is also the recommended way, to return information to the output.
 ****
 
-=== Raport z testów jednostkowych
+=== Unit test report
 
-Jeszcze kilka słów o raporcie. 
-Raport ułatwi nam śledzenie, które moduły naszej aplikacji są testowane w największym stopniu, a które w najniższym.
-Istnieją także platformy, które potrafią zrobić z nich większy użytek i ładnie je wyświetlić, jednak na razie nie miałem potrzeby, aby bawić się tym dalej. 
-Jeśli znasz jakieś ciekawe zastosowanie dla raportu, to daj znać w komentarzach!
+A few more words about the report. 
+The report will help us keep track of which modules of our application are tested the most and which are tested the lowest.
+There are also platforms that can make more use of them and display them nicely, but for now I had no need to play with it further. 
+If you know of any interesting uses for the report, let me know in the comments!
 
-Zwróć uwagę, na to, jak wyszukiwane są pliki `cubertura` do wygenerowania raportu: `TestResultDirectory.GlobFiles("**/*.cobertura.xml")`. 
-Jak widzisz, Nuke daje nam fajne narzędzie do operowania na plikach i katalogach.
+Note how the `cubertura` files are searched for to generate the report: `TestResultDirectory.GlobFiles("**/*.cobertura.xml")`. 
+As you can see, Nuke gives us a cool tool to operate on files and directories.
 
 
-== Publikowanie z wysyłką do Netlify jako przykład CI/CD.
+== Publishing with uploading to Netlify as an example of CI/CD.
 
-Cały proces CI/CD nie może obejść się bez publikacji rozwiązania na serwer roboczy. 
-W ramach przykładu pokażę, jak publikować aplikację Web Assembly (WASM) wykonanej w technologii Blazor na serwer Netlify.
+The entire CI/CD process cannot do without publishing the solution to the working server. 
+As an example, I will show how to publish a Web Assembly (WASM) application made with Blazor technology to a Netlify server.
 
-Przy publikacji projektu korzystam z biblioteki https://github.com/daveaglick/NetlifySharp[NetlifySharp], także do poprawnego działania poniższego skrawka kodu musisz ją doinstalować:
+When publishing the project I use the library https://github.com/daveaglick/NetlifySharp[NetlifySharp], also for the following code snippet to work correctly you need to install it:
 
 [source,powershell]
 Install-Package NetlifySharp -Version 1.1.1
 
-Kod wygląda następująco: 
+The code looks as follows: 
 
 [source,csharp]
 ----
@@ -250,18 +250,18 @@ Target PushToNetlify => _ => _
     });
 ----
 
-<1> Najpierw zdefiniujmy niezbędne parametry do działania naszej publikacji. 
-W tym przypadku potrzebujemy identyfikatora strony Netlify oraz kodu dostępu do API (który możemy wygenerować w ustawieniach portalu).
-Więcej o parametrach w ramce poniżej.
-<2> Z racji, że wiele projektów może nadawać się do publikacji, choćby w postaci pakietów nuget, to w tym przypadku interesuje mnie ten jeden. 
-Poprzez proste podanie nazwy takiego projektu, można go łatwo wybrać. 
-<3> W tym miejscu określamy, do jakiego katalogu ma zostać opublikowana nasza strona, tak aby było ją łatwo wysłać.
-<4> Przed wypchnięciem do Netlify upewnijmy się, że znane są nam parametry połączeniowe. 
-Bez tego możemy otrzymać zestaw dziwnych błędów. 
-<5> I tak przygotowaną stronę możemy wysłać dwoma linijkami prosto na serwer! 
+<1> First, let's define the necessary parameters for our publication to work. 
+In this case, we need the Netlify site ID and the API access code (which we can generate in the portal settings).
+More about the parameters in the box below.
+<2> Since many projects may be suitable for publication, if only in the form of nuget packages, in this case I am interested in this one. 
+By simply specifying the name of such a project, it can be easily selected. 
+<3> Here we specify to which directory we want to publish our site, so that it is easy to send it.
+<4> Before pushing out to Netlify, let's make sure we know the connection parameters. 
+Without this, we may get a set of strange errors. 
+<5> And so prepared page we can send with two lines straight to the server! 
 
-Pominąłem w tym przykładzie kwestię publikowania paczek nuget, gdyż te są łatwo dostępne w Internecie, na przykład https://cfrenzel.com/publishing-nuget-nuke-appveyor/[tutaj]. 
-Moje podejście do sprawy pokażę w przyszłej części tej serii artykułów.
+I skipped the issue of publishing nuget packages in this example, as these are readily available on the Internet, for example, https://cfrenzel.com/publishing-nuget-nuke-appveyor/[here]. 
+I will show my approach in a future part of this article series.
 
 .ParameterAttribute i SecretAttribute
 ****
