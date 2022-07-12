@@ -1,6 +1,6 @@
 ---
 title: "Nuke – wygodne CI/CD programu w C#. Część 2"
-date: 2022-07-12
+date: 2022-07-14
 draft: false
 image: cover.jpg
 description: "Nuke pozwala nam na proste opisanie procesu budowania i publikowania naszej aplikacji w języku C#. Niniejszy artykuł jest kontynuacją. Zamierzam pokazać tutaj jak wymusić odpowiednie pokrycie kodu oraz przygotować aplikację do publikacji, a następnie wysłać ją na serwery Netlify. 
@@ -28,7 +28,7 @@ Końcowy kod z opisanymi tutaj elementami, i kilkoma więcej, znajdziesz na moim
 
 == Pokrycie testami jednostkowymi
 
-Uruchomienie badania pokrycia testami jednostkowymi i zwracanie błędu, gdy to pokrycie jest za małe, zajęło mi na prawdę sporo czasu.
+Uruchomienie badania pokrycia testami jednostkowymi i zwracanie błędu, gdy to pokrycie jest za małe, zajęło mi naprawdę sporo czasu.
 Niestety to rozwiązanie wciąż nie jest idealne, ponieważ działa tylko na maszynie z Windows, a do tego potrzebuje trochę kodu.
 
 Badanie pokrycia kodu testami jednostkowymi jest wykonywane za pomocą `Coverlet`, które jest używane przez środowisko `dotnet test`.
@@ -133,7 +133,7 @@ Samo łączenie następuje w punkcie 5.
 <5> Musimy pamiętać, że mamy coś do połączenia dopiero po pierwszym uruchomieniu programu.
 <6> Na koniec, po wykonaniu ostatniego badania, możemy ustawić wymagany poziom pokrycia kodu testami jednostkowymi. 
 Jeśli zrobimy to wcześniej, to poziom ten będzie sprawdzany dla każdego uruchomienia, co w niektórych przypadkach może skończyć się błędem.
-<7> W tym miejscu mamy już zbadane pokrycie kodu testami jednostkowymi, i możemy wygenerować raport.
+<7> W tym miejscu mamy już zbadane pokrycie kodu testami jednostkowymi i możemy wygenerować raport.
 
 .OnlyWhenStatic() 
 ****
@@ -147,7 +147,7 @@ Pozwala nam to łatwo odsiać te kroki, które i tak nie mają sensu przy danej 
 
 Ważne jest, aby zauważyć, że wszystkie metody zmieniające konfigurację dokonują kopii obiektu i dopiero wtedy wprowadzają modyfikację. 
 Aby uprosić nam pracę nad wieloma kombinacjami, otrzymujemy metodę `CombineWith`, która kopiuje nam obiekt konfiguracyjny i pozwala na wprowadzenie zmian. 
-Następnie niemalże wszystkie metody wykonujące krok budowania są w stanie przyjąć, jako parametr wejściowy, wiele konfiguracji, co powoduje, że zostaną one uruchomione wielokrotnie.
+Następnie niemalże wszystkie metody wykonujące kroki budowania są w stanie przyjąć, jako parametr wejściowy, wiele konfiguracji, co powoduje, że zostaną one uruchomione wielokrotnie.
 ****
 
 === Sprawdzanie systemu operacyjnego
@@ -265,7 +265,7 @@ Moje podejście do sprawy pokażę w przyszłej części tej serii artykułów.
 
 .ParameterAttribute i SecretAttribute
 ****
-Parametry mają bardzo dużo, różnych właściwości. 
+Parametry mają bardzo dużo różnych właściwości. 
 Gdy oznaczymy jakieś pole atrybutem `Parameter`, to Nuke samodzielnie potraktuje to jako parametr wejściowy, który może zostać podany zarówno w linii poleceń, jak i pobrany samoczynnie ze zmiennych środowiskowych.
 Nuke potrafi nawet przechowywać parametry w celu wielokrotnego użycia. 
 Więcej przykładów użyć znajdziesz między innymi na https://twitter.com/nukebuildnet/status/1365023015688413187[Twitterze].
@@ -321,12 +321,12 @@ partial class Build : NukeBuild
 }
 ----
 
-<1> Dla każdej akcji musimy podać naszą nazwę, która będzie wyświetlana na GitHubie.
-<2> Musimy również podać, na jakim środowisku mają być wykonywane nasze procedury.
+<1> Dla każdej akcji musimy podać nazwę, która będzie wyświetlana na GitHubie.
+<2> Musimy również podać, na jakim środowisku mają być wykonywane procedury.
 <3> Możemy określić zasady, według których będą uruchamiane poszczególne konfiguracje (więcej szczegółów znajdziesz w https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpushbranchestagsbranches-ignoretags-ignore[dokumentacji]).
 I tak `OnPullRequestBranches` powoduje wywołanie danej konfiguracji, gdy pojawi się nowe żądanie (PR), które będzie adresowane do poszczególnych gałęzi.
 Natomiast `OnPushBranches` powoduje wywołanie danego przepływu każdorazowo, gdy zostaną wypchnięte na daną gałąź nowe zmiany.
-<4> Najciekawszym elementem jest `InvokedTargets`, który określa nam wyraźnie, który krok naszego budowania ma być uruchomiony w danym przypadku. 
+<4> Najciekawszym elementem jest `InvokedTargets` określający, który krok naszego budowania ma być uruchomiony w danym przypadku. 
 To właśnie tutaj zyskujemy najwięcej na wielorazowym wykorzystaniu kodu: nieważne ile przepływów wymyślimy, to ciągle wywołujemy dokładnie ten sam kod!
 <5> Fragment `ImportSecrets` jest istotny, gdy chcemy pobrać pewne zmienne ze środowiska GitHub Actions.
 Zwróć uwagę (zrzut ekranu poniżej), że nazwa parametru, na przykład `NetlifySiteId`, zostanie zamieniona na `NETLIFY_SITE_ID`.
@@ -334,7 +334,7 @@ Pola parametrów `NetlifySIteId` oraz `NetlifySiteAccessToken` zostały tutaj do
 
 Wynikiem pracy takich atrybutów będą następujące pliki YAML:
 
-.Konfiguracja publikowania strny
+.Konfiguracja publikowania strony
 [source,yaml]
 ----
 name: Deploy
@@ -414,10 +414,10 @@ image::githubactions_view.png[]
 
 == Podsumowanie
 
-Muszę przyznać, że podejście, które reprezentuje Nuke bardzo mi się podoba: mogę opisać cały proces budowania raz w języku, który znam i łatwo testować całość lokalnie.
+Muszę przyznać, że podejście, które reprezentuje Nuke bardzo mi się podoba: mogę opisać cały proces budowania w języku, który znam i łatwo testować całość lokalnie.
 Niestety nie ma róży bez kolców. 
 Na ten moment, dokumentacja i przykłady użycia są znikome. 
-Dużo, z tego co jest zaprezentowane w tej serii artykułów (i co zaprezentowane jeszcze będzie) zostało wyrwane z kodów różnych repozytoriów. 
+Dużo, z tego co jest zaprezentowane w tej serii artykułów (i co jeszcze zaprezentuję) zostało wyrwane z kodów różnych repozytoriów. 
 Na ten moment, nauka płynąca z używania Nuke płynie taka: Nuke to framework do wołania innych narzędzi. 
 Ma to dwie konsekwencje: duża ilość możliwości oraz duża ilość szukania odpowiedzi. 
 Jednak ma to też dobre strony: nie jesteśmy obarczeni blokadą stawianą przez bibliotekę (tak zwany vendor-lock), gdyż łatwo możemy przejść do innych dostępnych narzędzi, bądź wywoływać konkretne polecenia bezpośrednio.

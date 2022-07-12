@@ -1,6 +1,6 @@
 ---
 title: "Nuke - convenient CI/CD of a program in C#. Part 2"
-date: 2022-07-12
+date: 2022-07-14
 draft: false
 image: cover.en.webp
 description: "Nuke allows us to simply describe the process of building and publishing our application in C#. This article is a continuation. I'm going to show here how to enforce proper code coverage and prepare the application for publication and then upload it to Netlify servers. 
@@ -265,29 +265,29 @@ I will show my approach in a future part of this article series.
 
 .ParameterAttribute i SecretAttribute
 ****
-Parametry mają bardzo dużo, różnych właściwości. 
-Gdy oznaczymy jakieś pole atrybutem `Parameter`, to Nuke samodzielnie potraktuje to jako parametr wejściowy, który może zostać podany zarówno w linii poleceń, jak i pobrany samoczynnie ze zmiennych środowiskowych.
-Nuke potrafi nawet przechowywać parametry w celu wielokrotnego użycia. 
-Więcej przykładów użyć znajdziesz między innymi na https://twitter.com/nukebuildnet/status/1365023015688413187[Twitterze].
+Parameters have a wide variety of properties. 
+When you tag a field with the `Parameter` attribute, Nuke itself treats it as an input parameter, which can be given either on the command line or retrieved automatically from environment variables.
+Nuke can even store parameters for repeated use. 
+More usage examples can be found at https://twitter.com/nukebuildnet/status/1365023015688413187[Twitter].
 
-Atrybut `Secret` powoduje, że Nuke nie będzie przechowywał tej wartości czystym tekstem.
-W niektórych przypadkach potrafi nawet chronić taki sekret hasłem użytkownika, ale nie miałem okazji testować tej funkcjonalności.
+The `Secret` attribute means that Nuke will not store this value in plain text.
+In some cases it can even protect such a secret with the user's password, but I haven't had a chance to test this functionality.
 ****
 
 .Requires()
 ****
-`Requires` pozwala określić nam, wymagania niezbędne do uruchomienia danej akcji. 
-Jeśli, któryś z warunków nie będzie spełniony, zostanie wyświetlony błąd a cała procedura przerwana.
+`Requires` allows us to specify, the requirements necessary to run the action. 
+If any of the conditions is not met, an error will be displayed and the whole procedure will be aborted.
 
-W przykładzie powyżej, w punkcje 4 podajemy, że do wykonania danego kroku niezbędne są wartości `NetlifySideId` oraz `NetlifySiteAccessToken`. 
-Wartości string nie mogą być `null` ani pustym ciągiem znaków.
+In the example above, in point 4, we specify that the values `NetlifySideId` and `NetlifySiteAccessToken` are required to execute the step. 
+String values cannot be `null` or empty.
 ****
 
 == Github Actions
 
-Wszelką konfigurację GitHub Actions robimy za pomocą atrybutu.
-Z racji, że możemy mieć wiele wystąpień atrybutu `GitHubActions`, może określić różne docelowe kroki budowania w zależności od naszych potrzeb.
-Poniżej pokazuję przykładową konfigurację budowania dla każdej propozycji nowego kodu (prośba dodania z ang. _pull request_ ) oraz gdy wejdą nowe zmiany do gałęzi głównej, kiedy to ma zostać wykonane wdrożenie strony.
+We do all the configuration of GitHub Actions using the attribute.
+Since we can have multiple occurrences of the `GitHubActions` attribute, it can specify different target build steps according to our needs.
+Below I show a sample build configuration for each new code proposal (_pull request_ ) and when new changes are pushed the main branch, when the site deployment is to be performed.
 
 [source,csharp]
 ----
@@ -321,20 +321,20 @@ partial class Build : NukeBuild
 }
 ----
 
-<1> Dla każdej akcji musimy podać naszą nazwę, która będzie wyświetlana na GitHubie.
-<2> Musimy również podać, na jakim środowisku mają być wykonywane nasze procedury.
-<3> Możemy określić zasady, według których będą uruchamiane poszczególne konfiguracje (więcej szczegółów znajdziesz w https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpushbranchestagsbranches-ignoretags-ignore[dokumentacji]).
-I tak `OnPullRequestBranches` powoduje wywołanie danej konfiguracji, gdy pojawi się nowe żądanie (PR), które będzie adresowane do poszczególnych gałęzi.
-Natomiast `OnPushBranches` powoduje wywołanie danego przepływu każdorazowo, gdy zostaną wypchnięte na daną gałąź nowe zmiany.
-<4> Najciekawszym elementem jest `InvokedTargets`, który określa nam wyraźnie, który krok naszego budowania ma być uruchomiony w danym przypadku. 
-To właśnie tutaj zyskujemy najwięcej na wielorazowym wykorzystaniu kodu: nieważne ile przepływów wymyślimy, to ciągle wywołujemy dokładnie ten sam kod!
-<5> Fragment `ImportSecrets` jest istotny, gdy chcemy pobrać pewne zmienne ze środowiska GitHub Actions.
-Zwróć uwagę (zrzut ekranu poniżej), że nazwa parametru, na przykład `NetlifySiteId`, zostanie zamieniona na `NETLIFY_SITE_ID`.
-Pola parametrów `NetlifySIteId` oraz `NetlifySiteAccessToken` zostały tutaj dodane dla przejrzystości przykładu. 
+<1> For each action, we need to specify the name that will be displayed on GitHub.
+<2> We also need to specify on which environment the procedures are to be executed.
+<3> We can specify the rules by which each configuration will be run (see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpushbranchestagsbranches-ignoretags-ignore[documentation] for more details).
+Thus, `OnPullRequestBranches` triggers a given configuration when a new request (PR) arrives, which will be addressed to individual branches.
+On the other hand, `OnPushBranches` causes a given flow to be called whenever new changes are pushed out to a particular branch.
+<4> The most interesting element is `InvokedTargets` which determines which step of our build to trigger in a given case. 
+This is where we gain the most from code reuse: no matter how many flows we come up with, we call the exactly same code over and over again!
+<5> The `ImportSecrets` snippet is important when we want to retrieve certain variables from the GitHub Actions environment.
+Note (screenshot below) that the parameter name, for example `NetlifySiteId`, will be replaced with `NETLIFY_SITE_ID`.
+The parameter fields `NetlifySIteId` and `NetlifySiteAccessToken` have been added here for clarity of the example. 
 
-Wynikiem pracy takich atrybutów będą następujące pliki YAML:
+The result of such attributes will be the following YAML files:
 
-.Konfiguracja publikowania strny
+.Site publishing configuration
 [source,yaml]
 ----
 name: Deploy
@@ -364,7 +364,7 @@ jobs:
 
 ----
 
-.Konifguracja sprawdzająca prośbę dodania kodu
+.Conifguration checking request to add code
 [source,yaml]
 ----
 name: ForPR
@@ -409,20 +409,20 @@ jobs:
 
 ----
 
-.Widok strony konfiguracji sekretów dla GitHub Actions
+.View of the secret configuration page for GitHub Actions
 image::githubactions_view.png[]
 
-== Podsumowanie
+== Summary
 
-Muszę przyznać, że podejście, które reprezentuje Nuke bardzo mi się podoba: mogę opisać cały proces budowania raz w języku, który znam i łatwo testować całość lokalnie.
-Niestety nie ma róży bez kolców. 
-Na ten moment, dokumentacja i przykłady użycia są znikome. 
-Dużo, z tego co jest zaprezentowane w tej serii artykułów (i co zaprezentowane jeszcze będzie) zostało wyrwane z kodów różnych repozytoriów. 
-Na ten moment, nauka płynąca z używania Nuke płynie taka: Nuke to framework do wołania innych narzędzi. 
-Ma to dwie konsekwencje: duża ilość możliwości oraz duża ilość szukania odpowiedzi. 
-Jednak ma to też dobre strony: nie jesteśmy obarczeni blokadą stawianą przez bibliotekę (tak zwany vendor-lock), gdyż łatwo możemy przejść do innych dostępnych narzędzi, bądź wywoływać konkretne polecenia bezpośrednio.
+I must admit that the approach that Nuke represents appeals to me very much: I can describe the whole building process in a language I know and easily test the whole thing locally.
+Unfortunately, there is no rose without thorns. 
+At this point, documentation and usage examples are scarce. 
+Much, of what is presented in this series of articles (and what I will present) has been extracted from the codes of various repositories. 
+At this point, the lesson learned from using Nuke is this: Nuke is a framework for calling out other tools. 
+This has two consequences: a large number of possibilities and a large amount of searching for answers. 
+However, it also has good points: we are not burdened by the lock put up by the library (the so-called vendor-lock), as we can easily switch to other available tools, or call specific commands directly.
 
-Końcowy kod z opisanymi tutaj elementami, i kilkoma więcej, znajdziesz na moim GitHubie: https://github.com/MikDal002/ZTR.AI/tree/master/CICD[Ztr.AI].
+You can find the final code with the elements described here, and some more, on my GitHub: https://github.com/MikDal002/ZTR.AI/tree/master/CICD[Ztr.AI].
 
 [.small]
 Photo by https://unsplash.com/es/@burgessbadass?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Burgess Milner] on https://unsplash.com/s/photos/nuke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Unsplash].
