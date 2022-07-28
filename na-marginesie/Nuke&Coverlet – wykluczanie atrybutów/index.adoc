@@ -1,0 +1,66 @@
+---
+title: Coverlet – wykluczanie badania pokrycia kodu według atrybutów
+date: 2022-07-31
+description: "W niniejszej notatce pokażę jak wykluczyć poszczególne klasy z badania pokrycia kodu oraz dodać odpowiednią konfigurację do Nuke"
+draft: false
+categories:
+    - "Na marginesie"
+    - "W okół kodu"
+    - "CI/CD"
+tags:
+    - ".Net"
+    - "CI/CD"
+    - "Testy jednostkowe"
+    - "Code coverage"
+series: 
+    - "Nuke"
+---
+
+== Wykluczanie przez atrybut (ExcludeByAttribute)
+
+W trakcie mojego dążenia do 100% pokrycia kodu testami jednostkowymi stanąłem przed problemem, jakim jest wykluczenie kodu generowanego automatycznie. 
+Niestety tę informację było mi znaleźć strasznie ciężko, dlatego dziele się tym tutaj. 
+
+Jak pokazuje dokumentacja, każdy atrybut przeznaczony do wykluczenia należy przekazać osobno:
+
+[source,bash]
+----
+--exclude-by-attribute 'Obsolete' --exclude-by-attribute'GeneratedCode' --exclude-by-attribute 'CompilerGenerated'
+----
+
+czyli bardziej całościowy przykład:
+
+[source,bash]
+----
+coverlet /path/to/test-assembly.dll --target "dotnet" --targetargs "test /path/to/test-project --no-build" --exclude-by-attribute 'Obsolete' --exclude-by-attribute'GeneratedCode' 
+----
+
+== Nuke
+
+Aby dodać wykluczenie do Nuke, należy zmodyfikować parametry badania pokrycia kodu testami jednostkowymi. 
+Biorąc kawałek kodu z link:{{% ref "/programowanie/w-okol-kodu/dotnet-nuke-wygodne-budowanie-cz-02/index.adoc" %}}[drugiej części o Nuke], należałoby dodać jedną linijkę:
+
+[source,bash,highlight=9]
+----
+CoverletSettings PrepareCoverageSettingsForCoveringProject(Project project, CoverletSettings settings,
+    DotNetTestSettings coverageTestSettings, ref string previousCoverageFileResult)
+{
+    var assemblyPath = FindAssemblyForProject(project);
+    var coverageResultDirectory = TestResultDirectory / project.Name;
+
+    settings = settings
+        .SetAssembly(assemblyPath)
+        .SetProcessArgumentConfigurator(_ => _.Add(@"--exclude-by-attribute CompilerGeneratedAttribute --exclude-by-attribute GeneratedCodeAttribute")) // <1>
+        .SetOutput(coverageResultDirectory + "/")
+        .SetTargetSettings(coverageTestSettings
+            .EnableNoBuild()
+            .SetProjectFile(project));
+
+    settings = MergeCoverageResultsWithPreviousRun(previousCoverageFileResult, settings);
+    previousCoverageFileResult = SetThresholdForLastRun(project, coverageResultDirectory, ref settings);
+
+    return settings;
+}
+----
+
+<1> Ta jedna linijka wystarczy, aby wykluczyć kod oznaczony atrybutami `CompilerGeneratedAttribute` oraz `GeneratedCodeAttribute`.
