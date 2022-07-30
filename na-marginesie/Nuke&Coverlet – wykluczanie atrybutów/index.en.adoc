@@ -1,34 +1,34 @@
 ---
-title: Coverlet – wykluczanie badania pokrycia kodu według atrybutów
+title: Coverlet - exclusion of code coverage study by attribute
 date: 2022-07-31
-description: "W niniejszej notatce pokażę jak wykluczyć poszczególne klasy z badania pokrycia kodu oraz dodać odpowiednią konfigurację do Nuke."
+description: "In this note, I will show how to exclude specific classes from the code coverage and add the appropriate configuration to Nuke."
 draft: false
 categories:
-    - "Na marginesie"
-    - "W okół kodu"
+    - Side notes
+    - "Around the code"
     - "CI/CD"
 tags:
     - ".Net"
     - "CI/CD"
-    - "Testy jednostkowe"
+    - "Unit tests"
     - "Code coverage"
 series: 
     - "Nuke"
 ---
 
-== Wykluczanie przez atrybut (ExcludeByAttribute)
+== Exclusion by attribute (ExcludeByAttribute)
 
-W trakcie mojego dążenia do 100% pokrycia kodu testami jednostkowymi stanąłem przed problemem, jakim jest wykluczenie kodu generowanego automatycznie. 
-Niestety tę informację było mi znaleźć strasznie ciężko, dlatego dziele się tym tutaj. 
+When I was looking for 100% code coverage with unit tests, I faced the problem of how to exclude automatically generated code. 
+Unfortunately, this information was terribly hard for me to find, so I am sharing it here. 
 
-Jak pokazuje dokumentacja, każdy atrybut przeznaczony do wykluczenia należy przekazać osobno:
+As the documentation shows, each attribute intended for exclusion must be passed separately:
 
 [source,bash]
 ----
 --exclude-by-attribute 'Obsolete' --exclude-by-attribute'GeneratedCode' --exclude-by-attribute 'CompilerGenerated'
 ----
 
-czyli bardziej całościowy przykład:
+More holistic example:
 
 [source,bash]
 ----
@@ -37,8 +37,8 @@ coverlet /path/to/test-assembly.dll --target "dotnet" --targetargs "test /path/t
 
 == Nuke
 
-Aby dodać wykluczenie do Nuke, należy zmodyfikować parametry badania pokrycia kodu testami jednostkowymi. 
-Biorąc kawałek kodu z link:{{% ref "/programowanie/w-okol-kodu/dotnet-nuke-wygodne-budowanie-cz-02/index.adoc" %}}[drugiej części o Nuke], należałoby dodać jedną linijkę:
+To add an exclusion to Nuke, you need to modify the parameters of the code coverage. 
+Taking a piece of code from link:{{% ref "/programowanie/w-okol-kodu/dotnet-nuke-wygodne-budowanie-cz-02/index.adoc" %}}[the second part about Nuke], one line would need to be added:
 
 [source,bash,highlight=9]
 ----
@@ -63,4 +63,4 @@ CoverletSettings PrepareCoverageSettingsForCoveringProject(Project project, Cove
 }
 ----
 
-<1> Ta jedna linijka wystarczy, aby wykluczyć kod oznaczony atrybutami `CompilerGeneratedAttribute` oraz `GeneratedCodeAttribute`.
+<1> This one line is enough to exclude code marked with `CompilerGeneratedAttribute` and `GeneratedCodeAttribute` attributes.
