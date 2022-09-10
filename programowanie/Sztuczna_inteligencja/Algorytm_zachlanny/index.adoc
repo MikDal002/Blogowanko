@@ -1,0 +1,13 @@
+---
+title: Algorytm zachłanny — wprowadzenie i implementacja
+description: W niniejszym artykule opiszę szczegółowo algorytm zachłanny oraz jego implementację w języku C#. Szczególną część poświęciłem optymalizacji funkcji liniowych.
+draft: true
+date: 2023-07-12
+---
+
+- Ciężko mi coś znaleźć o optymalizacji funkcji liniowej w internecie 
+- Algorytm zachłanny, to taki, który ZAWSZE wybiera najlepsze *w danym momencie* rozwiązanie <<wiki>>. 
+
+[bibliography]
+== Zewnętrzne linki
+* [[[wiki]]] „Algorytm zachłanny”. W Wikipedia, wolna encyklopedia, 21 lipiec 2021. https://pl.wikipedia.org/w/index.php?title=Algorytm_zach%C5%82anny&oldid=64132709.

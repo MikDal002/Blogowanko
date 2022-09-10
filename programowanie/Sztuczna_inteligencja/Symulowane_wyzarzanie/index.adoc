@@ -1,0 +1,6 @@
+---
+title: Symulowane wyżarzanie — wprowadzenie i implementacja
+description: W niniejszym artykule opisano szczegółowo algorytm wyżarzania oraz jego implementację w języku C#. 
+draft: true
+date: 2023-07-12
+---

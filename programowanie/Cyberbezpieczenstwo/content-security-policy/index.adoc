@@ -207,5 +207,5 @@ Zostało to szczegółowo omówiony w https://github.com/facebook/create-react-a
     "test": "react-scripts test", 
     "eject": "react-scripts eject" 
   }
-}, 
+}
 ----
