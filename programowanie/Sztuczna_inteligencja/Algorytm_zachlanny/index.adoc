@@ -5,7 +5,7 @@ draft: true
 date: 2023-07-12
 ---
 
-- Ciężko mi coś znaleźć o optymalizacji funkcji liniowej w internecie 
+- Ciężko mi coś znaleźć o optymalizacji funkcji liniowej w internecie.
 - Algorytm zachłanny, to taki, który ZAWSZE wybiera najlepsze *w danym momencie* rozwiązanie <<wiki>>. 
 
 [bibliography]
