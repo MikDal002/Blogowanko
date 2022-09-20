@@ -1,6 +1,6 @@
 ---
 title: "Content-Security-Policy – nagłówek HTTP zwiększający bezpieczeństwo użytkowników przeciw atakowi XSS"
-date: 2022-09-14
+date: 2022-09-20
 draft: false
 image: cover.webp
 description: "O nagłówku Content-Security-Policy napisano już wiele. Dlatego niniejszy artykuł jest prostym wprowadzeniem z wieloma linkami do zewnętrznych źródeł. Zahaczę również o implementację na trzy różne sposoby oraz o kilka wskazówek praktycznych. Na koniec znajdzie się również krótka notatka dla osób pracujących z React.js"
@@ -26,8 +26,8 @@ Zdjęcie ilustrujące artykuł pochodzi z https://unsplash.com/s/photos/security
 
 == Wstęp
 
-Content Security Policy (CSP) to nagłówek, który umieszczany w odpowiedzi z serwera bądź w sekcji head za pomocą tagu meta. 
-Służy on do ochrony i zmniejszania zasięgu potencjalnego ataku XSS (Cross Site Scripts). 
+Content Security Policy (CSP) to nagłówek, który umieszczamy w odpowiedzi z serwera bądź w sekcji head za pomocą tagu meta. 
+Służy on do ochrony i zmniejszania zasięgu potencjalnego ataku XSS (z ang. _Cross Site Scripts_). 
 Pozwala na określenie skąd nasza przeglądarka może pobierać wszelakie zasoby dla naszej strony, które uznajemy za bezpieczne. 
 Tym samym ograniczamy możliwość pobrania szkodliwych elementów z zewnętrznych domen.
 
@@ -44,7 +44,7 @@ Możemy dodać nagłówek na wiele różnych sposobów, w tym:
 ****
 W sekcji head pliku `index.html`: 
 
-.Przykład wprowadzenia polity CSP w nagłówku strony HTML
+.Przykład wprowadzenia polityki CSP w nagłówku strony HTML
 [source,html]
 ----
 <head> 
@@ -90,7 +90,7 @@ Więcej, między innymi tutaj: https://stackoverflow.com/questions/37992225/conf
 
 == Podstawowa konfiguracja
 
-Przytoczone wyżej przykłady ograniczają pobieranie danych tylko do domeny, z którą połączyliśmy się na początku (np. zaprogramujtoraz.cplom) i wyklucza poddomeny. 
+Przytoczone wyżej przykłady ograniczają pobieranie danych tylko do domeny, z którą połączyliśmy się na początku (np. zaprogramujtoraz.pl) i wyklucza poddomeny. 
 Uniemożliwia to pobieranie obrazków, między innymi, ze strony podstrona.zaprogramujtoraz.pl. 
 Jest to preferowane zachowanie, od którego powinniśmy wyjść, robiąc wyjątki, na przykład poprzez konstrukcję `Content-Security-Policy: default-src 'self' podstrona.zaprogramujtoraz.pl;` lub gdy ufamy całej domenie, możemy użyć wyrażenia wieloznacznego '*': *.zaprogramujtoraz.pl.
 
@@ -104,7 +104,7 @@ Te, które widziałem najczęściej to:
 * `object-src` - określa lokalizację dla elementów `<object>`, `<embed>` oraz `<applet>` i warto ustawić go na `none` (`object-src: 'none';`), ponieważ te elementy w większości są już przestarzałe. 
 
 Zwróć uwagę, że stosowanie samej gwiazdki '*' jako znaku pozwalającego na ładowanie czegokolwiek zewsząd wskazuje zapewne na jakiś problem. 
-Jeśli nie jesteś agregatorem treści, warto przemyśleć taką konstrukcję, aby chronić swoich użytkowników przed niechcianymi treściami.  
+Jeśli nie jesteś agregatorem stron, warto przemyśleć taką konstrukcję, aby chronić swoich użytkowników przed niechcianymi treściami.  
 
 == Raportowanie o naruszeniach
  
@@ -141,11 +141,11 @@ Dzięki temu będziemy mieli większą pewność, że nic nam nie ucieknie.
 Wielką pomocą może okazać się dostępna za darmo wtyczka https://csper.io/generator[Content Security Policy (CSP) Evaluator (csper.io)]. 
 Zbiera ona dane i generuje przykładową politykę CSP, podczas gdy my przeglądamy stronę. 
 
-WARNING: Uważaj podczas korzystania z tego rozszerzenie, ponieważ do wynikowej polityki dołączany jest parametr `report-to`, który wskazuje na stronę dostawcy usługi (csper.io).  
+WARNING: Uważaj podczas korzystania z tego rozszerzenia, ponieważ do wynikowej polityki dołączany jest parametr `report-to`, który wskazuje na stronę dostawcy usługi (csper.io).  
 
 === Organizacja zasobów
 
-Patrząc na obsługę wyrażeń wieloznacznych w polityce CSP (z ang. Wildcards) warto zawczasu pomyśleć nad organizacją naszych zasobów. 
+Patrząc na obsługę wyrażeń wieloznacznych w polityce CSP (z ang. _wildcards_) warto zawczasu pomyśleć nad organizacją naszych zasobów. 
 Może to zaoszczędzić nam dużo pracy, podczas rozwoju aplikacji, kiedy to już zapomnimy o tym, że konfigurowaliśmy coś takiego jak `Content-Security-Policy`.
 
 Dlatego warto usługom nadawać adresy w następujący sposób: [nazwa serwisu].[środowisko], co będzie skutkowało przykładowym adresem orders.qa.zaprogramujtoraz.pl.
@@ -153,8 +153,8 @@ Dzięki temu dość łatwo będzie zastosować wyrażenie wieloznaczne w celu do
 
 === Transformacja konfiguracji
 
-Nie możemy zapominać o tym, ze wiele narzędzi dostarcza nam możliwość transformacji naszej konfiguracji. 
-Dzięki temu możemy łatwo zmienić naszą politykę, w zależności od tego, gdzie ja uruchomimy.
+Nie możemy zapominać o tym, że wiele narzędzi dostarcza nam możliwość transformacji naszej konfiguracji. 
+Dzięki temu możemy łatwo zmienić naszą politykę, w zależności od tego, gdzie ją uruchomimy.
 
 W ASP.Net możemy ładować różne konfiguracje, zależnie od tego, czy aplikacja uruchamia się w środowisku produkcyjnym, czy też deweloperskim. Więcej o tym w dokumentacji: https://docs.microsoft.com/pl-pl/aspnet/core/fundamentals/environments?view=aspnetcore-6.0[Używanie wielu środowisk na platformie ASP.NET Core].
 Wystarczy załadować odpowiedni klucz z konfiguracji. 
@@ -195,7 +195,7 @@ Nie mniej jest to wygodne na maszynie deweloperskiej, gdzie nie trzeba pamięta�
 Konfiguracja zależy od platformy, więc nie będę jej tutaj omawiał.
 
 NOTE: W przypadku modyfikacji `package.json` uważaj na spacje, gdyż nie wszystkie kombinacje działają. 
-Zostało to szczegółowo omówiony w https://github.com/facebook/create-react-app/issues/8825[wątku na Github - "set INLINE_RUNTIME_CHUNK=false && react-scripts build" not working (depending on spacing].
+Zostało to szczegółowo omówione w https://github.com/facebook/create-react-app/issues/8825[wątku na GitHub - "set INLINE_RUNTIME_CHUNK=false && react-scripts build" not working (depending on spacing].
 
 .Fragment pliku package.json
 [source,json,highlight=16]

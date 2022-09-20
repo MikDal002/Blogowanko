@@ -1,6 +1,6 @@
 ---
 title: "Content-Security-Policy – HTTP header to increase user security against XSS attacks"
-date: 2022-09-14
+date: 2022-09-20
 draft: false
 image: cover.webp
 description: "Much has already been written about the Content-Security-Policy header. Therefore, this article is a simple introduction with many links to external sources. I will also touch on the implementation in three different ways and some practical tips. There will also be a short note at the end for those working with React.js"
