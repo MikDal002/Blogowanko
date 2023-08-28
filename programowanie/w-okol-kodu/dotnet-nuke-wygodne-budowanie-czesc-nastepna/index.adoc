@@ -50,6 +50,82 @@ https://github.com/fluentassertions/fluentassertions/blob/master/Build/Build.cs
         });
 ----
 
+=== Pakowanie aplikacji
+
+---
+AbsolutePath PublishedProjectAsZip => OutputDirectory / "Pszczoła APP.zip";
+
+Target Publish => _ => _
+    .DependsOn(Compile)
+    .Executes(() =>
+    {
+        var projectToPublish = Solution.GetProject("Pszczoła.WpfCore");
+        DotNetPublish(s => s.SetProject(projectToPublish)
+            .SetConfiguration(Configuration)
+            .SetOutput(OutputDirectory));
+
+        OutputDirectory
+            .ZipTo(PublishedProjectAsZip,
+                compressionLevel: CompressionLevel.SmallestSize,
+                fileMode: FileMode.CreateNew);
+    })
+    .Produces(PublishedProjectAsZip);
+---
+
+
+=== Dodawanie wydania na Githubie
+
+---
+Target GitHubTarget => _ => _
+    .DependsOn(Publish)
+    .DependsOn(Tests)
+    .Executes(() =>
+    {
+        var credentials = new Credentials(GitHubActions.Instance.Token);
+        GitHubTasks.GitHubClient = new GitHubClient(
+            new ProductHeaderValue(nameof(NukeBuild)),
+            new InMemoryCredentialStore(credentials));
+
+        var gitVersionAsString = GitVersion.ToJson();
+
+        Log.Information(gitVersionAsString);
+
+        var newRelease = new NewRelease(GitVersion.SemVer)
+        {
+            TargetCommitish = GitVersion.Sha,
+            Draft = true,
+            Name = $"Release version {GitVersion.SemVer}",
+            Prerelease = !GitVersion.PreReleaseLabel.IsNullOrWhiteSpace(),
+            Body = @"It is a release!"
+        };
+
+
+        var repositoryId = GitHubTasks.GitHubClient.Repository.Get("MikDal002", "Pszczo-a").Result.Id;
+        var createdRelease = GitHubTasks.GitHubClient.Repository.Release.Create(repositoryId, newRelease).Result;
+
+        UploadReleaseAssetToGithub(createdRelease, PublishedProjectAsZip);
+        var _ = GitHubTasks.GitHubClient.Repository.Release
+            .Edit(repositoryId, createdRelease.Id, new ReleaseUpdate {Draft = false})
+            .Result;
+    });
+
+const string MasterBranch = "master";
+const string DevelopBranch = "develop";
+
+
+void UploadReleaseAssetToGithub(Release release, AbsolutePath asset)
+{
+    Assert.FileExists(asset);
+
+    var releaseAssetUpload = new ReleaseAssetUpload
+    {
+        ContentType = "application/x-binary",
+        FileName = $"Pszczoła-{GitVersion.SemVer}",
+        RawData = File.OpenRead(asset)
+    };
+    var _ = GitHubTasks.GitHubClient.Repository.Release.UploadAsset(release, releaseAssetUpload).Result;
+}
+---
 
 === Changelog z GitHub (i nie tylko...??)
 https://github.com/nuke-build/nuke/blob/develop/build/Build.GitFlow.cs

@@ -57,6 +57,13 @@ Co ważne, nie jest ono niezbędne na serwerze budującym.
 dotnet tool install Nuke.GlobalTool --global
 ----
 
+Nastepnie w katalogu głównym naszego rozwiązania uruchamiamy konfigurator:
+
+[source, powershell]
+----
+nuke :setup
+----
+
 .Widok konfiguratora Nuke
 image::nuke-setup.png[]
 
@@ -80,7 +87,7 @@ Pojawi się również katalog `.nuke`, który przechowuje kilka ustawień.
 .Widok klasy Build.cs
 [source,csharp]
 ----
-[CheckBuildProjectConfigurations]
+// [CheckBuildProjectConfigurations] <1>
 [ShutdownDotNetAfterServerBuild]
 class Build : NukeBuild
 {
@@ -126,6 +133,8 @@ class Build : NukeBuild
 
 }
 ----
+
+<1> Zauważ, że wykomentowałem attrybut `CheckBuildProjectConfigurations` ponieważ został on usunięty w wersji 7.0.0 Nuke, natomiast pozostał w szablonie nowego projektu.
 
 .Łączenie ścieżek
 ****
@@ -181,7 +190,8 @@ Target Tests => _ => _
         .Executes(() =>
         {
             EnsureCleanDirectory(TestResultDirectory); // <3>
-            DotNetTest(new DotNetTestSettings() 
+            DotNetTest(s => s
+                .SetProcessEnvironmentVariable("DOTNET_CLI_UI_LANGUAGE", "en-US") // <7>
                 .SetConfiguration(Configuration) // <4>
                 .EnableNoBuild() // <5>
                 .SetProjectFile(Solution)); // <6>
@@ -200,6 +210,7 @@ Jak spojrzysz na kod wygenerowany przez konfigurator, zobaczysz właściwość o
 Zawsze możesz go nadpisać, używając parametru `--Configuration [Debug|Release]`. 
 <5> Ustawiamy flagę, informującą o tym, że mechanizm testowy ma nie budować ponownie naszych projektów. Zrobiliśmy to w kroku `Compile``, więc powinno nam to zaoszczędzić trochę czasu.
 <6> Określamy projekt, a w tym przypadku całe rozwiązanie, które chcemy przetestować. 
+<7> Określenie działania .net'a w języku angielskim jest niezbędne ze względu na błąd w .Net, który może występować w przypadku danej wersji (w jednej występuje w innej nie). Więcej informacji na Githubie Microsoftu https://github.com/dotnet/sdk/issues/29543[dotnet test does no longer accept a project path after updating to NET 7.0.101].
 
 Mając dodane te kilka linijek do naszej klasy `Build.cs` możemy wywołać polecenie `nuke Compile`. 
 Powinniśmy ostatecznie uzyskać wynik na kształt: 
