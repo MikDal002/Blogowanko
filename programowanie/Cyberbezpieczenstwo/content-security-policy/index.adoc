@@ -34,7 +34,7 @@ Tym samym ograniczamy możliwość pobrania szkodliwych elementów z zewnętrzny
 Szczegóły konfiguracji znajdziesz, między innymi, na stronie Mozilla Developer Network (https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP[Content Security Policy (CSP) - HTTP]), Microsoftu (w tym przypadku dla technologii Blazor) https://docs.microsoft.com/pl-pl/aspnet/core/blazor/security/content-security-policy?view=aspnetcore-6.0[Wymuszanie zasad zabezpieczeń zawartości dla ASP.NET Core Blazor]. 
 Ciekawe omówienie w języku angielskim znajdziesz również w artykule https://medium.com/@technicadil_001/content-security-policy-csp-with-net-core-ebc00dcecc80[Content-Security-Policy(CSP) with .Net Core] oraz w języku polskim w artykule https://sekurak.pl/czym-jest-content-security-policy/[Czym jest Content Security Policy?].
 
-NOTE: Pamiętaj, że domyślne ustawienia przeglądarki pozwalają na pobieranie skryptów, stylów CSS, obrazów i innych z każdego miejsca w sieci, co nie zapewnia nam bezpieczeństwa w przypadku ataku XSS.  
+NOTE: Pamiętaj, że domyślne ustawienia przeglądarki pozwalają na pobieranie skryptów, stylów CSS, obrazów i innych z każdego miejsca w sieci, co nie zapewnia nam bezpieczeństwa w przypadku ataku XSS.
 
 == Przykłady wdrożenia
 
@@ -42,16 +42,18 @@ Możemy dodać nagłówek na wiele różnych sposobów, w tym:
 
 .HTML
 ****
-W sekcji head pliku `index.html`: 
+W sekcji head pliku `index.html`:    
 
-.Przykład wprowadzenia polityki CSP w nagłówku strony HTML
 [source,html]
+.Przykład wprowadzenia polityki CSP w nagłówku strony HTML
 ----
 <head> 
     ...
     <meta http-equiv="Content-Security-Policy" content="default-src 'self';"> 
 </head>
+
 ----
+
 ****
 
 .ASP.NET
@@ -59,24 +61,28 @@ W sekcji head pliku `index.html`:
 W odpowiedzi serwera, poniżej jako middleware dla ASP.Net Core. 
 Więcej informacji, na przykład tutaj: https://stackoverflow.com/questions/71499518/is-csp-content-security-policy-activated-by-default-in-net-core-3-1[Is CSP (Content Security Policy) activated by default in .net core 3.1?].
 
-.Warstwa pośrednia (middleware) dla ASP.Net Core dodająca nagłówek CSP
 [source,csharp]
+.Warstwa pośrednia (middleware) dla ASP.Net Core dodająca nagłówek CSP
 ----
 app.Use(async (ctx, next) => 
 { 
     ctx.Response.Headers.Add("Content-Security-Policy", "default-src 'self';"); 
     await next(); 
 }); 
+
 ----
+
 ****
+
+ 
 
 .Internet Information Services (IIS)
 ****
 Za pomocą pliku Web.config, gdy używamy IIS. 
 Więcej, między innymi tutaj: https://stackoverflow.com/questions/37992225/config-your-iis-server-to-use-the-content-security-policy-header[Config your IIS server to use the "Content-Security-Policy" header]: 
 
-.Przykład dodania polityki CSP w pliku web.config
 [source,xml]
+.Przykład dodania polityki CSP w pliku web.config
 ----
 <system.webServer> 
     <httpProtocol> 
@@ -85,45 +91,53 @@ Więcej, między innymi tutaj: https://stackoverflow.com/questions/37992225/conf
         </customHeaders> 
     </httpProtocol> 
 </system.webServer> 
+
 ----
+
 ****
 
 == Podstawowa konfiguracja
 
 Przytoczone wyżej przykłady ograniczają pobieranie danych tylko do domeny, z którą połączyliśmy się na początku (np. zaprogramujtoraz.pl) i wyklucza poddomeny. 
 Uniemożliwia to pobieranie obrazków, między innymi, ze strony podstrona.zaprogramujtoraz.pl. 
-Jest to preferowane zachowanie, od którego powinniśmy wyjść, robiąc wyjątki, na przykład poprzez konstrukcję `Content-Security-Policy: default-src 'self' podstrona.zaprogramujtoraz.pl;` lub gdy ufamy całej domenie, możemy użyć wyrażenia wieloznacznego '*': *.zaprogramujtoraz.pl.
+Jest to preferowane zachowanie, od którego powinniśmy wyjść, robiąc wyjątki, na przykład poprzez konstrukcję `Content-Security-Policy: default-src 'self' podstrona.zaprogramujtoraz.pl;` lub gdy ufamy całej domenie, możemy użyć wyrażenia wieloznacznego `*`: `*.zaprogramujtoraz.pl`.
 
 Pełną listę elementów, które możemy skonfigurować, znajdziemy tutaj: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy[Content-Security-Policy - HTTP].
 Te, które widziałem najczęściej to:
 
-* `default-src` - domyślne zachowanie, dla nieskonfigurowanych elementów, 
-* `script-src` - określa źródła dla JavaScriptu, 
+* `default-src` - domyślne zachowanie, dla nieskonfigurowanych elementów,
+
+* `script-src` - określa źródła dla JavaScriptu,
+
 * `img-src` - określa lokalizację dla obrazów,
-* `font-src` - określa lokalizację dla czcionek, 
-* `object-src` - określa lokalizację dla elementów `<object>`, `<embed>` oraz `<applet>` i warto ustawić go na `none` (`object-src: 'none';`), ponieważ te elementy w większości są już przestarzałe. 
+
+* `font-src` - określa lokalizację dla czcionek,
+
+* `object-src` - określa lokalizację dla elementów `<object>`, `<embed>` oraz `<applet>` i warto ustawić go na `none` (`object-src: 'none';`), ponieważ te elementy w większości są już przestarzałe.
 
 Zwróć uwagę, że stosowanie samej gwiazdki '*' jako znaku pozwalającego na ładowanie czegokolwiek zewsząd wskazuje zapewne na jakiś problem. 
 Jeśli nie jesteś agregatorem stron, warto przemyśleć taką konstrukcję, aby chronić swoich użytkowników przed niechcianymi treściami.  
 
 == Raportowanie o naruszeniach
- 
+
 Mechanizm CSP pozwala również na raportowanie o naruszeniach pod określony adres. 
 Dzieje się to za pomocą pola `report-uri`. 
-Więcej w dokumentacji MDN: (https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP#enabling_reporting)[CSP - Enabling Reporting].  
+Więcej w dokumentacji MDN: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP#enabling_reporting[CSP - Enabling Reporting].  
 
 Drugą ciekawą funkcją jest testowanie, czy wprowadzenie polityki CSP nic nie popsuje. 
 Możemy to zrobić za pomocą nagłówka `Content-Security-Policy-Report-Only`.
 Więcej na stronie MDN https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only[Content-Security-Policy-Report-Only - HTTP]. 
 
-== Kilka uwag przy wdrożeniu 
+== Kilka uwag przy wdrożeniu
 
 Podczas wdrażania polityki CSP w już istniejącym projekcie, pojawiają się dwa zagadnienia:
 
-. Jak upewnić się, że zebrano wszystkie zależności i adresy, które należy uwzględnić w polityce? 
+. Jak upewnić się, że zebrano wszystkie zależności i adresy, które należy uwzględnić w polityce?
+
 . Jak stosować osobne polityki dla poszczególnych środowisk (DEV, QA, PROD), tak aby nie pisać kolubryny wykluczeń?
 
-=== Zbieranie zależności i adresów dla CSP
+== Zbieranie zależności i adresów dla CSP
+
 W celu zebrania informacji, na temat zależności najłatwiej posłużyć się dwoma narzędziami.
 Jeśli znasz jeszcze jakieś, daj znać w komentarzach!
 
@@ -133,7 +147,7 @@ Podstawą są narzędzia deweloperskie wbudowane w przeglądarkę, zazwyczaj dos
 W zakładce Sieć (Network) zobaczymy wszystkie połączenia ustanawiane przez naszą aplikację od momentu uruchomienia narzędzi deweloperskich.
 Dlatego po ich otworzeniu warto odświeżyć stronę. 
 
-NOTE: W niektórych przeglądarkach, mając otwarte narzędzia deweloperskie, możemy kliknąć prawym przyciskiem myszy (PPM) na przycisku "odśwież" i wymusić pełne przeładowanie strony. 
+NOTE: W niektórych przeglądarkach, mając otwarte narzędzia deweloperskie, możemy kliknąć prawym przyciskiem myszy (PPM) na przycisku „odśwież” i wymusić pełne przeładowanie strony. 
 Dzięki temu będziemy mieli większą pewność, że nic nam nie ucieknie.
 
 ==== Wtyczka Content Security Evaluator (csper.io)
@@ -141,9 +155,9 @@ Dzięki temu będziemy mieli większą pewność, że nic nam nie ucieknie.
 Wielką pomocą może okazać się dostępna za darmo wtyczka https://csper.io/generator[Content Security Policy (CSP) Evaluator (csper.io)]. 
 Zbiera ona dane i generuje przykładową politykę CSP, podczas gdy my przeglądamy stronę. 
 
-WARNING: Uważaj podczas korzystania z tego rozszerzenia, ponieważ do wynikowej polityki dołączany jest parametr `report-to`, który wskazuje na stronę dostawcy usługi (csper.io).  
+WARNING: Uważaj podczas korzystania z tego rozszerzenia, ponieważ do wynikowej polityki dołączany jest parametr `report-to`, który wskazuje na stronę dostawcy usługi (csper.io).
 
-=== Organizacja zasobów
+== Organizacja zasobów
 
 Patrząc na obsługę wyrażeń wieloznacznych w polityce CSP (z ang. _wildcards_) warto zawczasu pomyśleć nad organizacją naszych zasobów. 
 Może to zaoszczędzić nam dużo pracy, podczas rozwoju aplikacji, kiedy to już zapomnimy o tym, że konfigurowaliśmy coś takiego jak `Content-Security-Policy`.
@@ -151,7 +165,7 @@ Może to zaoszczędzić nam dużo pracy, podczas rozwoju aplikacji, kiedy to ju�
 Dlatego warto usługom nadawać adresy w następujący sposób: [nazwa serwisu].[środowisko], co będzie skutkowało przykładowym adresem orders.qa.zaprogramujtoraz.pl.
 Dzięki temu dość łatwo będzie zastosować wyrażenie wieloznaczne w celu dostępu do wszystkich zasobów na przykład: *.qa.zaprogramujtoraz.pl.
 
-=== Transformacja konfiguracji
+== Transformacja konfiguracji
 
 Nie możemy zapominać o tym, że wiele narzędzi dostarcza nam możliwość transformacji naszej konfiguracji. 
 Dzięki temu możemy łatwo zmienić naszą politykę, w zależności od tego, gdzie ją uruchomimy.
@@ -164,7 +178,7 @@ Więcej na ten temat znajdziesz również w dokumentacji: https://docs.microsoft
 
 Przekształcanie pliku `web.config` może okazać się konieczne, gdy mamy do czynienia z stroną statyczną.
 
-== script-src a React.js: 
+== script-src a React.js
 
 W celu dalszego utwardzania polityki CSP można natknąć się na problem, który będzie wymagał dodania flagi `unsafe-inline` do zasady `script-src`. 
 Pracując w React.js nie musimy się na to godzić.
@@ -172,53 +186,47 @@ React może automatycznie przenieść skrypty, które umieszcza w linii do osobn
 Dzięki czemu można zrezygnować ze wpisu `unsafe-inline` dla `script-src`. 
 
 Nie udało mi się znaleźć nic na temat znacznego wpływu tego ustawienia na aplikację. 
-Przykładowe pomiary znajdziesz w artykule https://drag13.io/posts/react-inline-runtimer-chunk/index.html[„Jak uzywać React'a bez wpisu 'unsafe-inline' i dlaczego” (po angielsku) (drag13.io)]. 
+Przykładowe pomiary znajdziesz w artykule https://drag13.io/posts/react-inline-runtimer-chunk/index.html[„Jak uzywać React'a bez wpisu `unsafe-inline` i dlaczego” (po angielsku) (drag13.io)]. 
 
 Aby to zrobić, należy ustawić zmienną środowiskową `INLINE_RUNTIME_CHUNK` na `false`. 
 Wiecej na temat tej zmiennej w dokumentacji https://create-react-app.dev/docs/advanced-configuration/[„Zaawansowana konfiguracja (po angielsku)”]. 
 Można to zrobić na kilka sposobów:
 
-* w pliku `.env`. 
+* W pliku `.env`. 
 Więcej na jego temat w dokumentacji https://create-react-app.dev/docs/adding-custom-environment-variables/#adding-development-environment-variables-in-env["Dodawanie własnych zmiennych środowiskowych" (po angielsku)"]. 
 Jest to chyba najlepszy i najmniej awaryjny sposób, na ustawienie zmiennych środowiskowych.
 
 +
-NOTE: W przypadku, gdy korzystasz z **yarn**'a i jego przestrzenii (z angielskiego: _workspaces_), może okazać się, że będziesz musiał umieścić plik `.env` nie tylko w głównym katalogu, ale również obok pliku `package.json` projektu podrzędnego.
+NOTE: W przypadku, gdy korzystasz z *yarn*'a i jego przestrzenii (z angielskiego: _workspaces_), może okazać się, że będziesz musiał umieścić plik `.env` nie tylko w głównym katalogu, ale również obok pliku `package.json` projektu podrzędnego.
 
-* w pliku `package.json`. 
+* W pliku `package.json`. 
 Dodając wyrażenie `set INLINE_RUNTIME_CHUNK=false` w tej samej linii, co określenie skryptu budujacego. 
-Przykład takiego wykonania znajdziesz w poniższym wycinku pliku `package.json`, w linijce 16.
+Przykład takiego wykonania znajdziesz w poniższym wycinku pliku `package.json`, w linijce 5.
 
++
 WARNING: Podejście to nie jest trwałe i może różnić się zależnie od platformy. 
 Nie mniej jest to wygodne na maszynie deweloperskiej, gdzie nie trzeba pamiętać o dodatkowych ustawieniach.
++
+[source,json,highlight=5]
+.Fragment pliku package.json
+----
+{
+    ...,
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "set INLINE_RUNTIME_CHUNK=false&&react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    ...
+}
 
-* ustawienie zmiennej środowiskowej w narzędziach budowania.
+----
+
+* Ustawienie zmiennej środowiskowej w narzędziach budowania.
 Konfiguracja zależy od platformy, więc nie będę jej tutaj omawiał.
 
++
 NOTE: W przypadku modyfikacji `package.json` uważaj na spacje, gdyż nie wszystkie kombinacje działają. 
 Zostało to szczegółowo omówione w https://github.com/facebook/create-react-app/issues/8825[wątku na GitHub - "set INLINE_RUNTIME_CHUNK=false && react-scripts build" not working (depending on spacing].
 
-.Fragment pliku package.json
-[source,json,highlight=16]
-----
-{ 
-  "name": "seasons", 
-  "version": "0.1.0", 
-  "private": true, 
-  "dependencies": { 
-    "@testing-library/jest-dom": "^5.16.5", 
-    "@testing-library/react": "^13.4.0", 
-    "@testing-library/user-event": "^13.5.0", 
-    "react": "^18.2.0", 
-    "react-dom": "^18.2.0", 
-    "react-scripts": "5.0.1", 
-    "web-vitals": "^2.1.4" 
-  }, 
-  "scripts": { 
-    "start": "react-scripts start", 
-    "build": "set INLINE_RUNTIME_CHUNK=false&&react-scripts build", 
-    "test": "react-scripts test", 
-    "eject": "react-scripts eject" 
-  }
-}
-----
