@@ -23,7 +23,6 @@ tags:
 [.small]
 Zdjęcie ilustrujące artykuł pochodzi z https://unsplash.com/s/photos/security?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Unsplash] i zostało wykonane przez https://unsplash.com/@scottwebb?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"[Scott Webb]. 
 
-
 == Wstęp
 
 Content Security Policy (CSP) to nagłówek, który umieszczamy w odpowiedzi z serwera bądź w sekcji head za pomocą tagu meta. 
@@ -141,7 +140,7 @@ Podczas wdrażania polityki CSP w już istniejącym projekcie, pojawiają się d
 W celu zebrania informacji, na temat zależności najłatwiej posłużyć się dwoma narzędziami.
 Jeśli znasz jeszcze jakieś, daj znać w komentarzach!
 
-==== Narzędzie deweloperskie wbudowane w przeglądarkę
+=== Narzędzie deweloperskie wbudowane w przeglądarkę
 
 Podstawą są narzędzia deweloperskie wbudowane w przeglądarkę, zazwyczaj dostępne pod klawiszem kbd:[F12]. 
 W zakładce Sieć (Network) zobaczymy wszystkie połączenia ustanawiane przez naszą aplikację od momentu uruchomienia narzędzi deweloperskich.
@@ -150,7 +149,7 @@ Dlatego po ich otworzeniu warto odświeżyć stronę.
 NOTE: W niektórych przeglądarkach, mając otwarte narzędzia deweloperskie, możemy kliknąć prawym przyciskiem myszy (PPM) na przycisku „odśwież” i wymusić pełne przeładowanie strony. 
 Dzięki temu będziemy mieli większą pewność, że nic nam nie ucieknie.
 
-==== Wtyczka Content Security Evaluator (csper.io)
+=== Wtyczka Content Security Evaluator (csper.io)
 
 Wielką pomocą może okazać się dostępna za darmo wtyczka https://csper.io/generator[Content Security Policy (CSP) Evaluator (csper.io)]. 
 Zbiera ona dane i generuje przykładową politykę CSP, podczas gdy my przeglądamy stronę. 
