@@ -7,7 +7,7 @@ description: "Nuke pozwala nam na proste opisanie procesu budowania i publikowan
               W tym artkule opisuje użycie Nuke w połączniu z Microsoft Azure."
 
 categories: 
-    - "W okół kodu"
+    - "Wokół kodu"
     - "CI/CD"
 tags:
     - ".Net"
@@ -25,122 +25,151 @@ series:
 [.small]
 Zdjęcie ilustrujące artykuł pochodzi z https://unsplash.com/s/photos/security?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Unsplash] i zostało wykonane przez https://unsplash.com/@scottwebb?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"[Scott Webb]. 
 
+Ten artykuł jest kontynuacją poprzednich z serii o Nuke.
+Linki do nich znajdziesz u dołu artykułu.
+
+NOTE: Ten artykuł jest ciągle rozwijany. To nie zmienia faktu, że gorąco zapraszam Cię do podzielenia się swoją opinią w komentarzach!
+
 == Wstęp
 
-Więc mamy już ładnie zaczęty projekt i teraz chcielibyśmy zrobić coś poważniejszego z Azure.
-Wydanie aplikacji można rozbić na następujące kroki:
+Wydanie nowej wersji aplikacji staje się coraz mniej trywialne wraz z wiekiem aplikacji.
+Narastają wymagania zarówno biznesowe, jak i technologiczne. 
+Ciężko sprostać temu stosując proste rozwiązania, a pisanie wielotysięczników w plikach `.yml` staje się coraz trudniejsze.
 
-. Na kroki do wykonania w dowolnym czasie przed wydaniem:
+Osobiście uważam, że fajnie jest odpowiadać za cały cykl życia aplikacji, stąd też pojawiła się u mnie potrzeba ogarnięcia procesu wydawania aplikacji na poważnie.
 
-+
-.. Zbudowanie aplikacji -- w tym czyszczenie katalogu budowania, przywracanie pakietów Nuget.
+=== Procedura wydania nowej wersji aplikacji
 
-.. Uruchomienie testów -- jednostkowych, integracyjnych i skrośnych (z ang. _end2end_.
+Przygotowałem następującą listę kroków, które są potrzebne (lub mogą być) do wdrożenia aplikacji.
+Zdaję sobie sprawę, że lista ta nie jest kompletna, jednak myślę, że pozwoli nam ona pokryć zdecydowaną większość przypadków.
 
-. Właściwe wydanie:
+==== Jeszcze przed wydaniem
 
-+
-.. Poinformowanie środowiska o wdrażanej zmianie.
-Zarówno mailowo można poinformować swój zespół, jak i należałoby poinformować naszych klientów o możliwym przestoju.
-Zależnie od aplikacji można to zrobić przez zmianę aplikacje.
+Z racji, że jedną z największy zalet Nuke (według mnie) jest fajne współdzielenie kodu między różnymi potokami (z ang. _pipeline_), to warto zacząć jeszcze przed samym wydaniem aplikacji.
+Mianowicie przy weryfikacji, czy w ogóle się do tego nadaje.
+
+. Zbudowanie aplikacji -- w tym czyszczenie katalogu budowania, przywracanie pakietów Nuget.
+
+. Uruchomienie testów -- jednostkowych, integracyjnych i skrośnych (z ang. _end2end_).
+
+Oba te punkty zostały omówione w pozostałych artykułach z serii. 
+Choć mam nadzieję, że je kiedyś przeniosę tutaj, na razie pozostaje to poza zakresem.
+
+==== Właściwe wydanie aplikacji
+
+. *Poinformowanie otoczenia o wdrażanej zmianie.* 
+Należy poinformować swój zespół (na przykład mailowo), jak i należałoby poinformować naszych klientów o możliwym przestoju.
+Zależnie od aplikacji można to zrobić przez wyświetlenie odpowiedniej planszy w aplikacji.
 Dobrze byłoby również czasowo wyłączyć systemy alarmowe, tak aby nie zalała nas masa informacji o tym, że aplikacja nie działa.
 
-.. Eleganckie zatrzymanie aplikacji.
-Tak, aby wszystkie procesy zdążyły się zakończyć i aby nie zostały żadne śmieci.
-Tak wiem, że aplikacje bezstanowe nie powinny mieć takich problemów, ale bądźmy szczerzy – nie zawsze jesteśmy tak w stu procentach bezstanowi w czasie wykonywania bardziej skomplikowanych operacji.
+. *Eleganckie zatrzymanie aplikacji.* 
+Chamskie przerywanie pracy nie przystoi człowiekowi.
+Dlaczego też przerywać ją brutalnie naszym workerom?
+Tak wiem, że aplikacje bezstanowe nie powinny mieć takich problemów, ale bądźmy szczerzy –- nie zawsze jesteśmy tak w stu procentach bezstanowi w czasie wykonywania bardziej skomplikowanych operacji.
+Tak dla sportu, możesz się spytać swojego architekta/przełożonego, czy podzieli się z tobą swoją wypłatę, że nagłe zatrzymanie aplikacji nic nie popsuje (daj znać w komentarzu, co powiedział).
 Aby dalej nie było prosto, może się zdążyć, że rozbijemy ten proces na następujące kroki:
 
 +
-... Zatrzymanie serwisu od interfejsu użytkownika -- dzięki temu klienci nie będą mieli dostępu do aplikacji w tradycyjny sposób.
+.. Zatrzymanie serwisu od interfejsu użytkownika -- dzięki temu klienci nie będą mieli dostępu do aplikacji w tradycyjny sposób.
 
-... Zatrzymanie API -- dzięki temu nasza aplikacja na pewno przestanie odbierać nowe polecenia.
+.. Zatrzymanie API -- aby nasza aplikacja na pewno przestanie odbierać nowe polecenia.
 
-... Zatrzymanie Workerów (ciężko mi znaleźć na to polski odpowiednik) -- aby przestać przetwarzać wiadomości z kolejek i zatrzymać zadania w tle.
+.. Zatrzymanie Workerów (ciężko mi znaleźć na to polski odpowiednik) -- aby przestać przetwarzać wiadomości z kolejek i zatrzymać zadania w tle.
 
-.. Załadowanie nowej wersji aplikacji w miejsce docelowe (ten krok czasem wykonywany jest po następnym).
-Czyli nic więcej jak umieszczenie naszej aplikacji na serwerze.
+. *Załadowanie nowej wersji aplikacji w miejsce docelowe.* 
+Ten krok czasem wykonywany jest po następnym (to jest, po migracji bazy danych).
+Osobiście podoba mi się pomysł umieszczenia aplikacji na serwerze przed migracją, bo w przypadku problemów jeszcze można się bezproblemowo wycofać. 
 
-.. Dokonanie migracji. I tutaj chciałbym nam to jeszcze utrudnić, przedstawiając kolejne kroki:
+. *Dokonanie migracji*, czyli wykonanie zmian, które są niezbędne dla nowej wersji aplikacji i często niekompatybilne z poprzednią. 
+I tutaj chcę to rozbić, aby pokryć możliwie skomplikowane przypadki. 
+Często pojawia się pytanie, kiedy wykonać niektóre zmiany, takie jak dodanie lub usunięcie serwisów z aplikacjami, czy wdrożenie nowego serwera jakiejś usługi i dodanie odpowiednich wpisów konfiguracyjnych.
+Dlatego widzę tutaj następujące kroki: 
 
 +
-... Ręczne kroki do wykonania przed zmianami na bazie danych. Oby tych było jak najmniej!
-W tym miejscu mogą się taki rzeczy jak ręczne uruchamianie skryptów na bazie, aby naprawić jakieś pomniejsze błędy, które trzeba zrobić z uwagą.
+.. *Ręczne kroki do wykonania przed zmianami na bazie danych.* 
+Oby tych było jak najmniej!
+W tym miejscu mogą się zdarzyć takie rzeczy jak ręczne uruchamianie skryptów na bazie, aby naprawić jakieś pomniejsze błędy, które trzeba zrobić z uwagą.
 
-... Automatyczne kroki przed zmianami na bazie.
-Tutaj powinny znaleźć się wszystkie nasze zmiany, które wynikają z rozwoju naszej aplikacji i dodawania do niej funkcjonalności.
+.. *Automatyczne kroki przed zmianami na bazie.*Tutaj powinny znaleźć się wszystkie nasze zmiany, które wynikają z rozwoju naszej aplikacji i dodawania do niej funkcjonalności.
 Na przykład przeniesienie danych z jednego miejsca w drugie.
 
-... Migracja bazy danych
-Ten moment jest szczególnie ważny dla baz SQL.
-W jego wyniku pewne dane mogą zostać usunięte, dlatego wcześniej wykonaliśmy tak zwane „prestepy”.
+.. *Migracja bazy danych.*Ten moment jest szczególnie ważny dla baz SQL.
+W jego wyniku pewne dane mogą zostać usunięte, a schemat niekompatybilny z poprzednią wersją aplikacji.
 
-... Automatyczne kroki po zmianach na bazie danych
-Tutaj również trafiają typowe zmiany powstałe w trakcie rozwoju aplikacji.
+.. *Automatyczne kroki po zmianach na bazie danych.*Tutaj również trafiają typowe zmiany powstałe w trakcie rozwoju aplikacji.
 Z tą różnicą, że te wymagają już nowego schematu bazy danych.
 
-... Ręczne kroki do wykonania po zmianach na bazie danych.
-I podobnie jak w pierwszym podpunkcie – musimy mieć miejsce na wykonanie pewnych ręcznych poprawek już po migracji bazy danych.
+.. *Ręczne kroki do wykonania po zmianach na bazie danych.*I podobnie jak w pierwszym podpunkcie – musimy mieć miejsce na wykonanie pewnych ręcznych poprawek już po migracji bazy danych.
 Czasem to ratuje życie :D.
 
+. *Eleganckie uruchomienie aplikacji.*  
+Jeśli wszystko poszło dobrze w poprzednich krokach, to możemy uruchamiać aplikację, aby zobaczyć, czy wszystko działa.
+
++
 .. Uruchomienie aplikacji w odwrotnej kolejności do zatrzymania.
 
 .. Usunięcie informacji o planowanej przerwie w działaniu i poinformowanie użytkowników.
 
 .. Testy aplikacji na końcowym środowisku.
 
-I sam plan wydaje się dość prosty.
+Sam plan wydaje się dość prosty.
 Jednak jeśli będziemy chcieli mieć kontrolę nad całym procesem i łatwość śledzenia postępów, to okaże się, że implementacja jest bardzo ciekawa.
 Następujące części tego artykułu będę starał się pisać w formie możliwie samowystarczalnej, tak aby nie była potrzebna wiedza z pozostałych fragmentów.
 Przez to forma się wydłuży, ale wierzę, że zyska na czytelności.
 
+TIP: Im większy projekt, tym większe wymagania co do procedur wydawniczych.
+
 == Wstęp do Azure Pipelines
 
 Na początku trochę wiedzy o Azure Pipelines.
-Tak, abyśmy lepiej się rozumieli, co mówiąc o etapach (_Stages_), zadaniach (_jobs_) i zadaniach (_tasks_) (sic!).
+Tak, abyśmy lepiej się rozumieli, co mam na myśli, mówiąc o etapach (_Stages_), zadaniach (_jobs_) i zadaniach (_tasks_) (sic!).
 Tak, na końcu powtórzyłem słowo „zadania” dwa razy, bo ciężko znaleźć mi inne tłumaczenie słowa _job_ na polski.
 W związku z tym będę używał przede wszystkim angielskich nazw.
-Fajny wstęp dotyczący tych nazw znajdziesz w dokumentach https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/key-pipelines-concepts?view=azure-devops[kluczowe pojęcia dla nowych użytkowników Azure Pipelines].
-Gorąco zachęcam Cię do zapoznania się z tym artykułem przed dalszym czytaniem niniejszego artykułu.
+Fajny wstęp dotyczący podstawowych pojęć znajdziesz w dokumentacji https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/key-pipelines-concepts?view=azure-devops[kluczowe pojęcia dla nowych użytkowników Azure Pipelines].
+Gorąco zachęcam Cię do zapoznania się z tym materiałem przed dalszym czytaniem niniejszego artykułu.
 Stanowczo ułatwi Ci odnalezienie się w tym temacie.
 
 Zanim zaczniemy na poważnie wchodzić w temat Azure Pipelines w połączeniu z Nuke chce Cię uprzedzić, że nie jest to różowy temat.
-W wielu miejscach trzeba pójść na kompromisy, głównie ze względu na pewne decyzje projektowe projektu Nuke.
-Niestety nie jest łatwo rozszerzać kreację potoków, ponieważ wiele rzeczy jest poukrywane za słówkami `internal`.
-Jednak mimo to postanowiłem spróbować przejść nad tymi trudnościami.
+W wielu miejscach trzeba pójść na kompromisy (a gdzie nie trzeba?), głównie ze względu na pewne decyzje projektowe Nuke.
+Niestety nie jest łatwo rozszerzać kreację potoków, ponieważ wiele rzeczy jest poukrywanych za słowem kluczowym `internal`.
 
-Poniżej opiszę konstrukcje, które występują w plikach `yml` i są nam niezbędne do realizacji poszczególnych zadań.
-Ich kolejność może być nieodpowiednia do pisania samego potoku, ale jaśniejsze stanie się wszystko gdy będziemy implementować to w kodzie.
+Poniżej opiszę konstrukcje, które występują w plikach `.yml` i są nam niezbędne do realizacji poszczególnych zadań.
+Ich kolejność może być nieodpowiednia do pisania samego potoku, ale jaśniejsze stanie się wszystko, gdy będziemy implementować to w kodzie.
+Także, jeśli interesuje Cię „samo mięso” przewiń niżej.
 
-NOTE: W trakcie prac z Nuke wielokrotnie staniesz przed pytaniem: iść w C# czy korzystać z gotowców – na przykład skryptów Powershell.
+W trakcie prac z Nuke wielokrotnie staniesz przed pytaniem: iść w C# czy korzystać z zewnętrznych narzędzi, na przykład skryptów Powershell.
 Sam nie jestem pewien odpowiedzi na to pytanie.
 Kod C# daje łatwość debugowania, natomiast gotowce w Powershelu zmniejszają ilość potrzebnej pracy.
 Natomiast gdybyśmy chcieli pisać tylko skrypty, to też byśmy zrobili nasz system budowania w ten sposób.
-Nie mniej im dłużej pracuję z Nuke, tym bardziej mam wrażenie, że odnoszenie się do Powershella jest niewłaściwe, ze względu na to, że zaczynamy polegać na czymś, z czego trudno otrzymać informacje zwrotną – musliebyśmy parsować, to co jest na wyjściu poleceń.
+Nie mniej im dłużej pracuję z Nuke, tym bardziej mam wrażenie, że odnoszenie się do Powershella jest niewłaściwe, ze względu na to, że zaczynamy polegać na czymś, z czego trudno otrzymać informację zwrotną – musielibyśmy parsować, to co jest na wyjściu poleceń.
 
-NOTE: Nie próbuj dążyć do perfekcji w pliku `.yml`.
+Natomiast jeśli chodzi o wybór: plik `.yaml` a Nuke (`C#`), to nie próbuj dążyć do perfekcji w pliku `.yml`.
 Mamy za zadanie napisać budowanie naszej aplikacji za pomocą .Neta, a nie w yamlu.
 Gdyby było inaczej nie zaprzęgalibyśmy Nuke.
 
+TIP: Nie dąż do perfekcji w plikach .yml, gdy korzystasz z Nuke. To Nuke powienien być perfekcyjny.
+
+[[subsection:Azure-Connected-Services]]
 === Azure Pipelines Connected Services
 
 Azure DevOps posiada funkcjonalność o nazwie „Azure Pipelines Connected Services”.
 Jest to ciekawa usługa, która pozwala administratorom zalogować się do odpowiednich subskrypcji w sposób bezpieczny i w ten sposób też udostępnić połączenie do Azure poszczególnych potokom (z ang. _pipelines_).
-Największą wadą tego rozwiązania jest to, że narzędzia, które obsługują to w prosty i przyjemny sposób to kroki dostarczone bezpośrednio przez Microsoft.
-Takie podejście dodatkowo komplikuje nam rozwiązanie Nuke.
+Największą wadą tego rozwiązania jest to, że narzędzia, które obsługują to w prosty i przyjemny sposób to kroki dostarczone bezpośrednio przez Microsoft i dostępne tylko w Azure DevOps (w skrócie _ADO_).
+Komplikuje nam rozwiązanie Nuke, gdyż musimy zadbać aby odpowiednie logowanie zawsze znalazło się w plikach `.yml`.
 Zadanie, które potrzebujemy, wygląda następująco.
 
 [source,yaml]
 .Łączenie do Azure z wykorzystaniem Connected Services
 ----
-- task: AzureCLI@2 // 1
+- task: AzureCLI@2 // <1>
   displayName: 'Login to Azure'
   inputs:
-  azureSubscription: '${{variables.VSTS_CONNECTED_SERVICE_NAME}}' // 2
+  azureSubscription: '${{variables.VSTS_CONNECTED_SERVICE_NAME}}' // <2>
     scriptType: ps
     scriptLocation: inlineScript
     inlineScript: |
-      $AzureDefaultSubscription = az account show --query id -o tsv # 3
-      Write-Host "##vso[task.setvariable variable=AZURE_DEFAULT_SUBSCRIPTION] $AzureDefaultSubscription" # 4
+      $AzureDefaultSubscription = az account show --query id -o tsv # <3>
+      Write-Host "##vso[task.setvariable variable=AZURE_DEFAULT_SUBSCRIPTION] $AzureDefaultSubscription" # <4>
 
 ----
 
@@ -159,8 +188,8 @@ Bez tego musielibyśmy później zgadywać, jaką subskrypcję jako domyślną, 
 . Udostępnienie wcześniej zapisanej subskrypcji przez zmienne środowiskowe.
 Jest to specjalny sposób udostępniania takich zmiennych między zadaniami.
 
-Aby otrzymać łatwy dostęp do domyślnej subskrypcji, w kodzie należy dodać coś takiego jak ponizej.
-Jak już pisałem wcześniej, Nuke sam mapuje zmienne środowiskowe na odpowiednie parametry.
+Aby otrzymać łatwy dostęp do domyślnej subskrypcji, w kodzie Nuke należy dodać następujący parametr.
+Jak już pisałem wcześniej, Nuke sam mapuje zmienne środowiskowe na odpowiednie parametry i to właśnie chcemy tu wykorzystać.
 
 [source,csharp]
 .Ładowanie wartości z zmiennych środowiskowych
@@ -177,31 +206,32 @@ partial class Build
 
 Aby zwiększyć użyteczność poszczególnych plików `.yml`, warto dodać na początku możliwość konfiguracji.
 Oczywiście można obejść się bez nich, zapisując pliki z wartościami podanymi na sztywno (np. dla każdego środowiska osobny plik).
-Ja się zdecydowałem na podejście ze zmiennymi, które pozwalają na wykorzystanie powtórne tego samego kodu i daje mi większą pewność, że będzie poprawnie działać na wyższych środowiskach.
+Ja się zdecydowałem na podejście ze zmiennymi, które pozwalają na wykorzystanie powtórne dokładnie tego samego kodu i daje mi większą pewność, że będzie poprawnie działać na wyższych środowiskach.
+Choć również rozumiem osoby, które wolą mieć osobny plik per środowisko.
 
 [source,yaml]
 .Paremetry i zmienne
 ----
-parameters:                                     // 1
+parameters:                                     // <1>
 - name: Environment
-displayName: Environment
-type: string
-default: None
-values:
-- None
-- Dev
-- Qa
-- Uat
-variables:                                      // 2
-- name: NUKE_ENVIRONMENT
-  value: ${{parameters.Environment}}              // 3
-         - name: VSTS_CONNECTED_SERVICE_NAME
-         ${{ if eq(parameters.Environment, 'Dev') }}:
-         value: 'NON-PROD-SUBSCRIPTION'                  // 4
-         ${{ if eq(parameters.Environment, 'Qa') }}:
-               value: 'NON-PROD-SUBSCRIPTION'
-         ${{ if eq(parameters.Environment, 'Uat') }}:
-         value: 'PROD-SUBSCRIPTION'
+  displayName: Environment
+  type: string
+  default: None
+  values:
+  - None
+  - Dev
+  - Qa
+  - Uat
+  variables:                                      // <2>
+  - name: NUKE_ENVIRONMENT
+    value: ${{parameters.Environment}}            // <3>
+  - name: VSTS_CONNECTED_SERVICE_NAME
+    ${{ if eq(parameters.Environment, 'Dev') }}:
+      value: 'NON-PROD-SUBSCRIPTION'              // <4>
+    ${{ if eq(parameters.Environment, 'Qa') }}:
+      value: 'NON-PROD-SUBSCRIPTION'
+    ${{ if eq(parameters.Environment, 'Uat') }}:
+      value: 'PROD-SUBSCRIPTION'
 
 ----
 
@@ -211,17 +241,14 @@ W tym przypadku mam tylko jeden parametr `Environment`, który określa środowi
 . Zmienne (`variables`) są tłumaczone do zmiennych środowiskowych, gdzie następnie łatwo je pobrać za pomocą różnych narzędzi.
 Dlatego zdecydowałem się na takie przetłumaczenie parametrów na zmienne środowiskowe.
 
-. Zmienna `
-NUKE_ENVIRONMENT` pozwala na łatwe przekazanie parametru do Nuke w późniejszym czasie.
-Przedrostek `
-NUKE_` nie jest obowiązkowy, ale według mnie wprowadza porządek i jasno informuje o przeznaczeniu tej zmiennej.
+. Zmienna `NUKE_ENVIRONMENT` pozwala na łatwe przekazanie parametru do Nuke w późniejszym czasie.
+Przedrostek `NUKE_` nie jest obowiązkowy, ale wprowadza porządek i jasno informuje o przeznaczeniu tej zmiennej.
 
-. Określenie wartości zmiennej `
-VSTS_CONNECTED_SERVICE_NAME` jest trochę bardziej skomplikowane, bo mamy tutaj instrukcje warunkowe, które pozwalają nam ustawić inną wartość dla każdego ze środowisk.
+. Określenie wartości zmiennej `VSTS_CONNECTED_SERVICE_NAME` jest trochę bardziej skomplikowane, bo mamy tutaj instrukcje warunkowe, które pozwalają nam ustawić inną wartość dla każdego z środowisk.
 W tym punkcie chciałem zwrócić uwagę na fakt użycia dwóch takich samych subskrypcji – robię tak, bo uważam, że intencje są stanowczo lepiej widoczne w takim podejściu.
 
 Aby wykorzystać tak przygotowane zmienne, w kodzie powinno znaleźć się coś podobnego do listingu ponizej.
-Zwróć uwagę, że nie ma tu żadnego ręcznego mapowania ze stringu na Enum, dzieje się to automatycznie.
+Zwróć uwagę, że nie ma tu żadnego ręcznego mapowania ze `string` na `enum`, dzieje się to automatycznie.
 Podobnie z resztą jak wykorzystanie domyślnych wartości.
 
 [source,csharp]
@@ -241,28 +268,19 @@ partial class Build
 
 ----
 
-== Budowanie i testowanie
-
-Te elementy procesu ciągłego dostarczania zostały omówione w innych artykułach.
-Dlatego nie będę ich tu przedstawiał ponownie.
-Możliwe, że w przyszłości je tu przeniosę.
-
 == Informowanie o „trybie wdrożenia” na Azure
 
-„Tryb wdrożenia” wydaje mi się dobrą nazwą, na stan aplikacji podczas wdrożenia jej nowej wersji.
+„Tryb wdrożenia” wydaje mi się dobrą nazwą, na stan aplikacji podczas wdrażania jej nowej wersji.
 Aby poinformować użytkownika o trybie wdrożenia, wykonamy następujące kroki:
 
-* Ustawimy tag `
-IS_MAINTENANCE=TRUE` na grupie zasobów (z ang. _Resource Group_ -- tak nazywa się ten element w Azure).
-Dzięki temu systemy alarmowe będą wiedziały, że coś się dzieje i nie należy wysyłać poczty, gdy coś nie działa.
+* Ustawimy tag `IS_MAINTENANCE=TRUE` na grupie zasobów (z ang. _Resource Group_ -- tak nazywa się ten element w Azure).
+Dzięki temu systemy alarmowe będą wiedziały, że coś się dzieje i nie należy wysyłać wiadomości, gdy coś nie działa.
 
 * Ustawimy wpis konfiguracyjny dla wszystkich serwisów w następujący sposób: `"IsMaintenance": true`.
 Poinformuje to nasze aplikacje, aby przestały brać nowe zadania i dokończyły te, które już zaczęły.
+Osiągniemy to wykorzystując usługę „Azure Application Configuration".
 
-* Jako dodatek mogę zaproponować automatyczne wysyłanie maila do zespołu lub wiadomości na chacie w aplikacji Teams.
-Jednak to jest poza zakresem tej sekcji.
-
-Teraz gdy wiemy, co chcemy robić musimy napisać odpowiedni kod w Nuke.
+Mając taki plan mozemy napisać odpowiedni kod w Nuke, który opiszę w następujących sekcjach.
 
 === Manipulowanie tagami na Grupie Zasobów
 
@@ -277,41 +295,42 @@ Można ją zainstalować za pomocą poniższego polecenia:
 
 ----
 
-NOTE: Jeśli korzystasz z „Azure Connected Services" do poprawnego logowania musisz wywołać kroki omówione w sekcji .
+NOTE: Jeśli korzystasz z „Azure Connected Services" do poprawnego logowania musisz wywołać kroki omówione w sekcji <<subsection:Azure-Connected-Services>>.
 Można to osiągnąć na dwa sposoby:
 
 . ręczną edycję plików `.yml`, lub
 
-. napisanie własnego atrybutu (np. `MyAzurePipelinesAttribute`), który doda to automatycznie.
+. napisanie własnego atrybutu (np. `MyAzurePipelinesAttribute`), który doda to za każdym generowaniem plików potoków.
 Myślę, że prędzej czy później i tak napisanie własnego atrybutu może się przydać, bo daje to pewną swobodę konfiguracji.
 Ja wybrałem tę ścieżkę, ale ze względu na to, że potrzebowałem bardziej gruntownych zmian.
 
 Poniżej przedstawiam dwa sposoby manipulacji tagami.
 Zarówno ustawianie tagu z odpowiednią wartością, jak i jego późniejsze usunięcie.
-To całkowicie zamyka nam pierwszy etap przygotowania środowiska do wydania nowej wersji aplikacji.
 
 .Powershell
 ****
-Ustawić i usunąć tag można w prosty sposób za pomocą `PowerShell`u:
+Ustawić i usunąć tag można w prosty sposób za pomocą PowerShellu:
 
 [source,csharp]
 .Wołanie az cli z Nuke aby ustawić tag na Grupie Zasobów
 ----
-this.azureCredential = new AzureCliCredential();
-var client = new ArmClient(azureCredential);
-var subscription = await this.client.Value.GetSubscriptions().GetAsync(this.AzureSubscriptionId);
-var resourceGroup = await subscription.Value.GetResourceGroupAsync(environment.ResourceGroupName); // 1
+var azureSubscriptionId = "your subscription id here";
+var resourceGroupName = "your resource name here";
+var azureCredential = new AzureCliCredential();
 
-PowerShellTasks.PowerShell($$"""Update-AzTag -ResourceId {{resourceGroup.Value.Id}} -Tag @{"MaintenanceMode"="TRUE"} -Operation Merge"""); // 2
+var client = new ArmClient(azureCredential);
+var subscription = await this.client.Value.GetSubscriptions().GetAsync(azureSubscriptionId);
+var resourceGroup = await subscription.Value.GetResourceGroupAsync(resourceGroupName); // <1>
+
+PowerShellTasks.PowerShell($$"""Update-AzTag -ResourceId {{resourceGroup.Value.Id}} -Tag @{"MaintenanceMode"="TRUE"} -Operation Merge"""); // <2>
 // ...
-PowerShellTasks.PowerShell($$"""Update-AzTag -ResourceId {{resourceGroup.Value.Id}} -Tag @{"MaintenanceMode"="TRUE"} -Operation Delete"""); // 3
+PowerShellTasks.PowerShell($$"""Update-AzTag -ResourceId {{resourceGroup.Value.Id}} -Tag @{"MaintenanceMode"="TRUE"} -Operation Delete"""); // <3>
 
 
 ----
 
 . Trzeba najpierw wyciągnąć identyfikator Grupy Zasobów (_Resource Group_), na której chcemy ustawić tag.
-Można oczywiście zrobić to również z PowerShella: `
-$resourceGroup = Get-AzResourceGroup -Name $resourceGroupName`
+Można oczywiście zrobić to również z PowerShella: `$resourceGroup = Get-AzResourceGroup -Name $resourceGroupName`
 
 . Następnie wysyłamy polecenie zmiany tagu na grupie.
 
@@ -319,20 +338,24 @@ $resourceGroup = Get-AzResourceGroup -Name $resourceGroupName`
 
 ****
 
-.
-C#
+.C#
 ****
 Ustawianie i usuwanie tagu za pomocą C# nie jest bardzo odmienne od tego w powershellu.
 
 [source,csharp]
-.Wołanie az cli z Nuke aby ustawić tag na Grupie Zasobów
+.Wołanie api Azire z Nuke aby ustawić tag na Grupie Zasobów
 ----
-var subscription = await this.client.Value.GetSubscriptions().GetAsync(this.AzureSubscriptionId);
-var resourceGroup = await subscription.Value.GetResourceGroupAsync(environment.ResourceGroupName); // 1
+var azureSubscriptionId = "your subscription id here";
+var resourceGroupName = "your resource name here";
+var azureCredential = new AzureCliCredential();
 
-await resourceGroup.Value.AddTagAsync(MAINTENANCE_TAG, "TRUE"); // 2
+var client = new ArmClient(azureCredential);
+var subscription = await client.Value.GetSubscriptions().GetAsync(azureSubscriptionId);
+var resourceGroup = await subscription.Value.GetResourceGroupAsync(resourceGroupName ); // <1>
+
+await resourceGroup.Value.AddTagAsync(MAINTENANCE_TAG, "TRUE"); // <2>
 // ...
-await resourceGroup.Value.RemoveTagAsync(MAINTENANCE_TAG); // 3
+await resourceGroup.Value.RemoveTagAsync(MAINTENANCE_TAG); // <3>
 
 ----
 
@@ -344,17 +367,103 @@ await resourceGroup.Value.RemoveTagAsync(MAINTENANCE_TAG); // 3
 
 ****
 
+=== Ustawienia w Azure Application Configuration
+
+Więc chcielibyśmy poinformować nasze Workery o tym, że nadeszła przerwa w ich pracy.
+Niech skończą, co mają do skończenia i nic więcej już nie robią.
+Najprościej będzie to osiągnąć poprzez ustawienie odpowiedniej flagi. 
+Do tego celu świetnie nadaje się „Azure Application Configuration”. 
+Dużą zaletą takiego podejścia jest to, że aplikacje mają dostęp do konfiguracji z jednego miejsca, a jej zmiana nie wymusza na nas restartu aplikacji.
+Choć to ostatnie sporo zależy od sposobu, w jaki konstruujemy naszą aplikację.
+W porównaniu do innych rozwiązań mamy następujące korzyści:
+
+* _Azure Key Vault_ -- nie mieszamy rzeczy wrażliwych ze zwykłą konfiguracją.
+Przez co możliwe jest lepsze zarządzanie uprawnieniami.
+
+* _Environment Variables_ na karcie usługi App Service -- zmiana nie restartuje aplikacji, a ustawienia mogą być współdzielone pomiędzy różnymi usługami.
+
+Konfiguracja tej usługi wykracza dalece poza zakres tego artykułu.
+Jeśli Cię to interesuje to zajrzyj do dokumentacji https://learn.microsoft.com/pl-pl/azure/azure-app-configuration/quickstart-aspnet-core-app[Szybki start: tworzenie aplikacji ASP.NET Core przy użyciu usługi aplikacja systemu Azure Configuration].
+
+Podobnie jak w poprzednim przypadku, interakcji z „Azure Application Configuration” możemy dokonać na dwa sposoby. 
+Tym razem ograniczę się do C#.
+
+.C# -- konfigurowanie Azure Application Configuration
+****
+W tym miejscu nie korzystamy z `ArmClient`.
+Ta funkcjonalność jest dostarczana przez inną bibliotekę:
+
+[source,powershell]
+.Instalacja Azure.Data.AppConfiguration
+----
+> dotnet add package Azure.Data.AppConfiguration
+
+----
+
+Najpierw zdefiniujmy klucze, które nas interesują, aby następnie wysłać je w pętli.
+
+[source,csharp]
+.Ustawianie odpowiednich kluczy w Azure Application Configuration
+----
+var appConfigurationUrl = new Uri("https://myazconfig.azconfig.io");
+var onKeys = new Dictionary<string, string>()
+{
+    {"WorkerMaintenance:IsMaintenance", true.ToString()}
+});
+
+var configurationClient = new ConfigurationClient(appConfigurationUrl, this.azureCredential);
+
+foreach (var key in onKeys)
+{
+    await configurationClient.SetConfigurationSettingAsync(key.Key, key.Value);
+}
+
+----
+
+****
+
+== Uruchamianie i zatrzymywanie serwisów z aplikacjami (_App Services_)
+
+W tym momencie mamy aplikację gotową do zatrzymania.
+Na początek pobierzmy listę wszystkich aplikacji:
+
+[source,csharp]
+.Pobieranie listy App Services
+----
+var azureSubscriptionId = "your subscription id here";
+var resourceGroupName = "your resource name here";
+var azureCredential = new AzureCliCredential();
+
+var client = new ArmClient(azureCredential);
+var subscription = await client.Value.GetSubscriptions().GetAsync(azureSubscriptionId);
+var resourceGroup = await subscription.Value.GetResourceGroupAsync(resourceGroupName);
+
+var appServices = resourceGroup.Value.GetWebSites().GetAllAsync();  // <1>
+await foreach (var appService in appServices)
+{
+    await appService.StopAsync();                                   // <2>
+    await appService.StartAsync();                                  // <3>
+}
+
+----
+
+. na początku pobieramy wszystkie dostępne w Grupie Zasobów aplikacje,
+
+. następnie je wyłączamy...
+
+. i włączamy.
+
 == Punkty dodatkowe
 
 W tej sekcji zawarłem tematy, które nie dotyczą bezpośrednio procesu wdrożenia nowej wersji aplikacji, ale mają duży wpływ na sam proces.
 
-=== Pamięc podręczna – szybsze uruchamianie programu budującego
+=== Pamięć podręczna –- szybsze uruchamianie programu budującego
 
-Nuke z automatu stara się ładować do pamięci podręcznej nugety i katalog, w którym zbudowany jest nasz program budujący.
+Nuke z automatu stara się ładować do pamięci podręcznej nugety i katalog, do którego trafia nasz program budujący w wersji skompilowanej.
 Jest to fajne, dopóki nie zacznie się odtwarzanie gigabajtów nugetów, które w tej chwili nie są potrzebne.
 Jeśli będzie uruchamiał wielokrotnie swój program budujący, warto zostawić cache dla niego. 
 Aby to zrobić, wystarczy w parametrze `CachePaths` podać stałą `AzurePipelinesCachePaths.Nuke`. 
-Sprawa załatwiona – od tego momentu nie będzie potrzeby budowania go przy każdym wywołaniu.
+Sprawa załatwiona -– od tego momentu nie będzie potrzeby budowania go przy każdym wywołaniu.
 
 [source,csharp]
 .Określnie potoku wraz z ustawieniem pamięci podręcznej
@@ -362,6 +471,4 @@ Sprawa załatwiona – od tego momentu nie będzie potrzeby budowania go przy ka
 [AzurePipelines("StopAllServices", CachePaths = [AzurePipelinesCachePaths.Nuke], InvokedTargets = [nameof(StopAllServices)])]
 
 ----
-
-=== Instalacja dotnetu
 

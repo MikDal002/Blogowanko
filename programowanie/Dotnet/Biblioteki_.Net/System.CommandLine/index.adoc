@@ -1,0 +1,208 @@
+---
+title: "Przydatne biblioteki .Net #02 - System.CommandLine"
+slug: "Przydatne biblioteki .Net 02 - System.CommandLine"
+date: 2025-06-13
+draft: true
+image: ilustracja.png
+categories: 
+    - ".Net"
+    - "Narzędzia"
+tags:
+    - "nuget"
+    - "Konsola"
+    - "C-sharp"
+    - "Open Source"
+series: Przydatne biblioteki C#
+---
+:toc: 
+:experimental: true
+[.small]
+Zdjęcie ilustrujące artykuł pochodzi z https://unsplash.com/s/photos/security?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText[Unsplash] i zostało wykonane przez https://unsplash.com/@scottwebb?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"[Scott Webb]. 
+
+
+== Wstęp
+
+Jest to biblioteka, której najczęściej używam do realizacji aplikacji konsolowych.
+Od razu zastrzegam, że aplikacje konsolowe, które dotychczas pisałem, były raczej mniejszymi programami towarzyszącymi czemuś większemu, niż głównym oprogramowaniem.
+Wielką zaletą tej biblioteki, jest fakt, że jest rozwijana przez oficjalny zespół .Net, chociaż sam projekt należy do społeczności. 
+Strona repozytorium znajduje się na https://github.com/dotnet/command-line-api[Githubie].
+Natomiast o historii powstania tej biblioteki poczytasz na stronie https://github.com/dotnet/command-line-api/blob/main/docs/History.md[Historia System.CommandLine (po angielsku)].
+
+Sama biblioteka również jest zaprojektowana do użytku w małych (w szczególności z użyciem modułu "DragonFruit") i średnich aplikacjach.
+Do obsługi naprawdę dużych i niezwykle rozbudowanych rozwiązań lepiej poszukać czegoś innego.
+
+Instalację https://www.nuget.org/packages/System.CommandLine/[biblioteki (tutaj link do nuget.org)] możesz przeprowadzić za pomocą konsoli wywołując następujące polecenie w katalogu z twoim projektem:
+
+[source,bash]
+.Instalacja System.CommandLine z linii poleceń
+----
+> dotnet add package System.CommandLine --prerelease
+
+----
+
+NOTE: Na moment pisania tego artykułu, wersja nadrzędnej biblioteki (System.CommandLine), która obsługuje wszystkie wypisane niżej funkcjonalności to 2.0.0-beta4.2272.1, także jest to wersja zapoznawcza.
+
+== System.CommandLine.DragonFruit
+
+Ta sekcja będzie krótka, gdyż z komponentu `DragonFruit` korzystam sporadycznie.
+Piszę o nim z kronikarskiego obowiązku, ponieważ może przydać się innym. 
+Umieszczone poniżej przykłady pochodzą z https://github.com/dotnet/command-line-api/blob/main/docs/DragonFruit-overview.md[dokumentacji].
+
+Przykładowa funkcja `main` z wykorzystaniem tego modułu może wyglądać następująco:
+
+[source,csharp]
+.Przykładowa funkcja \texttt{main} z wykorzystaniem \texttt{DragonFruit} z dokumentacji.
+----
+/// <summary>
+/// Przykładowa aplikacja
+/// </summary>
+/// <param name="intOption">Argument obsługujący wartości całkowite</param>
+/// <param name="boolOption">Argument obsługujący wartości prawda/fałsz</param>
+/// <param name="fileOption">Argument obsługujący ścieżkę do pliku</param>
+static void Main(int intOption = 42, bool boolOption = false, FileInfo fileOption = null)
+{
+    Console.WriteLine($"The value of intOption is: {intOption}");
+    Console.WriteLine($"The value of boolOption is: {boolOption}");
+    Console.WriteLine($"The value of fileOption is: {fileOption?.FullName ?? "null"}");
+}
+
+----
+
+Mając tak określoną funkcję `main` możemy wywołać naszą aplikację w następujący sposób:
+
+[source,bash]
+.Wywołanie aplikacji z obsługą System.CommandLine przez plik projektu
+----
+> dotnet run -- -h
+Usage:
+  myapp [options]
+
+Options:
+  --int-option     Argument obsługujący wartości całkowite
+  --bool-option    Argument obsługujący wartości prawda/fałsz
+  --file-option    Argument obsługujący plik
+
+----
+
+Także, poza obsługą poszczególnych opcji wejściowych, uzyskujemy również opis pomocy dla naszej aplikacji. 
+Dodatkowo możliwe jest jeszcze włączenie autouzupełniania, ale o tym w następnych sekcjach.
+
+== Polecenia
+
+Powyższe podejście za pomocą DragonFruit bardzo szybko może stać się niewystarczające.
+Dużo większą elastyczność daje nam architektura poleceń. 
+Zmieniając wcześniejszy przykład, uzyskalibyśmy następujący kod:
+
+[source,csharp]
+.Przykładowa funkcja \texttt{main} z wykorzystaniem \texttt{Poleceń} z dokumentacji.
+----
+static void Main(string[] args )
+{
+  var root = new RootCommand("Przykładowa aplikacja");
+
+  var intOption = new Option<int>("--intOption", () => 42, "Argument obsługujący wartości całkowite");
+  var boolArgument = new Argument<bool>("--boolOption", () => false, "Argument obsługujący wartości prawda/fałsz");
+  var fileOption = new Option<FileInfo>("--fileOption", () => null, "Argument obsługujący ścieżkę do pliku");
+
+  root.SetHandler((int intOption, bool boolOption, FileInfo fileOption) =>
+  {
+    Console.WriteLine($"The value of intOption is: {intOption}");
+    Console.WriteLine($"The value of boolOption is: {boolOption}");
+    Console.WriteLine($"The value of fileOption is: {fileOption?.FullName ?? "null"}");
+  }, intOption, boolArgument, fileOption);
+
+  root.AddOption(intOption);
+  root.AddOption(fileOption);
+  root.AddArgument(boolArgument);
+
+  root.Invoke(args);
+}
+
+----
+
+Taki kawałek kodu daje nam zbliżony wynik do tego, co widzieliśmy wcześniej, zwróć jednak uwagę na kilka szczegółów:
+
+[source,bash]
+.Wywołanie aplikacji z obsługą System.CommandLine przez plik projektu
+----
+> dotnet run -- -h
+Usage:
+  myapp [<file>] [command] [options] <1>
+
+Arguments:
+  <file>  Argument obsługujący ściężkę do pliku [] <2>
+
+Options:
+  --intOption <intOption>    Argument obsługujący wartości całkowite [default: 42] <3>
+  --boolOption <boolOption>  Argument obsługujący wartości prawda/fałsz [default: False]
+  --version                Show version information
+  -?, -h, --help           Show help and usage information
+
+
+----
+
+Zwróć uwagę na:
+
+. W przykładzie użycia chciałem zwrócić twoją uwagę na to, że pojawia się fragment `command`, który w tym przypadku nie ma żadnego zastosowania.
+
+. Pojawienie się argumentu, który dodałem celowo.
+Pozwala to wskazanie, które argumenty należy podać obowiązkowo, a które sa opcjonalne.
+Poprawia to też czytelność całego polecenia.
+
+. Na pojawienie się wartości domyślnych w pomocy, dzięki temu, użytkownik dużo łatwiej przewidzi działanie programu.
+
+=== Dobra praktyka
+
+Powyższy sposób może dość łatwo rozrosnąć się do gigantycznych rozmiarów.
+W odmętach internetu udało znaleźć mi się przykład na wygodne tworzenie poleceń, które nie wymagają dużej ilości duplikacji kodu.
+Aby było to możliwe, zainstaluj dodatkową bibliotekę:
+
+[source,bash]
+.Instalacja System.CommandLine.NamingConventionBinder z linii poleceń
+----
+> dotnet add package System.CommandLine.NamingConventionBinder --prerelease
+
+----
+
+Teraz możemy sprawnie dodawać podpolecenia. 
+Każda większa aplikacja raczej będzie już w krótkim czasie wymagać czegoś więcej niż jedna akcja wykonywana z linii poleceń.
+Dlatego dobrze jest mieć je dobrze zorganizowane.
+
+[source,csharp]
+.Przykładowa funkcja \texttt{main} z wykorzystaniem \texttt{Poleceń} wraz z odpowiednim wydzieleniem klasy odpowiedzialnej.
+----
+static void Main(string[] args )
+{
+  var root = new RootCommand("Przykładowa aplikacja");
+  root.AddCommand(new PrintDataCommand());
+  root.Invoke(args);
+}
+
+class PrintDataCommand : Command
+{
+  public PrintDataCommand() : base("polecenie", "Opis polecenia")
+  {
+    AddOption(new Option<int>("--intOption", () => 42, "Argument obsługujący wartości całkowite"));
+    AddArgument (new Argument <FileInfo>("file", () => null, "Argument obsługujący ściężkę do pliku"));
+    AddOption(new Option<bool>("--boolOption", () => false, "Argument obsługujący wartości prawda/fałsz"));
+
+    this.Handler = CommandHandler.Create(this.Execute);
+  }
+
+  public Task<int> Execute(int intOption, bool boolOption, FileInfo file)
+  {
+    Console.WriteLine($"The value of intOption is: {intOption}");
+    Console.WriteLine($"The value of boolOption is: {boolOption}");
+    Console.WriteLine($"The value of file is: {file?.FullName ?? "null"}");
+    throw new NotImplementedException();
+  }
+}
+
+----
+
+== Podsumowanie
+
+Korzystam z tej biblioteki, ponieważ podczas pisania własnego przetwarzania parametrów wejściowych łatwo doprowadzić do takiej sytuacji, w której rozgraniczenie parsowania tychże parametrów od logiki aplikacji będzie niemalże niemożliwe. 
+Oraz pisanie takiego rozwiązania samodzielnie jest stratą czasu :). 
+Biblioteka ta ułatwia nam rozdzielenie konfiguracji od wykonania, co bardzo pozytywnie wpływa na czytelność, testowalność i łatwość utrzymania projektu.
+

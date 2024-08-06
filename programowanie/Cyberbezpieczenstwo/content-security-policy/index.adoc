@@ -6,7 +6,7 @@ image: cover.webp
 description: "O nagłówku Content-Security-Policy napisano już wiele. Dlatego niniejszy artykuł jest prostym wprowadzeniem z wieloma linkami do zewnętrznych źródeł. Zahaczę również o implementację na trzy różne sposoby oraz o kilka wskazówek praktycznych. Na koniec znajdzie się również krótka notatka dla osób pracujących z React.js"
 
 categories: 
-    - "W okół kodu"
+    - "Wokół kodu"
     - "Cyberbezpieczeństwo"
 tags:
     - "HTTP"
